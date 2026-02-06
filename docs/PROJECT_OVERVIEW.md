@@ -129,6 +129,8 @@ AutoDiscovery/
 | **Idaho** | IRCP (Idaho Rules of Civil Procedure) | High | Spy's primary jurisdiction |
 | **Utah** | URCP (Utah Rules of Civil Procedure) | High | Adjacent state comparison |
 | **Washington** | CR (Civil Rules) | High | Pacific Northwest coverage |
+| **New York** | CPLR (Civil Practice Law and Rules) | High | Major market, complex rules |
+| **California** | CCP (Code of Civil Procedure) | High | Largest state market |
 
 ### Workflow Mapping Strategy
 
@@ -179,6 +181,12 @@ AutoDiscovery handles jurisdiction-specific:
 3. **Immutable proofs** — Compliance attestations can't be altered
 4. **Auditability** — Courts can verify without seeing underlying data
 
+### Why Courts = Legitimization
+
+Courts guard precedent fiercely. In one case, a judge refused to let a plaintiff shortcut SCRA military status verification by simply asking the defendant under oath—calling the suggestion "slippery" because it would set dangerous precedent.
+
+**The inverse is equally powerful:** Once courts accept ZK proofs as factual record, that precedent binds all future proceedings. No industry can question what the legal system has validated.
+
 ### Why GeoOracle?
 
 **No privacy-preserving geographical oracle exists today.** AutoDiscovery + GeoOracle is a prerequisite infrastructure layer for any location-aware compliance system.
@@ -194,7 +202,7 @@ AutoDiscovery handles jurisdiction-specific:
 - [ ] Proof-of-concept compliance attestation
 
 ### Phase 2: Multi-Jurisdiction
-- [ ] Utah + Washington rule packs
+- [ ] Utah, Washington, NYC, California rule packs
 - [ ] GeoOracle prototype integration
 - [ ] Jurisdiction comparison view
 - [ ] Workflow forking based on location
@@ -272,12 +280,23 @@ npm run dev:frontend
 
 ---
 
+## Potential Collaborators
+
+| Partner | Role | Notes |
+|---------|------|-------|
+| **Charli3 Oracles** | GeoOracle Infrastructure | May build the privacy-preserving geographical oracle layer |
+| **OpenZeppelin** | Smart Contract Security | Compact contract templates and security patterns |
+| **NMKR** | NFT/Token Infrastructure | Potential integration for compliance credential tokens |
+
+---
+
 ## Resources
 
 - [Midnight Docs](https://docs.midnight.network/)
 - [MeshJS Midnight Starter](https://github.com/MeshJS/midnight-starter-template)
 - [Midnight Awesome dApps](https://github.com/midnightntwrk/awesome-midnight-dapps)
 - [OpenZeppelin Compact Contracts](https://github.com/OpenZeppelin/compact-contracts)
+- [Charli3 Oracles](https://charli3.io/)
 
 ---
 

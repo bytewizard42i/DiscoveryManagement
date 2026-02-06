@@ -21,7 +21,7 @@ AutoDiscovery targets **legal professionals** who manage discovery workflows and
 | **Profession** | Paralegals, Litigation Support Specialists | Solo/Small Firm Attorneys |
 | **Age Range** | 30-55 | 35-60 |
 | **Gender** | ~75% Female (paralegals), ~60% Male (attorneys) | Mixed |
-| **Geography** | Idaho, Utah, Washington (Phase 1); expanding to Federal courts | US nationwide |
+| **Geography** | Idaho, Utah, Washington, NYC, California (Phase 1); expanding to Federal courts | US nationwide |
 | **Income Range** | $45K-$75K (paralegals); $80K-$250K+ (attorneys) | Varies by firm size |
 | **Digital Literacy** | Moderate-High; familiar with legal software (Clio, PracticePanther, Westlaw) | Moderate; may resist new tools |
 | **Firm Size** | Small-to-mid firms (2-50 attorneys) | Solo practitioners |
@@ -71,6 +71,8 @@ Current workflows are **fragmented and manual**. AutoDiscovery consolidates thes
 | **Idaho** | IRCP (Idaho Rules of Civil Procedure) | Unique local rules; shorter timelines for some disclosures | Medium |
 | **Utah** | URCP (Utah Rules of Civil Procedure) | Tiered discovery based on case value; mandatory initial disclosures | High |
 | **Washington** | CR (Civil Rules) | E-discovery protocols; specific meet-and-confer requirements | High |
+| **New York** | CPLR (Civil Practice Law and Rules) | Commercial Division rules; aggressive timelines | Very High |
+| **California** | CCP (Code of Civil Procedure) | Complex proportionality rules; extensive e-discovery requirements | Very High |
 | **Federal** | FRCP (Federal Rules of Civil Procedure) | Uniform but complex; Rule 26 mandatory disclosures | Very High |
 
 ### Privacy Regulations Affecting Discovery
@@ -133,6 +135,22 @@ The top pain points carry **career-ending consequences**. AutoDiscovery directly
 
 ## 7. Strategic Vision — Blockchain Legitimization
 
+### The Core Questions
+
+> *"What if blockchain could earn the trust of the legal system?"*
+>
+> *"And if it did—how might that affect the overall perception of blockchain?"*
+
+### Why Precedent Is Everything
+
+Courts guard precedent fiercely because they understand its power. A real example:
+
+> *In a collections case, the plaintiff needed to prove the defendant wasn't on active military duty during non-payment (required by the Servicemembers Civil Relief Act). In court, he asked the judge: "Could you simply ask the defendant under oath if they were on active duty during that period?"*
+>
+> *The judge refused, calling the suggestion "slippery." Why? Because allowing testimony under oath to substitute for proper due diligence would set a precedent—one with far-reaching implications for every future case.*
+
+**The inverse is equally true:** When courts *do* accept something, that acceptance becomes precedent that binds all future proceedings.
+
 ### The Bigger Picture
 
 AutoDiscovery isn't just a legal tool — it's a **catalyst for blockchain adoption** across all regulated industries.
@@ -141,6 +159,7 @@ AutoDiscovery isn't just a legal tool — it's a **catalyst for blockchain adopt
 - Courts are the **ultimate arbiters of truth and evidence**
 - If a blockchain-based system is accepted as **factual court record**, it cannot be questioned
 - Legal adoption creates precedent that cascades to other industries
+- **A judge who rejects shortcuts for fear of bad precedent will equally enforce good precedent once established**
 
 ### The Legitimization Chain
 
