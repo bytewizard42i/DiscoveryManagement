@@ -118,9 +118,16 @@ Continuing from scaffold. Spy's feedback incorporated. TypeScript data model is 
 - **Action**: Discussed feasibility in depth. Document classification, semantic search, and metadata extraction are production-ready. Privilege detection and jurisdiction-aware assembly are medium difficulty. The ZK-proven compliance proof layer is our unique differentiator vs. existing e-discovery tools (Relativity, Logikcull, Everlaw).
 - **Decision**: Idea saved to `docs/Ai-for-parsing-of-data-dump.md` for future implementation. Not building now — focus stays on core platform first.
 
+**John**: I'd like to work a little more. What is next? Please continue with our build plan as you see fit.
+- **Action**: Researched actual Idaho IRCP rules from official source (isc.idaho.gov). Fetched and analyzed Rules 2.2, 26, 30, 33, 34, 35, 36, 37, and 45(j). Built comprehensive `idaho-ircp.json` rule pack.
+- **Key finding**: Idaho IRCP Rule 26(a) does NOT have FRCP-style mandatory initial disclosures — they're court-ordered via Rule 16 scheduling orders, not automatic. Flagged for Spy validation.
+- **Rules documented**: 12 rules covering initial disclosures, interrogatories (40 max), production, depositions (no limit!), admissions (deemed admitted trap), expert disclosure, privilege log, supplementation, UIDDA subpoenas, physical examination, med-mal standard of care, and sanctions.
+- **Also included**: Time computation (Rule 2.2), statute of limitations, damages cap ($509,013.28), comparative negligence, and a Spy validation checklist.
+
 ### Commits (continued)
 - `docs: adoption strategy + interaction log`
-- `docs: AI data dump parsing concept + interaction log update` *(this commit)*
+- `docs: AI data dump parsing concept + interaction log update`
+- `feat(rule-packs): Idaho IRCP rule pack — first jurisdiction data` *(this commit)*
 
 ---
 
