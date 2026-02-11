@@ -103,4 +103,25 @@ Continuing from scaffold. Spy's feedback incorporated. TypeScript data model is 
 
 ---
 
+**John**: What law firms might be our first clients? Perhaps firms with a history of failure to comply? Could we compel them through a judge for a pilot program?
+- **Action**: Discussed 4 client tiers, court-ordered pilot via IRCP Rule 16, insurance carrier force multiplier, network effects, CLE channel
+- **Decision**: Insurance carriers (MedPro, TheDoctorsGroup, MIEC) are the highest-leverage channel
+
+**John**: Can you add an adoption strategy file and an interaction log?
+- **Action**: Created `docs/ADOPTION_STRATEGY.md` and `docs/INTERACTION_LOG.md`
+- **Decision**: Interaction log updated before each push going forward (standing protocol)
+
+**John**: I really want to fix our connection to GitHub.
+- **Action**: Diagnosed GitHub MCP auth. Token is set and valid (curl returns 200 from api.github.com). MCP still failing with "Bad credentials" — likely Windsurf not passing the env var to the MCP process. Needs Windsurf restart or MCP config fix.
+
+**John**: I want to talk about automating discovery categorization and labeling — AI agents to auto-categorize, label, group, and dynamically assemble delivery packets from a data dump. Is this a reasonable goal?
+- **Action**: Discussed feasibility in depth. Document classification, semantic search, and metadata extraction are production-ready. Privilege detection and jurisdiction-aware assembly are medium difficulty. The ZK-proven compliance proof layer is our unique differentiator vs. existing e-discovery tools (Relativity, Logikcull, Everlaw).
+- **Decision**: Idea saved to `docs/Ai-for-parsing-of-data-dump.md` for future implementation. Not building now — focus stays on core platform first.
+
+### Commits (continued)
+- `docs: adoption strategy + interaction log`
+- `docs: AI data dump parsing concept + interaction log update` *(this commit)*
+
+---
+
 *Log maintained by Penny 🎀 — updated before each push*
