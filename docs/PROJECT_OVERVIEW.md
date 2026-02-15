@@ -124,13 +124,14 @@ AutoDiscovery/
 
 ## Phase 1: Target Jurisdictions
 
-| Jurisdiction | Rules | Priority | Notes |
-|--------------|-------|----------|-------|
-| **Idaho** | IRCP (Idaho Rules of Civil Procedure) | High | Spy's primary jurisdiction |
-| **Utah** | URCP (Utah Rules of Civil Procedure) | High | Adjacent state comparison |
-| **Washington** | CR (Civil Rules) | High | Pacific Northwest coverage |
-| **New York** | CPLR (Civil Practice Law and Rules) | High | Major market, complex rules |
-| **California** | CCP (Code of Civil Procedure) | High | Largest state market |
+| # | Jurisdiction | Rules | Priority | Notes |
+|---|--------------|-------|----------|-------|
+| 1 | **Idaho** | IRCP (Idaho Rules of Civil Procedure) | High | Spy's primary jurisdiction — domain-expert validated |
+| 2 | **Ohio** | Civ.R. (Ohio Rules of Civil Procedure) | High | Large market, 2020-2023 modernized rules; Grok deep dive complete |
+| 3 | **Washington** | CR (Civil Rules) | High | Pacific Northwest coverage |
+| 4 | **Utah** | URCP (Utah Rules of Civil Procedure) | High | Adjacent to Idaho; unique tiered discovery system |
+| 5 | **California** | CCP (Code of Civil Procedure) | High | Largest state market |
+| 6 | **New York** | CPLR (Civil Practice Law and Rules) | High | Major market, Commercial Division complexity |
 
 ### Workflow Mapping Strategy
 

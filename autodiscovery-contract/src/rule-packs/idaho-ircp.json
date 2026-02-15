@@ -1,0 +1,397 @@
+{
+  "jurisdictionCode": "ID",
+  "jurisdictionName": "Idaho",
+  "rulesTitle": "Idaho Rules of Civil Procedure (IRCP)",
+  "version": "2024.01",
+  "effectiveDate": "2024-01-01",
+  "hierarchy": ["federal-frcp", "idaho-ircp"],
+  "source": "https://isc.idaho.gov/ircp-new",
+  "validatedBySpy": false,
+  "_validationNote": "DRAFT — Spy must validate every rule, deadline, and exemption before use.",
+
+  "timeComputation": {
+    "_ruleRef": "IRCP Rule 2.2",
+    "excludeTriggerDay": true,
+    "countEveryDay": true,
+    "lastDayExtension": "If last day is Saturday, Sunday, or legal holiday, period extends to next business day",
+    "mailServiceAdditionalDays": 3,
+    "_note": "Idaho counts ALL days (including weekends/holidays) for period computation, but extends if the LAST day falls on a non-business day. This differs from FRCP's approach for periods under 7 days."
+  },
+
+  "defaults": {
+    "responseDays": 30,
+    "businessDayRule": "extend_last_day_only",
+    "_explanation": "Idaho counts every day including weekends. Only extends if the computed last day falls on Sat/Sun/holiday (Rule 2.2(a)(1)(C))."
+  },
+
+  "rules": [
+    {
+      "ruleId": "IRCP-16-disclosures",
+      "ruleRef": "IRCP Rule 16 (Scheduling Order)",
+      "category": "initial-disclosures",
+      "description": "Initial disclosures as ordered by the court in the scheduling order. NOTE: Unlike FRCP 26(a)(1), Idaho does NOT have automatic mandatory initial disclosures. Disclosures are court-ordered via Rule 16 scheduling conferences.",
+      "type": "conditional",
+      "deadline": {
+        "offset": 30,
+        "unit": "calendarDays",
+        "fromEvent": "scheduling-order-date"
+      },
+      "limits": null,
+      "exemptions": [],
+      "params": {
+        "kind": "initial-disclosures",
+        "includeDamagesComputation": true,
+        "includeInsuranceAgreements": true
+      },
+      "dependencies": [],
+      "sanctions": "IRCP Rule 37(c)(1) — exclusion of undisclosed information or witnesses",
+      "supportsSupplementation": true,
+      "_spyQuestion": "Spy: In your experience, do Idaho judges always order initial disclosures in their scheduling orders? Or is this inconsistent? The IRCP itself doesn't mandate them like FRCP does."
+    },
+    {
+      "ruleId": "IRCP-26b2",
+      "ruleRef": "IRCP Rule 26(b)(2) — Insurance Agreements",
+      "category": "initial-disclosures",
+      "description": "A party may obtain discovery of insurance agreements under which an insurer may be liable to satisfy a judgment. Insurance information is not admissible at trial merely because it was disclosed.",
+      "type": "mandatory",
+      "deadline": {
+        "offset": 30,
+        "unit": "calendarDays",
+        "fromEvent": "discovery-request-served"
+      },
+      "limits": null,
+      "exemptions": [],
+      "params": {
+        "kind": "initial-disclosures",
+        "includeDamagesComputation": false,
+        "includeInsuranceAgreements": true
+      },
+      "dependencies": [],
+      "sanctions": "IRCP Rule 37(a) — motion to compel",
+      "supportsSupplementation": true
+    },
+    {
+      "ruleId": "IRCP-33",
+      "ruleRef": "IRCP Rule 33 — Interrogatories to Parties",
+      "category": "interrogatories",
+      "description": "Written interrogatories to any party. Limited to 40 interrogatories including all discrete subparts. May be served on plaintiff after commencement; on other parties with or after service of summons and complaint.",
+      "type": "optional",
+      "deadline": {
+        "offset": 30,
+        "unit": "calendarDays",
+        "fromEvent": "interrogatories-served"
+      },
+      "limits": {
+        "maxCount": 40,
+        "maxPerSide": null,
+        "maxHoursPerDeponent": null,
+        "maxPages": null
+      },
+      "exemptions": [],
+      "params": {
+        "kind": "interrogatories",
+        "responseWindowDays": 30,
+        "subpartsCountTowardLimit": true
+      },
+      "dependencies": [],
+      "sanctions": "IRCP Rule 37(a) — motion to compel; Rule 37(d) — sanctions for failure to serve answers",
+      "supportsSupplementation": true,
+      "_note": "40 limit includes subparts. Court may allow more for good cause. Answers must be under oath. Each interrogatory must be set forth followed by the answer."
+    },
+    {
+      "ruleId": "IRCP-34",
+      "ruleRef": "IRCP Rule 34 — Request for Production",
+      "category": "request-for-production",
+      "description": "Request to produce documents, electronically stored information, and tangible things for inspection, copying, testing, or sampling. Includes ESI in any medium. May also request entry onto land.",
+      "type": "optional",
+      "deadline": {
+        "offset": 30,
+        "unit": "calendarDays",
+        "fromEvent": "production-request-served"
+      },
+      "limits": {
+        "maxCount": null,
+        "maxPerSide": null,
+        "maxHoursPerDeponent": null,
+        "maxPages": null
+      },
+      "exemptions": [],
+      "params": {
+        "kind": "request-for-production",
+        "responseWindowDays": 30,
+        "includesESI": true
+      },
+      "dependencies": [],
+      "sanctions": "IRCP Rule 37(a) — motion to compel; Rule 37(d) — sanctions for failure to respond",
+      "supportsSupplementation": true,
+      "_note": "No numerical limit on requests. Documents must be produced as kept in usual course of business OR organized/labeled to correspond to request categories. ESI produced in form ordinarily maintained or reasonably usable form."
+    },
+    {
+      "ruleId": "IRCP-30",
+      "ruleRef": "IRCP Rule 30 — Depositions by Oral Examination",
+      "category": "depositions",
+      "description": "Oral depositions of any person including parties. No per-side numerical limit (unlike FRCP's 10). No duration cap (unlike FRCP's 7 hours). Remote depositions permitted by stipulation or court order. Must be simultaneously recorded stenographically per Rule 30.1.",
+      "type": "optional",
+      "deadline": {
+        "offset": 0,
+        "unit": "calendarDays",
+        "fromEvent": "discovery-cutoff"
+      },
+      "limits": {
+        "maxCount": null,
+        "maxPerSide": null,
+        "maxHoursPerDeponent": null,
+        "maxPages": null
+      },
+      "exemptions": [],
+      "params": {
+        "kind": "depositions",
+        "videoPermitted": true,
+        "remotePermitted": true
+      },
+      "dependencies": [],
+      "sanctions": "IRCP Rule 30(d)(3) — sanctions for impeding deposition; Rule 37(d) — sanctions for failure to appear",
+      "supportsSupplementation": false,
+      "_note": "Idaho has NO default limit on number of depositions or duration — court limits via protective order (Rule 26(c)) or scheduling order (Rule 16). This is MORE permissive than FRCP."
+    },
+    {
+      "ruleId": "IRCP-36",
+      "ruleRef": "IRCP Rule 36 — Requests for Admission",
+      "category": "request-for-admissions",
+      "description": "Written requests to admit facts, application of law to fact, opinions, or genuineness of documents. No numerical limit. CRITICAL: Matters are deemed admitted if not responded to within 30 days.",
+      "type": "optional",
+      "deadline": {
+        "offset": 30,
+        "unit": "calendarDays",
+        "fromEvent": "admissions-request-served"
+      },
+      "limits": {
+        "maxCount": null,
+        "maxPerSide": null,
+        "maxHoursPerDeponent": null,
+        "maxPages": null
+      },
+      "exemptions": [],
+      "params": {
+        "kind": "request-for-admissions",
+        "responseWindowDays": 30,
+        "deemedAdmittedOnNoResponse": true
+      },
+      "dependencies": [],
+      "sanctions": "IRCP Rule 37(c)(2) — expenses for failure to admit matters later proved true. Deemed admitted = conclusively established unless court permits withdrawal.",
+      "supportsSupplementation": false,
+      "_note": "DEEMED ADMITTED TRAP: No response within 30 days = matter conclusively established. This is one of the most dangerous discovery deadlines. Court may permit withdrawal only if it promotes merits presentation and doesn't prejudice requesting party."
+    },
+    {
+      "ruleId": "IRCP-26b4",
+      "ruleRef": "IRCP Rule 26(b)(4) — Expert Witness Disclosure",
+      "category": "expert-disclosure",
+      "description": "Disclosure of expert witnesses expected to testify. Retained experts: must disclose all opinions, basis, data considered, exhibits, qualifications, compensation, and prior testimony. Non-retained experts: subject matter and summary of facts/opinions.",
+      "type": "mandatory",
+      "deadline": {
+        "offset": 0,
+        "unit": "calendarDays",
+        "fromEvent": "expert-disclosure-deadline"
+      },
+      "limits": null,
+      "exemptions": [],
+      "params": {
+        "kind": "expert-disclosure",
+        "reportRequired": true,
+        "rebuttalDeadlineSeparate": true
+      },
+      "dependencies": ["IRCP-16-disclosures"],
+      "sanctions": "IRCP Rule 26(e)(3) — court may exclude testimony of undisclosed expert; Rule 37(c)(1)",
+      "supportsSupplementation": true,
+      "_note": "Deadline typically set by scheduling order (Rule 16). Retained experts need comprehensive disclosure. Non-retained experts need summary only. Party may depose disclosed experts. Cannot contact opposing party's retained expert without permission."
+    },
+    {
+      "ruleId": "IRCP-26b5",
+      "ruleRef": "IRCP Rule 26(b)(5) — Privilege Log",
+      "category": "privilege-log",
+      "description": "When withholding discoverable information on privilege or work-product grounds, party must expressly claim privilege and describe withheld materials sufficiently for other parties to assess the claim, without revealing privileged content.",
+      "type": "conditional",
+      "deadline": {
+        "offset": 0,
+        "unit": "calendarDays",
+        "fromEvent": "production-response-due"
+      },
+      "limits": null,
+      "exemptions": [],
+      "params": {
+        "kind": "generic",
+        "notes": "Privilege log must be served with or before the discovery response that withholds documents. Clawback provision under Rule 26(b)(5)(B) allows post-production privilege claims."
+      },
+      "dependencies": ["IRCP-34"],
+      "sanctions": "Failure to log may waive privilege claim. Rule 37(a) — motion to compel production of unlogged documents.",
+      "supportsSupplementation": true
+    },
+    {
+      "ruleId": "IRCP-26e",
+      "ruleRef": "IRCP Rule 26(e) — Supplementation of Responses",
+      "category": "supplementation",
+      "description": "Duty to supplement prior discovery responses when: (1) response was incorrect when made; (2) response is no longer true and failure to amend is knowing concealment; (3) identity/location of persons with knowledge changes. Must supplement expert witness identity, subject matter, and testimony substance.",
+      "type": "mandatory",
+      "deadline": {
+        "offset": 0,
+        "unit": "calendarDays",
+        "fromEvent": "new-information-discovered"
+      },
+      "limits": null,
+      "exemptions": [],
+      "params": {
+        "kind": "generic",
+        "notes": "Ongoing duty throughout litigation. No specific numerical deadline — must supplement 'in a timely manner'. Failure to supplement = evidence exclusion under Rule 26(e)(3)."
+      },
+      "dependencies": [],
+      "sanctions": "IRCP Rule 26(e)(3) — court may exclude testimony or evidence not disclosed by required supplementation",
+      "supportsSupplementation": false,
+      "_note": "This is an ongoing obligation, not a one-time step. The system should flag when new information might trigger a supplementation duty."
+    },
+    {
+      "ruleId": "IRCP-45j",
+      "ruleRef": "IRCP Rule 45(j) — Interstate Subpoenas (UIDDA)",
+      "category": "subpoena",
+      "description": "Idaho adopted the Uniform Interstate Depositions and Discovery Act (UIDDA). Foreign subpoenas can be submitted to an Idaho court clerk who issues a local subpoena for service. No local counsel or pro hac vice admission required unless court intervention is needed.",
+      "type": "conditional",
+      "deadline": {
+        "offset": 0,
+        "unit": "calendarDays",
+        "fromEvent": "subpoena-issued"
+      },
+      "limits": null,
+      "exemptions": [],
+      "params": {
+        "kind": "subpoena",
+        "uiddaApplicable": true,
+        "localCounselRequired": false
+      },
+      "dependencies": [],
+      "sanctions": "IRCP Rule 45 — contempt for failure to comply with subpoena",
+      "supportsSupplementation": false,
+      "_note": "Per Spy: typically use a third-party service company for service of UIDDA subpoenas."
+    },
+    {
+      "ruleId": "IRCP-35",
+      "ruleRef": "IRCP Rule 35 — Physical and Mental Examinations",
+      "category": "physical-examination",
+      "description": "Court may order physical or mental examination of a party whose condition is in controversy. Requires motion showing good cause. Examiner's report must be delivered on request.",
+      "type": "conditional",
+      "deadline": {
+        "offset": 0,
+        "unit": "calendarDays",
+        "fromEvent": "court-order-date"
+      },
+      "limits": null,
+      "exemptions": [],
+      "params": {
+        "kind": "generic",
+        "notes": "Requires court order — not available by party request alone. Common in med-mal (defense requests IME of plaintiff). Requesting party's report of own examination may be demanded in return."
+      },
+      "dependencies": [],
+      "sanctions": "IRCP Rule 37(b)(2)(B) — sanctions for failure to comply with examination order",
+      "supportsSupplementation": false
+    },
+    {
+      "ruleId": "IRCP-37",
+      "ruleRef": "IRCP Rule 37 — Discovery Sanctions",
+      "category": "scheduling-order",
+      "description": "Sanctions for failure to cooperate in discovery. Graduated sanctions: expenses/fees → evidence exclusion → adverse inference → striking pleadings → stay → dismissal → default judgment → contempt. Motion must certify good-faith attempt to resolve without court action.",
+      "type": "mandatory",
+      "deadline": {
+        "offset": 0,
+        "unit": "calendarDays",
+        "fromEvent": "discovery-failure-date"
+      },
+      "limits": null,
+      "exemptions": [],
+      "params": {
+        "kind": "generic",
+        "notes": "Sanctions are graduated. Court must award expenses if motion to compel is granted (Rule 37(a)(5)(A)). Good-faith conference certification required before any motion. Failure to supplement = evidence exclusion (Rule 37(c)(1))."
+      },
+      "dependencies": [],
+      "sanctions": "This IS the sanctions rule. Graduated: expenses → exclusion → adverse inference → striking → dismissal → default → contempt.",
+      "supportsSupplementation": false
+    }
+  ],
+
+  "caseTypeOverrides": {
+    "med-mal": {
+      "exemptRules": [],
+      "additionalRules": ["IRCP-med-mal-soc"],
+      "_note": "Per Spy: Idaho does NOT require an Affidavit of Merit for med-mal (unlike Ohio). No initial disclosure exemption for med-mal. Expert testimony required to prove breach of standard of care."
+    }
+  },
+
+  "additionalRules": [
+    {
+      "ruleId": "IRCP-med-mal-soc",
+      "ruleRef": "Idaho Code § 6-1012 — Standard of Care",
+      "category": "standard-of-care",
+      "description": "In medical malpractice cases, plaintiff must prove by direct expert testimony that defendant negligently failed to meet the applicable standard of health care practice. Expert must be familiar with the standard of care for the specific community and specialty.",
+      "type": "mandatory",
+      "deadline": {
+        "offset": 0,
+        "unit": "calendarDays",
+        "fromEvent": "expert-disclosure-deadline"
+      },
+      "limits": null,
+      "exemptions": [],
+      "params": {
+        "kind": "generic",
+        "notes": "Idaho Code § 6-1012 through § 6-1015. Expert must establish: (1) applicable standard of care, (2) defendant failed to meet it, (3) failure was proximate cause of injury. Community standard applies — expert must know the standard in defendant's community or similar community."
+      },
+      "dependencies": ["IRCP-26b4"],
+      "sanctions": "Case dismissal if expert testimony is insufficient to establish standard of care",
+      "supportsSupplementation": false
+    }
+  ],
+
+  "statuteOfLimitations": {
+    "med-mal": {
+      "months": 24,
+      "fromEvent": "date-of-injury",
+      "discoveryRuleApplies": true,
+      "notes": "Idaho Code § 5-219(4). 2 years from date of injury. Discovery rule: clock starts when injury is discovered or should have been discovered through reasonable diligence. Foreign object exception may apply."
+    },
+    "general-civil": {
+      "months": 48,
+      "fromEvent": "date-of-accrual",
+      "discoveryRuleApplies": true,
+      "notes": "Idaho Code § 5-224. 4 years for most civil actions."
+    },
+    "personal-injury": {
+      "months": 24,
+      "fromEvent": "date-of-injury",
+      "discoveryRuleApplies": true,
+      "notes": "Idaho Code § 5-219. 2 years from date of injury."
+    }
+  },
+
+  "damagesCap": {
+    "maxNonEconomicDamages": 509013.28,
+    "effectiveDate": "2025-07-01",
+    "adjustedPeriodically": true,
+    "notes": "Per Spy: Idaho's 2025 non-economic damage cap is $509,013.28. Idaho Code § 6-1603. Adjusted annually by the Idaho Industrial Commission based on average annual wage. Applies to all personal injury including med-mal."
+  },
+
+  "comparativeNegligence": {
+    "type": "modified",
+    "threshold": 50,
+    "notes": "Idaho Code § 6-801. Modified comparative negligence — plaintiff's recovery reduced by percentage of fault. If plaintiff is 50% or more at fault, recovery is barred entirely."
+  },
+
+  "_spyValidationChecklist": [
+    "CRITICAL: Does Idaho actually require initial disclosures? IRCP Rule 26(a) does NOT have FRCP-style mandatory disclosures. Are they always ordered via Rule 16 scheduling orders?",
+    "Are the 30-day response windows accurate for all rules?",
+    "Confirm interrogatory limit of 40 including subparts (Rule 33)",
+    "Confirm no numerical limit on depositions or duration cap in Idaho",
+    "Confirm no numerical limit on requests for admission",
+    "Confirm deemed-admitted rule for unanswered Rule 36 requests",
+    "Verify expert disclosure requirements match practice",
+    "Are there any unwritten customs or practices we're missing?",
+    "Is the $509,013.28 damages cap current as of 2025?",
+    "Any med-mal specific discovery rules beyond standard of care expert requirement?",
+    "How is Rule 2.2 time computation handled in practice — any gotchas?"
+  ]
+}
