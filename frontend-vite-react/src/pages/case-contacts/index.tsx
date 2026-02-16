@@ -2,11 +2,12 @@ import { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   Users, Star, ArrowLeft, GripVertical, Baby, Scale,
-  Phone, Mail, Building2, Hash, Sparkles, Shield,
-  Gavel, Eye, UserCircle, AlertTriangle,
+  Phone, Building2, Hash, Sparkles, Shield,
+  Gavel, Eye, UserCircle, AlertTriangle, Send,
 } from 'lucide-react';
 import { useProviders } from '@/providers/context';
 import type { Case, CaseContact, ContactRole } from '@/providers/types';
+import { EmailSafetyDialog } from '@/components/email-safety-dialog';
 
 // ── Role display config ──
 const roleLabels: Partial<Record<ContactRole, string>> = {
@@ -86,6 +87,7 @@ function ContactCard({
   onDragStart,
   onDragOver,
   onDrop,
+  onEmail,
 }: {
   contact: CaseContact;
   onStarChange: (id: string, stars: 0 | 1 | 2 | 3) => void;
@@ -95,6 +97,7 @@ function ContactCard({
   onDragStart: (e: React.DragEvent, id: string) => void;
   onDragOver: (e: React.DragEvent) => void;
   onDrop: (e: React.DragEvent, id: string) => void;
+  onEmail: (contact: CaseContact) => void;
 }) {
   const isGlowing = hoveredId !== null && hoveredId !== contact.id && connectedIds.has(contact.id);
   const isHovered = hoveredId === contact.id;
@@ -126,7 +129,7 @@ function ContactCard({
       onMouseLeave={() => onHover(null)}
       className={`
         group bg-card border ${teamBorder} rounded-xl p-4 transition-all duration-300 cursor-grab active:cursor-grabbing
-        ${isHovered ? 'border-ad-gold/40 shadow-md' : ''}
+        ${isHovered ? 'border-white/70 shadow-md shadow-white/5' : ''}
         ${glowClass}
         ${isGlowing ? 'scale-[1.02]' : ''}
       `}
@@ -190,9 +193,20 @@ function ContactCard({
               </div>
             )}
             {contact.email && (
-              <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
-                <Mail className="w-3 h-3" /> {contact.email}
-              </div>
+              <button
+                onClick={(e) => { e.stopPropagation(); onEmail(contact); }}
+                className={`flex items-center gap-1.5 text-[11px] transition-colors rounded-md px-1.5 py-0.5 -ml-1.5 ${
+                  contact.team === 'opposing_team' || contact.team === 'court'
+                    ? 'text-amber-400 hover:bg-amber-500/10 hover:text-amber-300'
+                    : 'text-muted-foreground hover:bg-emerald-500/10 hover:text-emerald-400'
+                }`}
+                title={contact.team !== 'our_team' ? '⚠ External recipient — safety checks will apply' : 'Compose email'}
+              >
+                <Send className="w-3 h-3" /> {contact.email}
+                {(contact.team === 'opposing_team' || contact.team === 'court') && (
+                  <AlertTriangle className="w-3 h-3 ml-0.5" />
+                )}
+              </button>
             )}
             {contact.phone && (
               <div className="flex items-center gap-1.5 text-[11px] text-muted-foreground">
@@ -229,6 +243,7 @@ function TeamSection({
   onDragStart,
   onDragOver,
   onDrop,
+  onEmail,
 }: {
   title: string;
   subtitle: string;
@@ -241,6 +256,7 @@ function TeamSection({
   onDragStart: (e: React.DragEvent, id: string) => void;
   onDragOver: (e: React.DragEvent) => void;
   onDrop: (e: React.DragEvent, id: string) => void;
+  onEmail: (contact: CaseContact) => void;
 }) {
   const colorMap = {
     emerald: {
@@ -313,6 +329,7 @@ function TeamSection({
               onDragStart={onDragStart}
               onDragOver={onDragOver}
               onDrop={onDrop}
+              onEmail={onEmail}
             />
           ))
         )}
@@ -332,6 +349,7 @@ export function CaseContacts() {
   const [loading, setLoading] = useState(true);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [draggedId, setDraggedId] = useState<string | null>(null);
+  const [emailTarget, setEmailTarget] = useState<CaseContact | null>(null);
 
   useEffect(() => {
     async function load() {
@@ -471,6 +489,7 @@ export function CaseContacts() {
           onDragStart={handleDragStart}
           onDragOver={handleDragOver}
           onDrop={handleDrop}
+          onEmail={setEmailTarget}
         />
 
         <TeamSection
@@ -485,6 +504,7 @@ export function CaseContacts() {
           onDragStart={handleDragStart}
           onDragOver={handleDragOver}
           onDrop={handleDrop}
+          onEmail={setEmailTarget}
         />
       </div>
 
@@ -502,6 +522,7 @@ export function CaseContacts() {
           onDragStart={handleDragStart}
           onDragOver={handleDragOver}
           onDrop={handleDrop}
+          onEmail={setEmailTarget}
         />
 
         {neutralContacts.length > 0 && (
@@ -517,9 +538,19 @@ export function CaseContacts() {
             onDragStart={handleDragStart}
             onDragOver={handleDragOver}
             onDrop={handleDrop}
+            onEmail={setEmailTarget}
           />
         )}
       </div>
+
+      {/* Email Safety Dialog */}
+      {emailTarget && caseId && (
+        <EmailSafetyDialog
+          caseId={caseId}
+          prefilledTo={emailTarget}
+          onClose={() => setEmailTarget(null)}
+        />
+      )}
     </div>
   );
 }

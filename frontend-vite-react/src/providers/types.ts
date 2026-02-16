@@ -300,6 +300,81 @@ export interface IContactProvider {
   reorderContacts(caseId: string, contactIds: string[]): Promise<void>;
 }
 
+// --- Email Safety Protocol Types ---
+
+export type EmailThreatLevel = 'safe' | 'caution' | 'danger' | 'critical';
+
+export type EmailRecipientFlag =
+  | 'opposing_counsel'
+  | 'opposing_associate'
+  | 'opposing_paralegal'
+  | 'opposing_party'
+  | 'judge'
+  | 'court_staff'
+  | 'neutral_party'
+  | 'our_team';
+
+export interface EmailRecipientCheck {
+  contactId: string;
+  name: string;
+  email: string;
+  team: ContactTeam;
+  role: ContactRole;
+  flag: EmailRecipientFlag;
+  threatLevel: EmailThreatLevel;
+  warningMessage: string;
+}
+
+export interface EmailAttachment {
+  id: string;
+  fileName: string;
+  fileSize: number;
+  mimeType: string;
+  previewUrl?: string;
+  containsMetadata?: boolean;
+  metadataWarnings?: string[];
+}
+
+export interface TandemApproval {
+  id: string;
+  emailDraftId: string;
+  requiredApprovers: number;
+  approvers: {
+    contactId: string;
+    name: string;
+    status: 'pending' | 'approved' | 'rejected';
+    timestamp?: string;
+    comment?: string;
+  }[];
+  status: 'awaiting' | 'approved' | 'rejected' | 'expired';
+  createdAt: string;
+  expiresAt: string;
+}
+
+export interface EmailDraft {
+  id: string;
+  caseId: string;
+  subject: string;
+  body: string;
+  from: string;
+  to: EmailRecipientCheck[];
+  cc?: EmailRecipientCheck[];
+  bcc?: EmailRecipientCheck[];
+  attachments: EmailAttachment[];
+  overallThreatLevel: EmailThreatLevel;
+  tandemApproval?: TandemApproval;
+  requiresTandemApproval: boolean;
+  createdAt: string;
+}
+
+export interface IEmailSafetyProvider {
+  checkRecipients(caseId: string, emailAddresses: string[]): Promise<EmailRecipientCheck[]>;
+  scanAttachments(attachments: File[]): Promise<EmailAttachment[]>;
+  calculateThreatLevel(recipients: EmailRecipientCheck[], attachments: EmailAttachment[]): EmailThreatLevel;
+  createTandemApproval(emailDraftId: string, requiredApprovers: number): Promise<TandemApproval>;
+  submitApproval(approvalId: string, approverId: string, approved: boolean, comment?: string): Promise<TandemApproval>;
+}
+
 // --- Master Provider Bundle ---
 
 export interface Providers {
@@ -309,6 +384,7 @@ export interface Providers {
   compliance: IComplianceProvider;
   ai: IAIProvider;
   contacts: IContactProvider;
+  emailSafety: IEmailSafetyProvider;
 }
 
 export type ADMode = 'demoland' | 'realdeal';
