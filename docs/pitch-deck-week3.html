@@ -76,11 +76,11 @@
     }
 
     /* ── Typography — BIG & BOLD ──────────────────────────── */
-    h1 { font-size: 72px; font-weight: 900; line-height: 1.05; margin-bottom: 20px; }
-    h2 { font-size: 52px; font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
-    h3 { font-size: 32px; font-weight: 700; margin-bottom: 14px; }
-    p  { font-size: 24px; line-height: 1.5; color: var(--muted); }
-    .big-text { font-size: 28px; line-height: 1.5; color: var(--text); }
+    h1 { font-size: 88px; font-weight: 900; line-height: 1.05; margin-bottom: 20px; }
+    h2 { font-size: 64px; font-weight: 800; line-height: 1.1; margin-bottom: 14px; }
+    h3 { font-size: 40px; font-weight: 700; margin-bottom: 12px; }
+    p  { font-size: 30px; line-height: 1.4; color: var(--muted); }
+    .big-text { font-size: 34px; line-height: 1.4; color: var(--text); }
     .highlight { color: var(--gold); }
     .danger { color: var(--red); }
     .success { color: var(--emerald); }
@@ -96,13 +96,13 @@
     }
     .stat { text-align: center; flex: 1; min-width: 200px; }
     .stat .number {
-      font-size: 80px;
+      font-size: 100px;
       font-weight: 900;
       line-height: 1;
       margin-bottom: 8px;
     }
     .stat .label {
-      font-size: 18px;
+      font-size: 22px;
       color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 1.5px;
@@ -110,7 +110,7 @@
     }
 
     .elephant-stat {
-      font-size: 160px;
+      font-size: 200px;
       font-weight: 900;
       line-height: 1;
       margin: 16px 0;
@@ -125,7 +125,7 @@
       width: 100%;
       border-collapse: collapse;
       margin: 20px 0;
-      font-size: 20px;
+      font-size: 24px;
     }
     th {
       text-align: left;
@@ -133,7 +133,7 @@
       background: var(--card);
       color: var(--gold);
       font-weight: 700;
-      font-size: 18px;
+      font-size: 22px;
       text-transform: uppercase;
       letter-spacing: 1px;
       border-bottom: 3px solid var(--gold-dim);
@@ -142,7 +142,7 @@
       padding: 14px 20px;
       border-bottom: 1px solid var(--border);
       color: var(--text);
-      font-size: 20px;
+      font-size: 24px;
     }
     tr:last-child td { border-bottom: none; }
 
@@ -160,29 +160,29 @@
       padding: 32px;
     }
     .card h4 {
-      font-size: 24px;
+      font-size: 30px;
       font-weight: 800;
       margin-bottom: 10px;
     }
     .card p {
-      font-size: 20px;
-      line-height: 1.5;
+      font-size: 24px;
+      line-height: 1.4;
     }
     .card .icon {
-      font-size: 48px;
-      margin-bottom: 14px;
+      font-size: 56px;
+      margin-bottom: 12px;
     }
 
     /* ── Comparison Table ────────────────────────────────── */
     .vs-table td:first-child {
       color: var(--muted);
       width: 45%;
-      font-size: 20px;
+      font-size: 24px;
     }
     .vs-table td:last-child {
       color: var(--emerald);
       font-weight: 600;
-      font-size: 20px;
+      font-size: 24px;
     }
 
     /* ── Flow Diagram — Big & Clear ──────────────────────── */
@@ -202,10 +202,10 @@
       min-width: 160px;
       flex: 1;
     }
-    .flow-step .icon { font-size: 44px; margin-bottom: 8px; }
-    .flow-step .label { font-size: 18px; font-weight: 700; }
-    .flow-step .desc { font-size: 14px; color: var(--muted); margin-top: 4px; font-weight: 500; }
-    .flow-arrow { font-size: 36px; color: var(--gold); font-weight: 900; }
+    .flow-step .icon { font-size: 56px; margin-bottom: 6px; }
+    .flow-step .label { font-size: 24px; font-weight: 800; }
+    .flow-step .desc { font-size: 18px; color: var(--muted); margin-top: 4px; font-weight: 600; }
+    .flow-arrow { font-size: 44px; color: var(--gold); font-weight: 900; }
     .flow-step.accent {
       border-color: var(--gold-dim);
       background: rgba(251,191,36,0.08);
@@ -234,8 +234,8 @@
     }
     .timeline-item.done::before { background: var(--emerald); }
     .timeline-item.current::before { background: var(--gold); box-shadow: 0 0 12px var(--gold); }
-    .timeline-item h4 { font-size: 22px; font-weight: 700; }
-    .timeline-item p { font-size: 18px; margin-top: 4px; }
+    .timeline-item h4 { font-size: 28px; font-weight: 700; }
+    .timeline-item p { font-size: 22px; margin-top: 4px; }
 
     /* ── Pricing — Big Numbers ───────────────────────────── */
     .pricing {
@@ -256,9 +256,9 @@
       background: rgba(251,191,36,0.06);
       box-shadow: 0 0 24px rgba(251,191,36,0.1);
     }
-    .price-card .tier { font-size: 18px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 4px; font-weight: 700; }
-    .price-card .price { font-size: 44px; font-weight: 900; margin: 10px 0; }
-    .price-card .desc { font-size: 16px; color: var(--muted); line-height: 1.6; }
+    .price-card .tier { font-size: 22px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 4px; font-weight: 700; }
+    .price-card .price { font-size: 56px; font-weight: 900; margin: 10px 0; }
+    .price-card .desc { font-size: 20px; color: var(--muted); line-height: 1.5; }
 
     /* ── Team — Spacious Cards ───────────────────────────── */
     .team {
@@ -274,17 +274,17 @@
       padding: 36px;
     }
     .team-card .role {
-      font-size: 18px;
+      font-size: 22px;
       color: var(--gold);
       text-transform: uppercase;
       letter-spacing: 2px;
       margin-bottom: 6px;
       font-weight: 700;
     }
-    .team-card h4 { font-size: 30px; margin-bottom: 16px; font-weight: 800; }
+    .team-card h4 { font-size: 36px; margin-bottom: 16px; font-weight: 800; }
     .team-card ul { list-style: none; padding: 0; }
     .team-card li {
-      font-size: 20px;
+      font-size: 24px;
       color: var(--muted);
       padding: 6px 0;
       padding-left: 28px;
@@ -300,7 +300,7 @@
     .team-card .quote {
       margin-top: 20px;
       font-style: italic;
-      font-size: 20px;
+      font-size: 24px;
       color: var(--text);
       padding: 16px;
       border-left: 4px solid var(--gold-dim);
@@ -310,7 +310,7 @@
 
     /* ── Subtitle Label ──────────────────────────────────── */
     .subtitle {
-      font-size: 22px;
+      font-size: 28px;
       color: var(--gold);
       text-transform: uppercase;
       letter-spacing: 3px;
@@ -335,12 +335,12 @@
       border-radius: 0 16px 16px 0;
     }
     .quote-block p {
-      font-size: 26px;
+      font-size: 32px;
       color: var(--text);
       font-style: italic;
     }
     .quote-block .source {
-      font-size: 16px;
+      font-size: 20px;
       color: var(--muted);
       margin-top: 10px;
       font-style: normal;
@@ -361,9 +361,9 @@
     /* ── Bullet Lists ────────────────────────────────────── */
     .bullets { list-style: none; padding: 0; margin: 14px 0; }
     .bullets li {
-      padding: 10px 0 10px 36px;
+      padding: 10px 0 10px 40px;
       position: relative;
-      font-size: 22px;
+      font-size: 28px;
     }
     .bullets li::before {
       content: '✓';
@@ -371,7 +371,7 @@
       left: 0;
       color: var(--emerald);
       font-weight: 900;
-      font-size: 24px;
+      font-size: 30px;
     }
     .bullets.x li::before { content: '✕'; color: var(--red); }
 
@@ -381,20 +381,20 @@
       max-width: 600px;
     }
     .funnel-level {
-      padding: 18px 28px;
+      padding: 20px 28px;
       margin: 6px auto;
       border-radius: 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-weight: 700;
-      font-size: 22px;
+      font-size: 26px;
     }
     .funnel-level:nth-child(1) { background: rgba(59,130,246,0.12); width: 100%; }
     .funnel-level:nth-child(2) { background: rgba(59,130,246,0.18); width: 85%; }
     .funnel-level:nth-child(3) { background: rgba(251,191,36,0.15); width: 65%; }
     .funnel-level:nth-child(4) { background: rgba(251,191,36,0.25); width: 50%; }
-    .funnel-level .amount { color: var(--gold); font-weight: 900; font-size: 26px; }
+    .funnel-level .amount { color: var(--gold); font-weight: 900; font-size: 32px; }
 
     /* ── Print ────────────────────────────────────────────── */
     @media print {
@@ -467,7 +467,7 @@
     A law firm failed to produce emails. The court sanctioned them <strong style="color: var(--red);">$8,568,633</strong>
     and referred <strong style="color: var(--red);">6 attorneys to the state bar</strong> for discipline.
   </p>
-  <p style="margin-top: 24px; font-size: 20px;">
+  <p style="margin-top: 24px; font-size: 26px;">
     <em>Qualcomm v. Broadcom</em>, S.D. Cal. (2008)
   </p>
   <div style="margin-top: 40px;">
@@ -512,7 +512,7 @@
     <tr><td>Monetary Sanctions</td><td>Mean $704K, up to $8.5M+</td><td>Devastating financial penalty</td></tr>
   </table>
 
-  <p style="margin-top: 12px; font-size: 16px;">Sources: FJC (2009), Willoughby — Duke Law Journal (2010), Gibson Dunn, U.S. Courts (2024)</p>
+  <p style="margin-top: 12px; font-size: 20px;">Sources: FJC (2009), Willoughby — Duke Law Journal (2010), Gibson Dunn, U.S. Courts (2024)</p>
   <span class="slide-brand">autodiscovery.legal</span>
   <span class="slide-number">4 / 13</span>
 </div>
@@ -524,9 +524,9 @@
 
   <div class="two-col">
     <div>
-      <h3 style="color: var(--red); font-size: 28px;">Today: Manual & Fragile</h3>
+      <h3 style="color: var(--red); font-size: 36px;">Today: Manual & Fragile</h3>
       <div class="card" style="border-color: rgba(239,68,68,0.3);">
-        <p style="font-size: 20px; color: var(--text); line-height: 1.7;">
+        <p style="font-size: 26px; color: var(--text); line-height: 1.5;">
           Sarah manages <strong>12 active cases</strong> across <strong>3 attorneys</strong>.<br><br>
           She tracks deadlines in <strong>spreadsheets and Outlook reminders</strong>. When she's sick, nobody knows what's due.<br><br>
           Last month, a set number error on a supplementation almost cost the firm a spoliation motion.<br><br>
@@ -536,9 +536,9 @@
       </div>
     </div>
     <div>
-      <h3 style="color: var(--emerald); font-size: 28px;">Tomorrow: AutoDiscovery</h3>
+      <h3 style="color: var(--emerald); font-size: 36px;">Tomorrow: AutoDiscovery</h3>
       <div class="card" style="border-color: rgba(52,211,153,0.3);">
-        <p style="font-size: 20px; color: var(--text); line-height: 1.7;">
+        <p style="font-size: 26px; color: var(--text); line-height: 1.5;">
           Sarah opens AutoDiscovery. Her <strong>12 cases auto-loaded</strong> the correct jurisdiction rules.<br><br>
           Deadlines are <strong>computed automatically</strong> — weekends, holidays, service method extensions all handled.<br><br>
           When her coworker is out, the system knows every obligation and <strong>alerts the team</strong>.<br><br>
@@ -650,7 +650,7 @@
   <div class="subtitle">Privacy as Core Product Advantage</div>
   <h2>Why <span class="highlight">Midnight Network</span> Changes Everything</h2>
 
-  <p style="margin-bottom: 24px; font-size: 24px; color: var(--text);">Legal data is the most sensitive information in any industry. AutoDiscovery is built on Midnight — the only blockchain designed for data protection by default.</p>
+  <p style="margin-bottom: 24px; font-size: 30px; color: var(--text);">Legal data is the most sensitive information in any industry. AutoDiscovery is built on Midnight — the only blockchain designed for data protection by default.</p>
 
   <table class="vs-table">
     <tr><th style="width:45%">Traditional Legal Tech</th><th>AutoDiscovery on Midnight</th></tr>
@@ -676,7 +676,7 @@
     </div>
   </div>
 
-  <p style="text-align: center; margin-top: 20px; font-size: 26px;"><strong class="highlight">Midnight + Legal = the first privacy-preserving compliance system courts can trust.</strong></p>
+  <p style="text-align: center; margin-top: 20px; font-size: 32px;"><strong class="highlight">Midnight + Legal = the first privacy-preserving compliance system courts can trust.</strong></p>
   <span class="slide-brand">autodiscovery.legal</span>
   <span class="slide-number">8 / 13</span>
 </div>
@@ -696,15 +696,15 @@
       </div>
 
       <div style="margin-top: 20px;">
-        <p style="font-size: 20px;">🏛️ <strong>1.2M</strong> active attorneys in the U.S.</p>
-        <p style="font-size: 20px;">🏢 <strong>190,000+</strong> law firms (majority small-to-mid)</p>
-        <p style="font-size: 20px;">📊 <strong>300,000+</strong> civil cases filed annually (federal alone)</p>
-        <p style="font-size: 20px;">💼 <strong>15,000–19,000</strong> medical malpractice cases/year</p>
+        <p style="font-size: 26px;">🏛️ <strong>1.2M</strong> active attorneys in the U.S.</p>
+        <p style="font-size: 26px;">🏢 <strong>190,000+</strong> law firms (majority small-to-mid)</p>
+        <p style="font-size: 26px;">📊 <strong>300,000+</strong> civil cases filed annually (federal alone)</p>
+        <p style="font-size: 26px;">💼 <strong>15,000–19,000</strong> medical malpractice cases/year</p>
       </div>
     </div>
     <div>
       <h3>The Gap Nobody Fills</h3>
-      <table style="font-size: 18px;">
+      <table style="font-size: 24px;">
         <tr><th>Existing Tools</th><th>What They Miss</th></tr>
         <tr><td>Relativity, Everlaw</td><td>No jurisdiction rules, no deadline computation, no compliance proofs</td></tr>
         <tr><td>Clio, PracticePanther</td><td>No discovery-specific features, no rule packs</td></tr>
@@ -712,7 +712,7 @@
       </table>
 
       <div style="margin-top: 20px; padding: 16px; background: var(--card); border-radius: 12px; border: 1px solid var(--accent);">
-        <p style="font-size: 20px; color: var(--text); text-align: center;">
+        <p style="font-size: 26px; color: var(--text); text-align: center;">
           <strong>AutoDiscovery is the ONLY tool combining:</strong><br>
           <span class="success">✓</span> Jurisdiction-aware automation<br>
           <span class="success">✓</span> Cryptographic compliance proofs<br>
@@ -767,7 +767,7 @@
     <div>
       <div class="card" style="text-align: center;">
         <h4>The ROI Pitch</h4>
-        <p style="font-size: 20px; color: var(--text); margin-top: 8px;">
+        <p style="font-size: 26px; color: var(--text); margin-top: 8px;">
           Average sanction: <strong class="danger">$704,094</strong><br>
           Risk per case: <strong class="danger">~10%</strong><br>
           50 cases/yr × 10% × $704K = <strong class="danger">$3.5M exposure</strong><br><br>
@@ -864,7 +864,7 @@
   </div>
 
   <div style="text-align: center; margin-top: 16px;">
-    <p style="font-size: 24px;">
+    <p style="font-size: 30px;">
       <strong>Why this team wins:</strong> We combine <span class="highlight">real courtroom experience</span> with <span class="highlight">blockchain-native engineering</span>. We don't just understand the problem — we've lived it.
     </p>
   </div>
