@@ -206,6 +206,9 @@ cp frontend-vite-react/.env_template frontend-vite-react/.env
 | **[Jurisdiction Deep Dive](./docs/JURISDICTION_DEEP_DIVE.md)** | ID, OH, WA, UT, CA, NY rule mapping |
 | **[Customer Analysis Matrix](./docs/CUSTOMER_ANALYSIS_MATRIX.md)** | Market research and adoption strategy |
 | **[UI Design Notes](./docs/UI_DESIGN_NOTES.md)** | Brand palette, glass morphism, component guidelines |
+| **[Pitch Deck](./docs/PITCH_DECK.md)** | 11-slide investor pitch with stats, horror stories, and ROI math |
+| **[Pitch Fodder](./docs/PITCH_FODDER.md)** | Shock & awe stats, landmark cases, one-pager, shareable synopsis |
+| **[Week 3 Homework](./docs/WEEK_3_HOMEWORK.md)** | Build Club deliverables tracker, resource pack, 3-min script outline |
 | **[GeoZ Oracle](https://github.com/bytewizard42i/GeoZ_us_app_Midnight-Oracle)** | 🌐 Companion project — privacy-preserving geolocation oracle on Midnight *(GeoZ.us / GeoZ.app)* |
 
 ---
