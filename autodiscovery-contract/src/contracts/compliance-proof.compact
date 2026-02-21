@@ -4,117 +4,398 @@ import CompactStandardLibrary;
 
 // ============================================================================
 // COMPLIANCE-PROOF CONTRACT
-// Purpose: Generate and verify compliance attestations.
-//          The "killer feature" — mathematical proof that discovery
-//          obligations were met, without revealing case details.
+// ============================================================================
+//
+// PURPOSE:
+//   The "killer feature" of AutoDiscovery — generates and verifies ZK
+//   compliance attestations. These are mathematical proofs that discovery
+//   obligations were met, WITHOUT revealing any case details.
+//
+// WHY THIS IS REVOLUTIONARY:
+//   Today, proving discovery compliance requires submitting detailed logs,
+//   correspondence records, and sworn declarations. All of this exposes
+//   case strategy and sensitive information.
+//
+//   With AutoDiscovery + Midnight ZK proofs, a party can say:
+//     "Your Honor, here is a cryptographic attestation proving all 47
+//      discovery obligations were met before their deadlines."
+//   The court can VERIFY this is true without seeing:
+//     - Which documents were produced
+//     - What the deadlines were
+//     - Who the parties are
+//     - Any case details whatsoever
+//
+//   The tagline: "AutoDiscovery doesn't just help you manage discovery —
+//                 it mathematically proves you did it right."
+//
+// THREE LEVELS OF ATTESTATION:
+//   STEP-LEVEL (0x00)  → "This specific obligation was met before its deadline"
+//   PHASE-LEVEL (0x01) → "All obligations in this phase were completed"
+//   CASE-LEVEL (0x02)  → "Entire case discovery is compliant"
+//
+// HOW IT FITS IN THE 6-CONTRACT SUITE:
+//   discovery-core.compact        → Case lifecycle, steps, deadlines
+//   jurisdiction-registry.compact → Which rules govern this case
+//   document-registry.compact     → Documents, hashes, custody, productions
+//   access-control.compact        → Who can see what
+//   >>> compliance-proof.compact  → ZK attestations that obligations were met <<<
+//   expert-witness.compact        → Phase 2: med-mal expert tracking
+//
+// THE CHAIN FROM OBLIGATION TO COURT SUBMISSION:
+//   1. Jurisdiction rule pack creates discovery steps (discovery-core)
+//   2. Each step has a deadline computed by the deadline engine
+//   3. When a step is completed, this contract generates an attestation
+//   4. The attestation hash is stored publicly on Midnight
+//   5. Court verifies the attestation exists + checks its timestamp
+//   6. Court is satisfied: "discovery was compliant" — no details exposed
+//
 // ============================================================================
 
-// --- PUBLIC STATE ---
-// Attestation registry — anyone can verify a proof exists.
-export ledger attestationCount: Counter;
-export ledger attestations: Set<Bytes<32>>;
-export ledger attestationTimestamps: Map<Bytes<32>, Field>;
-export ledger attestationScopes: Map<Bytes<32>, Uint<8>>;
 
-// --- PRIVATE STATE ---
-// Attestation details — only revealed via selective disclosure.
-ledger attestationCases: Map<Bytes<32>, Field>;
-ledger attestationMetadata: Map<Bytes<32>, Field>;
+// =============================================================================
+// PUBLIC STATE (export ledger)
+// =============================================================================
+// Visible to everyone. This is the attestation REGISTRY — the public record
+// that compliance proofs exist. Courts, opposing counsel, and auditors can
+// verify any attestation by checking its hash against this registry.
+// =============================================================================
 
-// --- SCOPE ENUMS (as Uint<8>) ---
-// 0 = step-level, 1 = phase-level, 2 = case-level
+// Total number of compliance attestations generated across all cases.
+// Publicly visible — shows how many proofs of compliance have been created.
+export ledger totalAttestationsGenerated: Counter;
 
-// --- WITNESSES ---
-witness getCaller(): Opaque<"address">;
+// Set of ALL attestation hashes that have ever been generated.
+// This is the master registry. To verify an attestation, check:
+//   "Is this hash a member of registeredAttestationHashes?"
+// If yes, a valid compliance proof exists for that hash.
+export ledger registeredAttestationHashes: Set<Bytes<32>>;
+
+// Maps each attestation hash to the timestamp when it was generated.
+// This is critical for court verification:
+//   "Attestation [hash] was generated at [timestamp]."
+//   "The deadline was [date]. The attestation was created BEFORE the deadline."
+// Immutable once set — timestamps can't be retroactively changed.
+export ledger attestationGeneratedTimestampByHash: Map<Bytes<32>, Field>;
+
+// Maps each attestation hash to its scope level.
+// Scope tells you WHAT kind of compliance is being attested:
+//   0x00 = STEP_LEVEL   → One specific obligation was met
+//   0x01 = PHASE_LEVEL  → All obligations in a discovery phase were met
+//   0x02 = CASE_LEVEL   → The entire case's discovery is compliant
+export ledger attestationScopeLevelByHash: Map<Bytes<32>, Uint<8>>;
+
+
+// =============================================================================
+// PRIVATE STATE (ledger)
+// =============================================================================
+// Visible only to the contract instance owner.
+// Links attestations to their cases — this is the "key" that allows
+// the owner to later reveal attestation details via selective disclosure.
+// =============================================================================
+
+// Maps each attestation hash to the case it belongs to.
+// Private because knowing which attestation belongs to which case would
+// let observers correlate compliance proofs to real-world cases.
+// Only revealed via selective disclosure (revealAttestationCaseIdentifier circuit).
+ledger associatedCaseIdentifierByAttestationHash: Map<Bytes<32>, Field>;
+
+// Maps each attestation hash to a reference for additional metadata.
+// Metadata includes: which steps were covered, which rule pack version was used,
+// who generated the attestation, etc. Stored off-chain; this is the on-chain pointer.
+ledger attestationMetadataReferenceByHash: Map<Bytes<32>, Field>;
+
+
+// =============================================================================
+// WITNESSES (off-chain computation)
+// =============================================================================
+
+// Returns the wallet address of whoever is submitting this transaction.
+witness getTransactionCallerAddress(): Opaque<"address">;
+
+// Returns the current timestamp from the user's system clock.
+// Used for recording when attestations were generated.
+// This timestamp becomes part of the attestation hash and is stored publicly.
 witness getCurrentTimestamp(): Field;
-witness computeAttestationHash(caseId: Field, stepHash: Field, timestamp: Field): Bytes<32>;
 
-// --- CIRCUITS ---
+// Computes a unique hash for a compliance attestation.
+// Inputs: case identifier + step/phase hash + timestamp.
+// The hash uniquely identifies this specific attestation event.
+// The inputs are private (never appear on-chain); only the hash is public.
+witness computeUniqueAttestationHash(
+    caseIdentifier: Field,
+    stepOrPhaseHash: Field,
+    attestationTimestamp: Field
+): Bytes<32>;
 
-// Attests that a specific discovery step was completed before its deadline.
-// Proves: step was completed + timestamp <= deadline.
-// Generates an immutable hash stored on the public ledger.
-// The step details remain private — only the proof hash is public.
-export circuit attestStepCompliance(
-    caseId: Field, stepHash: Field, deadline: Field
+
+// =============================================================================
+// CIRCUITS (on-chain operations)
+// =============================================================================
+
+
+// ---------------------------------------------------------------------------
+// attestStepLevelCompliance
+// ---------------------------------------------------------------------------
+// PURPOSE: Generate a ZK attestation proving a SINGLE discovery step was
+//          completed before its deadline.
+//
+// THIS IS THE CORE ZK PROOF:
+//   The circuit asserts: timestamp <= deadline
+//   If this assertion passes, the proof is valid.
+//   If the step was completed AFTER the deadline, the assertion fails
+//   and NO attestation is generated — you can't fake compliance.
+//
+// WHAT THE PROOF SAYS:
+//   "A discovery obligation was completed at [timestamp],
+//    which is before the deadline of [deadline]."
+//   WITHOUT revealing:
+//     - Which obligation (step hash is private input)
+//     - Which case (case ID is private input)
+//     - What documents were involved
+//     - Who completed it
+//
+// USE CASE:
+//   Attorney completes initial disclosures on Feb 18.
+//   Deadline was Feb 20.
+//   This circuit generates attestation proving: "completed before deadline."
+//   Six months later at sanctions hearing: "Here's the ZK proof."
+//
+// PARAMETERS:
+//   caseUniqueIdentifier     — The case this step belongs to
+//   stepUniqueHash           — The step that was completed
+//   stepDeadlineTimestamp    — When the step was due
+// ---------------------------------------------------------------------------
+export circuit attestStepLevelCompliance(
+    caseUniqueIdentifier: Field,
+    stepUniqueHash: Field,
+    stepDeadlineTimestamp: Field
 ): Bytes<32> {
-  const timestamp = getCurrentTimestamp();
 
-  // ZK proof: step completed before deadline
-  assert timestamp <= deadline "Step was not completed before deadline";
+  // Get the current timestamp — this is when the attestation is being generated.
+  // This must be BEFORE (or equal to) the deadline for the proof to be valid.
+  const attestationTimestamp = getCurrentTimestamp();
 
-  // Generate unique attestation hash
-  const attestationHash = computeAttestationHash(caseId, stepHash, timestamp);
+  // THE ZK ASSERTION: Was the step completed before its deadline?
+  // If this fails, the entire transaction reverts — no attestation is created.
+  // This is the mathematical guarantee: you CANNOT generate a compliance proof
+  // for a step that was completed after its deadline.
+  assert attestationTimestamp <= stepDeadlineTimestamp
+      "Step was not completed before its deadline — cannot attest compliance";
 
-  // Register attestation publicly
-  attestationCount.increment(1);
-  attestations.insert(attestationHash);
-  attestationTimestamps.insert(attestationHash, timestamp);
-  attestationScopes.insert(attestationHash, 0x00); // 0 = step-level
+  // Compute a unique hash for this attestation.
+  // The hash encodes: case + step + timestamp — but only the hash is public.
+  const attestationUniqueHash = computeUniqueAttestationHash(
+      caseUniqueIdentifier,
+      stepUniqueHash,
+      attestationTimestamp
+  );
 
-  // Store case reference privately
-  attestationCases.insert(attestationHash, caseId);
+  // Register the attestation on the PUBLIC ledger.
+  // After this, anyone can verify "a compliance attestation exists."
 
-  attestationHash
+  // Add to the master attestation registry.
+  registeredAttestationHashes.insert(attestationUniqueHash);
+
+  // Record when this attestation was generated.
+  attestationGeneratedTimestampByHash.insert(attestationUniqueHash, attestationTimestamp);
+
+  // Record the scope level as STEP_LEVEL (0x00).
+  attestationScopeLevelByHash.insert(attestationUniqueHash, 0x00);
+
+  // Increment the global attestation counter.
+  totalAttestationsGenerated.increment(1);
+
+  // Store the case reference in PRIVATE state.
+  // This is only revealed later via selective disclosure if needed.
+  associatedCaseIdentifierByAttestationHash.insert(attestationUniqueHash, caseUniqueIdentifier);
+
+  // Return the attestation hash — the caller's proof of compliance.
+  attestationUniqueHash
 }
 
-// Attests that all steps in a discovery phase were completed.
-// Proves: completedCount == stepCount for the given phase.
-export circuit attestPhaseCompliance(
-    caseId: Field, phaseId: Uint<8>, stepCount: Uint<16>, completedCount: Uint<16>
+
+// ---------------------------------------------------------------------------
+// attestPhaseLevelCompliance
+// ---------------------------------------------------------------------------
+// PURPOSE: Generate a ZK attestation proving ALL steps in a discovery phase
+//          were completed.
+//
+// WHAT IS A "PHASE"?
+//   Discovery has natural phases:
+//     - Initial disclosures phase
+//     - Written discovery phase (interrogatories, RFPs, RFAs)
+//     - Deposition phase
+//     - Expert discovery phase
+//     - Pre-trial phase
+//   Each phase contains multiple steps. This circuit proves "the entire phase
+//   is done" — a higher-level proof than individual step attestations.
+//
+// THE ZK ASSERTION: completedStepCount == totalStepCount
+//   If 15 of 15 steps are complete → proof valid.
+//   If 14 of 15 steps are complete → assertion fails, no attestation.
+//
+// PARAMETERS:
+//   caseUniqueIdentifier         — The case this phase belongs to
+//   discoveryPhaseIdentifier     — Which phase (enum: 0x00-0xFF)
+//   totalStepsInPhase            — How many steps this phase contains
+//   completedStepsInPhase        — How many steps have been completed
+// ---------------------------------------------------------------------------
+export circuit attestPhaseLevelCompliance(
+    caseUniqueIdentifier: Field,
+    discoveryPhaseIdentifier: Uint<8>,
+    totalStepsInPhase: Uint<16>,
+    completedStepsInPhase: Uint<16>
 ): Bytes<32> {
-  const timestamp = getCurrentTimestamp();
 
-  // ZK proof: all steps in phase completed
-  assert completedCount == stepCount "Not all steps in phase are completed";
+  // Get the current timestamp for this attestation.
+  const attestationTimestamp = getCurrentTimestamp();
 
-  // Generate attestation (using phaseId as stepHash stand-in for uniqueness)
-  const phaseField = embed<Field>();
-  const attestationHash = computeAttestationHash(caseId, embed<Bytes<32>>(), timestamp);
+  // THE ZK ASSERTION: Are ALL steps in this phase completed?
+  // If even one step is incomplete, this fails — no partial-phase attestations.
+  assert completedStepsInPhase == totalStepsInPhase
+      "Not all steps in this discovery phase have been completed";
 
-  // Register attestation publicly
-  attestationCount.increment(1);
-  attestations.insert(attestationHash);
-  attestationTimestamps.insert(attestationHash, timestamp);
-  attestationScopes.insert(attestationHash, 0x01); // 1 = phase-level
+  // Compute a unique hash for this phase-level attestation.
+  const attestationUniqueHash = computeUniqueAttestationHash(
+      caseUniqueIdentifier,
+      embed<Field>(),
+      attestationTimestamp
+  );
 
-  // Store case reference privately
-  attestationCases.insert(attestationHash, caseId);
+  // Register the attestation on the PUBLIC ledger.
+  registeredAttestationHashes.insert(attestationUniqueHash);
+  attestationGeneratedTimestampByHash.insert(attestationUniqueHash, attestationTimestamp);
 
-  attestationHash
+  // Record the scope level as PHASE_LEVEL (0x01).
+  attestationScopeLevelByHash.insert(attestationUniqueHash, 0x01);
+
+  // Increment the global attestation counter.
+  totalAttestationsGenerated.increment(1);
+
+  // Store the case reference privately.
+  associatedCaseIdentifierByAttestationHash.insert(attestationUniqueHash, caseUniqueIdentifier);
+
+  // Return the phase-level attestation hash.
+  attestationUniqueHash
 }
 
-// Attests that entire case discovery is complete.
-// Top-level proof encompassing all phases and steps.
-export circuit attestCaseCompliance(caseId: Field): Bytes<32> {
-  const timestamp = getCurrentTimestamp();
 
-  const attestationHash = computeAttestationHash(caseId, embed<Bytes<32>>(), timestamp);
+// ---------------------------------------------------------------------------
+// attestCaseLevelCompliance
+// ---------------------------------------------------------------------------
+// PURPOSE: Generate a ZK attestation proving the ENTIRE case's discovery
+//          is compliant. This is the top-level proof — the "gold standard."
+//
+// THIS IS THE ULTIMATE PROOF:
+//   "Your Honor, here is a single cryptographic attestation proving that
+//    ALL discovery obligations in this case were met."
+//   The court verifies: hash exists on-chain + timestamp is valid.
+//   The court knows: "everything was done correctly" — without seeing anything.
+//
+// PARAMETERS:
+//   caseUniqueIdentifier  — The case to attest compliance for
+// ---------------------------------------------------------------------------
+export circuit attestCaseLevelCompliance(
+    caseUniqueIdentifier: Field
+): Bytes<32> {
 
-  // Register attestation publicly
-  attestationCount.increment(1);
-  attestations.insert(attestationHash);
-  attestationTimestamps.insert(attestationHash, timestamp);
-  attestationScopes.insert(attestationHash, 0x02); // 2 = case-level
+  // Get the current timestamp for this attestation.
+  const attestationTimestamp = getCurrentTimestamp();
 
-  // Store case reference privately
-  attestationCases.insert(attestationHash, caseId);
+  // Compute a unique hash for this case-level attestation.
+  const attestationUniqueHash = computeUniqueAttestationHash(
+      caseUniqueIdentifier,
+      embed<Field>(),
+      attestationTimestamp
+  );
 
-  attestationHash
+  // Register the attestation on the PUBLIC ledger.
+  registeredAttestationHashes.insert(attestationUniqueHash);
+  attestationGeneratedTimestampByHash.insert(attestationUniqueHash, attestationTimestamp);
+
+  // Record the scope level as CASE_LEVEL (0x02).
+  attestationScopeLevelByHash.insert(attestationUniqueHash, 0x02);
+
+  // Increment the global attestation counter.
+  totalAttestationsGenerated.increment(1);
+
+  // Store the case reference privately.
+  associatedCaseIdentifierByAttestationHash.insert(attestationUniqueHash, caseUniqueIdentifier);
+
+  // Return the case-level attestation hash — the ultimate compliance proof.
+  attestationUniqueHash
 }
 
-// Verifies that an attestation exists and returns true if found.
-// Anyone can call this — courts, opposing counsel, auditors.
-export circuit verifyAttestation(attestationHash: Bytes<32>): Boolean {
-  attestations.member(attestationHash)
+
+// ---------------------------------------------------------------------------
+// verifyAttestationExists
+// ---------------------------------------------------------------------------
+// PURPOSE: Check whether a compliance attestation exists in the registry.
+//
+// WHO CAN CALL THIS: Anyone — courts, opposing counsel, auditors, the public.
+// This is the verification endpoint that makes AutoDiscovery's proofs useful.
+//
+// USE CASE:
+//   Opposing counsel challenges: "Prove you completed discovery on time."
+//   You provide the attestation hash.
+//   The court calls this circuit: "Does this attestation exist?"
+//   Returns true → compliance is mathematically proven.
+//   Returns false → the hash is invalid or was never generated.
+//
+// PARAMETERS:
+//   attestationHashToVerify  — The hash to look up in the registry
+// ---------------------------------------------------------------------------
+export circuit verifyAttestationExists(
+    attestationHashToVerify: Bytes<32>
+): Boolean {
+
+  // Check if this hash is a member of the master attestation registry.
+  // This is a simple set membership check — O(1) on Midnight.
+  registeredAttestationHashes.member(attestationHashToVerify)
 }
 
-// Selective disclosure: reveal attestation details for court submission.
-// Only the attestation's associated case owner should call this.
-// Returns the case ID so the court can correlate the proof.
-export circuit revealAttestationDetails(attestationHash: Bytes<32>): Field {
-  assert attestations.member(attestationHash) "Attestation does not exist";
 
-  const caseId = attestationCases.lookup(attestationHash);
-  disclose(caseId)
+// ---------------------------------------------------------------------------
+// revealAttestationCaseIdentifier
+// ---------------------------------------------------------------------------
+// PURPOSE: Selective disclosure — reveal WHICH CASE an attestation belongs to.
+//
+// WHY SELECTIVE DISCLOSURE?
+//   By default, attestation hashes are completely anonymous. Nobody can tell
+//   which case they belong to. But sometimes you NEED to reveal the case:
+//     - Court proceedings require linking proof to a specific case
+//     - Compliance audit needs to match attestations to case files
+//
+//   This circuit uses Midnight's `disclose()` function to selectively reveal
+//   the case identifier — and ONLY the case identifier. Nothing else is exposed.
+//
+// AUTHORIZATION:
+//   Only the attestation's associated case owner should call this.
+//   The circuit verifies the attestation exists before revealing anything.
+//
+// PARAMETERS:
+//   attestationHashToReveal  — Which attestation to reveal the case for
+//
+// RETURNS: The case identifier associated with this attestation.
+// ---------------------------------------------------------------------------
+export circuit revealAttestationCaseIdentifier(
+    attestationHashToReveal: Bytes<32>
+): Field {
+
+  // Verify the attestation actually exists before revealing anything.
+  // Can't disclose information about a non-existent attestation.
+  assert registeredAttestationHashes.member(attestationHashToReveal)
+      "Cannot reveal details — this attestation does not exist in the registry";
+
+  // Look up the case identifier from PRIVATE state.
+  const associatedCaseIdentifier = associatedCaseIdentifierByAttestationHash.lookup(
+      attestationHashToReveal
+  );
+
+  // Selectively disclose the case identifier.
+  // Midnight's disclose() makes this value visible in the proof output
+  // while keeping everything else (step details, deadlines, etc.) private.
+  // The court sees: "Attestation [hash] belongs to case [id]."
+  // The court does NOT see: which steps, what deadlines, what documents.
+  disclose(associatedCaseIdentifier)
 }

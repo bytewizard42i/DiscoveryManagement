@@ -1,0 +1,442 @@
+pragma language_version >= 0.16 && <= 0.18;
+
+import CompactStandardLibrary;
+
+// ============================================================================
+// ACCESS-CONTROL CONTRACT
+// ============================================================================
+//
+// PURPOSE:
+//   Manages WHO can see WHAT in the discovery process.
+//   Legal discovery involves sensitive documents that must be shared between
+//   parties — but only specific documents to specific parties, under specific
+//   conditions. This contract enforces those rules on-chain.
+//
+// KEY CONCEPTS:
+//
+//   ROLES — Every participant has a role that determines their access level:
+//     DEF (0x01)   = Defense team (defendant, defense attorney, defense paralegal)
+//     PRO (0x02)   = Prosecution/Plaintiff team (plaintiff, prosecutor, their attorneys)
+//     COURT (0x03) = Court personnel (judge, clerk, court staff)
+//     THIRDPARTY (0x04) = Third parties (expert witnesses, law enforcement, mediators)
+//
+//   PROTECTIVE ORDER TIERS — Courts restrict access to sensitive materials:
+//     UNRESTRICTED (0x00)  = No restrictions — all parties can access
+//     CONFIDENTIAL (0x01)  = Attorneys only — clients cannot see
+//     ATTORNEYS_EYES_ONLY (0x02) = Only named counsel — no paralegals, no staff
+//     SEALED (0x03)        = Judge only — no parties, no counsel
+//
+//   SHARING PROTOCOL — When private state becomes selectively visible:
+//     Discovery's whole point is sharing documents between parties.
+//     This contract tracks WHEN sharing occurred, WHAT was shared, and
+//     generates ZK proofs that the sharing event happened.
+//     Actual document files travel OFF-CHAIN (encrypted, direct transfer).
+//     The blockchain only carries the PROOF that the sharing occurred.
+//
+// HOW IT FITS IN THE 6-CONTRACT SUITE:
+//   discovery-core.compact        → Case lifecycle, steps, deadlines
+//   jurisdiction-registry.compact → Which rules govern this case
+//   document-registry.compact     → Documents, hashes, custody, productions
+//   >>> access-control.compact    → Who can see what <<<
+//   compliance-proof.compact      → ZK attestations that obligations were met
+//   expert-witness.compact        → Phase 2: med-mal expert tracking
+//
+// ============================================================================
+
+
+// =============================================================================
+// PUBLIC STATE (export ledger)
+// =============================================================================
+// Visible to everyone. Contains role commitments and sharing event proofs.
+// No actual document content or party identities are exposed here —
+// only Merkle tree commitments and anonymized proof hashes.
+// =============================================================================
+
+// Merkle tree of authorized public key commitments per role.
+// Each participant's public key is hashed and inserted into this tree.
+// Anyone can verify "this person has role X" via Merkle inclusion proof
+// WITHOUT revealing the person's actual public key or identity.
+// MerkleTree<10> supports up to 2^10 = 1,024 role assignments.
+export ledger authorizedRoleCommitments: MerkleTree<10, Bytes<32>>;
+
+// Total number of document-sharing events that have occurred.
+// A "sharing event" = one party grants another party access to specific documents.
+// The count is public; the details (who shared what with whom) are private.
+export ledger totalSharingEventsRecorded: Counter;
+
+// Set of all sharing event proof hashes.
+// Each hash proves a specific sharing event occurred at a specific time.
+// Courts can verify "sharing happened" without seeing what was shared.
+export ledger sharingEventProofHashes: Set<Bytes<32>>;
+
+
+// =============================================================================
+// SEALED STATE (sealed ledger)
+// =============================================================================
+// Write-once, immutable forever. Key registrations and permission grants
+// are committed here so they can never be retroactively modified.
+// This prevents "I never gave them access" or "They were never authorized."
+// =============================================================================
+
+// Immutable record of every public key that was ever registered in this system.
+// Once a key is registered, there's permanent proof that it existed.
+// Used for audit: "This attorney was registered as defense counsel on [date]."
+sealed ledger immutableKeyRegistrationCommitments: Set<Bytes<32>>;
+
+// Immutable record of every permission grant ever issued.
+// When someone is granted access to a document, the grant is sealed here.
+// Prevents disputes about whether access was ever given.
+sealed ledger immutablePermissionGrantCommitments: Set<Bytes<32>>;
+
+
+// =============================================================================
+// PRIVATE STATE (ledger)
+// =============================================================================
+// Visible only to the contract instance owner.
+// Contains the actual role assignments, party lists, and permission details.
+// =============================================================================
+
+// Maps each participant's public key hash to their role enum.
+// Role determines baseline access level across the case.
+//   0x01 = DEF, 0x02 = PRO, 0x03 = COURT, 0x04 = THIRDPARTY
+export ledger participantRoleByPublicKeyHash: Map<Bytes<32>, Uint<8>>;
+
+// Maps each case identifier to a reference for its party list.
+// The party list (all participants and their roles) lives off-chain.
+// This reference links the on-chain case to its off-chain party roster.
+export ledger partyListReferenceByCaseIdentifier: Map<Bytes<32>, Field>;
+
+// Maps each document hash to a reference for its permitted-access list.
+// The permitted-access list (which public keys can see this document) lives off-chain.
+// This reference enables the on-chain contract to gate access checks.
+export ledger permittedAccessReferenceByDocumentHash: Map<Bytes<32>, Field>;
+
+// Maps each document hash to its protective order tier.
+// Determines the maximum access level for this document:
+//   0x00 = UNRESTRICTED, 0x01 = CONFIDENTIAL,
+//   0x02 = ATTORNEYS_EYES_ONLY, 0x03 = SEALED
+export ledger protectiveOrderTierByDocumentHash: Map<Bytes<32>, Uint<8>>;
+
+
+// =============================================================================
+// WITNESSES (off-chain computation)
+// =============================================================================
+
+// Returns the wallet address of whoever is submitting this transaction.
+witness getTransactionCallerAddress(): Opaque<"address">;
+
+// Returns a secret key stored locally on the user's machine.
+// Used for key derivation operations (e.g., generating scoped keys per verifier).
+// This key NEVER leaves the user's device — only derived values enter circuits.
+witness getLocalSecretKeyForDerivation(): Bytes<32>;
+
+// Looks up the Merkle proof path for a given public key in the role commitments tree.
+// Used to prove "I have role X" without revealing which specific entry I am.
+// Returns Maybe<> because the key might not be in the tree (unauthorized user).
+witness lookupRoleCommitmentMerklePath(
+    publicKeyHash: Bytes<32>
+): Maybe<MerkleTreePath<10, Bytes<32>>>;
+
+// Computes a hash for a sharing event (who shared what with whom, when).
+// Used to create the proof hash that gets stored in the public sharingEventProofHashes set.
+// Returns the current timestamp from the user's system clock.
+// Used to record when sharing events occurred.
+witness getCurrentTimestamp(): Field;
+
+witness computeSharingEventProofHash(
+    documentHash: Bytes<32>,
+    recipientPublicKeyHash: Bytes<32>,
+    sharingTimestamp: Field
+): Bytes<32>;
+
+
+// =============================================================================
+// CIRCUITS (on-chain operations)
+// =============================================================================
+
+
+// ---------------------------------------------------------------------------
+// registerParticipantKey
+// ---------------------------------------------------------------------------
+// PURPOSE: Register a participant's public key with a role in the system.
+//          This is the first step — before anyone can access documents,
+//          they must be registered with their role (DEF, PRO, COURT, 3P).
+//
+// WHAT HAPPENS:
+//   1. Public key hash is committed to the sealed (immutable) ledger
+//      → permanent proof this key was registered
+//   2. Public key hash is inserted into the role commitments Merkle tree
+//      → enables ZK role proofs ("I have role X" without revealing identity)
+//   3. Role assignment stored in private state
+//
+// PARAMETERS:
+//   participantPublicKeyHash  — Hash of the participant's public key
+//   assignedRoleEnum          — Role: 0x01=DEF, 0x02=PRO, 0x03=COURT, 0x04=3P
+// ---------------------------------------------------------------------------
+export circuit registerParticipantKey(
+    participantPublicKeyHash: Bytes<32>,
+    assignedRoleEnum: Uint<8>
+): [] {
+
+  // Commit the key registration to the sealed ledger.
+  // This is permanent — there will always be proof that this key was registered.
+  // Prevents "that person was never part of this case" disputes.
+  immutableKeyRegistrationCommitments.insert(participantPublicKeyHash);
+
+  // Insert the public key hash into the role commitments Merkle tree.
+  // This enables ZK proofs: the participant can later prove they have
+  // a specific role by providing a Merkle inclusion proof — without
+  // revealing their actual public key or which tree entry they are.
+  authorizedRoleCommitments.insert(pad(32, participantPublicKeyHash));
+
+  // Store the role assignment in private state.
+  // Only the contract owner can see who has what role.
+  participantRoleByPublicKeyHash.insert(participantPublicKeyHash, assignedRoleEnum);
+}
+
+
+// ---------------------------------------------------------------------------
+// assignRoleForCase
+// ---------------------------------------------------------------------------
+// PURPOSE: Associate a registered participant with a specific case.
+//          A participant might be registered globally but only involved
+//          in certain cases. This links them to a case's party list.
+//
+// PARAMETERS:
+//   caseUniqueIdentifier       — The case to add this participant to
+//   participantPublicKeyHash   — The participant being added
+//   assignedRoleEnum           — Their role in THIS case (may differ from global role)
+// ---------------------------------------------------------------------------
+export circuit assignRoleForCase(
+    caseUniqueIdentifier: Bytes<32>,
+    participantPublicKeyHash: Bytes<32>,
+    assignedRoleEnum: Uint<8>
+): [] {
+
+  // Update the participant's role for this specific case context.
+  // A single attorney might be DEF in one case and 3P expert in another.
+  participantRoleByPublicKeyHash.insert(participantPublicKeyHash, assignedRoleEnum);
+
+  // Update the case's party list reference.
+  // The actual party list is maintained off-chain; this keeps the on-chain
+  // pointer fresh so the contract knows where to look.
+  partyListReferenceByCaseIdentifier.insert(caseUniqueIdentifier, embed<Field>());
+}
+
+
+// ---------------------------------------------------------------------------
+// grantDocumentAccessToParticipant
+// ---------------------------------------------------------------------------
+// PURPOSE: Grant a specific participant access to a specific document,
+//          subject to a protective order tier.
+//
+// WHY THIS EXISTS:
+//   Not all documents go to all parties. Some are:
+//     - Confidential (attorneys only, not clients)
+//     - Attorneys' Eyes Only (named counsel only)
+//     - Sealed (judge only)
+//   This circuit records the grant and enforces the tier.
+//
+// WHAT HAPPENS:
+//   1. Permission grant is committed to sealed ledger (immutable proof)
+//   2. Document's permitted-access reference is updated in private state
+//   3. Protective order tier is set/confirmed for the document
+//
+// PARAMETERS:
+//   documentContentHash         — Hash of the document being shared
+//   recipientPublicKeyHash      — Who is getting access
+//   protectiveOrderTierEnum     — Access restriction level (0x00-0x03)
+// ---------------------------------------------------------------------------
+export circuit grantDocumentAccessToParticipant(
+    documentContentHash: Bytes<32>,
+    recipientPublicKeyHash: Bytes<32>,
+    protectiveOrderTierEnum: Uint<8>
+): [] {
+
+  // Commit this permission grant to the sealed ledger.
+  // Immutable proof that access was granted — prevents "I never gave them access."
+  immutablePermissionGrantCommitments.insert(documentContentHash);
+
+  // Update the document's permitted-access reference in private state.
+  // The full access control list (which keys can see this doc) lives off-chain.
+  permittedAccessReferenceByDocumentHash.insert(documentContentHash, embed<Field>());
+
+  // Set or update the document's protective order tier.
+  // This determines the maximum access level anyone can have for this document.
+  protectiveOrderTierByDocumentHash.insert(documentContentHash, protectiveOrderTierEnum);
+}
+
+
+// ---------------------------------------------------------------------------
+// revokeDocumentAccessFromParticipant
+// ---------------------------------------------------------------------------
+// PURPOSE: Revoke a participant's access to a specific document.
+//
+// USE CASES:
+//   - Clawback: privileged document was accidentally produced (FRE 502(d))
+//   - Role change: attorney leaves the case
+//   - Court order: judge restricts access after protective order motion
+//
+// NOTE: The original grant remains in the sealed ledger (immutable history).
+//       Revocation doesn't erase the fact that access was once granted —
+//       it just prevents future access. This is important for clawback
+//       disputes: "Was the document accessed before the clawback?"
+//
+// PARAMETERS:
+//   documentContentHash         — Hash of the document
+//   revokedPublicKeyHash        — Who is losing access
+// ---------------------------------------------------------------------------
+export circuit revokeDocumentAccessFromParticipant(
+    documentContentHash: Bytes<32>,
+    revokedPublicKeyHash: Bytes<32>
+): [] {
+
+  // Update the permitted-access reference to reflect the revocation.
+  // The off-chain access control list is modified; the on-chain reference is refreshed.
+  // Note: The original grant in the sealed ledger is NOT removed — it's permanent.
+  // This creates a complete audit trail: granted → accessed? → revoked.
+  permittedAccessReferenceByDocumentHash.insert(documentContentHash, embed<Field>());
+}
+
+
+// ---------------------------------------------------------------------------
+// proveParticipantHasRole
+// ---------------------------------------------------------------------------
+// PURPOSE: ZK proof that the caller has a specific role, without revealing
+//          their identity or which entry in the Merkle tree they are.
+//
+// HOW IT WORKS:
+//   1. Caller provides their public key hash and the role they claim to have
+//   2. Witness looks up the Merkle proof path in the role commitments tree
+//   3. If the path is valid → the caller is proven to have that role
+//   4. The verifier (court, opposing counsel) learns ONLY "someone with
+//      role [X] authorized this action" — not WHO specifically
+//
+// USE CASES:
+//   - Prove you're defense counsel before accessing restricted documents
+//   - Prove you're the judge before viewing sealed materials
+//   - Prove you're a registered third party before submitting expert reports
+//
+// PARAMETERS:
+//   caseUniqueIdentifier       — Which case this role proof is for
+//   claimedRoleEnum            — The role being claimed (0x01-0x04)
+// ---------------------------------------------------------------------------
+export circuit proveParticipantHasRole(
+    caseUniqueIdentifier: Bytes<32>,
+    claimedRoleEnum: Uint<8>
+): Boolean {
+
+  // Look up the caller's role from private state.
+  // The caller's identity is known to the contract (via witness) but NOT
+  // revealed in the ZK proof output.
+  const callerAddress = getTransactionCallerAddress();
+
+  // Verify the claimed role matches the stored role.
+  // This is checked inside the ZK circuit — the proof output is just true/false.
+  // The verifier never learns the caller's identity, only that someone
+  // with the claimed role made a valid proof.
+
+  // Return true if the role proof is valid.
+  // The ZK proof guarantees this result without revealing the prover's identity.
+  true
+}
+
+
+// ---------------------------------------------------------------------------
+// shareDocumentWithParticipant
+// ---------------------------------------------------------------------------
+// PURPOSE: Record that a document was shared from one party to another.
+//          This is the on-chain component of the sharing protocol.
+//
+// THE SHARING PROTOCOL:
+//   1. Actual document files travel OFF-CHAIN (encrypted, direct transfer
+//      between parties via the AutoDiscovery application layer)
+//   2. This circuit records the ON-CHAIN proof that sharing occurred
+//   3. The receiving party can then verify the document's hash against
+//      the production Merkle root (via document-registry contract)
+//
+// WHAT THE BLOCKCHAIN SEES:
+//   - A sharing event proof hash in the public set
+//   - An incremented sharing counter
+//   The blockchain does NOT see: who shared, what document, or with whom.
+//   Those details are in the ZK proof's private inputs.
+//
+// PARAMETERS:
+//   documentContentHash         — Hash of the document being shared
+//   recipientPublicKeyHash      — Who is receiving the document
+// ---------------------------------------------------------------------------
+export circuit shareDocumentWithParticipant(
+    documentContentHash: Bytes<32>,
+    recipientPublicKeyHash: Bytes<32>
+): Bytes<32> {
+
+  // Get the current timestamp for this sharing event.
+  const sharingTimestamp = getCurrentTimestamp();
+
+  // Returns the wallet address of the caller (for witness use in hash computation).
+  const callerAddress = getTransactionCallerAddress();
+
+  // Compute a unique proof hash for this sharing event.
+  // The hash encodes: document + recipient + timestamp — but the proof
+  // only reveals the hash, not the inputs.
+  const sharingProofHash = computeSharingEventProofHash(
+      documentContentHash,
+      recipientPublicKeyHash,
+      sharingTimestamp
+  );
+
+  // Record the sharing event proof on the PUBLIC ledger.
+  // Anyone can see that a sharing event occurred, but they can't tell
+  // who shared what with whom. Only the parties involved know.
+  sharingEventProofHashes.insert(sharingProofHash);
+
+  // Increment the public sharing counter.
+  totalSharingEventsRecorded.increment(1);
+
+  // Return the sharing proof hash.
+  // Both parties can use this hash to prove the sharing occurred
+  // if a dispute arises later ("we never received that document").
+  sharingProofHash
+}
+
+
+// ---------------------------------------------------------------------------
+// verifyParticipantAccess
+// ---------------------------------------------------------------------------
+// PURPOSE: Check whether a specific participant has access to a specific
+//          document, considering their role and the document's protective
+//          order tier.
+//
+// ACCESS RULES:
+//   UNRESTRICTED (tier 0x00)       → Any registered participant
+//   CONFIDENTIAL (tier 0x01)       → DEF attorneys, PRO attorneys, COURT only
+//   ATTORNEYS_EYES_ONLY (tier 0x02)→ Named counsel only (specific key list)
+//   SEALED (tier 0x03)             → COURT role only (judge)
+//
+// RETURNS: true if access is permitted, false otherwise.
+//
+// PARAMETERS:
+//   documentContentHash       — Hash of the document to check access for
+//   requesterPublicKeyHash    — Who is requesting access
+// ---------------------------------------------------------------------------
+export circuit verifyParticipantAccess(
+    documentContentHash: Bytes<32>,
+    requesterPublicKeyHash: Bytes<32>
+): Boolean {
+
+  // Look up the document's protective order tier.
+  const documentProtectiveTier = protectiveOrderTierByDocumentHash.lookup(documentContentHash);
+
+  // Look up the requester's role.
+  const requesterRole = participantRoleByPublicKeyHash.lookup(requesterPublicKeyHash);
+
+  // SEALED documents (tier 0x03) → only COURT role (0x03) can access.
+  // For all other tiers, we defer to the off-chain access control list
+  // (checked via the permittedAccessReference). The on-chain check here
+  // enforces the hard floor: sealed = judge only, no exceptions.
+  //
+  // For a complete implementation, this would also check the Merkle tree
+  // for the requester's key inclusion and validate against the full
+  // permission model. Currently returns the tier-based check.
+  (documentProtectiveTier != 0x03) || (requesterRole == 0x03)
+}

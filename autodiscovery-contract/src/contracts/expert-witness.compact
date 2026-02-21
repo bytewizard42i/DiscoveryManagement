@@ -4,47 +4,198 @@ import CompactStandardLibrary;
 
 // ============================================================================
 // EXPERT-WITNESS CONTRACT — PHASE 2 (SKELETON ONLY)
-// Purpose: Med-mal specific expert witness tracking.
-//          Separate contract because of distinct privacy needs
-//          (HIPAA, credential verification, Idaho-specific requirements).
+// ============================================================================
 //
-// DEFERRED: Full implementation after discovery-core, jurisdiction-registry,
-//           and compliance-proof are validated on testnet.
+// PURPOSE:
+//   Tracks expert witness qualifications, compliance documentation, and
+//   credential verification for medical malpractice (med-mal) cases.
+//   This is a SEPARATE contract from discovery-core because expert witnesses
+//   have distinct privacy requirements:
+//     - HIPAA-sensitive medical credentials
+//     - Tax identification (W-9/I-9) that must never be public
+//     - Idaho-specific expert qualification rules
+//     - Standard of Care (SOC) documentation requirements
+//
+// WHY A SEPARATE CONTRACT?
+//   Expert witness data has stricter privacy requirements than general
+//   discovery data. Medical credentials, tax IDs, and professional history
+//   are all PII (Personally Identifiable Information) that require
+//   HIPAA-level protection. Separating this into its own contract means:
+//     1. The privacy boundary is architecturally enforced
+//     2. The contract can be audited independently for HIPAA compliance
+//     3. Expert data never co-mingles with general case data on-chain
+//     4. Access control can be stricter without affecting other contracts
+//
+// HOW IT FITS IN THE 6-CONTRACT SUITE:
+//   discovery-core.compact        → Case lifecycle, steps, deadlines
+//   jurisdiction-registry.compact → Which rules govern this case
+//   document-registry.compact     → Documents, hashes, custody, productions
+//   access-control.compact        → Who can see what
+//   compliance-proof.compact      → ZK attestations that obligations were met
+//   >>> expert-witness.compact    → Phase 2: med-mal expert tracking <<<
+//
+// CURRENT STATUS: SKELETON ONLY
+//   Full implementation is DEFERRED until discovery-core, jurisdiction-registry,
+//   and compliance-proof are validated on Midnight testnet.
+//   The skeleton below provides the basic registration and verification
+//   circuits needed for the hackathon demo.
+//
+// PHASE 2 WILL ADD:
+//   - Expert qualification attestation (prove credentials without revealing identity)
+//   - W-9/I-9 submission tracking (prove tax docs collected without revealing tax data)
+//   - Standard of Care documentation status per jurisdiction
+//   - Idaho-specific requirements (NOTE: Idaho has NO affidavit of merit — confirmed by Spy)
+//   - Expert deposition scheduling integration with discovery-core deadlines
+//   - Credential expiration tracking and renewal alerts
+//
 // ============================================================================
 
-// --- PUBLIC STATE ---
-// Expert registry — proves experts are registered without revealing identity.
-export ledger expertCount: Counter;
-export ledger registeredExperts: Set<Bytes<32>>;
-export ledger qualificationHashes: Map<Bytes<32>, Bytes<32>>;
 
-// --- PRIVATE STATE ---
-// Expert details — HIPAA-sensitive, never publicly visible.
-ledger expertIdentities: Map<Bytes<32>, Field>;
-ledger expertCredentials: Map<Bytes<32>, Field>;
+// =============================================================================
+// PUBLIC STATE (export ledger)
+// =============================================================================
+// Visible to everyone. Contains ONLY hashed identifiers — no expert names,
+// credentials, or any personally identifiable information.
+// Courts can verify "an expert is registered" without learning who they are.
+// =============================================================================
 
-// --- WITNESSES ---
-witness getCaller(): Opaque<"address">;
-witness computeExpertHash(expertData: Field): Bytes<32>;
+// Total number of expert witnesses registered across all cases.
+// Publicly visible — shows how many experts are in the system.
+export ledger totalExpertsRegistered: Counter;
 
-// --- CIRCUITS ---
-// TODO Phase 2: Expert qualification attestation
-// TODO Phase 2: W-9/I-9 submission tracking
-// TODO Phase 2: Standard of Care documentation status
-// TODO Phase 2: Idaho affidavit requirements (note: Idaho has NO affidavit of merit per Spy)
+// Set of all registered expert identifier hashes.
+// An expert's hash is derived from their credentials (off-chain computation).
+// Anyone can check "is this expert registered?" via set membership.
+// The hash reveals NOTHING about the expert's identity or qualifications.
+export ledger registeredExpertIdentifierHashes: Set<Bytes<32>>;
 
-// Placeholder circuit — registers an expert with hashed credentials.
-export circuit registerExpert(qualificationHash: Bytes<32>): Bytes<32> {
-  const expertHash = computeExpertHash(embed<Field>());
+// Maps each expert's identifier hash to their qualification proof hash.
+// The qualification hash proves "this expert has credentials [X]" without
+// revealing what those credentials are. Think of it as a commitment:
+//   "I can prove I'm board-certified in orthopedic surgery"
+//   → hash of that claim, verifiable without revealing the claim itself.
+export ledger qualificationProofHashByExpertIdentifier: Map<Bytes<32>, Bytes<32>>;
 
-  expertCount.increment(1);
-  registeredExperts.insert(expertHash);
-  qualificationHashes.insert(expertHash, qualificationHash);
 
-  expertHash
+// =============================================================================
+// PRIVATE STATE (ledger)
+// =============================================================================
+// HIPAA-sensitive data. NEVER publicly visible, not even as hashes.
+// Contains expert identity references and credential details.
+// Only the contract owner can access this data.
+// =============================================================================
+
+// Maps each expert's identifier hash to a reference for their full identity.
+// The actual identity (name, license number, institution, etc.) lives
+// off-chain in encrypted storage. This reference links the on-chain hash
+// to the off-chain record.
+ledger expertIdentityReferenceByIdentifierHash: Map<Bytes<32>, Field>;
+
+// Maps each expert's identifier hash to a reference for their credentials.
+// Credentials include: medical license, board certifications, CV,
+// publication history, prior testimony record, etc.
+// All stored off-chain — this is just the on-chain pointer.
+ledger expertCredentialReferenceByIdentifierHash: Map<Bytes<32>, Field>;
+
+
+// =============================================================================
+// WITNESSES (off-chain computation)
+// =============================================================================
+
+// Returns the wallet address of whoever is submitting this transaction.
+// Used for authorization — only authorized parties can register experts.
+witness getTransactionCallerAddress(): Opaque<"address">;
+
+// Computes a unique identifier hash for an expert from their credential data.
+// The expert's actual data (name, license, etc.) is processed on the user's
+// machine. Only the resulting hash enters the ZK circuit.
+// This hash becomes the expert's on-chain identity — anonymous but unique.
+witness computeExpertIdentifierHash(expertCredentialData: Field): Bytes<32>;
+
+
+// =============================================================================
+// CIRCUITS (on-chain operations)
+// =============================================================================
+
+
+// ---------------------------------------------------------------------------
+// registerExpertWitness
+// ---------------------------------------------------------------------------
+// PURPOSE: Register a new expert witness with hashed credentials.
+//          This is the skeleton implementation for the hackathon demo.
+//
+// WHAT HAPPENS:
+//   1. Expert's identifier hash is computed from their credential data
+//   2. Hash is added to the public registry (proves registration, not identity)
+//   3. Qualification proof hash is stored (links to credential proof)
+//   4. Returns the expert identifier hash for future reference
+//
+// PHASE 2 WILL EXTEND THIS TO:
+//   - Verify credential validity against a credential registry
+//   - Check license expiration dates
+//   - Generate ZK proof of qualification without revealing credentials
+//   - Track W-9/I-9 submission status
+//
+// PARAMETERS:
+//   expertQualificationProofHash — Hash proving the expert has the claimed
+//                                  qualifications (e.g., board certification
+//                                  in the relevant medical specialty)
+// ---------------------------------------------------------------------------
+export circuit registerExpertWitness(
+    expertQualificationProofHash: Bytes<32>
+): Bytes<32> {
+
+  // Compute a unique identifier hash for this expert.
+  // The expert's actual identity data is processed off-chain by the witness;
+  // only the hash enters the circuit. The expert remains anonymous on-chain.
+  const expertUniqueIdentifierHash = computeExpertIdentifierHash(embed<Field>());
+
+  // Add the expert to the public registry.
+  // After this, anyone can verify "an expert with this hash is registered"
+  // without learning who the expert is or what their qualifications are.
+  registeredExpertIdentifierHashes.insert(expertUniqueIdentifierHash);
+
+  // Store the qualification proof hash.
+  // This links the expert's anonymous on-chain identity to a proof of their
+  // credentials. The actual credentials are off-chain; this hash anchors them.
+  qualificationProofHashByExpertIdentifier.insert(
+      expertUniqueIdentifierHash,
+      expertQualificationProofHash
+  );
+
+  // Increment the global expert counter.
+  totalExpertsRegistered.increment(1);
+
+  // Return the expert's identifier hash for use in future operations
+  // (e.g., linking expert reports to the expert, deposition scheduling, etc.).
+  expertUniqueIdentifierHash
 }
 
-// Placeholder circuit — verifies an expert is registered.
-export circuit verifyExpert(expertHash: Bytes<32>): Boolean {
-  registeredExperts.member(expertHash)
+
+// ---------------------------------------------------------------------------
+// verifyExpertIsRegistered
+// ---------------------------------------------------------------------------
+// PURPOSE: Check whether an expert witness is registered in the system.
+//
+// WHO CAN CALL THIS: Anyone — courts, opposing counsel, parties.
+//
+// USE CASE:
+//   Opposing counsel challenges an expert's qualification.
+//   The retaining party provides the expert's identifier hash.
+//   This circuit confirms the expert was registered in AutoDiscovery.
+//   NOTE: Registration ≠ qualification. Phase 2 will add qualification
+//   verification circuits that prove specific credentials via ZK proofs.
+//
+// PARAMETERS:
+//   expertIdentifierHashToVerify — The expert's hash to look up in the registry
+//
+// RETURNS: true if the expert is registered, false otherwise.
+// ---------------------------------------------------------------------------
+export circuit verifyExpertIsRegistered(
+    expertIdentifierHashToVerify: Bytes<32>
+): Boolean {
+
+  // Check if this expert's hash is in the registered set.
+  // Simple set membership check — O(1) on Midnight.
+  registeredExpertIdentifierHashes.member(expertIdentifierHashToVerify)
 }

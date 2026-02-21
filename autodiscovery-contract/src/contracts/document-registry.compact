@@ -1,0 +1,530 @@
+pragma language_version >= 0.16 && <= 0.18;
+
+import CompactStandardLibrary;
+
+// ============================================================================
+// DOCUMENT-REGISTRY CONTRACT
+// ============================================================================
+//
+// PURPOSE:
+//   The workhorse contract for AutoDiscovery's discovery protocol.
+//   Manages the entire lifecycle of documents within a legal case:
+//     - Hash anchoring (immutable proof that a document existed at a point in time)
+//     - Twin Protocol bonds (linking image scans to their OCR'd digital counterparts)
+//     - Chain of custody (tracking every time a document changes hands)
+//     - Production tracking (grouping documents into formal legal productions)
+//     - Case root anchoring (periodic snapshot of the entire discovery universe)
+//
+// HOW IT FITS IN THE 6-CONTRACT SUITE:
+//   discovery-core.compact        → Case lifecycle, steps, deadlines
+//   jurisdiction-registry.compact → Which rules govern this case
+//   >>> document-registry.compact → Documents, hashes, custody, productions <<<
+//   access-control.compact        → Who can see what
+//   compliance-proof.compact      → ZK attestations that obligations were met
+//   expert-witness.compact        → Phase 2: med-mal expert tracking
+//
+// ARCHITECTURE (WHERE DATA LIVES):
+//   PUBLIC ledger  → Production Merkle roots, case root snapshots, counts
+//                    (visible to everyone — only hashes, never content)
+//   SEALED ledger  → Document hash commitments (write-once, immutable forever)
+//                    (once committed, cannot be modified or removed)
+//   PRIVATE ledger → Document metadata, twin bonds, custody chains, categories
+//                    (visible only to contract instance owner)
+//   WITNESS/LOCAL  → Actual document files, AI metadata, search indexes
+//                    (never touches the blockchain — lives on user's machine)
+//
+// THE 5-LEVEL MERKLE HASHING HIERARCHY:
+//   Level 0: Raw Bytes      → SHA-256 of raw file content (the atomic unit)
+//   Level 1: Page/Segment   → Hash per page, per email message, per video segment
+//   Level 2: Document       → Merkle root of all pages in one file
+//   Level 3: Package        → Merkle root of related documents (e.g., expert report + appendices)
+//   Level 4: Production     → Merkle root of all documents in a single submission
+//   Level 5: Case Root      → Merkle root of ALL productions — the entire discovery universe
+//
+//   Only Level 4-5 go on-chain. Everything below is verifiable via Merkle proof path.
+//
+// TWIN PROTOCOL:
+//   Every digitized physical document exists as twins — permanently bonded:
+//     - IMAGE twin: the scan/photo (faithful visual reproduction)
+//     - DIGITAL twin: the OCR'd text (searchable, machine-readable)
+//     - BOND HASH: SHA-256(image_hash + digital_hash) — proves both match
+//   Rule: You can't have a digital without its image. The image is the authority.
+//
+// ============================================================================
+
+
+// =============================================================================
+// PUBLIC STATE (export ledger)
+// =============================================================================
+// Visible to everyone on the network. Contains ONLY hashes and counts —
+// never any actual document content, metadata, or identifying information.
+// This is what courts, opposing counsel, and auditors can see.
+// =============================================================================
+
+// How many formal productions (document submissions) have been created
+// across all cases managed by this contract instance.
+// A "production" is a formal legal submission, e.g., "DEF's Response to RFP #3".
+export ledger totalProductionsCreated: Counter;
+
+// Maps each production's unique identifier to its Merkle root hash.
+// The Merkle root is computed from ALL document hashes in that production.
+// Anyone can verify a specific document belongs to a production using
+// the Merkle proof path (O(log n) verification — same technique as Bitcoin SPV).
+export ledger productionMerkleRootByIdentifier: Map<Bytes<32>, Bytes<32>>;
+
+// Maps each case identifier to its latest Case Root hash (Level 5).
+// The Case Root is the Merkle root of ALL productions in the entire case.
+// This is the single hash that represents the complete discovery universe.
+// Anchored periodically (e.g., at each production event).
+export ledger latestCaseRootHashByCaseIdentifier: Map<Bytes<32>, Bytes<32>>;
+
+// Records when each case root was last anchored on-chain.
+// Used for audit trail: "As of [timestamp], this was the state of discovery."
+export ledger caseRootAnchorTimestampByCaseIdentifier: Map<Bytes<32>, Field>;
+
+// Total number of individual documents registered across all cases.
+// Each document gets registered exactly once (content-addressable by its hash).
+export ledger totalDocumentsRegistered: Counter;
+
+
+// =============================================================================
+// SEALED STATE (sealed ledger)
+// =============================================================================
+// Write-once, immutable forever. Once a hash is committed here, it CANNOT be
+// modified, removed, or overwritten — not even by the contract owner.
+// This is the mathematical foundation for proving "this document existed at
+// this time and has not been altered since."
+//
+// MerkleTree<20, Bytes<32>> is a native Compact type that holds up to
+// 2^20 (~1,048,576) hash entries. If a case exceeds this, we would need
+// to split across multiple trees (see Open Questions in architecture docs).
+// =============================================================================
+
+// Immutable store of every document hash ever committed to this case.
+// Once inserted, a hash lives here forever — this IS the proof of existence.
+// Supports Merkle inclusion proofs: "prove document X is in this tree"
+// without revealing any other documents in the tree.
+sealed ledger immutableDocumentHashCommitments: MerkleTree<20, Bytes<32>>;
+
+// Immutable store of production root + timestamp pairs.
+// When a production is finalized, its root hash is permanently committed.
+// Prevents retroactive modification of what was produced and when.
+sealed ledger immutableProductionCommitments: Set<Bytes<32>>;
+
+
+// =============================================================================
+// PRIVATE STATE (ledger)
+// =============================================================================
+// Visible only to the contract instance owner (the party running this instance).
+// Contains document metadata, relationships, and tracking information.
+// None of this is visible on the public chain — it stays encrypted in
+// Midnight's private state.
+// =============================================================================
+
+// ---- DOCUMENT METADATA ----
+
+// Maps each document's content hash to a reference for its full metadata.
+// The metadata itself (originator, date, format, Bates number, etc.) lives
+// off-chain in the user's local database. This reference points to it.
+export ledger documentMetadataReferenceByDocumentHash: Map<Bytes<32>, Field>;
+
+// Maps each document hash to one of the 24 Universal Discovery Categories:
+//   1=Pleadings, 2=Interrogatories, 3=RFP, 4=RFA, 5=Depositions,
+//   6=Subpoenas, 7=Expert Reports, 8=Physical Evidence, 9=ESI,
+//   10=Medical Records, 11=Financial Records, 12=Communications,
+//   13=Photos/Video/Audio, 14=Law Enforcement Reports, 15=Witness Statements,
+//   16=Privilege Logs, 17=Protective Orders, 18=Disclosure Statements,
+//   19=Court Transcripts, 20=Court Orders, 21=Jury Selection,
+//   22=Jury Instructions, 23=Jury Notes, 24=Verdict Forms
+export ledger documentCategoryByDocumentHash: Map<Bytes<32>, Uint<8>>;
+
+// Maps each document hash to the public key of the party who originated it.
+// "Originator" = who created or first possessed the document.
+// This is the anchor point — every document enters the discovery universe
+// at a single moment from a single source.
+export ledger documentOriginatorPublicKeyByDocumentHash: Map<Bytes<32>, Bytes<32>>;
+
+// ---- TWIN PROTOCOL BONDS ----
+
+// Maps an image twin's hash to its corresponding digital twin's hash.
+// The image twin is the scan/photo; the digital twin is the OCR'd text.
+// These two are permanently bonded — they must travel together in production.
+// If either twin is tampered with, the bond breaks (bond hash won't match).
+export ledger digitalTwinHashByImageTwinHash: Map<Bytes<32>, Bytes<32>>;
+
+// Maps each twin bond hash to its fidelity score (0-100).
+// Fidelity = how faithfully the digital twin represents the image twin.
+// Computed by re-OCR'ing the image and comparing character-by-character.
+//   99-100 = Excellent (digital is faithful reproduction)
+//   90-98  = Good (minor OCR artifacts, common for printed text)
+//   70-89  = Moderate (some misreads — human review recommended)
+//   Below 70 = Poor (handwriting, damage, or bad scan — manual transcription needed)
+// This score is IMMUTABLE once set. If digital is corrected, a NEW bond is created.
+export ledger twinBondFidelityScoreByBondHash: Map<Bytes<32>, Uint<8>>;
+
+// ---- CHAIN OF CUSTODY ----
+
+// Maps each document hash to a reference for its latest transfer record.
+// Every time a document moves between parties (DEF→PRO, PRO→COURT, etc.),
+// a new transfer record is created. This points to the most recent one.
+// The full transfer history is maintained off-chain, linked by references.
+export ledger latestCustodyTransferReferenceByDocumentHash: Map<Bytes<32>, Field>;
+
+// ---- PRODUCTION TRACKING ----
+
+// Maps each production identifier to a reference for its document list.
+// A production is a formal submission (e.g., "DEF's Response to RFP #3")
+// containing potentially hundreds or thousands of documents.
+// The actual document list lives off-chain; this is the on-chain anchor.
+export ledger documentListReferenceByProductionIdentifier: Map<Bytes<32>, Field>;
+
+
+// =============================================================================
+// WITNESSES (off-chain computation)
+// =============================================================================
+// Witnesses are functions that run on the user's machine at transaction time.
+// They provide private inputs to the ZK circuit without putting those inputs
+// on-chain. The blockchain only sees the RESULT of the computation, not the
+// inputs themselves.
+// =============================================================================
+
+// Returns the wallet address of whoever is submitting this transaction.
+// Used for ownership checks — only the case owner can register documents.
+witness getTransactionCallerAddress(): Opaque<"address">;
+
+// Computes SHA-256 of the document's raw byte content.
+// This happens entirely on the user's machine — the actual file content
+// NEVER leaves their computer. Only the resulting hash enters the circuit.
+witness computeDocumentContentHash(rawDocumentContent: Bytes<32>): Bytes<32>;
+
+// Computes the twin bond hash: SHA-256(image_hash + digital_hash).
+// This single hash proves both twins exist and are linked.
+// If either twin is swapped or modified, this hash will be different.
+witness computeTwinBondHash(imageTwinHash: Bytes<32>, digitalTwinHash: Bytes<32>): Bytes<32>;
+
+// Builds a Merkle root from an array of document hashes (off-chain computation).
+// For a production of 500 documents, this computes the tree on the user's machine
+// and returns only the root hash to the circuit.
+// The full tree is stored locally for later Merkle proof generation.
+witness buildMerkleRootFromDocumentHashes(documentHashCollection: Field): Bytes<32>;
+
+// Returns the current timestamp from the user's system clock.
+// Used for anchoring "when" events happened (document registration, transfers, etc.).
+witness getCurrentTimestamp(): Field;
+
+
+// =============================================================================
+// CIRCUITS (on-chain operations)
+// =============================================================================
+// These are the functions that parties call to interact with the contract.
+// Each circuit generates a ZK proof — the blockchain verifies the proof
+// without needing to see the private inputs.
+// =============================================================================
+
+
+// ---------------------------------------------------------------------------
+// registerDocument
+// ---------------------------------------------------------------------------
+// PURPOSE: Register a new document in the discovery system.
+//          This is Step 1 (Origination) of the 9-step protocol.
+//
+// WHAT HAPPENS:
+//   1. Document's content hash is committed to the sealed (immutable) ledger
+//   2. Category and originator are stored in private state
+//   3. Public counter is incremented (proves document count without revealing docs)
+//   4. Returns the document hash for use in subsequent operations
+//
+// ZK PROOF GENERATED:
+//   "A document with hash [X] was registered at [timestamp] in category [N]
+//    by originator [pubkey] — without revealing the document's content."
+//
+// PARAMETERS:
+//   documentContentHash     — SHA-256 of the document's raw bytes (computed by witness)
+//   documentCategoryNumber  — Which of the 24 Universal Discovery Categories (1-24)
+//   originatorPublicKey     — Public key of the party who created/first possessed the doc
+// ---------------------------------------------------------------------------
+export circuit registerDocument(
+    documentContentHash: Bytes<32>,
+    documentCategoryNumber: Uint<8>,
+    originatorPublicKey: Bytes<32>
+): Bytes<32> {
+
+  // Commit the document hash to the sealed (immutable) Merkle tree.
+  // After this line executes, this hash exists FOREVER in the sealed state.
+  // It cannot be modified, removed, or overwritten — not even by the owner.
+  // This IS the mathematical proof of "this document existed at this time."
+  immutableDocumentHashCommitments.insert(pad(32, documentContentHash));
+
+  // Store the document's category in private state.
+  // Category is one of 24 universal types (Pleadings, Depositions, etc.).
+  // This metadata is only visible to the contract owner — not on public chain.
+  documentCategoryByDocumentHash.insert(documentContentHash, documentCategoryNumber);
+
+  // Store who originated this document (their public key) in private state.
+  // Originator tracking is critical for chain-of-custody: every document
+  // enters the discovery universe from a single source at a single moment.
+  documentOriginatorPublicKeyByDocumentHash.insert(documentContentHash, originatorPublicKey);
+
+  // Increment the public document counter.
+  // This proves to the network that a document was registered, without
+  // revealing WHAT document, WHO originated it, or WHAT category it is.
+  totalDocumentsRegistered.increment(1);
+
+  // Return the hash so the caller can reference this document in future operations
+  // (twin bonds, transfers, productions, etc.)
+  documentContentHash
+}
+
+
+// ---------------------------------------------------------------------------
+// registerTwinBond
+// ---------------------------------------------------------------------------
+// PURPOSE: Create a permanent bond between an image twin (scan/photo) and
+//          its digital twin (OCR'd text). This is the Twin Protocol.
+//
+// WHY THIS MATTERS:
+//   Physical documents that get digitized exist as two files:
+//     - IMAGE: faithful visual reproduction (signatures, stamps, handwriting visible)
+//     - DIGITAL: OCR'd text (searchable, machine-readable, but loses visual detail)
+//   The bond ensures they are permanently linked and travel together.
+//   If either twin is tampered with, the bond hash won't match → tamper detected.
+//
+// ZK PROOF GENERATED:
+//   "Image [img_hash] and digital [dig_hash] are bonded as twins
+//    with fidelity score [N] at [timestamp]."
+//
+// PARAMETERS:
+//   imageTwinContentHash    — SHA-256 of the image file (scan, photo, etc.)
+//   digitalTwinContentHash  — SHA-256 of the OCR'd digital file
+//   ocrFidelityScorePercent — How faithfully digital represents image (0-100)
+// ---------------------------------------------------------------------------
+export circuit registerTwinBond(
+    imageTwinContentHash: Bytes<32>,
+    digitalTwinContentHash: Bytes<32>,
+    ocrFidelityScorePercent: Uint<8>
+): Bytes<32> {
+
+  // Compute the bond hash: SHA-256(image_hash + digital_hash).
+  // This single hash represents the twin pair as one unit.
+  // In the Merkle tree hierarchy, this bond hash IS the document's Level 1 hash.
+  // If someone swaps either twin for a different file, this hash changes → caught.
+  const twinBondHash = computeTwinBondHash(imageTwinContentHash, digitalTwinContentHash);
+
+  // Store the image→digital mapping in private state.
+  // Given an image hash, you can always look up its digital counterpart.
+  digitalTwinHashByImageTwinHash.insert(imageTwinContentHash, digitalTwinContentHash);
+
+  // Store the fidelity score for this bond.
+  // This score is IMMUTABLE once set. If the digital twin is later corrected
+  // (e.g., better OCR), a NEW bond must be created with a new fidelity score.
+  // The original bond is preserved in history (we never delete, only append).
+  twinBondFidelityScoreByBondHash.insert(twinBondHash, ocrFidelityScorePercent);
+
+  // Return the bond hash — this becomes the document's identity in the Merkle tree.
+  twinBondHash
+}
+
+
+// ---------------------------------------------------------------------------
+// recordCustodyTransfer
+// ---------------------------------------------------------------------------
+// PURPOSE: Record that a document moved from one party to another.
+//          This is Step 4 (Chain of Custody) of the 9-step protocol.
+//
+// WHY THIS MATTERS:
+//   Legal discovery is about SHARING documents between parties.
+//   Every transfer must be tracked: who sent what to whom, and when.
+//   If a party later claims "we never received that document," the
+//   transfer record proves otherwise. If they claim "we sent it on time,"
+//   the timestamp proves (or disproves) that.
+//
+// PROOF STRENGTH DEPENDS ON ADOPTION:
+//   Both parties on DApp  → Full proof (send + receipt confirmed, both timestamped)
+//   Sender only on DApp   → Partial proof (sent confirmed, receipt unconfirmed)
+//   Neither on DApp       → No proof (the status quo — chaos)
+//
+// PARAMETERS:
+//   documentContentHash        — Hash of the document being transferred
+//   senderPartyPublicKey       — Public key of the party sending the document
+//   receiverPartyPublicKey     — Public key of the party receiving the document
+//   transferTimestamp          — When the transfer occurred
+// ---------------------------------------------------------------------------
+export circuit recordCustodyTransfer(
+    documentContentHash: Bytes<32>,
+    senderPartyPublicKey: Bytes<32>,
+    receiverPartyPublicKey: Bytes<32>,
+    transferTimestamp: Field
+): [] {
+
+  // Store the transfer reference in private state.
+  // This overwrites the previous "latest transfer" pointer for this document.
+  // The full transfer history chain is maintained off-chain in the user's
+  // local database — each transfer record points to the previous one.
+  latestCustodyTransferReferenceByDocumentHash.insert(documentContentHash, transferTimestamp);
+}
+
+
+// ---------------------------------------------------------------------------
+// anchorProductionMerkleRoot
+// ---------------------------------------------------------------------------
+// PURPOSE: Anchor a production's Merkle root to the public ledger.
+//          This is the on-chain proof that "these documents were produced."
+//
+// WHAT IS A "PRODUCTION"?
+//   A formal legal submission of documents from one party to another.
+//   Example: "DEF's Response to RFP #3, Production #1" containing 500 documents.
+//   The Merkle root is computed from all 500 document hashes.
+//   From this single root, any individual document can be verified via
+//   Merkle proof path in O(log n) steps.
+//
+// ZK PROOF GENERATED:
+//   "Production [id] with Merkle root [root] was anchored at [timestamp].
+//    It contains [N] documents." — without revealing which documents.
+//
+// PARAMETERS:
+//   productionUniqueIdentifier  — Unique ID for this production
+//   productionMerkleRootHash    — Merkle root computed from all document hashes
+// ---------------------------------------------------------------------------
+export circuit anchorProductionMerkleRoot(
+    productionUniqueIdentifier: Bytes<32>,
+    productionMerkleRootHash: Bytes<32>
+): [] {
+
+  // Store the production's Merkle root on the PUBLIC ledger.
+  // This is visible to everyone — anyone can verify a document belongs to
+  // this production by providing a Merkle proof path from the document's
+  // hash up to this root.
+  productionMerkleRootByIdentifier.insert(productionUniqueIdentifier, productionMerkleRootHash);
+
+  // Commit the production root to the SEALED (immutable) ledger.
+  // Once committed, this production's root can never be changed.
+  // This prevents retroactive modification: "we actually produced different documents."
+  immutableProductionCommitments.insert(productionMerkleRootHash);
+
+  // Increment the public production counter.
+  totalProductionsCreated.increment(1);
+
+  // Store a reference to the off-chain document list for this production.
+  // The actual list of which documents are in this production lives off-chain.
+  documentListReferenceByProductionIdentifier.insert(productionUniqueIdentifier, embed<Field>());
+}
+
+
+// ---------------------------------------------------------------------------
+// anchorCaseRootSnapshot
+// ---------------------------------------------------------------------------
+// PURPOSE: Anchor a periodic snapshot of the entire case's discovery state.
+//          The Case Root (Level 5) is the Merkle root of ALL productions.
+//
+// WHY PERIODIC SNAPSHOTS?
+//   Discovery evolves over months. New productions are added, supplements filed.
+//   Each snapshot says: "As of [timestamp], THIS was the complete state of
+//   all discovery in this case." Six months later at a sanctions hearing,
+//   you can prove exactly what existed at any point in time.
+//
+// FREQUENCY:
+//   Anchored at each production event, or at configurable intervals.
+//   Each snapshot is independent — the history of snapshots is the audit trail.
+//
+// PARAMETERS:
+//   caseUniqueIdentifier    — The case's unique ID (hash of case number + jurisdiction)
+//   caseRootMerkleHash      — Merkle root of ALL productions in this case
+// ---------------------------------------------------------------------------
+export circuit anchorCaseRootSnapshot(
+    caseUniqueIdentifier: Bytes<32>,
+    caseRootMerkleHash: Bytes<32>
+): [] {
+
+  // Get the current timestamp for this snapshot.
+  const snapshotTimestamp = getCurrentTimestamp();
+
+  // Store the case root hash on the PUBLIC ledger.
+  // This is THE single hash that represents the entire discovery universe
+  // for this case at this moment in time.
+  latestCaseRootHashByCaseIdentifier.insert(caseUniqueIdentifier, caseRootMerkleHash);
+
+  // Record when this snapshot was taken.
+  // Creates an audit trail: "Case root was [hash] as of [timestamp]."
+  caseRootAnchorTimestampByCaseIdentifier.insert(caseUniqueIdentifier, snapshotTimestamp);
+}
+
+
+// ---------------------------------------------------------------------------
+// verifyDocumentExistsInProduction
+// ---------------------------------------------------------------------------
+// PURPOSE: Verify that a specific document is part of a specific production
+//          using its Merkle proof path. This is the core verification circuit.
+//
+// HOW MERKLE VERIFICATION WORKS:
+//   Given: document hash + production ID + Merkle proof path
+//   1. Start with the document's hash
+//   2. Walk up the Merkle tree using the proof path (sibling hashes)
+//   3. Arrive at a computed root
+//   4. Compare computed root to the stored production Merkle root
+//   5. If they match → document is proven to be in the production
+//
+//   This verification costs O(log n) — for 1 million documents, only ~20 hashes.
+//
+// USE CASE:
+//   "Prove that page 47 of the Expert Report was part of Production #1
+//    and hasn't been altered since origination."
+//
+// PARAMETERS:
+//   documentContentHash        — Hash of the document to verify
+//   productionUniqueIdentifier — Which production to check against
+//   merkleProofPath            — The sibling hashes needed to walk up the tree
+// ---------------------------------------------------------------------------
+export circuit verifyDocumentExistsInProduction(
+    documentContentHash: Bytes<32>,
+    productionUniqueIdentifier: Bytes<32>,
+    merkleProofPath: Bytes<32>
+): Boolean {
+
+  // Look up the stored Merkle root for this production.
+  const storedProductionRoot = productionMerkleRootByIdentifier.lookup(productionUniqueIdentifier);
+
+  // Compute what the root SHOULD be given this document and its proof path.
+  // This is done off-chain by the witness, which walks the Merkle tree.
+  const computedRootFromProofPath = buildMerkleRootFromDocumentHashes(embed<Field>());
+
+  // If the computed root matches the stored root, the document is verified
+  // as a member of this production. Mathematically irrefutable.
+  storedProductionRoot == computedRootFromProofPath
+}
+
+
+// ---------------------------------------------------------------------------
+// verifyTwinBondIntegrity
+// ---------------------------------------------------------------------------
+// PURPOSE: Verify that a twin bond is intact — the image and digital twins
+//          still match the original bond hash.
+//
+// WHY THIS MATTERS:
+//   If someone re-OCR's a document (producing a different digital twin)
+//   or replaces the image (e.g., with a doctored scan), the bond breaks.
+//   This circuit catches that: recompute the bond hash from the current
+//   twins and compare to the stored bond hash.
+//
+// USE CASE:
+//   Receiving party runs fidelity check on a produced document.
+//   If their computed bond hash differs from the record → tamper detected.
+//
+// PARAMETERS:
+//   expectedTwinBondHash    — The bond hash from the original registration
+//   currentImageTwinHash    — Hash of the image twin as it exists now
+//   currentDigitalTwinHash  — Hash of the digital twin as it exists now
+// ---------------------------------------------------------------------------
+export circuit verifyTwinBondIntegrity(
+    expectedTwinBondHash: Bytes<32>,
+    currentImageTwinHash: Bytes<32>,
+    currentDigitalTwinHash: Bytes<32>
+): Boolean {
+
+  // Recompute the bond hash from the current twins.
+  // Bond hash = SHA-256(image_hash + digital_hash).
+  const recomputedBondHash = computeTwinBondHash(currentImageTwinHash, currentDigitalTwinHash);
+
+  // If the recomputed hash matches the expected hash, both twins are intact.
+  // If they don't match, at least one twin has been modified since bonding.
+  expectedTwinBondHash == recomputedBondHash
+}

@@ -4,100 +4,357 @@ import CompactStandardLibrary;
 
 // ============================================================================
 // DISCOVERY-CORE CONTRACT
-// Purpose: Manage case creation, step tracking, and status transitions.
-//          Jurisdiction-agnostic — doesn't know about specific rules.
+// ============================================================================
+//
+// PURPOSE:
+//   Manages the lifecycle of a legal case within AutoDiscovery.
+//   Handles case creation, discovery step tracking, deadline management,
+//   and status transitions. This contract is JURISDICTION-AGNOSTIC — it
+//   doesn't know about Idaho IRCP or Federal FRCP or any specific rules.
+//   The jurisdiction-registry contract handles which rules apply;
+//   this contract just tracks obligations and their completion.
+//
+// HOW IT FITS IN THE 6-CONTRACT SUITE:
+//   >>> discovery-core.compact    → Case lifecycle, steps, deadlines <<<
+//   jurisdiction-registry.compact → Which rules govern this case
+//   document-registry.compact     → Documents, hashes, custody, productions
+//   access-control.compact        → Who can see what
+//   compliance-proof.compact      → ZK attestations that obligations were met
+//   expert-witness.compact        → Phase 2: med-mal expert tracking
+//
+// KEY CONCEPTS:
+//
+//   CASE — A legal proceeding (e.g., "Smith v. Acme Corp, Case CV-2025-1234").
+//     Each case has a unique ID computed from its case number + jurisdiction.
+//     The case ID is a hash — the actual case number never appears on-chain.
+//
+//   DISCOVERY STEP — A single obligation within a case (e.g., "produce expert
+//     report by Feb 20"). Steps are generated from jurisdiction rule packs.
+//     Each step has a hash (hiding its details) and a deadline.
+//
+//   STATUS ENUMS (stored as Uint<8>):
+//     0x00 = NOT_STARTED   — Step exists but no work has begun
+//     0x01 = IN_PROGRESS   — Step is being worked on
+//     0x02 = COMPLETED     — Step finished successfully
+//     0x03 = OVERDUE       — Deadline passed without completion
+//     0x04 = WAIVED        — Parties agreed to skip this step
+//     0x05 = OBJECTED      — Opposing party objected to this obligation
+//     0x06 = PROTECTED     — Step is under protective order (restricted access)
+//
 // ============================================================================
 
-// --- PUBLIC STATE ---
-// Visible to all. Proves case exists and compliance status.
-export ledger caseCount: Counter;
-export ledger caseStatuses: Map<Field, Uint<8>>;
-export ledger caseJurisdictions: Map<Field, Bytes<8>>;
-export ledger stepCompletionFlags: Map<Field, Boolean>;
-export ledger attestationHashes: Set<Bytes<32>>;
 
-// --- PRIVATE STATE ---
-// Case details hidden from public view.
-ledger caseOwners: Map<Field, Opaque<"address">>;
-ledger stepDeadlines: Map<Field, Field>;
-ledger stepStatuses: Map<Field, Uint<8>>;
+// =============================================================================
+// PUBLIC STATE (export ledger)
+// =============================================================================
+// Visible to everyone on the network. Contains ONLY case existence proofs,
+// status flags, and compliance indicators. No actual case details are exposed.
+// =============================================================================
 
-// --- WITNESSES ---
-// Off-chain computation provided at transaction time.
-witness getCaller(): Opaque<"address">;
-witness computeCaseId(caseNumber: Bytes<32>, jurisdiction: Bytes<8>): Field;
-witness computeStepHash(caseId: Field, ruleRef: Bytes<32>): Field;
+// Total number of cases created across all users of this contract instance.
+// Publicly visible — proves activity level without revealing case details.
+export ledger totalCasesCreated: Counter;
+
+// Maps each case's unique identifier to its current status enum.
+// This is public so that anyone (courts, opposing counsel) can check:
+// "Does this case exist? Is discovery in progress? Is it complete?"
+// The case ID is a hash — it does NOT reveal the actual case number.
+export ledger caseStatusByCaseIdentifier: Map<Field, Uint<8>>;
+
+// Maps each case's unique identifier to its jurisdiction code.
+// Jurisdiction codes are 8-byte identifiers (e.g., "ID" for Idaho, "UT" for Utah).
+// Public because jurisdiction isn't sensitive — it's part of the court filing.
+// This links to the jurisdiction-registry contract for rule pack verification.
+export ledger jurisdictionCodeByCaseIdentifier: Map<Field, Bytes<8>>;
+
+// Maps each discovery step's unique hash to whether it has been completed.
+// Public boolean: true = completed, false = not yet completed.
+// The step hash hides WHAT the step is — only its completion status is visible.
+// Used by compliance-proof contract to verify obligations were met.
+export ledger isStepCompletedByStepHash: Map<Field, Boolean>;
+
+// Set of all attestation hashes generated when steps are completed.
+// Each attestation is a cryptographic proof that "a step was finished."
+// Courts can verify an attestation exists without knowing which step it represents.
+export ledger completionAttestationHashes: Set<Bytes<32>>;
+
+
+// =============================================================================
+// PRIVATE STATE (ledger)
+// =============================================================================
+// Visible only to the contract instance owner (the party running this instance).
+// Contains case ownership, step deadlines, and detailed status information.
+// None of this appears on the public chain.
+// =============================================================================
+
+// Maps each case's unique identifier to the wallet address of its owner.
+// The owner is the party who created the case in AutoDiscovery.
+// Only the owner can add steps, complete steps, and manage the case.
+ledger caseOwnerAddressByCaseIdentifier: Map<Field, Opaque<"address">>;
+
+// Maps each discovery step's unique hash to its deadline timestamp.
+// Deadlines are computed off-chain by the deadline engine from jurisdiction
+// rule packs, then stored here for on-chain enforcement.
+// Private because deadlines can reveal strategic information about the case.
+ledger stepDeadlineTimestampByStepHash: Map<Field, Field>;
+
+// Maps each discovery step's unique hash to its detailed status enum.
+// More granular than the public isStepCompleted boolean — this tracks
+// the full lifecycle: NOT_STARTED → IN_PROGRESS → COMPLETED/OVERDUE/etc.
+ledger detailedStepStatusByStepHash: Map<Field, Uint<8>>;
+
+
+// =============================================================================
+// WITNESSES (off-chain computation)
+// =============================================================================
+// Witnesses run on the user's machine at transaction time.
+// They provide private inputs to ZK circuits without revealing those inputs.
+// =============================================================================
+
+// Returns the wallet address of whoever is submitting this transaction.
+// Used for ownership checks — only the case owner can modify their case.
+witness getTransactionCallerAddress(): Opaque<"address">;
+
+// Computes a unique case identifier from the case number and jurisdiction.
+// Case ID = hash(caseNumber + jurisdictionCode).
+// The actual case number NEVER appears on-chain — only this hash.
+// This prevents anyone from looking at the public ledger and identifying
+// which real-world cases are using AutoDiscovery.
+witness computeUniqueCaseIdentifier(
+    caseNumber: Bytes<32>,
+    jurisdictionCode: Bytes<8>
+): Field;
+
+// Computes a unique hash for a discovery step within a case.
+// Step hash = hash(caseId + ruleReference).
+// Hides WHAT the step is (e.g., "produce expert report per IRCP 26(a)")
+// while still allowing the step to be uniquely identified on-chain.
+witness computeUniqueStepHash(
+    caseIdentifier: Field,
+    jurisdictionRuleReference: Bytes<32>
+): Field;
+
+// Returns the current timestamp from the user's system clock.
+// Used for recording when steps are completed, for deadline comparison, etc.
 witness getCurrentTimestamp(): Field;
 
-// --- STATUS ENUMS (as Uint<8>) ---
-// 0 = notStarted, 1 = inProgress, 2 = completed,
-// 3 = overdue, 4 = waived, 5 = objected, 6 = protected
 
-// --- CIRCUITS ---
+// =============================================================================
+// CIRCUITS (on-chain operations)
+// =============================================================================
 
-// Creates a new case and returns its unique ID (hash of caseNumber + jurisdiction).
-// The case is registered on the public ledger with its jurisdiction code.
-// The caller becomes the case owner (stored privately).
-export circuit createCase(caseNumber: Bytes<32>, jurisdiction: Bytes<8>): Field {
-  const caller = getCaller();
-  const caseId = computeCaseId(caseNumber, jurisdiction);
 
-  // Register case publicly
-  caseCount.increment(1);
-  caseStatuses.insert(caseId, 0x01); // 1 = inProgress
-  caseJurisdictions.insert(caseId, jurisdiction);
+// ---------------------------------------------------------------------------
+// createNewCase
+// ---------------------------------------------------------------------------
+// PURPOSE: Create a new legal case in AutoDiscovery and register it on-chain.
+//
+// WHAT HAPPENS:
+//   1. A unique case identifier is computed from the case number + jurisdiction
+//      (the actual case number never appears on-chain — only the hash)
+//   2. The case is registered on the public ledger with its jurisdiction code
+//   3. The caller becomes the case owner (stored privately)
+//   4. Returns the case identifier for use in all subsequent operations
+//
+// THIS IS THE ENTRY POINT — everything else in AutoDiscovery starts here.
+// After creating a case, the next steps are:
+//   - Add discovery steps (from the jurisdiction's rule pack)
+//   - Register documents (via document-registry contract)
+//   - Assign party roles (via access-control contract)
+//
+// PARAMETERS:
+//   caseNumber         — The court-assigned case number (e.g., "CV-2025-1234")
+//                        Passed as Bytes<32> — hashed immediately, never stored raw
+//   jurisdictionCode   — Which jurisdiction governs this case (e.g., "ID" for Idaho)
+//                        8-byte code matching jurisdiction-registry entries
+// ---------------------------------------------------------------------------
+export circuit createNewCase(
+    caseNumber: Bytes<32>,
+    jurisdictionCode: Bytes<8>
+): Field {
 
-  // Store owner privately
-  caseOwners.insert(caseId, caller);
+  // Identify who is creating this case.
+  // Their wallet address becomes the case owner — only they can manage it.
+  const callerWalletAddress = getTransactionCallerAddress();
 
-  caseId
+  // Compute the unique case identifier from case number + jurisdiction.
+  // This hash is the case's on-chain identity. The real case number stays private.
+  const caseUniqueIdentifier = computeUniqueCaseIdentifier(caseNumber, jurisdictionCode);
+
+  // Register the case on the PUBLIC ledger.
+  // After this, anyone can see "a case exists" — but not WHICH case.
+
+  // Increment the global case counter (proves activity, hides specifics).
+  totalCasesCreated.increment(1);
+
+  // Set initial status to IN_PROGRESS (0x01).
+  // Status will transition to COMPLETED (0x02) when all steps are done.
+  caseStatusByCaseIdentifier.insert(caseUniqueIdentifier, 0x01);
+
+  // Record which jurisdiction governs this case.
+  // Public because jurisdiction is part of the court filing (not sensitive).
+  // Links to jurisdiction-registry contract for rule pack verification.
+  jurisdictionCodeByCaseIdentifier.insert(caseUniqueIdentifier, jurisdictionCode);
+
+  // Store the case owner's wallet address in PRIVATE state.
+  // Only the contract can see this — it's used for authorization checks.
+  caseOwnerAddressByCaseIdentifier.insert(caseUniqueIdentifier, callerWalletAddress);
+
+  // Return the case identifier so the caller can reference this case
+  // in all future operations (adding steps, registering documents, etc.).
+  caseUniqueIdentifier
 }
 
-// Adds a discovery step to a case. Returns the step hash.
-// Only the case owner can add steps.
-// The deadline is stored privately; completion flag is public.
-export circuit addStep(caseId: Field, ruleRef: Bytes<32>, deadline: Field): Field {
-  const caller = getCaller();
-  const owner = caseOwners.lookup(caseId);
-  assert caller == owner "Only case owner can add steps";
 
-  const stepHash = computeStepHash(caseId, ruleRef);
+// ---------------------------------------------------------------------------
+// addDiscoveryStepToCase
+// ---------------------------------------------------------------------------
+// PURPOSE: Add a discovery obligation (step) to a case.
+//          Steps are generated from the jurisdiction's rule pack by the
+//          off-chain deadline engine, then registered on-chain here.
+//
+// EXAMPLES OF DISCOVERY STEPS:
+//   - "Serve initial disclosures per IRCP 26(a) by [date]"
+//   - "Produce expert report per FRCP 26(a)(2) by [date]"
+//   - "Complete depositions by [date]"
+//   - "File privilege log per [local rule] by [date]"
+//
+// AUTHORIZATION: Only the case owner can add steps to their case.
+//
+// WHAT HAPPENS:
+//   1. Step hash is computed from the case ID + rule reference
+//      (hides WHAT the step is on the public chain)
+//   2. Public completion flag set to false (step exists, not yet done)
+//   3. Deadline and detailed status stored privately
+//   4. Returns the step hash for tracking
+//
+// PARAMETERS:
+//   caseUniqueIdentifier        — The case to add this step to
+//   jurisdictionRuleReference   — Which rule creates this obligation
+//                                 (e.g., hash of "IRCP 26(a)" — hides the rule name)
+//   stepDeadlineTimestamp       — When this step must be completed by
+//                                 (computed by the off-chain deadline engine)
+// ---------------------------------------------------------------------------
+export circuit addDiscoveryStepToCase(
+    caseUniqueIdentifier: Field,
+    jurisdictionRuleReference: Bytes<32>,
+    stepDeadlineTimestamp: Field
+): Field {
 
-  // Public: step exists but not yet completed
-  stepCompletionFlags.insert(stepHash, false);
+  // Verify the caller is the case owner.
+  // Only the owner can add obligations to their case — prevents tampering.
+  const callerWalletAddress = getTransactionCallerAddress();
+  const storedOwnerAddress = caseOwnerAddressByCaseIdentifier.lookup(caseUniqueIdentifier);
+  assert callerWalletAddress == storedOwnerAddress
+      "Only the case owner can add discovery steps";
 
-  // Private: deadline and detailed status
-  stepDeadlines.insert(stepHash, deadline);
-  stepStatuses.insert(stepHash, 0x00); // 0 = notStarted
+  // Compute a unique hash for this step.
+  // The step hash hides both the case details AND the specific rule.
+  // On the public chain, this step is just an anonymous hash with a boolean flag.
+  const stepUniqueHash = computeUniqueStepHash(
+      caseUniqueIdentifier,
+      jurisdictionRuleReference
+  );
 
-  stepHash
+  // Register the step on the PUBLIC ledger as "not yet completed."
+  // Anyone can see "a step exists" but not what it is or when it's due.
+  isStepCompletedByStepHash.insert(stepUniqueHash, false);
+
+  // Store the step's deadline in PRIVATE state.
+  // Deadlines are sensitive — they reveal case strategy and timing.
+  // The deadline engine computes these from jurisdiction rule packs off-chain.
+  stepDeadlineTimestampByStepHash.insert(stepUniqueHash, stepDeadlineTimestamp);
+
+  // Set the initial detailed status to NOT_STARTED (0x00).
+  // This will progress through IN_PROGRESS → COMPLETED (or OVERDUE, etc.).
+  detailedStepStatusByStepHash.insert(stepUniqueHash, 0x00);
+
+  // Return the step hash so the caller can track and complete this step later.
+  stepUniqueHash
 }
 
-// Marks a step as completed. Generates an attestation hash for the proof record.
-// Only the case owner can complete steps.
-// Returns an attestation hash that can be used for compliance proofs.
-export circuit completeStep(caseId: Field, stepHash: Field): Bytes<32> {
-  const caller = getCaller();
-  const owner = caseOwners.lookup(caseId);
-  assert caller == owner "Only case owner can complete steps";
 
-  // Update public completion flag
-  stepCompletionFlags.insert(stepHash, true);
+// ---------------------------------------------------------------------------
+// markDiscoveryStepAsCompleted
+// ---------------------------------------------------------------------------
+// PURPOSE: Mark a discovery step as completed and generate an attestation.
+//
+// THIS IS WHERE THE ZK MAGIC HAPPENS:
+//   When a step is completed, this circuit generates an attestation hash —
+//   a cryptographic proof that "a step was finished at [timestamp]."
+//   The attestation can later be used by the compliance-proof contract
+//   to prove "all obligations were met" without revealing case details.
+//
+// THE CHAIN FROM STEP COMPLETION TO COURT SUBMISSION:
+//   1. Step completed here → attestation hash generated
+//   2. Attestation hash stored in public set (completionAttestationHashes)
+//   3. compliance-proof contract references this attestation
+//   4. Court verifies: "attestation exists on-chain at [timestamp]"
+//   5. Court satisfied: "discovery obligation was met" — without seeing details
+//
+// AUTHORIZATION: Only the case owner can complete steps.
+//
+// PARAMETERS:
+//   caseUniqueIdentifier  — The case this step belongs to
+//   stepUniqueHash        — The step being marked as completed
+// ---------------------------------------------------------------------------
+export circuit markDiscoveryStepAsCompleted(
+    caseUniqueIdentifier: Field,
+    stepUniqueHash: Field
+): Bytes<32> {
 
-  // Update private status to completed
-  stepStatuses.insert(stepHash, 0x02); // 2 = completed
+  // Verify the caller is the case owner.
+  const callerWalletAddress = getTransactionCallerAddress();
+  const storedOwnerAddress = caseOwnerAddressByCaseIdentifier.lookup(caseUniqueIdentifier);
+  assert callerWalletAddress == storedOwnerAddress
+      "Only the case owner can complete discovery steps";
 
-  // Generate attestation hash from step completion
-  const timestamp = getCurrentTimestamp();
-  const attestation = disclose(embed<Bytes<32>>());
-  attestationHashes.insert(attestation);
+  // Update the PUBLIC completion flag to true.
+  // Anyone watching the chain can now see "that step is done" — but they
+  // still don't know WHAT the step was or WHICH case it belongs to.
+  isStepCompletedByStepHash.insert(stepUniqueHash, true);
 
-  attestation
+  // Update the PRIVATE detailed status to COMPLETED (0x02).
+  // This is more granular than the public boolean — tracks the full lifecycle.
+  detailedStepStatusByStepHash.insert(stepUniqueHash, 0x02);
+
+  // Generate an attestation hash for this completion event.
+  // The attestation is a ZK proof artifact — it proves "something was completed
+  // at this timestamp" without revealing what, by whom, or for which case.
+  const completionTimestamp = getCurrentTimestamp();
+  const completionAttestationHash = disclose(embed<Bytes<32>>());
+
+  // Store the attestation hash in the public set.
+  // This is the anchor point for the compliance-proof contract.
+  completionAttestationHashes.insert(completionAttestationHash);
+
+  // Return the attestation hash so it can be referenced in compliance proofs.
+  completionAttestationHash
 }
 
-// Checks overall compliance for a case by verifying the case status.
-// Returns true if the case status indicates compliance (all steps complete).
-export circuit getComplianceStatus(caseId: Field): Boolean {
-  const status = caseStatuses.lookup(caseId);
-  status == 0x02 // 2 = completed means fully compliant
+
+// ---------------------------------------------------------------------------
+// checkCaseComplianceStatus
+// ---------------------------------------------------------------------------
+// PURPOSE: Check whether a case's overall discovery is compliant.
+//
+// RETURNS: true if the case status is COMPLETED (0x02), meaning all
+//          discovery obligations have been met. false otherwise.
+//
+// WHO CAN CALL THIS: Anyone — it reads public state only.
+//
+// NOTE: This is a simplified check based on the case-level status flag.
+//       For granular step-by-step compliance verification, use the
+//       compliance-proof contract's attestation circuits.
+//
+// PARAMETERS:
+//   caseUniqueIdentifier  — The case to check compliance for
+// ---------------------------------------------------------------------------
+export circuit checkCaseComplianceStatus(caseUniqueIdentifier: Field): Boolean {
+
+  // Look up the case's current status from the public ledger.
+  const currentCaseStatus = caseStatusByCaseIdentifier.lookup(caseUniqueIdentifier);
+
+  // COMPLETED (0x02) = all discovery obligations met = fully compliant.
+  currentCaseStatus == 0x02
 }

@@ -4,65 +4,263 @@ import CompactStandardLibrary;
 
 // ============================================================================
 // JURISDICTION-REGISTRY CONTRACT
-// Purpose: On-chain registry of jurisdiction metadata.
-//          Rules stored as JSON off-chain; registry stores hashes and
-//          version info for auditability and integrity verification.
+// ============================================================================
+//
+// PURPOSE:
+//   On-chain registry of jurisdiction metadata for AutoDiscovery.
+//   Legal discovery rules are DIFFERENT in every jurisdiction — Idaho IRCP,
+//   Utah URCP, Washington CR, Federal FRCP, etc. This contract tracks
+//   WHICH rule packs exist, WHAT version is current, and provides an
+//   immutable audit trail of which rules were in effect at any point in time.
+//
+// DESIGN RATIONALE:
+//   The actual rules themselves are stored as JSON files OFF-CHAIN
+//   (e.g., idaho-ircp.json in the rule-packs/ folder). They're too large
+//   and too frequently updated for on-chain storage.
+//
+//   What goes ON-CHAIN is the HASH of each rule pack + its version number.
+//   This means:
+//     - We can prove "this case used Idaho IRCP version 2024.07" immutably
+//     - If rules are updated (e.g., California's 2024 mandatory disclosure change),
+//       the new hash is recorded with a new version number
+//     - The old hash remains in history — we can always verify what rules
+//       were active when a specific compliance attestation was generated
+//
+// HOW IT FITS IN THE 6-CONTRACT SUITE:
+//   discovery-core.compact        → Case lifecycle, steps, deadlines
+//   >>> jurisdiction-registry.compact → Which rules govern this case <<<
+//   document-registry.compact     → Documents, hashes, custody, productions
+//   access-control.compact        → Who can see what
+//   compliance-proof.compact      → ZK attestations that obligations were met
+//   expert-witness.compact        → Phase 2: med-mal expert tracking
+//
+// JURISDICTION CODES (8-byte identifiers):
+//   "ID"       → Idaho (IRCP) — PRIMARY, Spy's home jurisdiction
+//   "UT"       → Utah (URCP) — tiered discovery system
+//   "WA"       → Washington (CR) — strong e-discovery protocols
+//   "NY"       → New York (CPLR) — Commercial Division, categorical privilege logs
+//   "CA"       → California (CCP) — broadest mandatory disclosures
+//   "FEDERAL"  → Federal (FRCP) — baseline for removal cases
+//   "OH"       → Ohio (Civ.R.) — included early from Grok research
+//
+// RULE HIERARCHY:
+//   Federal FRCP → State rules → County local rules → Judge standing orders
+//   Each level can override the one above it. The rule loader service
+//   (off-chain) handles merging; this contract just anchors the hashes.
+//
 // ============================================================================
 
-// --- PUBLIC STATE ---
-// Which jurisdictions are registered and their rule pack versions.
-export ledger jurisdictionCount: Counter;
-export ledger registeredJurisdictions: Set<Bytes<8>>;
-export ledger rulePackHashes: Map<Bytes<8>, Bytes<32>>;
-export ledger rulePackVersions: Map<Bytes<8>, Uint<32>>;
 
-// --- PRIVATE STATE ---
-// Full rule metadata references (pointers to off-chain data).
-ledger rulePackData: Map<Bytes<8>, Field>;
+// =============================================================================
+// PUBLIC STATE (export ledger)
+// =============================================================================
+// Visible to everyone. Shows which jurisdictions are registered,
+// their current rule pack hashes, and version numbers.
+// This is non-sensitive information — jurisdiction is part of court filings.
+// =============================================================================
 
-// --- ACCESS CONTROL ---
-// Only the registry admin can register or update jurisdictions.
-export ledger registryAdmin: Opaque<"address">;
+// Total number of jurisdictions registered in this registry.
+// Publicly visible — shows coverage breadth of the AutoDiscovery system.
+export ledger totalJurisdictionsRegistered: Counter;
 
-// --- WITNESSES ---
-witness getCaller(): Opaque<"address">;
-witness computeRuleHash(jurisdictionCode: Bytes<8>, ruleData: Field): Bytes<32>;
+// Set of all registered jurisdiction codes.
+// Anyone can check: "Is Idaho registered? Is Federal available?"
+// Used by the frontend to populate the jurisdiction selector in the New Case Wizard.
+export ledger registeredJurisdictionCodes: Set<Bytes<8>>;
 
-// --- CIRCUITS ---
+// Maps each jurisdiction code to the SHA-256 hash of its current rule pack JSON.
+// This hash is the integrity anchor — it proves which exact rules were used.
+// When a compliance attestation references "Idaho IRCP," this hash proves
+// exactly which version of Idaho's rules generated the discovery steps.
+export ledger currentRulePackHashByJurisdictionCode: Map<Bytes<8>, Bytes<32>>;
 
-// Registers a new jurisdiction with its rule pack hash.
-// Only the registry admin can call this.
-// The jurisdiction code (e.g., "ID" for Idaho) is added to the public set.
-export circuit registerJurisdiction(code: Bytes<8>, ruleHash: Bytes<32>): [] {
-  const caller = getCaller();
-  assert caller == registryAdmin "Only registry admin can register jurisdictions";
+// Maps each jurisdiction code to its current version number.
+// Version numbers increment monotonically (1, 2, 3, ...).
+// Combined with the hash, this creates a full audit trail:
+//   "Idaho IRCP v1 had hash [abc...], v2 had hash [def...], current is v3 [ghi...]"
+// The version history lets us verify which rules were active at any past date.
+export ledger currentRulePackVersionByJurisdictionCode: Map<Bytes<8>, Uint<32>>;
 
-  // Add to public registry
-  jurisdictionCount.increment(1);
-  registeredJurisdictions.insert(code);
-  rulePackHashes.insert(code, ruleHash);
-  rulePackVersions.insert(code, 0x00000001); // Version 1
+
+// =============================================================================
+// PRIVATE STATE (ledger)
+// =============================================================================
+// Visible only to the contract owner.
+// Contains references to the off-chain rule pack data.
+// =============================================================================
+
+// Maps each jurisdiction code to a reference pointing to its full rule pack data.
+// The actual rule pack JSON (with all rules, deadlines, exemptions, sanctions)
+// lives off-chain in the user's local storage or in the monorepo's rule-packs/ folder.
+// This reference allows the contract to correlate on-chain hashes with off-chain data.
+ledger offChainRulePackDataReferenceByJurisdictionCode: Map<Bytes<8>, Field>;
+
+
+// =============================================================================
+// ACCESS CONTROL
+// =============================================================================
+// Only the registry administrator can register or update jurisdictions.
+// This prevents unauthorized parties from poisoning the rule registry
+// with incorrect rules (which could lead to wrong deadlines → sanctions).
+// =============================================================================
+
+// The wallet address of the registry administrator.
+// Set during contract deployment. Only this address can call
+// registerNewJurisdiction and updateJurisdictionRulePack.
+export ledger registryAdministratorAddress: Opaque<"address">;
+
+
+// =============================================================================
+// WITNESSES (off-chain computation)
+// =============================================================================
+
+// Returns the wallet address of whoever is submitting this transaction.
+// Used to verify the caller is the registry administrator.
+witness getTransactionCallerAddress(): Opaque<"address">;
+
+// Computes the SHA-256 hash of a jurisdiction's rule pack data.
+// The full rule pack JSON is processed on the user's machine;
+// only the resulting hash enters the ZK circuit.
+witness computeRulePackContentHash(
+    jurisdictionCode: Bytes<8>,
+    rulePackDataReference: Field
+): Bytes<32>;
+
+
+// =============================================================================
+// CIRCUITS (on-chain operations)
+// =============================================================================
+
+
+// ---------------------------------------------------------------------------
+// registerNewJurisdiction
+// ---------------------------------------------------------------------------
+// PURPOSE: Add a new jurisdiction to the registry.
+//          This is called when AutoDiscovery adds support for a new state
+//          or court system (e.g., adding Utah after Idaho is validated).
+//
+// AUTHORIZATION: Only the registry administrator can call this.
+//
+// WHAT HAPPENS:
+//   1. Jurisdiction code is added to the public set of registered jurisdictions
+//   2. Rule pack hash is stored (proves which rules are active)
+//   3. Version is initialized to 1
+//   4. Public counter is incremented
+//
+// PARAMETERS:
+//   jurisdictionCode      — 8-byte identifier (e.g., "ID" for Idaho)
+//   rulePackContentHash   — SHA-256 of the jurisdiction's rule pack JSON
+// ---------------------------------------------------------------------------
+export circuit registerNewJurisdiction(
+    jurisdictionCode: Bytes<8>,
+    rulePackContentHash: Bytes<32>
+): [] {
+
+  // Verify the caller is the registry administrator.
+  // Only the admin can add new jurisdictions — this prevents anyone from
+  // injecting fake rule packs that could generate incorrect deadlines.
+  const callerWalletAddress = getTransactionCallerAddress();
+  assert callerWalletAddress == registryAdministratorAddress
+      "Only the registry administrator can register new jurisdictions";
+
+  // Add the jurisdiction code to the public registry.
+  // After this, anyone can verify "Idaho is a supported jurisdiction."
+  registeredJurisdictionCodes.insert(jurisdictionCode);
+
+  // Store the rule pack hash on the public ledger.
+  // This is the integrity anchor — proves exactly which rules are in effect.
+  currentRulePackHashByJurisdictionCode.insert(jurisdictionCode, rulePackContentHash);
+
+  // Initialize the version number to 1.
+  // Future updates will increment this (2, 3, 4, ...).
+  currentRulePackVersionByJurisdictionCode.insert(jurisdictionCode, 0x00000001);
+
+  // Increment the global jurisdiction counter.
+  totalJurisdictionsRegistered.increment(1);
 }
 
-// Updates an existing jurisdiction's rule pack.
-// Increments the version number for audit trail.
-// Old hash is replaced but the version history proves what rules were active when.
-export circuit updateRulePack(code: Bytes<8>, newRuleHash: Bytes<32>, newVersion: Uint<32>): [] {
-  const caller = getCaller();
-  assert caller == registryAdmin "Only registry admin can update rule packs";
 
-  // Verify jurisdiction exists
-  assert registeredJurisdictions.member(code) "Jurisdiction not registered";
+// ---------------------------------------------------------------------------
+// updateJurisdictionRulePack
+// ---------------------------------------------------------------------------
+// PURPOSE: Update an existing jurisdiction's rule pack to a new version.
+//          Called when procedural rules change (e.g., California's 2024
+//          mandatory disclosure reform) or when errors are corrected.
+//
+// AUTHORIZATION: Only the registry administrator can call this.
+//
+// WHAT HAPPENS:
+//   1. Verifies the jurisdiction is already registered
+//   2. Replaces the current rule pack hash with the new one
+//   3. Updates the version number
+//   The OLD hash is replaced in the map, but the version number creates
+//   an audit trail. Combined with the compliance-proof contract's timestamps,
+//   you can always determine which rules were active for any past attestation.
+//
+// PARAMETERS:
+//   jurisdictionCode          — Which jurisdiction to update (e.g., "CA")
+//   updatedRulePackContentHash — SHA-256 of the new rule pack JSON
+//   updatedVersionNumber       — New version number (must be > previous)
+// ---------------------------------------------------------------------------
+export circuit updateJurisdictionRulePack(
+    jurisdictionCode: Bytes<8>,
+    updatedRulePackContentHash: Bytes<32>,
+    updatedVersionNumber: Uint<32>
+): [] {
 
-  // Update hash and version
-  rulePackHashes.insert(code, newRuleHash);
-  rulePackVersions.insert(code, newVersion);
+  // Verify the caller is the registry administrator.
+  const callerWalletAddress = getTransactionCallerAddress();
+  assert callerWalletAddress == registryAdministratorAddress
+      "Only the registry administrator can update rule packs";
+
+  // Verify this jurisdiction is already registered.
+  // Can't update what doesn't exist — use registerNewJurisdiction first.
+  assert registeredJurisdictionCodes.member(jurisdictionCode)
+      "Cannot update a jurisdiction that has not been registered yet";
+
+  // Replace the rule pack hash with the updated version.
+  // The old hash is overwritten in the map, but its existence at past
+  // timestamps can be proven through compliance-proof attestations
+  // that referenced it.
+  currentRulePackHashByJurisdictionCode.insert(jurisdictionCode, updatedRulePackContentHash);
+
+  // Update the version number.
+  // This creates the audit trail: "Rule pack was updated to version N."
+  currentRulePackVersionByJurisdictionCode.insert(jurisdictionCode, updatedVersionNumber);
 }
 
-// Verifies that a jurisdiction's current rule pack matches an expected hash.
-// Anyone can call this — used by compliance-proof contract to confirm
-// which rules were in effect when an attestation was generated.
-export circuit verifyRuleVersion(code: Bytes<8>, expectedHash: Bytes<32>): Boolean {
-  const currentHash = rulePackHashes.lookup(code);
-  currentHash == expectedHash
+
+// ---------------------------------------------------------------------------
+// verifyRulePackHashMatchesExpected
+// ---------------------------------------------------------------------------
+// PURPOSE: Verify that a jurisdiction's current rule pack matches an expected hash.
+//          This is how the compliance-proof contract confirms which rules
+//          were in effect when an attestation was generated.
+//
+// WHO CAN CALL THIS: Anyone — it reads public state only.
+//
+// USE CASE:
+//   A court wants to verify: "AutoDiscovery used Idaho IRCP version 2024.07
+//   for this case's discovery steps." The court provides the expected hash,
+//   and this circuit confirms whether it matches the current on-chain hash.
+//
+// PARAMETERS:
+//   jurisdictionCode       — Which jurisdiction to check (e.g., "ID")
+//   expectedRulePackHash   — The hash the caller expects to find on-chain
+//
+// RETURNS: true if the current on-chain hash matches the expected hash.
+// ---------------------------------------------------------------------------
+export circuit verifyRulePackHashMatchesExpected(
+    jurisdictionCode: Bytes<8>,
+    expectedRulePackHash: Bytes<32>
+): Boolean {
+
+  // Look up the current rule pack hash for this jurisdiction from the public ledger.
+  const currentOnChainRulePackHash = currentRulePackHashByJurisdictionCode.lookup(jurisdictionCode);
+
+  // Compare the on-chain hash to the expected hash.
+  // If they match, the caller's expectation is confirmed — the rules are what
+  // they think they are. If they don't match, either the rules were updated
+  // or the caller has the wrong hash.
+  currentOnChainRulePackHash == expectedRulePackHash
 }
