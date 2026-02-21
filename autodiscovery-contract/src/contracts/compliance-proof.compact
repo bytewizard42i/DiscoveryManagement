@@ -200,7 +200,7 @@ export circuit attestStepLevelCompliance(
   attestationGeneratedTimestampByHash.insert(attestationUniqueHash, attestationTimestamp);
 
   // Record the scope level as STEP_LEVEL (0x00).
-  attestationScopeLevelByHash.insert(attestationUniqueHash, 0x00);
+  attestationScopeLevelByHash.insert(attestationUniqueHash, 0);
 
   // Increment the global attestation counter.
   totalAttestationsGenerated.increment(1);
@@ -267,7 +267,7 @@ export circuit attestPhaseLevelCompliance(
   attestationGeneratedTimestampByHash.insert(attestationUniqueHash, attestationTimestamp);
 
   // Record the scope level as PHASE_LEVEL (0x01).
-  attestationScopeLevelByHash.insert(attestationUniqueHash, 0x01);
+  attestationScopeLevelByHash.insert(attestationUniqueHash, 1);
 
   // Increment the global attestation counter.
   totalAttestationsGenerated.increment(1);
@@ -314,7 +314,7 @@ export circuit attestCaseLevelCompliance(
   attestationGeneratedTimestampByHash.insert(attestationUniqueHash, attestationTimestamp);
 
   // Record the scope level as CASE_LEVEL (0x02).
-  attestationScopeLevelByHash.insert(attestationUniqueHash, 0x02);
+  attestationScopeLevelByHash.insert(attestationUniqueHash, 2);
 
   // Increment the global attestation counter.
   totalAttestationsGenerated.increment(1);

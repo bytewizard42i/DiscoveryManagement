@@ -63,10 +63,10 @@ import CompactStandardLibrary;
 // Publicly visible — shows coverage breadth of the AutoDiscovery system.
 export ledger totalJurisdictionsRegistered: Counter;
 
-// Set of all registered jurisdiction codes.
+// Map of all registered jurisdiction codes (true = registered).
 // Anyone can check: "Is Idaho registered? Is Federal available?"
 // Used by the frontend to populate the jurisdiction selector in the New Case Wizard.
-export ledger registeredJurisdictionCodes: Set<Bytes<8>>;
+export ledger registeredJurisdictionCodes: Map<Bytes<8>, Boolean>;
 
 // Maps each jurisdiction code to the SHA-256 hash of its current rule pack JSON.
 // This hash is the integrity anchor — it proves which exact rules were used.
@@ -104,19 +104,15 @@ ledger offChainRulePackDataReferenceByJurisdictionCode: Map<Bytes<8>, Field>;
 // with incorrect rules (which could lead to wrong deadlines → sanctions).
 // =============================================================================
 
-// The wallet address of the registry administrator.
-// Set during contract deployment. Only this address can call
+// The public key of the registry administrator.
+// Set during contract deployment (constructor). Only this key can call
 // registerNewJurisdiction and updateJurisdictionRulePack.
-export ledger registryAdministratorAddress: Opaque<"address">;
+export ledger registryAdministratorPublicKey: ZswapCoinPublicKey;
 
 
 // =============================================================================
 // WITNESSES (off-chain computation)
 // =============================================================================
-
-// Returns the wallet address of whoever is submitting this transaction.
-// Used to verify the caller is the registry administrator.
-witness getTransactionCallerAddress(): Opaque<"address">;
 
 // Computes the SHA-256 hash of a jurisdiction's rule pack data.
 // The full rule pack JSON is processed on the user's machine;
@@ -159,21 +155,21 @@ export circuit registerNewJurisdiction(
   // Verify the caller is the registry administrator.
   // Only the admin can add new jurisdictions — this prevents anyone from
   // injecting fake rule packs that could generate incorrect deadlines.
-  const callerWalletAddress = getTransactionCallerAddress();
-  assert callerWalletAddress == registryAdministratorAddress
-      "Only the registry administrator can register new jurisdictions";
+  const callerPublicKey = ownPublicKey();
+  assert(callerPublicKey == registryAdministratorPublicKey,
+      "Only the registry administrator can register new jurisdictions");
 
   // Add the jurisdiction code to the public registry.
   // After this, anyone can verify "Idaho is a supported jurisdiction."
-  registeredJurisdictionCodes.insert(jurisdictionCode);
+  registeredJurisdictionCodes.insert(disclose(jurisdictionCode), disclose(true));
 
   // Store the rule pack hash on the public ledger.
   // This is the integrity anchor — proves exactly which rules are in effect.
-  currentRulePackHashByJurisdictionCode.insert(jurisdictionCode, rulePackContentHash);
+  currentRulePackHashByJurisdictionCode.insert(disclose(jurisdictionCode), disclose(rulePackContentHash));
 
   // Initialize the version number to 1.
   // Future updates will increment this (2, 3, 4, ...).
-  currentRulePackVersionByJurisdictionCode.insert(jurisdictionCode, 0x00000001);
+  currentRulePackVersionByJurisdictionCode.insert(disclose(jurisdictionCode), disclose(1 as Uint<32>));
 
   // Increment the global jurisdiction counter.
   totalJurisdictionsRegistered.increment(1);
@@ -209,24 +205,24 @@ export circuit updateJurisdictionRulePack(
 ): [] {
 
   // Verify the caller is the registry administrator.
-  const callerWalletAddress = getTransactionCallerAddress();
-  assert callerWalletAddress == registryAdministratorAddress
-      "Only the registry administrator can update rule packs";
+  const callerPublicKey = ownPublicKey();
+  assert(callerPublicKey == registryAdministratorPublicKey,
+      "Only the registry administrator can update rule packs");
 
   // Verify this jurisdiction is already registered.
   // Can't update what doesn't exist — use registerNewJurisdiction first.
-  assert registeredJurisdictionCodes.member(jurisdictionCode)
-      "Cannot update a jurisdiction that has not been registered yet";
+  assert(registeredJurisdictionCodes.member(disclose(jurisdictionCode)),
+      "Cannot update a jurisdiction that has not been registered yet");
 
   // Replace the rule pack hash with the updated version.
   // The old hash is overwritten in the map, but its existence at past
   // timestamps can be proven through compliance-proof attestations
   // that referenced it.
-  currentRulePackHashByJurisdictionCode.insert(jurisdictionCode, updatedRulePackContentHash);
+  currentRulePackHashByJurisdictionCode.insert(disclose(jurisdictionCode), disclose(updatedRulePackContentHash));
 
   // Update the version number.
   // This creates the audit trail: "Rule pack was updated to version N."
-  currentRulePackVersionByJurisdictionCode.insert(jurisdictionCode, updatedVersionNumber);
+  currentRulePackVersionByJurisdictionCode.insert(disclose(jurisdictionCode), disclose(updatedVersionNumber));
 }
 
 
@@ -256,11 +252,11 @@ export circuit verifyRulePackHashMatchesExpected(
 ): Boolean {
 
   // Look up the current rule pack hash for this jurisdiction from the public ledger.
-  const currentOnChainRulePackHash = currentRulePackHashByJurisdictionCode.lookup(jurisdictionCode);
+  const currentOnChainRulePackHash = currentRulePackHashByJurisdictionCode.lookup(disclose(jurisdictionCode));
 
   // Compare the on-chain hash to the expected hash.
   // If they match, the caller's expectation is confirmed — the rules are what
   // they think they are. If they don't match, either the rules were updated
   // or the caller has the wrong hash.
-  currentOnChainRulePackHash == expectedRulePackHash
+  return currentOnChainRulePackHash == expectedRulePackHash;
 }

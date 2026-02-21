@@ -1,0 +1,88 @@
+{
+  "circuits": [
+    {
+      "name": "registerNewJurisdiction",
+      "pure": false,
+      "arguments": [
+        {
+          "name": "jurisdictionCode",
+          "type": {
+            "type-name": "Bytes",
+            "length": 8
+          }
+        },
+        {
+          "name": "rulePackContentHash",
+          "type": {
+            "type-name": "Bytes",
+            "length": 32
+          }
+        }
+      ],
+      "result-type": {
+        "type-name": "Tuple",
+        "types": [
+        ]
+      }
+    },
+    {
+      "name": "updateJurisdictionRulePack",
+      "pure": false,
+      "arguments": [
+        {
+          "name": "jurisdictionCode",
+          "type": {
+            "type-name": "Bytes",
+            "length": 8
+          }
+        },
+        {
+          "name": "updatedRulePackContentHash",
+          "type": {
+            "type-name": "Bytes",
+            "length": 32
+          }
+        },
+        {
+          "name": "updatedVersionNumber",
+          "type": {
+            "type-name": "Uint",
+            "maxval": 4294967295
+          }
+        }
+      ],
+      "result-type": {
+        "type-name": "Tuple",
+        "types": [
+        ]
+      }
+    },
+    {
+      "name": "verifyRulePackHashMatchesExpected",
+      "pure": false,
+      "arguments": [
+        {
+          "name": "jurisdictionCode",
+          "type": {
+            "type-name": "Bytes",
+            "length": 8
+          }
+        },
+        {
+          "name": "expectedRulePackHash",
+          "type": {
+            "type-name": "Bytes",
+            "length": 32
+          }
+        }
+      ],
+      "result-type": {
+        "type-name": "Boolean"
+      }
+    }
+  ],
+  "witnesses": [
+  ],
+  "contracts": [
+  ]
+}

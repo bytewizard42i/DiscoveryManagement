@@ -73,10 +73,10 @@ export ledger jurisdictionCodeByCaseIdentifier: Map<Field, Bytes<8>>;
 // Used by compliance-proof contract to verify obligations were met.
 export ledger isStepCompletedByStepHash: Map<Field, Boolean>;
 
-// Set of all attestation hashes generated when steps are completed.
+// Map of all attestation hashes generated when steps are completed (true = exists).
 // Each attestation is a cryptographic proof that "a step was finished."
 // Courts can verify an attestation exists without knowing which step it represents.
-export ledger completionAttestationHashes: Set<Bytes<32>>;
+export ledger completionAttestationHashes: Map<Field, Boolean>;
 
 
 // =============================================================================
@@ -87,10 +87,10 @@ export ledger completionAttestationHashes: Set<Bytes<32>>;
 // None of this appears on the public chain.
 // =============================================================================
 
-// Maps each case's unique identifier to the wallet address of its owner.
+// Maps each case's unique identifier to the public key of its owner.
 // The owner is the party who created the case in AutoDiscovery.
 // Only the owner can add steps, complete steps, and manage the case.
-ledger caseOwnerAddressByCaseIdentifier: Map<Field, Opaque<"address">>;
+ledger caseOwnerPublicKeyByCaseIdentifier: Map<Field, ZswapCoinPublicKey>;
 
 // Maps each discovery step's unique hash to its deadline timestamp.
 // Deadlines are computed off-chain by the deadline engine from jurisdiction
@@ -110,10 +110,6 @@ ledger detailedStepStatusByStepHash: Map<Field, Uint<8>>;
 // Witnesses run on the user's machine at transaction time.
 // They provide private inputs to ZK circuits without revealing those inputs.
 // =============================================================================
-
-// Returns the wallet address of whoever is submitting this transaction.
-// Used for ownership checks — only the case owner can modify their case.
-witness getTransactionCallerAddress(): Opaque<"address">;
 
 // Computes a unique case identifier from the case number and jurisdiction.
 // Case ID = hash(caseNumber + jurisdictionCode).
@@ -174,8 +170,8 @@ export circuit createNewCase(
 ): Field {
 
   // Identify who is creating this case.
-  // Their wallet address becomes the case owner — only they can manage it.
-  const callerWalletAddress = getTransactionCallerAddress();
+  // Their public key becomes the case owner — only they can manage it.
+  const callerPublicKey = ownPublicKey();
 
   // Compute the unique case identifier from case number + jurisdiction.
   // This hash is the case's on-chain identity. The real case number stays private.
@@ -187,22 +183,22 @@ export circuit createNewCase(
   // Increment the global case counter (proves activity, hides specifics).
   totalCasesCreated.increment(1);
 
-  // Set initial status to IN_PROGRESS (0x01).
-  // Status will transition to COMPLETED (0x02) when all steps are done.
-  caseStatusByCaseIdentifier.insert(caseUniqueIdentifier, 0x01);
+  // Set initial status to IN_PROGRESS (1).
+  // Status will transition to COMPLETED (2) when all steps are done.
+  caseStatusByCaseIdentifier.insert(disclose(caseUniqueIdentifier), disclose(1 as Uint<8>));
 
   // Record which jurisdiction governs this case.
   // Public because jurisdiction is part of the court filing (not sensitive).
   // Links to jurisdiction-registry contract for rule pack verification.
-  jurisdictionCodeByCaseIdentifier.insert(caseUniqueIdentifier, jurisdictionCode);
+  jurisdictionCodeByCaseIdentifier.insert(disclose(caseUniqueIdentifier), disclose(jurisdictionCode));
 
-  // Store the case owner's wallet address in PRIVATE state.
+  // Store the case owner's public key in PRIVATE state.
   // Only the contract can see this — it's used for authorization checks.
-  caseOwnerAddressByCaseIdentifier.insert(caseUniqueIdentifier, callerWalletAddress);
+  caseOwnerPublicKeyByCaseIdentifier.insert(disclose(caseUniqueIdentifier), disclose(callerPublicKey));
 
   // Return the case identifier so the caller can reference this case
   // in all future operations (adding steps, registering documents, etc.).
-  caseUniqueIdentifier
+  return disclose(caseUniqueIdentifier);
 }
 
 
@@ -243,10 +239,10 @@ export circuit addDiscoveryStepToCase(
 
   // Verify the caller is the case owner.
   // Only the owner can add obligations to their case — prevents tampering.
-  const callerWalletAddress = getTransactionCallerAddress();
-  const storedOwnerAddress = caseOwnerAddressByCaseIdentifier.lookup(caseUniqueIdentifier);
-  assert callerWalletAddress == storedOwnerAddress
-      "Only the case owner can add discovery steps";
+  const callerPublicKey = ownPublicKey();
+  const storedOwnerKey = caseOwnerPublicKeyByCaseIdentifier.lookup(disclose(caseUniqueIdentifier));
+  assert(callerPublicKey == storedOwnerKey,
+      "Only the case owner can add discovery steps");
 
   // Compute a unique hash for this step.
   // The step hash hides both the case details AND the specific rule.
@@ -258,19 +254,19 @@ export circuit addDiscoveryStepToCase(
 
   // Register the step on the PUBLIC ledger as "not yet completed."
   // Anyone can see "a step exists" but not what it is or when it's due.
-  isStepCompletedByStepHash.insert(stepUniqueHash, false);
+  isStepCompletedByStepHash.insert(disclose(stepUniqueHash), disclose(false));
 
   // Store the step's deadline in PRIVATE state.
   // Deadlines are sensitive — they reveal case strategy and timing.
   // The deadline engine computes these from jurisdiction rule packs off-chain.
-  stepDeadlineTimestampByStepHash.insert(stepUniqueHash, stepDeadlineTimestamp);
+  stepDeadlineTimestampByStepHash.insert(disclose(stepUniqueHash), disclose(stepDeadlineTimestamp));
 
-  // Set the initial detailed status to NOT_STARTED (0x00).
+  // Set the initial detailed status to NOT_STARTED (0).
   // This will progress through IN_PROGRESS → COMPLETED (or OVERDUE, etc.).
-  detailedStepStatusByStepHash.insert(stepUniqueHash, 0x00);
+  detailedStepStatusByStepHash.insert(disclose(stepUniqueHash), disclose(0 as Uint<8>));
 
   // Return the step hash so the caller can track and complete this step later.
-  stepUniqueHash
+  return disclose(stepUniqueHash);
 }
 
 
@@ -301,35 +297,35 @@ export circuit addDiscoveryStepToCase(
 export circuit markDiscoveryStepAsCompleted(
     caseUniqueIdentifier: Field,
     stepUniqueHash: Field
-): Bytes<32> {
+): Field {
 
   // Verify the caller is the case owner.
-  const callerWalletAddress = getTransactionCallerAddress();
-  const storedOwnerAddress = caseOwnerAddressByCaseIdentifier.lookup(caseUniqueIdentifier);
-  assert callerWalletAddress == storedOwnerAddress
-      "Only the case owner can complete discovery steps";
+  const callerPublicKey = ownPublicKey();
+  const storedOwnerKey = caseOwnerPublicKeyByCaseIdentifier.lookup(disclose(caseUniqueIdentifier));
+  assert(callerPublicKey == storedOwnerKey,
+      "Only the case owner can complete discovery steps");
 
   // Update the PUBLIC completion flag to true.
   // Anyone watching the chain can now see "that step is done" — but they
   // still don't know WHAT the step was or WHICH case it belongs to.
-  isStepCompletedByStepHash.insert(stepUniqueHash, true);
+  isStepCompletedByStepHash.insert(disclose(stepUniqueHash), disclose(true));
 
-  // Update the PRIVATE detailed status to COMPLETED (0x02).
+  // Update the PRIVATE detailed status to COMPLETED (2).
   // This is more granular than the public boolean — tracks the full lifecycle.
-  detailedStepStatusByStepHash.insert(stepUniqueHash, 0x02);
+  detailedStepStatusByStepHash.insert(disclose(stepUniqueHash), disclose(2 as Uint<8>));
 
   // Generate an attestation hash for this completion event.
   // The attestation is a ZK proof artifact — it proves "something was completed
   // at this timestamp" without revealing what, by whom, or for which case.
   const completionTimestamp = getCurrentTimestamp();
-  const completionAttestationHash = disclose(embed<Bytes<32>>());
+  const completionAttestationHash = transientHash<[Field, Field]>([stepUniqueHash, completionTimestamp]);
 
-  // Store the attestation hash in the public set.
+  // Store the attestation hash in the public map.
   // This is the anchor point for the compliance-proof contract.
-  completionAttestationHashes.insert(completionAttestationHash);
+  completionAttestationHashes.insert(disclose(completionAttestationHash), disclose(true));
 
   // Return the attestation hash so it can be referenced in compliance proofs.
-  completionAttestationHash
+  return disclose(completionAttestationHash);
 }
 
 
@@ -353,8 +349,8 @@ export circuit markDiscoveryStepAsCompleted(
 export circuit checkCaseComplianceStatus(caseUniqueIdentifier: Field): Boolean {
 
   // Look up the case's current status from the public ledger.
-  const currentCaseStatus = caseStatusByCaseIdentifier.lookup(caseUniqueIdentifier);
+  const currentCaseStatus = caseStatusByCaseIdentifier.lookup(disclose(caseUniqueIdentifier));
 
-  // COMPLETED (0x02) = all discovery obligations met = fully compliant.
-  currentCaseStatus == 0x02
+  // COMPLETED (2) = all discovery obligations met = fully compliant.
+  return currentCaseStatus == (2 as Uint<8>);
 }

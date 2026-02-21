@@ -1,0 +1,146 @@
+{
+  "circuits": [
+    {
+      "name": "createNewCase",
+      "pure": false,
+      "arguments": [
+        {
+          "name": "caseNumber",
+          "type": {
+            "type-name": "Bytes",
+            "length": 32
+          }
+        },
+        {
+          "name": "jurisdictionCode",
+          "type": {
+            "type-name": "Bytes",
+            "length": 8
+          }
+        }
+      ],
+      "result-type": {
+        "type-name": "Field"
+      }
+    },
+    {
+      "name": "addDiscoveryStepToCase",
+      "pure": false,
+      "arguments": [
+        {
+          "name": "caseUniqueIdentifier",
+          "type": {
+            "type-name": "Field"
+          }
+        },
+        {
+          "name": "jurisdictionRuleReference",
+          "type": {
+            "type-name": "Bytes",
+            "length": 32
+          }
+        },
+        {
+          "name": "stepDeadlineTimestamp",
+          "type": {
+            "type-name": "Field"
+          }
+        }
+      ],
+      "result-type": {
+        "type-name": "Field"
+      }
+    },
+    {
+      "name": "markDiscoveryStepAsCompleted",
+      "pure": false,
+      "arguments": [
+        {
+          "name": "caseUniqueIdentifier",
+          "type": {
+            "type-name": "Field"
+          }
+        },
+        {
+          "name": "stepUniqueHash",
+          "type": {
+            "type-name": "Field"
+          }
+        }
+      ],
+      "result-type": {
+        "type-name": "Field"
+      }
+    },
+    {
+      "name": "checkCaseComplianceStatus",
+      "pure": false,
+      "arguments": [
+        {
+          "name": "caseUniqueIdentifier",
+          "type": {
+            "type-name": "Field"
+          }
+        }
+      ],
+      "result-type": {
+        "type-name": "Boolean"
+      }
+    }
+  ],
+  "witnesses": [
+    {
+      "name": "computeUniqueCaseIdentifier",
+      "arguments": [
+        {
+          "name": "caseNumber",
+          "type": {
+            "type-name": "Bytes",
+            "length": 32
+          }
+        },
+        {
+          "name": "jurisdictionCode",
+          "type": {
+            "type-name": "Bytes",
+            "length": 8
+          }
+        }
+      ],
+      "result type": {
+        "type-name": "Field"
+      }
+    },
+    {
+      "name": "computeUniqueStepHash",
+      "arguments": [
+        {
+          "name": "caseIdentifier",
+          "type": {
+            "type-name": "Field"
+          }
+        },
+        {
+          "name": "jurisdictionRuleReference",
+          "type": {
+            "type-name": "Bytes",
+            "length": 32
+          }
+        }
+      ],
+      "result type": {
+        "type-name": "Field"
+      }
+    },
+    {
+      "name": "getCurrentTimestamp",
+      "arguments": [
+      ],
+      "result type": {
+        "type-name": "Field"
+      }
+    }
+  ],
+  "contracts": [
+  ]
+}
