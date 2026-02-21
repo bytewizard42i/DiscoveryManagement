@@ -1,0 +1,230 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-ad-gold: var(--ad-gold);
+  --color-ad-gold-dim: var(--ad-gold-dim);
+  --color-ad-navy: var(--ad-navy);
+  --color-ad-emerald: var(--ad-emerald);
+}
+
+/* ── AutoDiscovery Brand: Light ──────────────────────────── */
+:root {
+  --radius: 0.625rem;
+  --background: #f8f9fc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #1e3a5f;
+  --primary-foreground: #f1f5f9;
+  --secondary: #e2e8f0;
+  --secondary-foreground: #1e293b;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #f0f4ff;
+  --accent-foreground: #1e3a5f;
+  --destructive: #dc2626;
+  --border: #cbd5e1;
+  --input: #e2e8f0;
+  --ring: #3b82f6;
+  --chart-1: #1e3a5f;
+  --chart-2: #d4a017;
+  --chart-3: #059669;
+  --chart-4: #6366f1;
+  --chart-5: #f59e0b;
+  --sidebar: #0f172a;
+  --sidebar-foreground: #e2e8f0;
+  --sidebar-primary: #d4a017;
+  --sidebar-primary-foreground: #0f172a;
+  --sidebar-accent: #1e293b;
+  --sidebar-accent-foreground: #f1f5f9;
+  --sidebar-border: rgba(255,255,255,0.08);
+  --sidebar-ring: #3b82f6;
+  --ad-gold: #d4a017;
+  --ad-gold-dim: #b8860b;
+  --ad-navy: #1e3a5f;
+  --ad-emerald: #059669;
+}
+
+/* ── AutoDiscovery Brand: Dark ───────────────────────────── */
+.dark {
+  --background: #0b1120;
+  --foreground: #e8ecf4;
+  --card: #111827;
+  --card-foreground: #e8ecf4;
+  --popover: #111827;
+  --popover-foreground: #e8ecf4;
+  --primary: #60a5fa;
+  --primary-foreground: #0b1120;
+  --secondary: #1e293b;
+  --secondary-foreground: #e2e8f0;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --accent: #172554;
+  --accent-foreground: #93c5fd;
+  --destructive: #ef4444;
+  --border: rgba(148,163,184,0.12);
+  --input: rgba(148,163,184,0.15);
+  --ring: #3b82f6;
+  --chart-1: #60a5fa;
+  --chart-2: #fbbf24;
+  --chart-3: #34d399;
+  --chart-4: #a78bfa;
+  --chart-5: #fb923c;
+  --sidebar: #060d1b;
+  --sidebar-foreground: #cbd5e1;
+  --sidebar-primary: #fbbf24;
+  --sidebar-primary-foreground: #0b1120;
+  --sidebar-accent: #0f1d32;
+  --sidebar-accent-foreground: #e2e8f0;
+  --sidebar-border: rgba(148,163,184,0.08);
+  --sidebar-ring: #3b82f6;
+  --ad-gold: #fbbf24;
+  --ad-gold-dim: #d4a017;
+  --ad-navy: #1e3a5f;
+  --ad-emerald: #34d399;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* ── AutoDiscovery Custom Utilities ──────────────────────── */
+
+.ad-glass {
+  background: rgba(17, 24, 39, 0.6);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(148, 163, 184, 0.08);
+}
+
+.ad-glass-light {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(203, 213, 225, 0.4);
+}
+
+.ad-glow-gold {
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.15), 0 0 60px rgba(251, 191, 36, 0.05);
+}
+
+.ad-glow-blue {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15), 0 0 60px rgba(59, 130, 246, 0.05);
+}
+
+.ad-glow-emerald {
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.15), 0 0 60px rgba(52, 211, 153, 0.05);
+}
+
+.ad-gradient-navy {
+  background: linear-gradient(135deg, #0b1120 0%, #1e3a5f 50%, #172554 100%);
+}
+
+.ad-gradient-card {
+  background: linear-gradient(145deg, rgba(17,24,39,0.8) 0%, rgba(15,23,42,0.95) 100%);
+}
+
+.ad-gradient-gold {
+  background: linear-gradient(135deg, #d4a017 0%, #fbbf24 50%, #f59e0b 100%);
+}
+
+.ad-border-glow {
+  position: relative;
+}
+
+.ad-border-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(251,191,36,0.3), rgba(59,130,246,0.2), rgba(52,211,153,0.2));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@keyframes ad-pulse-gold {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes ad-slide-in-right {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes ad-fade-up {
+  from { transform: translateY(8px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.ad-animate-fade-up {
+  animation: ad-fade-up 0.4s ease-out;
+}
+
+.ad-animate-slide-in {
+  animation: ad-slide-in-right 0.3s ease-out;
+}
+
+/* Scrollbar styling for the jurisdiction panel */
+.ad-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.ad-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.ad-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 2px;
+}
+.ad-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}
