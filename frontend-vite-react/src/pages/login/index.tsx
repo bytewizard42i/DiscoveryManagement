@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Scale, Mail, KeyRound, HardDrive, Loader2, Shield, Lock, Fingerprint } from 'lucide-react';
 import { useAuth, useMode } from '@/providers/context';
+import { useVitalsLogger } from '@/vitals';
 import type { AuthMethod } from '@/providers/types';
 
 export function LoginPage() {
   const { login } = useAuth();
   const mode = useMode();
   const navigate = useNavigate();
+  const vitals = useVitalsLogger();
 
   const [method, setMethod] = useState<AuthMethod>('email');
   const [email, setEmail] = useState('demo@autodiscovery.legal');
@@ -19,6 +21,17 @@ export function LoginPage() {
   const handleLogin = async () => {
     setLoading(true);
     setError('');
+
+    const methodLabels: Record<AuthMethod, string> = {
+      email: 'email and password',
+      yubikey: 'YubiKey hardware key (FIDO2/WebAuthn)',
+      trezor: 'Trezor 5 hardware wallet (Ed25519)',
+    };
+
+    vitals.action(`You clicked "Sign In" using ${methodLabels[method]}.`);
+    vitals.info(
+      'Authenticating your identity. In realDeal mode, this would derive a cryptographic key from your credentials and connect to the Midnight blockchain.',
+    );
 
     switch (method) {
       case 'yubikey':
@@ -33,10 +46,20 @@ export function LoginPage() {
 
     try {
       await login(method, { email, password });
+      vitals.success(
+        'Authentication successful. You are now logged in and can access your cases, documents, and compliance reports.',
+      );
       setStatus('Success! Redirecting...');
       setTimeout(() => navigate('/'), 500);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Authentication failed');
+      const errorMessage = err instanceof Error ? err.message : 'Authentication failed';
+      vitals.logError(
+        'Authentication failed.',
+        `Reason: "${errorMessage}"`,
+        'The login attempt was rejected. This could be incorrect credentials, a hardware key issue, or a network problem.',
+        'Double-check your credentials and try again. If using a hardware key, make sure it is properly connected.',
+      );
+      setError(errorMessage);
       setStatus('');
     } finally {
       setLoading(false);

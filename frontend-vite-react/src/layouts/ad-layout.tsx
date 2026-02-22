@@ -8,6 +8,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useAuth, useMode } from '@/providers/context';
 import { ModeToggle } from '@/components/mode-toggle';
 import { JurisdictionPanel } from '@/components/jurisdiction-panel';
+import { VitalsToggleButton, VitalsPanel } from '@/vitals';
 
 const navItems = [
   { to: '/', icon: LayoutDashboard, label: 'Dashboard', end: true },
@@ -273,6 +274,7 @@ export function ADLayout() {
                   </div>
                 )}
               </div>
+              <VitalsToggleButton />
               <ModeToggle />
             </div>
           </header>
@@ -298,6 +300,9 @@ export function ADLayout() {
           </div>
         </div>
       </div>
+
+      {/* MidnightVitals diagnostic panel — slides up from bottom */}
+      <VitalsPanel />
     </div>
   );
 }

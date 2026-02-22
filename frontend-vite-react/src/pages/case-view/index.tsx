@@ -7,6 +7,7 @@ import {
   Share2,
 } from 'lucide-react';
 import { useProviders } from '@/providers/context';
+import { useVitalsLogger } from '@/vitals';
 import type {
   Case, DiscoveryStep, Document, Attestation, Party,
   TimelineEntry, ObfuscationScore, AccessPermission, SharingEvent,
@@ -71,6 +72,7 @@ export function CaseView() {
   const { caseId } = useParams<{ caseId: string }>();
   const navigate = useNavigate();
   const { cases, documents, compliance, ai, accessControl, expertWitness } = useProviders();
+  const vitals = useVitalsLogger();
 
   const [activeTab, setActiveTab] = useState<Tab>('overview');
   const [caseData, setCaseData] = useState<Case | null>(null);
@@ -93,6 +95,7 @@ export function CaseView() {
     if (!caseId) return;
     async function load() {
       setLoading(true);
+      vitals.info(`Opening case ${caseId}. Loading case details, discovery steps, documents, parties, access permissions, and expert witnesses.`);
       const [c, s, d, a, p] = await Promise.all([
         cases.getCase(caseId!),
         cases.getCaseSteps(caseId!),
@@ -127,15 +130,30 @@ export function CaseView() {
         setObfuscationData(obfData);
       }
 
+      vitals.success(
+        `Case loaded: "${c?.title || caseId}". Found ${s.length} discovery steps, ${d.length} documents, ${p.length} parties, ${perms.length} access permissions, and ${exps.length} expert witnesses.`,
+      );
+
       setLoading(false);
     }
     load();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [caseId, cases, documents, compliance, ai, accessControl, expertWitness]);
 
   const handleVerify = async (docId: string) => {
     setVerifying(docId);
     setVerifyResult(null);
+    vitals.action(`You clicked "Verify Hash" for document ${docId.slice(0, 8)}...`);
+    vitals.info(
+      'Checking this document\'s fingerprint against the on-chain hash in the document-registry contract. ' +
+      'This confirms the document has not been altered since it was anchored to the blockchain.',
+    );
     const result = await documents.verifyHash(docId);
+    if (result.valid) {
+      vitals.success(`Document hash verified. ${result.message}`);
+    } else {
+      vitals.warn(`Document verification returned a warning. ${result.message}`);
+    }
     setVerifyResult(result.message);
     setTimeout(() => { setVerifying(null); setVerifyResult(null); }, 4000);
   };

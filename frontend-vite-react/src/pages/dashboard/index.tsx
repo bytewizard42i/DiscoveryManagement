@@ -6,6 +6,7 @@ import {
   Lock, Globe, UserCheck, GraduationCap,
 } from 'lucide-react';
 import { useProviders } from '@/providers/context';
+import { useVitalsLogger } from '@/vitals';
 import type { Case, ComplianceStatus, DiscoveryStep, Attestation, ExpertWitness, AccessPermission } from '@/providers/types';
 
 function ComplianceBadge({ score }: { score: number }) {
@@ -62,6 +63,7 @@ function StatCard({ icon: Icon, label, value, sub, accent }: {
 export function Dashboard() {
   const { cases, compliance, accessControl, expertWitness } = useProviders();
   const navigate = useNavigate();
+  const vitals = useVitalsLogger();
   const [caseList, setCaseList] = useState<Case[]>([]);
   const [statuses, setStatuses] = useState<Record<string, ComplianceStatus>>({});
   const [dueThisWeek, setDueThisWeek] = useState<(DiscoveryStep & { caseTitle: string })[]>([]);
@@ -73,6 +75,8 @@ export function Dashboard() {
   useEffect(() => {
     async function load() {
       setLoading(true);
+      vitals.info('Loading your dashboard. Fetching cases, compliance data, expert witnesses, and access permissions from all six contracts.');
+
       const allCases = await cases.listCases();
       setCaseList(allCases);
 
@@ -105,9 +109,17 @@ export function Dashboard() {
       weekItems.sort((a, b) => (a.daysRemaining ?? 99) - (b.daysRemaining ?? 99));
       setDueThisWeek(weekItems);
 
+      vitals.success(
+        `Dashboard loaded. Found ${allCases.length} active cases, ${attestations.length} compliance attestations, ${experts.length} expert witnesses, and ${permissions.length} access permissions.`,
+        weekItems.length > 0
+          ? `Heads up: ${weekItems.length} discovery step${weekItems.length > 1 ? 's are' : ' is'} due within 7 days.`
+          : undefined,
+      );
+
       setLoading(false);
     }
     load();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cases, compliance, accessControl, expertWitness]);
 
   if (loading) {
