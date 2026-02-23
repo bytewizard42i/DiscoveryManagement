@@ -88,7 +88,13 @@
 
 **[Advance to Slide 11]**
 
-## SLIDE 11: The Team (2:30–2:45)
+## SLIDE 11: The Relationship Edge (2:20–2:30)
+
+> *[TODO: Script needed for the Competitive Edge slide — career-long relationships across Courts, Attorney Education, Health Law, and Law Firms spanning 8+ states. Concentric expansion from Idaho core → adjacent states → all 50 via Bar Associations and St. Luke's network.]*
+
+**[Advance to Slide 12]**
+
+## SLIDE 12: The Team (2:30–2:45)
 
 > "Spy brings fifteen-plus years of complex litigation — medical malpractice, personal injury, discovery workflows. He's lived this problem.
 >
@@ -96,9 +102,9 @@
 >
 > The secret sauce? The unique talents of over two decades of experience each — in domain expertise and diagnostic systems design and architecture — are just another winning competitive edge. Making the world's best products and packaging them in an enticing and engaging fashion. It's what we do."
 
-**[Advance to Slide 12]**
+**[Advance to Slide 13]**
 
-## SLIDE 12: The Close (2:45–3:00)
+## SLIDE 13: The Close (2:45–3:00)
 
 > "Courts guard precedent fiercely. Once a court accepts a ZK proof as factual record, that precedent binds every case after it.
 >
@@ -126,8 +132,9 @@
 | Market Opportunity | 8 | 2:00–2:10 | 10s |
 | Business Model | 9 | 2:10–2:20 | 10s |
 | What We've Built | 10 | 2:20–2:30 | 10s |
-| The Team | 11 | 2:30–2:45 | 15s |
-| The Close | 12 | 2:45–3:00 | 15s |
+| The Relationship Edge | 11 | 2:20–2:30 | 10s |
+| The Team | 12 | 2:30–2:45 | 15s |
+| The Close | 13 | 2:45–3:00 | 15s |
 
 ## Recording Checklist
 

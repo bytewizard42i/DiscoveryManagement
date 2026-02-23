@@ -240,21 +240,21 @@
     /* ── Pricing — Big Numbers ───────────────────────────── */
     .pricing {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
       margin: 24px 0;
     }
     .price-card {
-      background: var(--card);
-      border: 2px solid var(--border);
+      background: rgba(17,24,39,0.75);
+      border: 2px solid rgba(0,255,200,0.4);
       border-radius: 20px;
       padding: 32px 24px;
       text-align: center;
     }
     .price-card.featured {
-      border-color: var(--gold-dim);
-      background: rgba(251,191,36,0.06);
-      box-shadow: 0 0 24px rgba(251,191,36,0.1);
+      border-color: rgba(0,255,200,0.55);
+      background: rgba(17,24,39,0.85);
+      box-shadow: 0 0 24px rgba(0,255,200,0.08);
     }
     .price-card .tier { font-size: 22px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 4px; font-weight: 700; }
     .price-card .price { font-size: 56px; font-weight: 900; margin: 10px 0; }
@@ -352,16 +352,16 @@
       background: linear-gradient(135deg, rgba(251,191,36,0.1), rgba(59,130,246,0.08));
       border: 2px solid var(--gold-dim);
       border-radius: 24px;
-      padding: 44px;
+      padding: 24px 36px;
       text-align: center;
-      margin: 28px 0;
+      margin: 16px 0;
       box-shadow: 0 0 40px rgba(251,191,36,0.08);
     }
 
     /* ── Bullet Lists ────────────────────────────────────── */
-    .bullets { list-style: none; padding: 0; margin: 14px 0; }
+    .bullets { list-style: none; padding: 0; margin: 8px 0; }
     .bullets li {
-      padding: 10px 0 10px 40px;
+      padding: 6px 0 6px 40px;
       position: relative;
       font-size: 28px;
     }
@@ -447,7 +447,7 @@
   <img src="../media/elephant-sanctions-slide-1.png" alt="What is the most terrifying word for a lawyer?"
        style="max-height: 100vh; max-width: 100vw; object-fit: contain;" />
   <span class="slide-brand" style="color: rgba(255,255,255,0.5);">autodiscovery.legal</span>
-  <span class="slide-number" style="color: rgba(255,255,255,0.5);">1 / 12</span>
+  <span class="slide-number" style="color: rgba(255,255,255,0.5);">1 / 13</span>
 </div>
 
 <!-- ========== SLIDE 2: THE ANSWER (Full Image) ========== -->
@@ -455,7 +455,7 @@
   <img src="../media/elephant%20sanctions%20slide%202.png" alt="SANCTIONS — The Elephant in the Room"
        style="max-height: 100vh; max-width: 100vw; object-fit: contain;" />
   <span class="slide-brand" style="color: rgba(255,255,255,0.5);">autodiscovery.legal</span>
-  <span class="slide-number" style="color: rgba(255,255,255,0.5);">2 / 12</span>
+  <span class="slide-number" style="color: rgba(255,255,255,0.5);">2 / 13</span>
 </div>
 
 <!-- ========== SLIDE 3: THE DATA (Stats overlaid on elephant) ========== -->
@@ -473,7 +473,7 @@
     </p>
   </div>
   <span class="slide-brand">autodiscovery.legal</span>
-  <span class="slide-number">3 / 12</span>
+  <span class="slide-number">3 / 13</span>
 </div>
 
 <!-- ========== SLIDE 4: THE PROBLEM ========== -->
@@ -503,12 +503,12 @@
 
   <p style="margin-top: 12px; font-size: 28px;">Sources: FJC (2009), Willoughby — Duke Law Journal (2010), Gibson Dunn, U.S. Courts (2024)</p>
   <span class="slide-brand">autodiscovery.legal</span>
-  <span class="slide-number">4 / 12</span>
+  <span class="slide-number">4 / 13</span>
 </div>
 
 <!-- ========== SLIDE 5: THE SOLUTION ========== -->
 <div class="slide" id="slide-5" style="background: url('../media/neon-map-us.png') center/cover no-repeat;">
-  <div style="background: rgba(11,17,32,0.92); border-radius: 20px; padding: 32px 48px; margin-bottom: 20px; border: 1px solid rgba(0,255,200,0.5);">
+  <div style="background: rgba(11,17,32,0.96); border-radius: 20px; padding: 32px 48px; margin-bottom: 20px; border: 1px solid rgba(0,255,200,0.5);">
     <div class="subtitle">The Solution</div>
     <h2>AutoDiscovery<span class="highlight">.legal</span></h2>
     <p class="big-text" style="margin-bottom: 16px;">Jurisdiction-aware discovery automation with cryptographic compliance proofs.</p>
@@ -518,26 +518,26 @@
   </div>
 
   <div class="cards" style="gap: 20px;">
-    <div class="card" style="padding: 28px 24px; text-align: center; background: rgba(11,17,32,0.85); border: 1px solid rgba(0,255,200,0.45);">
+    <div class="card" style="padding: 28px 24px; text-align: center; background: rgba(11,17,32,0.96); border: 1px solid rgba(0,255,200,0.45);">
       <h4 style="font-size: 40px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 12px; color: var(--gold);"><svg width="48" height="48" viewBox="0 0 64 64" fill="none"><line x1="32" y1="8" x2="32" y2="56" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/><line x1="20" y1="56" x2="44" y2="56" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/><line x1="16" y1="20" x2="48" y2="20" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/><path d="M16 20 L10 36" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round"/><path d="M48 20 L54 36" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round"/><path d="M4 36 Q10 44 16 36" stroke="#D4AF37" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M48 36 Q54 44 60 36" stroke="#D4AF37" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="32" cy="12" r="4" stroke="#D4AF37" stroke-width="2" fill="none"/></svg> Jurisdiction-Aware Rule Packs</h4>
       <p style="font-size: 24px;">Hard-coded IRCP, FRCP, and state variants. The system knows which rules apply.</p>
     </div>
-    <div class="card" style="padding: 28px 24px; text-align: center; background: rgba(11,17,32,0.85); border: 1px solid rgba(0,255,200,0.45);">
+    <div class="card" style="padding: 28px 24px; text-align: center; background: rgba(11,17,32,0.96); border: 1px solid rgba(0,255,200,0.45);">
       <h4 style="font-size: 40px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 12px; color: var(--gold);"><svg width="48" height="48" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="24" stroke="#D4AF37" stroke-width="3" fill="none"/><path d="M32 16v18l12 8" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" fill="none"/></svg> Automated Deadline Engine</h4>
       <p style="font-size: 24px;">Computes every deadline per state-specific rules. Weekends, holidays, extensions — handled.</p>
     </div>
-    <div class="card" style="padding: 28px 24px; text-align: center; background: rgba(11,17,32,0.85); border: 1px solid rgba(0,255,200,0.45);">
+    <div class="card" style="padding: 28px 24px; text-align: center; background: rgba(11,17,32,0.96); border: 1px solid rgba(0,255,200,0.45);">
       <h4 style="font-size: 40px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 12px; color: var(--gold);"><svg width="48" height="48" viewBox="0 0 64 64" fill="none"><rect x="12" y="8" width="40" height="48" rx="6" stroke="#D4AF37" stroke-width="3" fill="none"/><circle cx="32" cy="32" r="10" stroke="#D4AF37" stroke-width="2.5" fill="none"/><path d="M28 32l3 3 6-6" stroke="#34D399" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> ZK Compliance Proofs</h4>
       <p style="font-size: 24px;">Zero-knowledge proofs on Midnight. Prove you complied without revealing privileged content.</p>
     </div>
-    <div class="card" style="padding: 28px 24px; text-align: center; background: rgba(11,17,32,0.85); border: 1px solid rgba(0,255,200,0.45);">
+    <div class="card" style="padding: 28px 24px; text-align: center; background: rgba(11,17,32,0.96); border: 1px solid rgba(0,255,200,0.45);">
       <h4 style="font-size: 40px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 12px; color: var(--gold);"><svg width="48" height="48" viewBox="0 0 64 64" fill="none"><path d="M12 48V20l20-12 20 12v28L32 60 12 48z" stroke="#D4AF37" stroke-width="3" fill="none"/><path d="M26 32l5 5 10-10" stroke="#34D399" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg> Verifiable Audit Trail</h4>
       <p style="font-size: 24px;">Courts and insurers verify compliance independently. No more "he said, she said."</p>
     </div>
   </div>
 
   <span class="slide-brand">autodiscovery.legal</span>
-  <span class="slide-number">5 / 12</span>
+  <span class="slide-number">5 / 13</span>
 </div>
 
 <!-- ========== SLIDE 6: HOW IT WORKS ========== -->
@@ -588,39 +588,39 @@
 
   <p style="margin-top: 24px; text-align: center;"><strong style="color: var(--gold); font-size: 52px;">Every step tracked.&nbsp;&nbsp;&nbsp;&nbsp;Every deadline computed.&nbsp;&nbsp;&nbsp;&nbsp;Every completion proven.</strong></p>
   <span class="slide-brand">autodiscovery.legal</span>
-  <span class="slide-number">6 / 12</span>
+  <span class="slide-number">6 / 13</span>
 </div>
 
 <!-- ========== SLIDE 7: PRIVACY — CORE ADVANTAGE ========== -->
 <div class="slide" id="slide-7" style="background: linear-gradient(rgba(11,17,32,0.38), rgba(11,17,32,0.45)), url('../media/midnight-logo.png') center/contain no-repeat;">
   <div class="subtitle">Privacy as Core Product Advantage</div>
-  <h2>Why <span class="highlight">Midnight Network</span> Changes Everything</h2>
+  <h2 style="font-size: 56px;">Why <span class="highlight">Midnight Network</span> Changes Everything</h2>
 
-  <p style="margin-bottom: 24px; font-size: 30px; color: var(--text);">Legal data is the most sensitive information in any industry.<br>AutoDiscovery is built on Midnight — the only blockchain designed for data protection by default.</p>
+  <p style="margin-bottom: 24px; font-size: 30px; color: var(--text);">Legal data is the most sensitive information in any industry.<br>AutoDiscovery is built on Midnight, the only blockchain designed for data protection by default.</p>
 
 
   <div class="cards" style="margin-top: 24px; gap: 20px;">
-    <div class="card" style="border-left: 4px solid var(--emerald); padding: 28px 24px; background: rgba(11,17,32,0.82); border: 1px solid rgba(52,211,153,0.25); border-left: 4px solid var(--emerald);">
-      <h4 style="font-size: 36px; margin-bottom: 10px;"><svg width="36" height="36" viewBox="0 0 36 36" style="vertical-align: middle; margin-right: 8px;"><rect x="4" y="8" width="28" height="24" rx="3" stroke="#34D399" stroke-width="2.5" fill="none"/><path d="M14 8V4h8v4" stroke="#34D399" stroke-width="2.5" fill="none"/><path d="M18 15v10M13 20h10" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"/></svg> HIPAA Safe</h4>
-      <p style="font-size: 26px; line-height: 1.4;">Medical malpractice documents stay encrypted. Only proof hashes touch the blockchain.</p>
+    <div class="card" style="border-left: 4px solid var(--emerald); padding: 12px 14px; background: rgba(11,17,32,0.82); border: 1px solid rgba(52,211,153,0.25); border-left: 4px solid var(--emerald);">
+      <h4 style="font-size: 30px; margin-bottom: 6px;"><svg width="30" height="30" viewBox="0 0 36 36" style="vertical-align: middle; margin-right: 8px;"><rect x="4" y="8" width="28" height="24" rx="3" stroke="#34D399" stroke-width="2.5" fill="none"/><path d="M14 8V4h8v4" stroke="#34D399" stroke-width="2.5" fill="none"/><path d="M18 15v10M13 20h10" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"/></svg> HIPAA Safe</h4>
+      <p style="font-size: 22px; line-height: 1.3;">Medical malpractice documents stay encrypted. Only proof hashes touch the blockchain.</p>
     </div>
-    <div class="card" style="border-left: 4px solid var(--emerald); padding: 28px 24px; background: rgba(11,17,32,0.82); border: 1px solid rgba(52,211,153,0.25); border-left: 4px solid var(--emerald);">
-      <h4 style="font-size: 36px; margin-bottom: 10px;"><svg width="36" height="36" viewBox="0 0 36 36" style="vertical-align: middle; margin-right: 8px;"><path d="M18 4v28" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"/><path d="M8 12l10-4 10 4" stroke="#34D399" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 12v6c0 2 2 4 4 4h0" stroke="#34D399" stroke-width="2" fill="none"/><path d="M28 12v6c0 2-2 4-4 4h0" stroke="#34D399" stroke-width="2" fill="none"/><path d="M12 32h12" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"/></svg> Privilege Protected</h4>
-      <p style="font-size: 26px; line-height: 1.4;">Prove privilege log was maintained without revealing privileged content.</p>
+    <div class="card" style="border-left: 4px solid var(--emerald); padding: 12px 14px; background: rgba(11,17,32,0.82); border: 1px solid rgba(52,211,153,0.25); border-left: 4px solid var(--emerald);">
+      <h4 style="font-size: 30px; margin-bottom: 6px;"><svg width="30" height="30" viewBox="0 0 36 36" style="vertical-align: middle; margin-right: 8px;"><path d="M18 4v28" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"/><path d="M8 12l10-4 10 4" stroke="#34D399" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 12v6c0 2 2 4 4 4h0" stroke="#34D399" stroke-width="2" fill="none"/><path d="M28 12v6c0 2-2 4-4 4h0" stroke="#34D399" stroke-width="2" fill="none"/><path d="M12 32h12" stroke="#34D399" stroke-width="2.5" stroke-linecap="round"/></svg> Privilege Protected</h4>
+      <p style="font-size: 22px; line-height: 1.3;">Prove privilege log was maintained without revealing privileged content.</p>
     </div>
-    <div class="card" style="border-left: 4px solid var(--emerald); padding: 28px 24px; background: rgba(11,17,32,0.82); border: 1px solid rgba(52,211,153,0.25); border-left: 4px solid var(--emerald);">
-      <h4 style="font-size: 36px; margin-bottom: 10px;"><svg width="36" height="36" viewBox="0 0 36 36" style="vertical-align: middle; margin-right: 8px;"><rect x="6" y="4" width="24" height="28" rx="3" stroke="#34D399" stroke-width="2.5" fill="none"/><path d="M12 12h12M12 18h12M12 24h8" stroke="#34D399" stroke-width="2" stroke-linecap="round" opacity="0.8"/></svg> Work Product Shielded</h4>
-      <p style="font-size: 26px; line-height: 1.4;">Demonstrate good-faith compliance without exposing legal strategy.</p>
+    <div class="card" style="border-left: 4px solid var(--emerald); padding: 12px 14px; background: rgba(11,17,32,0.82); border: 1px solid rgba(52,211,153,0.25); border-left: 4px solid var(--emerald);">
+      <h4 style="font-size: 30px; margin-bottom: 6px;"><svg width="30" height="30" viewBox="0 0 36 36" style="vertical-align: middle; margin-right: 8px;"><rect x="6" y="4" width="24" height="28" rx="3" stroke="#34D399" stroke-width="2.5" fill="none"/><path d="M12 12h12M12 18h12M12 24h8" stroke="#34D399" stroke-width="2" stroke-linecap="round" opacity="0.8"/></svg> Work Product Shielded</h4>
+      <p style="font-size: 22px; line-height: 1.3;">Demonstrate good-faith compliance without exposing legal strategy.</p>
     </div>
-    <div class="card" style="border-left: 4px solid var(--emerald); padding: 28px 24px; background: rgba(11,17,32,0.82); border: 1px solid rgba(52,211,153,0.25); border-left: 4px solid var(--emerald);">
-      <h4 style="font-size: 36px; margin-bottom: 10px;"><svg width="36" height="36" viewBox="0 0 36 36" style="vertical-align: middle; margin-right: 8px;"><rect x="8" y="16" width="20" height="16" rx="3" stroke="#34D399" stroke-width="2.5" fill="none"/><path d="M13 16v-4a5 5 0 0 1 10 0v4" stroke="#34D399" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="18" cy="24" r="2" fill="#34D399"/></svg> Client Data Sovereign</h4>
-      <p style="font-size: 26px; line-height: 1.4;">Case data never leaves your system. Zero vendor lock-in, zero data exposure, full client trust.</p>
+    <div class="card" style="border-left: 4px solid var(--emerald); padding: 12px 14px; background: rgba(11,17,32,0.82); border: 1px solid rgba(52,211,153,0.25); border-left: 4px solid var(--emerald);">
+      <h4 style="font-size: 30px; margin-bottom: 6px;"><svg width="30" height="30" viewBox="0 0 36 36" style="vertical-align: middle; margin-right: 8px;"><rect x="8" y="16" width="20" height="16" rx="3" stroke="#34D399" stroke-width="2.5" fill="none"/><path d="M13 16v-4a5 5 0 0 1 10 0v4" stroke="#34D399" stroke-width="2.5" fill="none" stroke-linecap="round"/><circle cx="18" cy="24" r="2" fill="#34D399"/></svg> Client Data Sovereign</h4>
+      <p style="font-size: 22px; line-height: 1.3;">Case data never leaves your system. Zero vendor lock-in, zero data exposure, full client trust.</p>
     </div>
   </div>
 
-  <p style="text-align: center; margin-top: 20px; font-size: 36px;"><strong>Midnight + Legal = the first <span style="color: var(--emerald);">privacy-preserving compliance system courts can trust.</span></strong></p>
+  <p style="text-align: center; margin-top: 20px; font-size: 30px; white-space: nowrap;"><strong>Midnight + Legal = the first <span style="color: var(--emerald);">privacy-preserving compliance system courts can trust.</span></strong></p>
   <span class="slide-brand">autodiscovery.legal</span>
-  <span class="slide-number">7 / 12</span>
+  <span class="slide-number">7 / 13</span>
 </div>
 
 <!-- ========== SLIDE 8: MARKET OPPORTUNITY ========== -->
@@ -669,7 +669,7 @@
   </div>
 
   <span class="slide-brand">autodiscovery.legal</span>
-  <span class="slide-number">8 / 12</span>
+  <span class="slide-number">8 / 13</span>
 </div>
 
 <!-- ========== SLIDE 9: BUSINESS MODEL ========== -->
@@ -678,20 +678,25 @@
   <h2 style="font-size: 72px;">SaaS + Per-Proof Revenue</h2>
 
   <div class="pricing">
-    <div class="price-card" style="border-color: rgba(0,255,200,0.4);">
+    <div class="price-card">
       <div class="tier">Solo</div>
       <div class="price">$99<span style="font-size: 16px; color: var(--muted);">/mo</span></div>
       <div class="desc">Solo attorneys<br>1 jurisdiction<br>Basic automation</div>
     </div>
-    <div class="price-card featured" style="border-color: rgba(0,255,200,0.55);">
+    <div class="price-card featured">
       <div class="tier">Practice</div>
       <div class="price">$399<span style="font-size: 16px; color: var(--muted);">/mo</span></div>
       <div class="desc">Small firms<br>Multi-jurisdiction<br>Team workflows</div>
     </div>
-    <div class="price-card" style="border-color: rgba(0,255,200,0.4);">
+    <div class="price-card">
       <div class="tier">Enterprise</div>
       <div class="price">$1,499<span style="font-size: 16px; color: var(--muted);">/mo</span></div>
       <div class="desc">Regional firms<br>Unlimited jurisdictions<br>API + compliance proofs</div>
+    </div>
+    <div class="price-card">
+      <div class="tier">Proof Credits</div>
+      <div class="price" style="font-size: 28px;">Per ZK Proof</div>
+      <div class="desc">Each tier includes proof credits<br>Overages billed per proof<br>Deters abuse, drives margin</div>
     </div>
   </div>
 
@@ -708,7 +713,7 @@
     </div>
   </div>
   <span class="slide-brand">autodiscovery.legal</span>
-  <span class="slide-number">9 / 12</span>
+  <span class="slide-number">9 / 13</span>
 </div>
 
 <!-- ========== SLIDE 10: WHAT'S BUILT ========== -->
@@ -735,19 +740,25 @@
   </div>
 
   <span class="slide-brand">autodiscovery.legal</span>
-  <span class="slide-number">10 / 12</span>
+  <span class="slide-number">10 / 13</span>
 </div>
 
-<!-- ========== SLIDE 11: TEAM ========== -->
-<div class="slide" id="slide-11">
+<!-- ========== SLIDE 11: THE RELATIONSHIP EDGE ========== -->
+<div class="slide" id="slide-11" style="background: url('../media/Edge-slide-3.png') top center/contain no-repeat; background-color: #0a0e1a; padding: 0;">
+  <span class="slide-brand">autodiscovery.legal</span>
+  <span class="slide-number">11 / 13</span>
+</div>
+
+<!-- ========== SLIDE 12: TEAM ========== -->
+<div class="slide" id="slide-12">
   <div style="font-size: 48px; color: var(--gold); text-transform: uppercase; letter-spacing: 5px; font-weight: 900; margin-bottom: 8px;">Meet the Team</div>
   <h2 style="font-size: 66px; margin-bottom: 24px;">Domain Expertise + Technical Execution</h2>
 
-  <div class="team" style="gap: 32px; flex: 1;">
-    <div class="team-card" style="padding: 32px 44px; flex: 1; display: flex; flex-direction: column;">
+  <div class="team" style="gap: 32px;">
+    <div class="team-card" style="padding: 24px 44px 20px; display: flex; flex-direction: column;">
       <div class="role" style="font-size: 32px;">Domain Expert & Co-Founder</div>
       <h4 style="font-size: 50px;">Spy (@SpyCrypto)</h4>
-      <ul style="flex: 1;">
+      <ul>
         <li style="font-size: 34px;">15+ years complex litigation experience</li>
         <li style="font-size: 34px;">Medical malpractice, personal injury, discovery workflows</li>
         <li style="font-size: 34px;">Published researcher for Idaho government agencies</li>
@@ -755,10 +766,10 @@
       </ul>
       <div class="quote" style="font-size: 30px; margin-top: 12px;">"I've seen attorneys lose cases because they missed one disclosure deadline. That's what AutoDiscovery prevents."</div>
     </div>
-    <div class="team-card" style="padding: 32px 44px; flex: 1; display: flex; flex-direction: column;">
+    <div class="team-card" style="padding: 24px 44px 20px; display: flex; flex-direction: column;">
       <div class="role" style="font-size: 32px;">Technical Lead & Co-Founder</div>
       <h4 style="font-size: 50px;">John Santi (@bytewizard42i)</h4>
-      <ul style="flex: 1;">
+      <ul>
         <li style="font-size: 34px;">Blockchain architect — Compact/Midnight smart contracts</li>
         <li style="font-size: 34px;">Full-stack engineer — React, TypeScript, ZK systems</li>
         <li style="font-size: 34px;">Midnight ecosystem ambassador and active builder</li>
@@ -769,13 +780,14 @@
   </div>
 
   <span class="slide-brand">autodiscovery.legal</span>
-  <span class="slide-number">11 / 12</span>
+  <span class="slide-number">12 / 13</span>
 </div>
 
-<!-- ========== SLIDE 12: CALL TO ACTION ========== -->
-<div class="slide" id="slide-12">
+<!-- ========== SLIDE 13: CALL TO ACTION ========== -->
+<div class="slide" id="slide-13">
+  <div style="font-size: 80px; font-weight: 900; color: #ffffff; text-align: center; letter-spacing: 4px; margin-bottom: 12px; text-shadow: 0 0 20px rgba(255,255,255,0.3);">Thank you for your time!</div>
   <div style="font-size: 45px; color: var(--gold); text-transform: uppercase; letter-spacing: 6px; font-weight: 900; margin-bottom: 8px;">The Vision</div>
-  <h2 style="font-size: 72px;">Courts Guard Precedent Fiercely.<br><span class="highlight">We're Setting a New One.</span></h2>
+  <h2 style="font-size: 58px;">Courts Guard Precedent Fiercely.<br><span class="highlight">We're Setting a New One.</span></h2>
 
   <p style="font-size: 36px; color: var(--text); max-width: 100%; margin: 16px 0 28px; line-height: 1.4;">
     Once courts accept ZK proofs as factual record, that precedent binds all future proceedings.
@@ -790,43 +802,41 @@
           <li>Pilot law firms for beta testing</li>
           <li>Midnight ecosystem collaboration</li>
           <li>Feedback from attorneys & paralegals</li>
-          <li>Support for Vegas Hackathon (April 2026)</li>
         </ul>
       </div>
       <div>
         <h3 style="color: var(--gold); font-size: 36px;">What We Offer</h3>
         <ul class="bullets" style="font-size: 28px;">
           <li>Early access to MVP for pilot firms</li>
-          <li>Open-source jurisdiction rule packs</li>
           <li>Blueprint for privacy-preserving compliance</li>
           <li>The first court-accepted ZK proof precedent</li>
         </ul>
       </div>
     </div>
 
-    <div style="margin-top: 24px; font-size: 48px;">
-      <strong style="color: var(--emerald); text-shadow: 0 0 10px rgba(52,211,153,0.6), 0 0 24px rgba(52,211,153,0.3);">autoDiscovery.legal</strong>
+    <div style="margin-top: 24px; font-size: 56px;">
+      <strong style="color: #5eead4; text-shadow: 0 0 10px rgba(52,211,153,0.6), 0 0 24px rgba(52,211,153,0.3);">autoDiscovery.legal</strong>
     </div>
   </div>
 
-  <p style="font-size: 30px; color: var(--muted); text-align: center; margin-top: 16px; line-height: 1.4; font-style: italic;">
-    AutoDiscovery isn't just legal tech — <strong>it's the bridge that brings blockchain into the most conservative,<br>high-stakes industry in the world.</strong>
+  <p style="font-size: 26px; color: #ffffff; text-align: center; margin-top: 16px; line-height: 1.4; font-style: italic; white-space: nowrap;">
+    AutoDiscovery isn't just legal tech, <strong>it's the bridge that brings blockchain into the most conservative, high-stakes industry in the world.</strong>
   </p>
 
   <span class="slide-brand">autodiscovery.legal</span>
-  <span class="slide-number">12 / 12</span>
+  <span class="slide-number">13 / 13</span>
 </div>
 
 <!-- Navigation -->
 <div class="nav" id="nav">
   <button onclick="goSlide(-1)">◀</button>
-  <div class="counter"><span id="current-slide">1</span> / 12</div>
+  <div class="counter"><span id="current-slide">1</span> / 13</div>
   <button onclick="goSlide(1)">▶</button>
 </div>
 
 <script>
   let currentSlide = 1;
-  const totalSlides = 12;
+  const totalSlides = 13;
 
   function goSlide(delta) {
     currentSlide = Math.max(1, Math.min(totalSlides, currentSlide + delta));
