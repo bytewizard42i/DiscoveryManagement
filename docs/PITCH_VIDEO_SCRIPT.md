@@ -10,7 +10,7 @@
 
 ### SLIDE 2 — The Answer
 
-"*Sanctions.* In law, a sanction is a court-imposed punishment for failing to follow the rules of discovery (that's the mandatory exchange of evidence before trial)."
+"*Sanctions.* In law, a sanction is a court-imposed punishment for failing to follow the rules of discovery (that's the mandatory exchange of evidence during a trial)."
 
 ---
 
@@ -28,19 +28,19 @@
 
 ### SLIDE 5 — The Solution
 
-"AutoDiscovery doesn't just help you manage discovery — it *mathematically proves* you did it right. Every aspect of AutoDiscovery is designed to ease the burden and abstract away liability from law firms, making it a very attractive product to the industry."
+"AutoDiscovery doesn't just help you manage the discovery -it *mathematically proves* you did it right. Every aspect of AutoDiscovery is designed to ease the burden and abstract away liability from law firms, making it a very attractive product to the industry."
 
 ---
 
 ### SLIDE 6 — How It Works
 
-"Here's our workflow: We file a case. detect the jurisdiction, load the rule pack, and generate deadlines and checklists, as each step is completed — a proof is written and immutably stored. Intuitive, regionally, lawfully compliant workflows that take the guesswork and legal gotchas out of discovery management."
+"Here's our workflow: We file a case. detect the jurisdiction, load the rule pack, and generate deadlines and checklists. As each step is completed — a proof is written and immutably stored. Intuitive, regionally, lawfully compliant workflows that take the guesswork and legal gotchas out of discovery management."
 
 ---
 
 ### SLIDE 7 — Why Midnight
 
-"The unique, cutting-edge technology of Midnight streamlines and writes compliance in stone, control, and safety."
+"The unique, cutting-edge technology of Midnight streamlines complianceand writes it in stone, offering granular control, and security."
 
 ---
 
@@ -64,13 +64,13 @@
 
 ### SLIDE 11 — The Relationship Edge
 
-"A great part of our competitive edge is our domain expert partner's career relationships and contacts which we plan to leverage to gain a foothold in a skeptical and critical industry."
+"A great part of our competitive edge is our partner's career relationships and contacts which we plan to leverage to gain a foothold in a skeptical and critical industry."
 
 ---
 
 ### SLIDE 12 — The Team
 
-"The secret sauce: Our team boasts over two decades of experience each, from domain expertise to diagnostic systems design and architecture. Just a few more of our winning competitive edge advantages. Making the world's best products and packaging them in an enticing and engaging fashion. It's what we do."
+"The secret sauce: Our team boasts over two decades of experience each, from domain expertise to diagnostic systems design and architecture. Just a few more of our winning competitive edge advantages. Making the world's best products and packaging them in an enticing and engaging fashion is what we do."
 
 ---
 
