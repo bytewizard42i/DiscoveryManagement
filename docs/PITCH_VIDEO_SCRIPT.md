@@ -10,13 +10,17 @@
 
 ### SLIDE 2 — The Answer
 
-"*Sanctions.* In law, a sanction is a court-imposed punishment for failing to follow the rules of discovery (that's the mandatory exchange of evidence during a trial)."
+"*Sanctions.* 
+In law, a sanction is a court-imposed punishment for failing to follow the rules of discovery (that's the mandatory exchange of evidence during a trial)."
 
 ---
 
 ### SLIDE 3 — The Elephant in the Room
 
-"Eight point five *million* dollars. That's the largest single discovery sanction in U.S. history. Legal Discovery compliance is broken. Everyone in legal knows it. We have built the solution."
+"Eight point five *million* dollars. 
+That's the largest single discovery sanction in U.S. history. 
+Legal Discovery compliance is broken. 
+Everyone in legal knows it, but We have built the solution."
 
 ---
 
@@ -28,7 +32,7 @@
 
 ### SLIDE 5 — The Solution
 
-"AutoDiscovery doesn't just help you manage the discovery -it *mathematically proves* you did it right. Every aspect of AutoDiscovery is designed to ease the burden and abstract away liability from law firms, making it a very attractive product to the industry."
+"Our protocoldoesn't just help you manage the discovery -it *mathematically proves* you did it right. Every aspect of AutoDiscovery is designed to ease the burden and abstract away liability from law firms, making it a very attractive product to the industry."
 
 ---
 
@@ -40,7 +44,7 @@
 
 ### SLIDE 7 — Why Midnight
 
-"The unique, cutting-edge technology of Midnight streamlines complianceand writes it in stone, offering granular control, and security."
+"The unique, cutting-edge technology of Midnight streamlines compliance and writes it in stone, offering granular control, and security."
 
 ---
 
@@ -64,7 +68,7 @@
 
 ### SLIDE 11 — The Relationship Edge
 
-"A great part of our competitive edge is our partner's career relationships and contacts which we plan to leverage to gain a foothold in a skeptical and critical industry."
+"A great part of our competitive edge is our partner's career relationships and contacts, which we are leveraging to gain a foothold in a skeptical and critical industry."
 
 ---
 
