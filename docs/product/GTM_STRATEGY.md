@@ -1,7 +1,7 @@
-# 🚀 autoDiscovery.Legal — Comprehensive GTM & Customer Acquisition Strategy
+# 🚀 autoDiscovery.Legal Comprehensive GTM & Customer Acquisition Strategy
 
 **Prepared by:** Spy & John | **Date:** March 2, 2026 | 
-**Product:** autoDiscovery.Legal — Privacy-preserving legal discovery compliance on Midnight Network
+**Product:** autoDiscovery.Legal | Privacy-preserving legal discovery compliance on Midnight Network
 
 > **Living document** — updated as market research and customer feedback evolve.
 
@@ -19,7 +19,7 @@ The beachhead is **Idaho med-mal** — strategically sound due to Spy's 20-year 
 
 | Priority | Segment | Who | Size (Beachhead) | Why First |
 |----------|---------|-----|-----------------|-----------|
-| **P0** | Associte/Junior Attorney, Sr. Paralegals | Sarah Chen archetype — 18yr experience, 10+ cases, multi-attorney | ~200 in Idaho med-mal | **Daily user, evangelist, bottom-up adoption driver** |
+| **P0** | Associate/Junior Attorney, Sr. Paralegals | Sarah Chen archetype — 18yr experience, 10+ cases, multi-attorney | ~200 in Idaho med-mal | **Daily user, evangelist, bottom-up adoption driver** |
 | **P1** | Solo/Small Plaintiff Firms | Mark Reeves archetype — solo/2-5 person, contingency cases | ~150 in Idaho | **Self-serve buyer, immediate WTP, no committee** |
 | **P2** | Regional Defense Firm Partners | David Okafor archetype — multi-state, 8+ associates | ~30 in Idaho/UT/WA corridor | **Highest LTV, insurance-driven purchase** |
 | **P3** | Insurance Carriers | MedPro, TheDoctorsGroup, MIEC | 3-5 target carriers | **Force multiplier — one deal = hundreds of firms** |
