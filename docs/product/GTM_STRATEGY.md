@@ -1,7 +1,7 @@
-# 🚀 AutoDiscovery.legal — Comprehensive GTM & Customer Acquisition Strategy
+# 🚀 autoDiscovery.Legal — Comprehensive GTM & Customer Acquisition Strategy
 
-**Prepared for:** Spy & John | **Date:** March 2, 2026
-**Product:** autoDiscovery.legal — Privacy-preserving legal discovery compliance on Midnight Network
+**Prepared by:** Spy & John | **Date:** March 2, 2026 | 
+**Product:** autoDiscovery.Legal — Privacy-preserving legal discovery compliance on Midnight Network
 
 > **Living document** — updated as market research and customer feedback evolve.
 
@@ -15,11 +15,11 @@
 
 #### Beachhead Market: Idaho Medical Malpractice Litigation
 
-The beachhead is **Idaho med-mal** — strategically sound due to Spy's 20-year domain expertise, professional network, and deep jurisdiction knowledge (IRCP). Here's the refined segmentation with acquisition priority:
+The beachhead is **Idaho med-mal** — strategically sound due to Spy's 20-year domain expertise, extensive professional network, and deep jurisdiction knowledge (IRCP). Here's the refined segmentation with acquisition priority:
 
 | Priority | Segment | Who | Size (Beachhead) | Why First |
 |----------|---------|-----|-----------------|-----------|
-| **P0** | Senior Paralegals | Sarah Chen archetype — 18yr experience, 10+ cases, multi-attorney | ~200 in Idaho med-mal | **Daily user, evangelist, bottom-up adoption driver** |
+| **P0** | Associte/Junior Attorney, Sr. Paralegals | Sarah Chen archetype — 18yr experience, 10+ cases, multi-attorney | ~200 in Idaho med-mal | **Daily user, evangelist, bottom-up adoption driver** |
 | **P1** | Solo/Small Plaintiff Firms | Mark Reeves archetype — solo/2-5 person, contingency cases | ~150 in Idaho | **Self-serve buyer, immediate WTP, no committee** |
 | **P2** | Regional Defense Firm Partners | David Okafor archetype — multi-state, 8+ associates | ~30 in Idaho/UT/WA corridor | **Highest LTV, insurance-driven purchase** |
 | **P3** | Insurance Carriers | MedPro, TheDoctorsGroup, MIEC | 3-5 target carriers | **Force multiplier — one deal = hundreds of firms** |
@@ -27,7 +27,7 @@ The beachhead is **Idaho med-mal** — strategically sound due to Spy's 20-year 
 
 #### Refined Personas (Buying Triggers)
 
-- **Sarah (Paralegal)** → *"It does the jurisdiction lookup for me AND generates proof I followed the rules?"*
+- **Sarah (Associate/Junior Attorney, Sr. Paralegal)** → *"It does the jurisdiction lookup for me AND generates proof I followed the rules?"*
 - **Mark (Solo)** → *"First case is free? And it tracks my URCP tiered deadlines automatically?"*
 - **David (Partner)** → *"Our malpractice carrier gave us a discount for using it."*
 - **Judge Henderson (Court)** → *"Fewer motions to compel on my calendar? Let's pilot this."*
@@ -38,16 +38,16 @@ The beachhead is **Idaho med-mal** — strategically sound due to Spy's 20-year 
 
 #### The One-Liner
 
-> **"AutoDiscovery mathematically proves your firm was discovery-compliant — across every jurisdiction, for every case, every time."**
+> **"autoDiscovery.Legal mathematically proves your firm is discovery-compliant — across every jurisdiction, for every case, every time."**
 
 #### Messaging Hierarchy (NEVER lead with blockchain)
 
 | Audience | Lead Message | Supporting Message | Infrastructure Reveal |
 |----------|-------------|-------------------|----------------------|
-| **Paralegals** | "Stop researching which rules apply — they load automatically" | "One system for ID + UT + WA" | "Powered by privacy-preserving tech" |
+| **Associte/Junior Attorneys Sr. Paralegals** | "Stop researching which rules apply — they load automatically" | "One system for ID + UT + WA" | "Powered by privacy-preserving tech" |
 | **Solo Attorneys** | "Your first case is free. Never miss a deadline again" | "Level the playing field against large defense firms" | "Court-verifiable compliance records" |
 | **Partners** | "Reduce malpractice exposure with provable compliance" | "One workflow for all jurisdictions" | "Immutable audit trails on Midnight" |
-| **Insurance Carriers** | "Reduce claims from discovery failures — your insured firms prove compliance" | "Like a safe driver discount for law firms" | "ZK proofs = objective risk assessment" |
+| **Insurance Carriers** | "Reduce claims from discovery failures — your insured firms prove compliance" | "Significant discount for law firms" | "ZK proofs = objective risk assessment" |
 | **Judges** | "Fewer discovery motions on your docket" | "Neutral, verifiable compliance from both sides" | "Tamper-proof, cryptographically verifiable" |
 
 #### Key Messaging Principles (from Customer Analysis Matrix)
@@ -61,10 +61,10 @@ The beachhead is **Idaho med-mal** — strategically sound due to Spy's 20-year 
 
 ### 3. MARKETING & SALES CHANNELS — PLAN PER CHANNEL
 
-#### Channel 1: Spy's Professional Network (Months 1-3) — **PRIMARY**
+#### Channel 1: Spy's Extensive Professional Network (Months 1-3) — **PRIMARY**
 
 - **Reach:** 50-100 Idaho legal professionals directly
-- **Action:** Personal demos, 1-on-1 walkthroughs, paralegal association meetings
+- **Action:** Personal demos, 1-on-1 walkthroughs, ISB CLE for Discovery, paralegal association meetings
 - **Cost:** $0 (sweat equity)
 - **Target:** 5 beta firms, 3 case studies
 - **Metric:** Demo-to-trial conversion rate
@@ -72,7 +72,7 @@ The beachhead is **Idaho med-mal** — strategically sound due to Spy's 20-year 
 #### Channel 2: Court System / Judge Pilot (Months 2-6)
 
 - **Reach:** 1 judge = all parties in their cases (potentially 50+ firms/year)
-- **Action:** Pitch Ada County District Court pilot — 5 complex cases, both sides get AD free
+- **Action:** Pitch Ada County District Court pilot — 5 complex cases, both sides get aDL free
 - **Pitch:** *"Your Honor, we'd like to pilot a compliance tracking tool in 5 complex cases this quarter. Both sides get it free. You get fewer discovery motions on your calendar."*
 - **Cost:** $0 product cost (free pilot); ~$2K travel/presentation
 - **Target:** 1 standing discovery order or voluntary pilot recommendation
@@ -90,8 +90,8 @@ The beachhead is **Idaho med-mal** — strategically sound due to Spy's 20-year 
 #### Channel 4: Insurance Carrier Partnership (Months 4-10)
 
 - **Reach:** Hundreds of insured firms per carrier
-- **Action:** Pitch MedPro or TheDoctorsGroup — position as risk-reduction tool
-- **Model:** Carrier incentivizes/mandates adoption → premium discount for AD-using firms
+- **Action:** Pitch MedPro, TheDoctorsGroup, or MIEC — position as risk-reduction tool
+- **Model:** Carrier incentivizes/mandates adoption → premium discount for aDL-using firms
 - **Cost:** ~$5K (pitch materials, data room, legal review)
 - **Target:** 1 LOI with a malpractice carrier
 - **Metric:** # of firms onboarded via carrier channel
@@ -102,7 +102,7 @@ The beachhead is **Idaho med-mal** — strategically sound due to Spy's 20-year 
 - **Action:** Direct outreach — "We noticed [public record]. Here's a tool that prevents this."
 - **Positioning:** Reputation rehabilitation, not punishment
 - **Cost:** $0 (outreach) + free/discounted pilot
-- **Target:** 2-3 case studies showing "before AD vs. after AD"
+- **Target:** 2-3 case studies showing "before aDL vs. after aDL"
 - **Metric:** Sanction prevention stories
 
 #### Channel 6: Content Marketing / Thought Leadership (Ongoing)
@@ -116,10 +116,10 @@ The beachhead is **Idaho med-mal** — strategically sound due to Spy's 20-year 
 
 #### Channel 7: Conference Presence (Quarter milestones)
 
-- **Q2 2026:** Midnight Vegas Hackathon (launch event) — Blockchain/ZK community
-- **Q3 2026:** ABA TECHSHOW — Largest legal tech conference
-- **Q4 2026:** Idaho State Bar Annual Conference — Home turf
-- **Q1 2027:** LegalTech NYC — Enterprise market entry
+- **Q2 2026:** Launch event Hackfort — Blockchain/ZK community March 27-28, 2026 Q1
+- **Q3 2026:** ABA TechShow — Largest legal tech conference March 25-28, 2026 Q1
+- **Q4 2026:** Idaho State Bar Annual Conference — Home turf June 17, 2026 Q2
+- **Q1 2027:** LegalTech NYC — Enterprise market entry March 9 - 12, 2026 Q1
 - **Cost:** $3-8K per conference
 - **Metric:** Qualified leads generated per event
 
@@ -252,11 +252,11 @@ This is AutoDiscovery's **#1 differentiator** and should be woven into every tou
 
 ### 🎯 Customer #1: The "Spy Handshake"
 
-**Who:** A paralegal in Spy's direct professional network at an Idaho med-mal firm.
+**Who:** An attorney in Spy's direct professional network at an Idaho med-mal firm.
 
 **How:**
 
-1. Spy calls her former colleague: *"I'm building something that would have saved us 20 hours a week. Can I show you?"*
+1. Spy calls her former law firm: *"I'm building something that would have saved us 20 hours a week. Can I show you?"*
 2. 30-minute in-person demo on Spy's laptop
 3. Free beta access — first case onboarded together
 4. Weekly check-in for 4 weeks → capture feedback → build case study
@@ -321,9 +321,9 @@ This is AutoDiscovery's **#1 differentiator** and should be woven into every tou
 
 | Scale Channel | Mechanism | Expected Volume |
 |--------------|-----------|----------------|
-| **Insurance carrier mandate** | "Use AD or pay higher premiums" | 200-500 firms |
+| **Insurance carrier mandate** | "Use aDL or pay higher premiums" | 200-500 firms |
 | **Court standing orders** | "All parties shall maintain compliance tracking" | 50-100 firms per court |
-| **National CLE circuit** | ABA TECHSHOW, state bar conventions | 10-20 firms per event |
+| **National CLE circuit** | ABA TechShow, state bar conventions | 10-20 firms per event |
 | **Enterprise sales** | Regional firms with 50+ attorneys | 5-10 firms @ $1,499/mo |
 | **Inbound/SEO** | "discovery compliance automation" rankings | 20-50 firms/month |
 | **API partnerships** | Clio, MyCase integrations | Embedded distribution |
@@ -359,7 +359,7 @@ This is AutoDiscovery's **#1 differentiator** and should be woven into every tou
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
-**Market Context:** The global e-discovery market is projected at **$16.7-20.7 billion in 2026**, growing at a CAGR exceeding 10%, reaching **$25-46 billion by 2030-2034** (Fortune Business Insights, The Business Research Company). AutoDiscovery occupies an **empty quadrant** (jurisdiction-aware + privacy-preserving) that no existing competitor fills.
+**Market Context:** The global ediscovery market is projected at **$16.7-20.7 billion in 2026**, growing at a CAGR exceeding 10%, reaching **$25-46 billion by 2030-2034** (Fortune Business Insights, The Business Research Company). aDL occupies an **empty quadrant** (jurisdiction-aware + privacy-preserving) that no existing competitor fills.
 
 ---
 
@@ -370,9 +370,9 @@ This is AutoDiscovery's **#1 differentiator** and should be woven into every tou
 | **ZK Proofs on Midnight** | Only privacy-preserving discovery compliance tool | Technical moat — 18+ months to replicate |
 | **Jurisdiction Rule Packs** | Modular, on-chain, attorney-validated | Domain moat — requires real legal expertise to encode |
 | **Court Precedent** | First ZK proof accepted = binding for all future cases | Legal moat — precedent is permanent |
-| **Network Effects** | Opposing counsel must adopt when one side uses AD | Viral moat — grows stronger with adoption |
+| **Network Effects** | Opposing counsel must adopt when one side uses aDL | Viral moat — grows stronger with adoption |
 | **Insurance Carrier Channel** | Premium discounts create economic lock-in | Distribution moat — carrier mandate = captive market |
-| **Spy's Domain Expertise** | 20 years litigation + professional network | Founder moat — can't be hired away or replicated |
+| **Spy's Domain Expertise** | 20 years litigation + extensive professional network | Founder moat — can't be hired away or replicated |
 
 ---
 
@@ -380,10 +380,10 @@ This is AutoDiscovery's **#1 differentiator** and should be woven into every tou
 
 | # | What | By When | Owner | Success Looks Like |
 |---|------|---------|-------|-------------------|
-| **1** | Get 5 beta firms using AD daily | May 2026 | Spy | 5 firms with active cases + feedback loop |
+| **1** | Get 5 beta firms using aDL daily | May 2026 | Spy | 5 firms with active cases + feedback loop |
 | **2** | File first compliance proof in court | Jun 2026 | John + Spy | Judge accepts or acknowledges the proof |
-| **3** | Complete first CLE workshop | Aug 2026 | Spy | 50 attendees, 5 new trial signups |
-| **4** | Secure insurance carrier LOI | Oct 2026 | Spy + John | MedPro or TheDoctorsGroup agrees to pilot |
+| **3** | Complete first ISB CLE workshop | Aug 2026 | Spy | 50 attendees, 5 new trial signups |
+| **4** | Secure insurance carrier LOI | Oct 2026 | Spy + John | MedPro, TheDoctorsGroup, MIEC agrees to pilot |
 | **5** | Hit 50 paying firms in Idaho | Jan 2027 | Both | $17.5K MRR, beachhead locked |
 
 ---
@@ -413,7 +413,7 @@ This is AutoDiscovery's **#1 differentiator** and should be woven into every tou
 
 <div align="center">
 
-**AutoDiscovery.legal**
+**autoDiscovery.legal**
 
 *Automated discovery compliance: build once, comply everywhere.*
 
@@ -421,6 +421,6 @@ Built on [Midnight Network](https://midnight.network)
 
 ---
 
-*GTM Strategy — Spy, John & Copilot (March 2026)*
+*GTM Strategy — Spy, John with Copilot (March 2026)*
 
 </div>
