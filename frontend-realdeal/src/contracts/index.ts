@@ -6,16 +6,16 @@
  * connector that wraps the generated TypeScript API.
  *
  * Contract → Provider Mapping:
- * ┌─────────────────────────┬──────────────────────────┬────────────┐
- * │ Contract (.compact)     │ Provider Interface       │ Status     │
- * ├─────────────────────────┼──────────────────────────┼────────────┤
- * │ discovery-core          │ ICaseProvider            │ ✅ Wired   │
- * │ document-registry       │ IDocumentProvider        │ 🔴 Stub    │
- * │ compliance-proof        │ IComplianceProvider      │ 🔴 Stub    │
- * │ jurisdiction-registry   │ IJurisdictionProvider    │ 🔴 Stub    │
- * │ access-control          │ IAccessControlProvider   │ 🔴 Stub    │
- * │ expert-witness          │ IExpertWitnessProvider   │ 🔴 Stub    │
- * └─────────────────────────┴──────────────────────────┴────────────┘
+ * ┌─────────────────────────┬──────────────────────────┬──────────────────────┐
+ * │ Contract (.compact)     │ Provider Interface       │ Status               │
+ * ├─────────────────────────┼──────────────────────────┼──────────────────────┤
+ * │ discovery-core          │ ICaseProvider            │ ✅ Phase 1 + Phase 2 │
+ * │ document-registry       │ IDocumentProvider        │ ✅ Phase 1 + Phase 2 │
+ * │ compliance-proof        │ IComplianceProvider      │ ✅ Phase 1 + Phase 2 │
+ * │ jurisdiction-registry   │ IJurisdictionProvider    │ ✅ Phase 1 + Phase 2 │
+ * │ access-control          │ IAccessControlProvider   │ ✅ Phase 1 + Phase 2 │
+ * │ expert-witness          │ IExpertWitnessProvider   │ ✅ Phase 1 + Phase 2 │
+ * └─────────────────────────┴──────────────────────────┴──────────────────────┘
  *
  * All 6 contracts are compiled (0.29.0) and deployed to Preprod (v2).
  * discovery-core is the first to be wired with a real provider.

@@ -1,0 +1,4 @@
+# Contract ZK assets are derived files — regenerate with: npm run copy-contracts
+# They're copied from autodiscovery-contract/src/managed/ and are ~12MB total.
+**/keys/
+**/zkir/
