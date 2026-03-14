@@ -57,10 +57,11 @@ function clearSession(): void {
 
 /**
  * Check if the Midnight Lace wallet browser extension is available.
- * Lace injects a `window.midnight` object when installed.
+ * Lace injects `window.midnight.mnLace` when installed.
+ * (Confirmed via MCP TypeScript search — naval-battle-game, midnames, etc.)
  */
 function isLaceAvailable(): boolean {
-  return typeof window !== 'undefined' && 'midnight' in window;
+  return typeof window !== 'undefined' && !!(window as any).midnight?.mnLace;
 }
 
 /**
@@ -71,19 +72,24 @@ async function connectLaceWallet(): Promise<{ publicKey: string; walletName: str
   if (!isLaceAvailable()) return null;
 
   try {
-    // The Lace Midnight extension API exposes wallet connection
-    // window.midnight is injected by the Lace browser extension
-    const midnightApi = (window as any).midnight;
-    if (!midnightApi) return null;
+    // The Lace Midnight extension injects window.midnight.mnLace
+    // This is the DAppConnectorAPI — confirmed from working DApps:
+    //   - ErickRomeroDev/naval-battle-game_v2 (battle-naval.tsx)
+    //   - midnames/core (api.ts)
+    const mnLace = (window as any).midnight?.mnLace;
+    if (!mnLace) return null;
 
-    // Request wallet connection (prompts user to approve in extension)
-    // The exact API depends on the Lace version — this follows the pattern
-    // from docs.midnight.network
-    const wallet = await midnightApi.enable();
+    // Request wallet connection — prompts user to approve in the Lace popup.
+    // The compatible connector API version must match what Lace supports.
+    const compatibleConnectorAPIVersion = '1.x';
+    const wallet = await mnLace.enable(compatibleConnectorAPIVersion);
     if (!wallet) return null;
 
-    // Extract the public key
-    const publicKey = await wallet.getPublicKey?.() ?? 'lace-connected';
+    // The wallet object provides the DAppConnectorWalletAPI
+    // which includes serviceUriConfig (indexer, proof server, node URLs)
+    // and state() for coin public key access
+    const walletState = await wallet.state();
+    const publicKey = walletState?.coinPublicKey ?? 'lace-connected';
 
     return { publicKey: String(publicKey), walletName: 'Lace' };
   } catch (error) {
