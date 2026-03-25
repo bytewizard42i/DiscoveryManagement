@@ -347,12 +347,12 @@ export circuit proveParticipantHasRole(
       "Merkle inclusion proof failed — caller key not in role commitments tree";
 
   // 5. Look up the caller's registered role from the on-chain role map.
-  //    disclose() makes the key visible in the ZK proof transcript.
-  const storedRole = participantRoleByPublicKeyHash.lookup(disclose(callerPublicKey));
+  //    The caller's key is used privately — not disclosed in the ZK proof.
+  //    The ZK proof proves "stored role == claimed role" without revealing the key.
+  const storedRole = participantRoleByPublicKeyHash.lookup(callerPublicKey);
 
   // 6. Assert the stored role matches the claimed role.
-  //    disclose() makes claimedRoleEnum visible for verification.
-  assert storedRole == disclose(claimedRoleEnum),
+  assert storedRole == claimedRoleEnum,
       "Claimed role does not match registered role";
 
   // 7. Return true — the ZK proof guarantees this result without

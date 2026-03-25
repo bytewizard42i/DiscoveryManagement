@@ -116,7 +116,8 @@ export const getCurrentTimestamp = (
  * the Merkle inclusion proof that the caller is registered in the role tree.
  *
  * @param context - WitnessContext with ledger and private state
- * @param publicKeyHash_0 - The caller's public key (Bytes<32>)
+ * @param publicKeyHash_0 - The caller's Bytes<32> public key value (as returned by ownPublicKey()).
+ *                         This matches the value stored in the tree via registerParticipantKey.
  * @returns [unchangedPrivateState, MerkleTreePath if found, undefined if not]
  */
 export const lookupRoleCommitmentMerklePath = (
