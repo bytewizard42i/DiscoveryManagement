@@ -1,0 +1,131 @@
+John Santi
+
+Midnight Ambassador · 4-Time Hackathon Builder · Nightforce Bravo
+
+────────────────────────────────────────────────────────────────
+
+Role (AutoDiscovery.legal team)
+  Developer · Midnight Builder · Architect
+
+Core Focus
+  Privacy-first legal technology — automation + compliance on the
+  Midnight Network, powered by zero-knowledge proofs.
+
+────────────────────────────────────────────────────────────────
+
+STRENGTHS
+
+  Full-Stack Development
+    TypeScript, React, Next.js, Vite, Express, Docker, CI/CD.
+    Builds both frontend and backend from scratch — two complete
+    frontend apps (demoLand + realDeal) for AutoDiscovery alone.
+
+  Smart Contract Architecture
+    Designs and implements smart contracts in Compact on the
+    Midnight Network. Authored all 6 core AutoDiscovery contracts:
+    discovery-core, jurisdiction-registry, compliance-proof,
+    document-registry, access-control, and expert-witness.
+    All compiling. 20+ exported ZK circuits.
+
+  Zero-Knowledge Protocol Design
+    ZK-based compliance attestations — provable, privacy-preserving
+    records that a legal discovery process followed jurisdictional
+    rules, without exposing case content. Designed the attestation
+    model, proof generation flow, and verification architecture.
+
+  Product & Architecture
+    Architect of the "build once, comply everywhere" jurisdiction-
+    aware discovery compliance engine. Created the demoLand/realDeal
+    provider pattern — a 12-interface abstraction layer that lets
+    the same UI run against mock data or live Midnight contracts.
+    Rolled this pattern across 12 products in the DIDz ecosystem.
+
+────────────────────────────────────────────────────────────────
+
+NOTABLE CONTRIBUTIONS
+
+  MidnightVitals
+    Created MidnightVitals — a real-time diagnostic console for
+    Midnight DApps. Monitors wallet health, proof server status,
+    contract state, and network connectivity with interaction
+    logging. Iterated from v0.1.0 to v0.3.8 in a single day.
+    Integrated into AutoDiscovery and designed as a standalone
+    product with open-source, Pro, and Enterprise tiers.
+
+  Midnight Ambassador
+    Ambassador for the Midnight blockchain ecosystem. Active in
+    community building, developer education, and ecosystem growth.
+
+  Build Club Participant
+    Midnight Build Club — completed customer analysis, pitch deck,
+    video script, and preparing for Demo Day presentation at the
+    Midnight Vegas hackathon.
+
+  DIDz Ecosystem Architect
+    Designed and maintains a portfolio of 20+ privacy-first
+    products built on Midnight, all under the DIDzMonolith
+    umbrella. Products span legal tech, healthcare, identity,
+    finance, social networking, and scientific collaboration:
+
+      AutoDiscovery.legal — Legal discovery compliance
+      DIDz-io            — Decentralized identity engine
+      KYCz               — Privacy-preserving KYC
+      GeoZ               — Geolocation oracle
+      SelectConnect       — Privacy-first contact sharing
+      SilentLedger        — Confidential financial records
+      EncryptVault        — Encrypted document storage
+      ProMingle           — Professional networking
+      SouLink             — Soul-bound credentials
+      PopCork             — Event ticketing & access
+      HuddleBridge        — Secure communications
+      DownMan             — Document management
+      SafeHealthData      — Healthcare records
+      PetProData          — Companion animal health records
+      EquineProData       — Equine identity & provenance
+      SharedScience.me    — Scientific collaboration
+      MidnightVitals      — DApp diagnostic console
+
+  Author
+    Writing a book on Midnight Network enterprise development
+    (G4 series).
+
+  demoLand Auth Standard
+    Designed and deployed a standardized 8-method authentication
+    frontend across all 12 DIDz ecosystem products — email, PGP,
+    YubiKey, DID wallet, Trezor, biometric, Chrome OAuth, and
+    Brave OAuth.
+
+  CI/CD & DevOps
+    Built GitHub Actions workflows for automated Compact contract
+    compilation, artifact management, and reproducible local
+    development with Docker.
+
+  Idris Midnight MCP
+    Maintains a fork of the Midnight MCP server — an AI assistant
+    integration layer for searching contracts, analyzing Compact
+    code, compiling contracts, and exploring Midnight documentation.
+
+────────────────────────────────────────────────────────────────
+
+BY THE NUMBERS (AutoDiscovery.legal alone)
+
+  155   commits
+    6   Compact smart contracts (all compiling)
+   20+  exported ZK circuits
+   12   provider interfaces
+    2   frontend apps (demoLand + realDeal)
+   11   UI pages
+   40+  documentation files
+   22   media/brand assets
+
+────────────────────────────────────────────────────────────────
+
+TECH STACK
+
+  Blockchain    Midnight Network, Compact, ZK proofs, Lace wallet
+  Frontend      React, Next.js, Vite, TailwindCSS, HTML/CSS
+  Backend       TypeScript, Node.js, Express
+  DevOps        GitHub Actions, Docker, Turborepo, npm workspaces
+  Tools         Puppeteer, MCP servers, Git multi-remote workflows
+
+────────────────────────────────────────────────────────────────
