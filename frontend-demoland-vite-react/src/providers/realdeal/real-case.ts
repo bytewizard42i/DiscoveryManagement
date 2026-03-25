@@ -59,6 +59,12 @@ import {
   CASE_STATUS_LABELS,
 } from './chain/discovery-core-reader';
 
+// --- Provider Configuration ---
+
+interface RealCaseProviderConfig {
+  contractAddress: string;
+}
+
 // --- Wallet Connection State ---
 // When wallet integration is added (Phase 2), this interface will
 // represent the active blockchain connection used for write operations.
@@ -75,7 +81,15 @@ interface BlockchainConnection {
 // ============================================================================
 
 export class RealCaseProvider implements ICaseProvider {
+  private readonly contractAddress: string;
   private blockchainConnection: BlockchainConnection = { connected: false };
+
+  constructor(config: RealCaseProviderConfig) {
+    this.contractAddress = config.contractAddress;
+    console.info(
+      `[RealCaseProvider] Initialized. Contract address: ${this.contractAddress || '(not set — connect wallet to anchor on-chain)'}`,
+    );
+  }
 
   // --- READ OPERATIONS (work now) ---
 
