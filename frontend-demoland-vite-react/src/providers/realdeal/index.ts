@@ -11,9 +11,19 @@ import { MockJurisdictionProvider } from '../demoland/mock-jurisdiction';
 import { MockExpertWitnessProvider } from '../demoland/mock-expert-witness';
 
 export function createRealProviders(): Providers {
+  const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS;
+
+  if (!contractAddress) {
+    console.warn(
+      '[createRealProviders] VITE_CONTRACT_ADDRESS is not set. ' +
+      'The realDeal case provider will not be able to connect to the discovery-core contract. ' +
+      'Set VITE_CONTRACT_ADDRESS in your .env.realdeal file.',
+    );
+  }
+
   return {
     auth: new MockAuthProvider(),          // Phase 2: LaceAuthProvider
-    cases: new RealCaseProvider(),         // REAL — wired to discovery-core
+    cases: new RealCaseProvider({ contractAddress }),  // REAL — wired to discovery-core
     documents: new MockDocumentProvider(), // Phase 2: wired to document-registry
     compliance: new MockComplianceProvider(),
     ai: new MockAIProvider(),
