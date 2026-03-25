@@ -27,6 +27,9 @@ jobs:
           curl --proto '=https' --tlsv1.2 -LsSf https://github.com/midnightntwrk/compact/releases/latest/download/compact-installer.sh | sh
           echo "$HOME/.compact/bin" >> $GITHUB_PATH
 
+      - name: List contents of Compact bin
+        run: ls -l "$HOME/.compact/bin"
+
       - name: Verify Compact compiler
         run: compactc --version
 
