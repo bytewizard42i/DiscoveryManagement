@@ -170,7 +170,7 @@ AutoDiscovery/
 
 ```bash
 # Clone the repository
-git clone git@github.com:SpyCrypto/AutoDiscovery.git
+git clone git@github.com:bytewizard42i/autoDiscovery_legal.git
 cd AutoDiscovery
 
 # Install all dependencies (monorepo)
@@ -350,7 +350,7 @@ Features include **recipient auto-detection** against the case contacts database
 <td align="center" width="50%">
 
 ### Spy
-**[@SpyCrypto](https://github.com/SpyCrypto)**
+**Domain Expert**
 
 Domain Expert · Legal Discovery Specialist
 

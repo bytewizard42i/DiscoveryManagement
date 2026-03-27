@@ -17,7 +17,7 @@
 **Team**
 
 **Spy** — Domain Expert · 20-Year Complex Litigation Paralegal · Published Government Researcher
-[@SpyCrypto](https://github.com/SpyCrypto)
+Domain Expert
 
 **John** — 4x Midnight Hackathon Winner · Founder, EnterpriseZK Labs LLC · Blockchain Architect
 [@bytewizard42i](https://github.com/bytewizard42i)

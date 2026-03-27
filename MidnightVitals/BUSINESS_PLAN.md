@@ -2,7 +2,7 @@
 
 **Version**: 1.0  
 **Date**: Feb 22, 2026  
-**Author**: John (SpyCrypto) & Penny 🎀
+**Author**: John (bytewizard42i) & Penny 🎀
 
 ---
 
@@ -187,7 +187,7 @@ Consider raising if:
 
 ## Team
 
-- **John (SpyCrypto)** — Midnight ambassador, builder, legal-tech visionary
+- **John (bytewizard42i)** — Midnight ambassador, builder, legal-tech visionary
 - **Penny 🎀** — AI engineering partner (architecture, implementation, documentation)
 - **Spy** — Domain expert (legal discovery, compliance, privacy law)
 

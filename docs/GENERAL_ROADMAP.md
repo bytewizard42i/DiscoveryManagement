@@ -8,7 +8,7 @@
 
 **Version:** 1.0  
 **Date:** March 3, 2026  
-**Authors:** Spy ([@SpyCrypto](https://github.com/SpyCrypto)) · John ([@bytewizard42i](https://github.com/bytewizard42i))
+**Authors:** Spy · John ([@bytewizard42i](https://github.com/bytewizard42i))
 
 </div>
 

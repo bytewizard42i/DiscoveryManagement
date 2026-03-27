@@ -301,7 +301,7 @@ Courts guard precedent fiercely. In one case, a judge refused to let a plaintiff
 
 | 👤 **Member** | 🎭 **Role** | 🔗 **GitHub** |
 |-------------|-------------|---------------|
-| **🕵️ Spy** | Domain Expert (Retired Paralegal) | [@SpyCrypto](https://github.com/SpyCrypto) |
+| **🕵️ Spy** | Domain Expert (Retired Paralegal) | Domain Expert |
 | **💻 John** | Developer, Midnight Builder | [@bytewizard42i](https://github.com/bytewizard42i) |
 
 </div>

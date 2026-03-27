@@ -1,6 +1,6 @@
 # Spy - Team Dossier
 
-**GitHub:** [@SpyCrypto](https://github.com/SpyCrypto)  
+**Alias:** Spy  
 **Role:** Domain Expert, Legal Discovery Specialist
 
 ---
@@ -32,7 +32,7 @@ Experienced as a complex litigation paralegal and researcher; accented with nume
 
 ## Contact
 
-- GitHub: [@SpyCrypto](https://github.com/SpyCrypto)
+- Alias: Spy
 
 ---
 

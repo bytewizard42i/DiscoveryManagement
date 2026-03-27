@@ -2,8 +2,8 @@
 
 **Version:** 1.0 Draft  
 **Date:** February 20, 2026  
-**Authors:** Spy ([@SpyCrypto](https://github.com/SpyCrypto)) · John ([@bytewizard42i](https://github.com/bytewizard42i))  
-**Repository:** [SpyCrypto/AutoDiscovery](https://github.com/SpyCrypto/AutoDiscovery)  
+**Authors:** Spy · John ([@bytewizard42i](https://github.com/bytewizard42i))  
+**Repository:** [bytewizard42i/autoDiscovery_legal](https://github.com/bytewizard42i/autoDiscovery_legal)  
 **License:** Proprietary — Copyright 2026 AutoDiscovery Team. All rights reserved.
 
 ---
@@ -469,7 +469,7 @@ For cases with multiple parties, multiple jurisdictions, or both, autoDiscovery.
 
 ## 16. Team
 ### Spy — Domain Expert & Legal Discovery Specialist
-**[@SpyCrypto](https://github.com/SpyCrypto)**
+**Domain Expert**
 
 20 years of complex litigation paralegal experience. Published statistical reports for Idaho government agencies. Deep jurisdiction expertise across Idaho, Utah, and Washington. The legal domain knowledge backbone of autoDiscovery.legal — every protocol rule, deadline, and workflow reflects real-world experience at the front lines of discovery compliance.
 

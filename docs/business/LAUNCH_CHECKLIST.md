@@ -1,6 +1,6 @@
 # Launch Checklist — Build Club Program Completion (Demo Day)
 
-**Repo:** SpyCrypto/AutoDiscovery  
+**Repo:** bytewizard42i/autoDiscovery_legal  
 **Objective:** Successful completion of the Build Club program by fulfilling participation requirements and delivering a Demo Day presentation.
 
 > Definition of “Launch” for this checklist: **Program Completion**. Completion means the participant fulfills participation requirements and presents at Demo Day.

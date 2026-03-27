@@ -29,7 +29,7 @@
 
 | Milestone | Who | Details |
 |-----------|:---:|---------|
-| Initial commit | `[J]` | Repository created at `SpyCrypto/AutoDiscovery`. First commit: *"AutoDiscovery — GeoOracle Auto Compliance for Legal Discovery."* |
+| Initial commit | `[J]` | Repository created at `bytewizard42i/autoDiscovery_legal`. First commit: *"AutoDiscovery — GeoOracle Auto Compliance for Legal Discovery."* |
 | Team formation | `[J+S]` | Spy onboarded as domain expert and co-founder. 20+ year Idaho complex litigation paralegal. Bio, dossier, and role documented. |
 | Starter template scaffold | `[J]` | Midnight MeshJS/Edda starter template. `PROJECT_OVERVIEW.md` created. |
 | AutoDiscovery logo | `[J]` | First brand asset added to `media/`. |

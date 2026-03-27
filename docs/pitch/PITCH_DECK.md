@@ -233,7 +233,7 @@ Full FRCP integration, expert witness management, AI-assisted e-discovery, court
 
 ### Domain Expertise + Technical Execution
 
-**Spy (@SpyCrypto)** — Domain Expert & Co-Founder
+**Spy** — Domain Expert & Co-Founder
 - 15+ years complex litigation experience
 - Medical malpractice, personal injury, discovery workflows
 - Published researcher for Idaho government agencies
@@ -273,6 +273,6 @@ Once courts accept ZK proofs as factual record, that precedent binds all future 
 
 ---
 
-**autodiscovery.legal** | **@SpyCrypto** · **@bytewizard42i** | Midnight Vegas Hackathon — April 2026
+**autodiscovery.legal** | **@bytewizard42i** | Midnight Vegas Hackathon — April 2026
 
 *"Discovery is a battlefield. AutoDiscovery is your armor."*

@@ -101,4 +101,4 @@ The standalone repo at [bytewizard42i/MidnightVitals](https://github.com/bytewiz
 
 ---
 
-Built by John (SpyCrypto) with Penny 🎀 as part of the AutoDiscovery.legal ecosystem.
+Built by John (bytewizard42i) with Penny 🎀 as part of the AutoDiscovery.legal ecosystem.

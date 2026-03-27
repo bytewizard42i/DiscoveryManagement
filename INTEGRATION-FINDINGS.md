@@ -2,7 +2,7 @@
 
 > **Date:** 2026-03-25
 > **Scope:** Code audit of AutoDiscovery realDeal layer against [midnight-doc-manager](https://github.com/Mackenzie-OO7/midnight-doc-manager) (PreProd reference) and [midnight-local-dev](https://github.com/midnightntwrk/midnight-local-dev) (local Docker stack).
-> **Related Issue:** [#37 — Reference Implementation for AutoDiscovery Integration](https://github.com/SpyCrypto/AutoDiscovery/issues/37)
+> **Related Issue:** [#37 — Reference Implementation for AutoDiscovery Integration](https://github.com/bytewizard42i/autoDiscovery_legal/issues/37)
 
 ---
 
@@ -201,4 +201,4 @@ VITE_NODE_URL=http://localhost:9944
 - **midnight-local-dev** (local Docker stack): https://github.com/midnightntwrk/midnight-local-dev
 - **AutoDiscovery witnesses**: `autodiscovery-contract/src/witnesses/`
 - **AutoDiscovery Compact contracts**: `autodiscovery-contract/src/contracts/`
-- **Related issue**: [SpyCrypto/AutoDiscovery#37](https://github.com/SpyCrypto/AutoDiscovery/issues/37)
+- **Related issue**: [bytewizard42i/autoDiscovery_legal#37](https://github.com/bytewizard42i/autoDiscovery_legal/issues/37)

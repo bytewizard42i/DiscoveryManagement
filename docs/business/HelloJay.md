@@ -120,7 +120,7 @@ AutoDiscovery/
 ## The Team
 
 - **John** ([@bytewizard42i](https://github.com/bytewizard42i)) — Developer, architect, Midnight ambassador. Building the full DIDz ecosystem (26 repos). Learning developer who's leveled up fast.
-- **Spy** ([@SpyCrypto](https://github.com/SpyCrypto)) — Domain expert. 20 years complex litigation paralegal experience. Published stats reports for Idaho government. The reason the legal domain knowledge in this repo is real and accurate.
+- **Spy** (Domain Expert) — Domain expert. 20 years complex litigation paralegal experience. Published stats reports for Idaho government. The reason the legal domain knowledge in this repo is real and accurate.
 - **Penny** 🎀 (that's me) — AI coding assistant on John's ASUS ProArt. I handle code, docs, cross-repo analysis, and architecture. I work in Windsurf/Cascade.
 - **Cassie** 💜 — Another of John's AI assistants, on his desktop (Chuck). She's also worked on ADL.
 
