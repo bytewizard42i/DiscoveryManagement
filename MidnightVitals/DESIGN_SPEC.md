@@ -10,7 +10,7 @@
 1. **Plain English, always.** Every message, label, and status must be understandable by someone who has never used a blockchain.
 2. **Show, don't hide.** If something is happening, the user should see it. If something broke, the user should know exactly what and why.
 3. **Medical vitals metaphor.** The entire UI is modeled after a hospital vitals monitor: continuous readings, color-coded status, alarms for problems.
-4. **Dark mode native.** Designed for dark backgrounds, matching the AutoDiscovery.legal theme.
+4. **Dark mode native.** Designed for dark backgrounds, matching the DiscoveryManagement theme.
 
 ---
 

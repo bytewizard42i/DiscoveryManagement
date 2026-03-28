@@ -90,7 +90,7 @@ export const WALLET_MESSAGES = {
 export const CONTRACT_MESSAGES = {
   allHealthy: (count: number) =>
     `All ${count} smart contracts are deployed and responding. ` +
-    `The full AutoDiscovery contract suite is operational.`,
+    `The full DiscoveryManagement contract suite is operational.`,
 
   someDeployed: (deployed: number, total: number) =>
     `${deployed} out of ${total} contracts are deployed. ` +

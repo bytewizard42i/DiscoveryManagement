@@ -294,7 +294,7 @@ ZK proofs verify public fields (e.g., "status=completed by deadline") without re
 
 ---
 
-## 9. Incentivizing Lawyers to Use AutoDiscovery
+## 9. Incentivizing Lawyers to Use DiscoveryManagement
 
 Lawyers in small firms are often overwhelmed by caseloads, wary of new tech, and focused on billables/compliance. Incentives should emphasize immediate value, low risk, and peer validation.
 
@@ -315,7 +315,7 @@ Pitch to highlight benefits over features — lawyers want solutions to "deadlin
 
 ### Core Pitch Framework
 
-**Problem-Solution-Benefit**: Start with pains (e.g., "Missed a Civ.R. 26 deadline? It happens — costing time, money, reputation"). Introduce AutoDiscovery as "your automated discovery copilot, jurisdiction-smart and privacy-first." End with benefits: "Cut discovery time by half, prove compliance instantly, focus on winning cases."
+**Problem-Solution-Benefit**: Start with pains (e.g., "Missed a Civ.R. 26 deadline? It happens — costing time, money, reputation"). Introduce DiscoveryManagement as "your automated discovery copilot, jurisdiction-smart and privacy-first." End with benefits: "Cut discovery time by half, prove compliance instantly, focus on winning cases."
 
 **Med-Mal Hook**: "For Ohio med-mal attorneys: Never scramble for affidavits again — built-in builders ensure R.C. 2323.451 compliance from day one."
 

@@ -12,7 +12,7 @@ The legal discovery process is messy, time consuming, and varies by jurisdiction
 
 ## SOLUTION
 
-With autoDiscovery.legal, we aim to organize and formalize a hard-coded, geographically compliant, law-based protocol that will help organize, distribute, and give proper, accurate, and secure access control to user aggregated legal discovery. This protocol will abstract away liability, reduce man hours and overall costs, increase profits, and form an immutable (existing forever) proof of compliance, custody, provenance, and access. It is our hope that autoDiscovery.legal will be the default protocol for accurate and dependable discovery/evidence management back with error insurance that will protect law firms from errors and omissions.
+With DiscoveryManagement, we aim to organize and formalize a hard-coded, geographically compliant, law-based protocol that will help organize, distribute, and give proper, accurate, and secure access control to user aggregated legal discovery. This protocol will abstract away liability, reduce man hours and overall costs, increase profits, and form an immutable (existing forever) proof of compliance, custody, provenance, and access. It is our hope that DiscoveryManagement will be the default protocol for accurate and dependable discovery/evidence management back with error insurance that will protect law firms from errors and omissions.
 
 ---
 

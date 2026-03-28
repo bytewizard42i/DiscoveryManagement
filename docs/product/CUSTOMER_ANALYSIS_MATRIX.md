@@ -2,7 +2,7 @@
 
 <span style="font-size: 80%">Introducing:</span>
 
-# AutoDiscovery.legal
+# DiscoveryManagement
 
 ### Customer Analysis Matrix
 
@@ -28,7 +28,7 @@ Domain Expert
 
 ## The One-Liner
 
-> **AutoDiscovery turns the most adversarial, evidence-demanding environment on earth — the courtroom — into the proving ground for Midnight's privacy-preserving blockchain.**
+> **DiscoveryManagement turns the most adversarial, evidence-demanding environment on earth — the courtroom — into the proving ground for Midnight's privacy-preserving blockchain.**
 
 ---
 
@@ -93,7 +93,7 @@ An attorney handling a medical malpractice case in Boise follows completely diff
 
 These are not edge cases. **Missed deadlines are the #1 complaint in legal malpractice claims**, and **discovery errors are one of four recognized categories** of attorney malpractice `[desk research: TLIE]`. The problem is systemic.
 
-### Spotlight: *State v. Kohberger* — Why AutoDiscovery Exists
+### Spotlight: *State v. Kohberger* — Why DiscoveryManagement Exists
 
 The 2022 University of Idaho quadruple homicide case is the most high-profile criminal prosecution in Idaho history — and a masterclass in discovery chaos. It happened in **our beachhead jurisdiction**.
 
@@ -125,9 +125,9 @@ The 2022 University of Idaho quadruple homicide case is the most high-profile cr
 ╚══════════════════════════════════════════════════════════════════╝
 ```
 
-**What AutoDiscovery would have changed:**
+**What DiscoveryManagement would have changed:**
 
-| Kohberger Problem | AutoDiscovery Solution |
+| Kohberger Problem | DiscoveryManagement Solution |
 |-------------------|----------------------|
 | 68 TB dumped without organization | **Automated jurisdiction-aware indexing** — documents tagged by IRCP rule relevance at intake |
 | Expert disclosures incomplete (5 of 25) | **Deadline tracking with automated alerts** — every expert disclosure deadline calendared with escalation |
@@ -138,7 +138,7 @@ The 2022 University of Idaho quadruple homicide case is the most high-profile cr
 
 > **The Kohberger case proves that even in the highest-stakes prosecution imaginable — a quadruple homicide capital case with unlimited state resources — discovery still breaks down.** If Idaho's AG office can't manage document production smoothly, what chance does a solo practitioner or small firm have? `[domain expertise + desk research]`
 
-This is not a hypothetical. This is Idaho. This is now. This is why we're building AutoDiscovery.
+This is not a hypothetical. This is Idaho. This is now. This is why we're building DiscoveryManagement.
 
 ### The Cost of Getting It Wrong
 
@@ -208,7 +208,7 @@ Three roles touch discovery daily. Each experiences the problem differently — 
 
 ### Psychographic Profile: The Legal Mind
 
-| Dimension | Implication for AutoDiscovery |
+| Dimension | Implication for DiscoveryManagement |
 |-----------|-------------------------------|
 | **Risk-averse by training** | Position as liability *reduction*, not innovation `[domain expertise]` |
 | **Precedent-driven** | Show existing legal tech adoption curves; cite court acceptance |
@@ -334,7 +334,7 @@ Each pain point scored on three axes: **severity** (career/case impact), **frequ
   C                 │         │         │ trail   │ deadlns │
   Y                 └─────────┴─────────┴─────────┴─────────┘
 
-  ■ Top-right quadrant = AutoDiscovery's primary targets
+  ■ Top-right quadrant = DiscoveryManagement's primary targets
   ■ Every item in the rightmost column can end a career
 ```
 
@@ -382,7 +382,7 @@ Each pain point scored on three axes: **severity** (career/case impact), **frequ
 
 ### Privacy Regulations Intersecting Discovery
 
-| Regulation | Impact | AutoDiscovery Response |
+| Regulation | Impact | DiscoveryManagement Response |
 |------------|--------|------------------------|
 | **HIPAA** | Medical records in malpractice cases require strict handling | ZK proofs verify compliance without exposing PHI |
 | **Attorney-Client Privilege** | Must be identified, logged, and protected | Automated privilege detection + immutable log |
@@ -417,7 +417,7 @@ Each pain point scored on three axes: **severity** (career/case impact), **frequ
                └───────────┴───────────┴───────────┴───────────┘
 ```
 
-**AutoDiscovery occupies an empty quadrant.** No existing solution combines:
+**DiscoveryManagement occupies an empty quadrant.** No existing solution combines:
 - Automated jurisdiction detection
 - Privacy-preserving compliance proofs
 - Immutable audit trails admissible in court
@@ -502,7 +502,7 @@ Each pain point scored on three axes: **severity** (career/case impact), **frequ
 
 ### What Must Be True
 
-These are the critical assumptions underpinning AutoDiscovery. Each must be validated for the product to succeed.
+These are the critical assumptions underpinning DiscoveryManagement. Each must be validated for the product to succeed.
 
 | # | Assumption | Risk Level | Validation Plan | Timeline |
 |---|-----------|------------|-----------------|----------|
@@ -515,7 +515,7 @@ These are the critical assumptions underpinning AutoDiscovery. Each must be vali
 
 ### Jurisdiction Determination: Simple by Design
 
-AutoDiscovery does **not** need a geolocation oracle to determine jurisdiction. The filing court determines which rules apply — and the attorney knows this at case creation. The `jurisdiction-registry` contract simply loads the correct modular rule pack based on the court selected.
+DiscoveryManagement does **not** need a geolocation oracle to determine jurisdiction. The filing court determines which rules apply — and the attorney knows this at case creation. The `jurisdiction-registry` contract simply loads the correct modular rule pack based on the court selected.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -543,7 +543,7 @@ AutoDiscovery does **not** need a geolocation oracle to determine jurisdiction. 
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-> **Note:** Our companion project [GeoZ](https://github.com/bytewizard42i/GeoZ_us_app_Midnight-Oracle) (GeoZ.us / GeoZ.app) is a standalone privacy-preserving geolocation oracle on Midnight — a separate protocol by the same team, not a dependency of AutoDiscovery.
+> **Note:** Our companion project [GeoZ](https://github.com/bytewizard42i/GeoZ_us_app_Midnight-Oracle) (GeoZ.us / GeoZ.app) is a standalone privacy-preserving geolocation oracle on Midnight — a separate protocol by the same team, not a dependency of DiscoveryManagement.
 
 ---
 
@@ -564,7 +564,7 @@ Courts guard precedent fiercely because they understand its power.
 ```
 ╔══════════════════════════════════════════════════════════════════╗
 ║                                                                  ║
-║   STAGE 1 ──▶ Courts accept AutoDiscovery compliance proofs     ║
+║   STAGE 1 ──▶ Courts accept DiscoveryManagement compliance proofs     ║
 ║               as factual record in discovery disputes            ║
 ║                           │                                      ║
 ║   STAGE 2 ──▶ Legal precedent established:                      ║
@@ -625,7 +625,7 @@ Q1 2027    NY + CA rule packs                      100 firms
                     ┌──────────────┐
                     │   Paralegal  │
                     │   discovers  │
-                    │  AutoDiscovery│
+                    │  DiscoveryManagement│
                     └──────┬───────┘
                            │
                            ▼
@@ -725,7 +725,7 @@ Q1 2027    NY + CA rule packs                      100 firms
 |-----------|-----|--------|-----------|
 | **MVP** | Working Idaho IRCP workflow with wallet | Functional demo | April 2026 (hackathon) |
 | **First Proof** | ZK compliance proof generated on Midnight testnet | 1 proof | Q2 2026 |
-| **Beta** | Firms actively using AutoDiscovery | 5 firms | Q3 2026 |
+| **Beta** | Firms actively using DiscoveryManagement | 5 firms | Q3 2026 |
 | **Court Filing** | Compliance proof submitted as exhibit | 1 filing | Q4 2026 |
 | **Revenue** | Monthly recurring revenue | $5K MRR | Q1 2027 |
 | **Precedent** | Court accepts ZK proof as admissible | 1 ruling | 2027 |
@@ -734,7 +734,7 @@ Q1 2027    NY + CA rule packs                      100 firms
 
 ## XIV. SUMMARY
 
-AutoDiscovery sits at the intersection of **urgent legal pain** and **unprecedented technology capability**.
+DiscoveryManagement sits at the intersection of **urgent legal pain** and **unprecedented technology capability**.
 
 ```
 ╔══════════════════════════════════════════════════════════════════╗
@@ -763,7 +763,7 @@ AutoDiscovery sits at the intersection of **urgent legal pain** and **unpreceden
 
 <div align="center">
 
-**AutoDiscovery.legal**
+**DiscoveryManagement**
 
 *Privacy meets compliance.*
 
@@ -819,7 +819,7 @@ February 2026
 | dApp | Decentralized Application |
 | ESI | Electronically Stored Information |
 | FRCP | Federal Rules of Civil Procedure |
-| GeoZ | Privacy-preserving geolocation oracle on Midnight — [companion project](https://github.com/bytewizard42i/GeoZ_us_app_Midnight-Oracle) (not a dependency of AutoDiscovery) |
+| GeoZ | Privacy-preserving geolocation oracle on Midnight — [companion project](https://github.com/bytewizard42i/GeoZ_us_app_Midnight-Oracle) (not a dependency of DiscoveryManagement) |
 | GTM | Go-to-Market |
 | IRCP | Idaho Rules of Civil Procedure |
 | KPI | Key Performance Indicator |

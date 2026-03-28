@@ -1,4 +1,4 @@
-# 🗺️ AutoDiscovery — State-by-State Rollout Strategy
+# 🗺️ DiscoveryManagement — State-by-State Rollout Strategy
 
 > **Idaho first. Then everywhere. One jurisdiction at a time.**
 
@@ -6,7 +6,7 @@
 
 ## 📋 Overview
 
-This document defines the phased, state-by-state launch strategy for AutoDiscovery — starting in **Idaho** as the anchor jurisdiction and expanding methodically across the US. Each state is treated as its own product release with discrete compliance checkpoints, legal validation gates, and measurable success criteria before the next state is opened.
+This document defines the phased, state-by-state launch strategy for DiscoveryManagement — starting in **Idaho** as the anchor jurisdiction and expanding methodically across the US. Each state is treated as its own product release with discrete compliance checkpoints, legal validation gates, and measurable success criteria before the next state is opened.
 
 The modular `jurisdiction-registry` smart contract is built for exactly this model: **add new rule packs without code changes.**
 
@@ -51,7 +51,7 @@ The modular `jurisdiction-registry` smart contract is built for exactly this mod
 
 ---
 
-### 🏛️ **Idaho Court System — Structure AutoDiscovery Must Support**
+### 🏛️ **Idaho Court System — Structure DiscoveryManagement Must Support**
 
 Idaho has **7 Judicial Districts**, each with its own District Court and local rules that layer on top of IRCP:
 
@@ -65,17 +65,17 @@ Idaho has **7 Judicial Districts**, each with its own District Court and local r
 | **6th** | Bear Lake, Bannock, Caribou, Franklin, Oneida, Power | Pocatello | ISU area |
 | **7th** | Bingham, Bonneville, Butte, Clark, Custer, Fremont, Jefferson, Lemhi, Madison, Teton | Idaho Falls | Eastern Idaho hub |
 
-> **AutoDiscovery v1.0 targets:** 4th District (Ada County / Boise) as primary, 3rd and 6th as secondary.
+> **DiscoveryManagement v1.0 targets:** 4th District (Ada County / Boise) as primary, 3rd and 6th as secondary.
 
 ---
 
 ### 📜 **IRCP Discovery Rules — Detailed Mapping**
 
-The Idaho Rules of Civil Procedure were comprehensively revised effective **July 1, 2016**, closely following the 2015 Federal Rules amendments. AutoDiscovery must correctly implement every rule below.
+The Idaho Rules of Civil Procedure were comprehensively revised effective **July 1, 2016**, closely following the 2015 Federal Rules amendments. DiscoveryManagement must correctly implement every rule below.
 
 #### Core Discovery Rules to Implement
 
-| Rule | Title | Key AutoDiscovery Function |
+| Rule | Title | Key DiscoveryManagement Function |
 |------|-------|---------------------------|
 | **IRCP 16** | Pretrial Conferences; Scheduling | Scheduling order ingestion — sets all downstream deadlines |
 | **IRCP 26(a)(1)** | Initial Disclosures | Auto-trigger at case creation; 14-day deadline from scheduling conference |
@@ -93,7 +93,7 @@ The Idaho Rules of Civil Procedure were comprehensively revised effective **July
 | **IRCP 37** | Sanctions for Discovery Failures | Sanction risk flags and compliance alerts |
 | **IRCP 45** | Subpoenas | Third-party document subpoena tracking |
 
-#### ⏰ IRCP Deadline Table — AutoDiscovery Must Calculate All of These
+#### ⏰ IRCP Deadline Table — DiscoveryManagement Must Calculate All of These
 
 | Deadline | Trigger | Days | Notes |
 |----------|---------|------|-------|
@@ -109,48 +109,48 @@ The Idaho Rules of Civil Procedure were comprehensively revised effective **July
 | **Deposition notice** | Before deposition | Reasonable (~14 days) | IRCP 30 |
 | **Deposition objections** | After transcript | +30 days | IRCP 32 |
 
-> ⚠️ **Critical:** Failure to serve timely RFA responses results in automatic admission (IRCP 36(a)(3)). AutoDiscovery must flag this deadline with **CRITICAL** alert level.
+> ⚠️ **Critical:** Failure to serve timely RFA responses results in automatic admission (IRCP 36(a)(3)). DiscoveryManagement must flag this deadline with **CRITICAL** alert level.
 
 ---
 
 ### ⚖️ **Idaho UPL Analysis — Detailed Assessment**
 
-This is a legal gate. AutoDiscovery **cannot launch** until this analysis is complete and documented.
+This is a legal gate. DiscoveryManagement **cannot launch** until this analysis is complete and documented.
 
 #### Governing Statutes & Rules
 
 | Authority | Provision | Relevance |
 |-----------|-----------|-----------|
-| **Idaho Code § 3-104** | Only licensed attorneys may practice law in Idaho | AutoDiscovery must not constitute "practice of law" |
+| **Idaho Code § 3-104** | Only licensed attorneys may practice law in Idaho | DiscoveryManagement must not constitute "practice of law" |
 | **Idaho Code § 3-420** | Unauthorized practice is a misdemeanor | Criminal exposure if UPL occurs |
 | **ISB Rule 5.5** | Multi-jurisdictional practice | Governs out-of-state attorney use |
-| **Idaho RPC 1.1** | Competence includes technology | Supports attorney use of AutoDiscovery |
-| **Idaho RPC 5.3** | Supervision of non-lawyer assistants | AutoDiscovery = non-lawyer tool under attorney supervision |
+| **Idaho RPC 1.1** | Competence includes technology | Supports attorney use of DiscoveryManagement |
+| **Idaho RPC 5.3** | Supervision of non-lawyer assistants | DiscoveryManagement = non-lawyer tool under attorney supervision |
 
 #### UPL Safe Harbor Analysis
 
-AutoDiscovery avoids UPL under Idaho law because:
+DiscoveryManagement avoids UPL under Idaho law because:
 
-1. **Tool, not advisor** — AutoDiscovery enforces rules set by the Idaho legislature; it does not give legal advice
-2. **Attorney supervision** — The attorney of record retains all judgment and discretion; AutoDiscovery surfaces deadlines, the attorney decides strategy
+1. **Tool, not advisor** — DiscoveryManagement enforces rules set by the Idaho legislature; it does not give legal advice
+2. **Attorney supervision** — The attorney of record retains all judgment and discretion; DiscoveryManagement surfaces deadlines, the attorney decides strategy
 3. **Scrivener function** — Populating forms and calculating deadlines is a scrivener function, not legal practice (analogous to court-approved legal form software)
 4. **Precedent** — The ISB has found that legal software tools (Clio, Westlaw, etc.) do not constitute UPL when used under attorney supervision
 
 #### Required UPL Documentation (Pre-Launch Gate)
 - [ ] Written UPL memo from Idaho-licensed attorney confirming safe harbor
-- [ ] ToS language affirming AutoDiscovery is a tool, not legal counsel
-- [ ] In-app disclaimer: *"AutoDiscovery is a compliance automation tool. It does not constitute legal advice. All decisions remain with the supervising attorney."*
+- [ ] ToS language affirming DiscoveryManagement is a tool, not legal counsel
+- [ ] In-app disclaimer: *"DiscoveryManagement is a compliance automation tool. It does not constitute legal advice. All decisions remain with the supervising attorney."*
 - [ ] ISB Ethics Opinion inquiry (informal) — confirm no objection
 
 ---
 
 ### 🏥 **Idaho Medical Malpractice — Primary Use Case Deep Dive**
 
-Medical malpractice is AutoDiscovery's anchor use case. Idaho has specific statutory requirements beyond IRCP:
+Medical malpractice is DiscoveryManagement's anchor use case. Idaho has specific statutory requirements beyond IRCP:
 
 #### Governing Statutes
 
-| Statute | Provision | AutoDiscovery Implementation |
+| Statute | Provision | DiscoveryManagement Implementation |
 |---------|-----------|------------------------------|
 | **Idaho Code § 6-1001** | Medical Malpractice Act scope | Case type flag — triggers malpractice workflow |
 | **Idaho Code § 6-1003** | Pre-litigation screening panel required | Panel request tracking + deadline |
@@ -174,7 +174,7 @@ Medical malpractice is AutoDiscovery's anchor use case. Idaho has specific statu
 
 ### 🗂️ **Idaho District Local Rules — Mapping Required**
 
-Each judicial district adds local rules on top of IRCP. AutoDiscovery must handle at least the **4th District** at launch:
+Each judicial district adds local rules on top of IRCP. DiscoveryManagement must handle at least the **4th District** at launch:
 
 #### 4th District (Ada County / Boise) — Priority
 
@@ -191,13 +191,13 @@ Each judicial district adds local rules on top of IRCP. AutoDiscovery must handl
 
 ### 🔒 **Idaho Data Privacy & Security Requirements**
 
-| Law / Rule | Requirement | AutoDiscovery Compliance |
+| Law / Rule | Requirement | DiscoveryManagement Compliance |
 |------------|-------------|--------------------------|
 | **Idaho Code § 28-51-104** | Data breach notification within 30 days | Midnight private ledger = encrypted at rest; breach protocol documented |
 | **Idaho Code § 28-51-105** | Reasonable security measures required | ZK architecture + Lace wallet key management satisfies this |
-| **HIPAA (Federal)** | Medical records — covered entity rules | AutoDiscovery does not store PHI; document handling is client-side |
+| **HIPAA (Federal)** | Medical records — covered entity rules | DiscoveryManagement does not store PHI; document handling is client-side |
 | **Idaho RPC 1.6** | Attorney duty of confidentiality | Selective disclosure + private ledger satisfies this |
-| **Idaho RPC 1.15** | Safekeeping of client property | Documents on client's machine; AutoDiscovery holds only hashes |
+| **Idaho RPC 1.15** | Safekeeping of client property | Documents on client's machine; DiscoveryManagement holds only hashes |
 
 ---
 
@@ -217,19 +217,19 @@ Each judicial district adds local rules on top of IRCP. AutoDiscovery must handl
 - [ ] Both reviewers sign written attestation — stored in `docs/jurisdictions/idaho/`
 
 **UPL & Ethics**
-- [ ] UPL memo from Idaho attorney — confirms AutoDiscovery is a tool, not legal practice
+- [ ] UPL memo from Idaho attorney — confirms DiscoveryManagement is a tool, not legal practice
 - [ ] ISB informal inquiry submitted (Ethics Hotline: (208) 334-4500)
 - [ ] ToS reviewed by Idaho attorney for enforceability
 - [ ] In-app disclaimer language finalized and implemented
 
 **Data & Privacy**
 - [ ] Idaho Code § 28-51-104 breach notification procedure documented
-- [ ] HIPAA handling confirmed: AutoDiscovery stores hashes, not PHI
+- [ ] HIPAA handling confirmed: DiscoveryManagement stores hashes, not PHI
 - [ ] Idaho RPC 1.6 confidentiality analysis documented
 
 **Insurance**
 - [ ] Verify beta user E&O policies are not voided by use of third-party compliance tools
-- [ ] Obtain confirmation from ALPS or ISB that attorney E&O covers AutoDiscovery-assisted work
+- [ ] Obtain confirmation from ALPS or ISB that attorney E&O covers DiscoveryManagement-assisted work
 
 #### 🛠️ Technical Checkpoints
 
@@ -259,7 +259,7 @@ Each judicial district adds local rules on top of IRCP. AutoDiscovery must handl
 
 #### 📣 Go-to-Market Checkpoints
 
-- [ ] `autodiscovery.legal` live with Idaho-specific landing page ("Built for Idaho practitioners")
+- [ ] `DiscoveryManagement` live with Idaho-specific landing page ("Built for Idaho practitioners")
 - [ ] Idaho State Bar *The Advocate* newsletter — submit product announcement
 - [ ] Idaho Association for Justice (IAJ) outreach — request member newsletter placement
 - [ ] Idaho State Bar CLE Committee — propose 1-hour CLE: "Discovery Automation & Compliance"
@@ -302,7 +302,7 @@ Each judicial district adds local rules on top of IRCP. AutoDiscovery must handl
 
 ---
 
-### 🏛️ **Utah Court System — Structure AutoDiscovery Must Support**
+### 🏛️ **Utah Court System — Structure DiscoveryManagement Must Support**
 
 Utah has **8 Judicial Districts** under the Utah Supreme Court:
 
@@ -317,13 +317,13 @@ Utah has **8 Judicial Districts** under the Utah Supreme Court:
 | **7th** | Carbon, Emery, Grand, San Juan | Price | Eastern Utah |
 | **8th** | Duchesne, Uintah, Daggard | Vernal | Uinta Basin |
 
-> **AutoDiscovery v1.0 (Utah) targets:** 3rd District (Salt Lake County) primary, 4th District (Utah County) secondary.
+> **DiscoveryManagement v1.0 (Utah) targets:** 3rd District (Salt Lake County) primary, 4th District (Utah County) secondary.
 
 ---
 
 ### � **URCP Discovery Rules — Divergence Map from IRCP**
 
-Utah Rules of Civil Procedure (URCP) were substantially revised in 2004 and track the federal model closely — but diverge from IRCP in several important areas AutoDiscovery must handle correctly.
+Utah Rules of Civil Procedure (URCP) were substantially revised in 2004 and track the federal model closely — but diverge from IRCP in several important areas DiscoveryManagement must handle correctly.
 
 #### Core Discovery Rules — URCP vs IRCP Comparison
 
@@ -344,13 +344,13 @@ Utah Rules of Civil Procedure (URCP) were substantially revised in 2004 and trac
 
 Utah's most significant divergence from Idaho: **URCP 26(c)(3) establishes a mandatory discovery tier system** based on the amount in controversy:
 
-| Tier | Amount in Controversy | Discovery Limits | AutoDiscovery Implementation |
+| Tier | Amount in Controversy | Discovery Limits | DiscoveryManagement Implementation |
 |------|----------------------|-----------------|------------------------------|
 | **Tier 1** | Under $50,000 | 10 interrogatories, 3 depositions, no experts | Simplified workflow; flag if case type suggests higher value |
 | **Tier 2** | $50,000–$300,000 | 20 interrogatories, 5 depositions | Standard workflow |
 | **Tier 3** | Over $300,000 | 40 interrogatories, no deposition limit | Full workflow |
 
-> ⚠️ AutoDiscovery must prompt for Utah tier designation at case creation and enforce correct limits per tier throughout the workflow.
+> ⚠️ DiscoveryManagement must prompt for Utah tier designation at case creation and enforce correct limits per tier throughout the workflow.
 
 #### ⏰ URCP Deadline Table
 
@@ -374,7 +374,7 @@ Utah's most significant divergence from Idaho: **URCP 26(c)(3) establishes a man
 
 | Authority | Provision | Relevance |
 |-----------|-----------|-----------|
-| **Utah Code § 78A-9-103** | Definition of practice of law | AutoDiscovery must fall outside this definition |
+| **Utah Code § 78A-9-103** | Definition of practice of law | DiscoveryManagement must fall outside this definition |
 | **Utah Code § 78A-9-102** | UPL prohibition | Civil and criminal penalties |
 | **Utah RPC 5.5** | Multi-jurisdictional practice | Out-of-state attorney access |
 | **Utah RPC 1.1** | Competence includes technology | Supports use |
@@ -386,12 +386,12 @@ Utah's most significant divergence from Idaho: **URCP 26(c)(3) establishes a man
 
 ### 🔒 **Utah Data Privacy Requirements**
 
-| Law | Requirement | AutoDiscovery Compliance |
+| Law | Requirement | DiscoveryManagement Compliance |
 |-----|-------------|--------------------------|
-| **Utah Consumer Privacy Act (UCPA)** | Effective Dec 31, 2023 — consumer data rights | AutoDiscovery stores hashes only; no personal data in ledger |
+| **Utah Consumer Privacy Act (UCPA)** | Effective Dec 31, 2023 — consumer data rights | DiscoveryManagement stores hashes only; no personal data in ledger |
 | **Utah Code § 13-44-202** | Data breach notification — 30 days | Midnight architecture satisfies; breach protocol documented |
 | **Utah RPC 1.6** | Confidentiality | Private ledger + selective disclosure satisfies |
-| **HIPAA (Federal)** | Medical records | Client-side handling; AutoDiscovery holds hashes only |
+| **HIPAA (Federal)** | Medical records | Client-side handling; DiscoveryManagement holds hashes only |
 
 ---
 
@@ -467,7 +467,7 @@ Utah's most significant divergence from Idaho: **URCP 26(c)(3) establishes a man
 
 ---
 
-### 🏛️ **Washington Court System — Structure AutoDiscovery Must Support**
+### 🏛️ **Washington Court System — Structure DiscoveryManagement Must Support**
 
 Washington has **Superior Courts in each of its 39 counties**, organized under the Washington Supreme Court. Key markets:
 
@@ -480,7 +480,7 @@ Washington has **Superior Courts in each of its 39 counties**, organized under t
 | **Clark County Superior Court** | Clark | Vancouver | Portland metro spillover |
 | **Thurston County Superior Court** | Thurston | Olympia | State government cases |
 
-> **AutoDiscovery v1.0 (Washington) targets:** King County primary, Pierce and Snohomish secondary.
+> **DiscoveryManagement v1.0 (Washington) targets:** King County primary, Pierce and Snohomish secondary.
 
 ---
 
@@ -542,7 +542,7 @@ King County Superior Court has its own Local Civil Rules (KCLCR) that layer on t
 
 | Authority | Provision | Relevance |
 |-----------|-----------|-----------|
-| **RCW 2.48.180** | UPL prohibition — criminal misdemeanor | AutoDiscovery must not constitute practice of law |
+| **RCW 2.48.180** | UPL prohibition — criminal misdemeanor | DiscoveryManagement must not constitute practice of law |
 | **APR 12** | Limited Practice Officer rules | Defines permitted non-attorney activities |
 | **Washington RPC 5.5** | Multi-jurisdictional practice | Out-of-state attorney access |
 | **Washington RPC 1.1** | Competence includes technology | Supports use |
@@ -556,15 +556,15 @@ King County Superior Court has its own Local Civil Rules (KCLCR) that layer on t
 
 Washington has some of the most aggressive state privacy laws in the US:
 
-| Law | Requirement | AutoDiscovery Compliance |
+| Law | Requirement | DiscoveryManagement Compliance |
 |-----|-------------|--------------------------|
 | **Washington Privacy Act (WPA)** | Comprehensive consumer data rights (effective July 31, 2023) | Hash-only ledger; no personal data stored |
 | **My Health MY Data Act (MHMDA)** | Strict health data protections (effective March 31, 2024) | Medical case data handled client-side only |
 | **RCW 19.255.010** | Data breach notification — 30 days | Midnight architecture satisfies; breach protocol documented |
 | **Washington RPC 1.6** | Attorney confidentiality | ZK selective disclosure satisfies |
-| **HIPAA (Federal)** | Medical records | Client-side; AutoDiscovery holds hashes only |
+| **HIPAA (Federal)** | Medical records | Client-side; DiscoveryManagement holds hashes only |
 
-> ⚠️ **Washington's My Health MY Data Act** is broader than HIPAA and covers health information even when handled by non-covered entities. Confirm medical case data never touches AutoDiscovery's servers.
+> ⚠️ **Washington's My Health MY Data Act** is broader than HIPAA and covers health information even when handled by non-covered entities. Confirm medical case data never touches DiscoveryManagement's servers.
 
 ---
 
@@ -643,7 +643,7 @@ Washington has some of the most aggressive state privacy laws in the US:
 
 ---
 
-### 🏛️ **Nevada Court System — Structure AutoDiscovery Must Support**
+### 🏛️ **Nevada Court System — Structure DiscoveryManagement Must Support**
 
 Nevada has **District Courts in each of its 17 counties** plus Carson City:
 
@@ -655,13 +655,13 @@ Nevada has **District Courts in each of its 17 counties** plus Carson City:
 | **Eighth Judicial District** | Clark | Las Vegas | Covers Clark County |
 | **Second Judicial District** | Washoe | Reno | Covers Washoe County |
 
-> **AutoDiscovery v1.0 (Nevada) targets:** Clark County (Las Vegas) primary, Washoe County (Reno) secondary.
+> **DiscoveryManagement v1.0 (Nevada) targets:** Clark County (Las Vegas) primary, Washoe County (Reno) secondary.
 
 ---
 
 ### 📜 **NRCP Discovery Rules — Divergence Map**
 
-Nevada's 2019 NRCP overhaul mirrors the 2015 federal amendments almost exactly. This is AutoDiscovery's highest-similarity state after Idaho/Utah.
+Nevada's 2019 NRCP overhaul mirrors the 2015 federal amendments almost exactly. This is DiscoveryManagement's highest-similarity state after Idaho/Utah.
 
 #### Core Discovery Rules — NRCP vs IRCP Comparison
 
@@ -697,7 +697,7 @@ Nevada's 2019 NRCP overhaul mirrors the 2015 federal amendments almost exactly. 
 
 | Authority | Provision | Relevance |
 |-----------|-----------|-----------|
-| **NRS 7.285** | UPL prohibition — criminal misdemeanor | AutoDiscovery must fall outside this definition |
+| **NRS 7.285** | UPL prohibition — criminal misdemeanor | DiscoveryManagement must fall outside this definition |
 | **Nevada RPC 5.5** | Multi-jurisdictional practice | Out-of-state attorney access |
 | **Nevada RPC 1.1** | Competence includes technology | Supports use |
 | **State Bar of Nevada Ethics Hotline** | (702) 382-2200 | Submit informal inquiry pre-launch |
@@ -706,12 +706,12 @@ Nevada's 2019 NRCP overhaul mirrors the 2015 federal amendments almost exactly. 
 
 ### 🔒 **Nevada Data Privacy Requirements**
 
-| Law | Requirement | AutoDiscovery Compliance |
+| Law | Requirement | DiscoveryManagement Compliance |
 |-----|-------------|--------------------------|
 | **Nevada Privacy Law (SB 220/SB 260)** | Consumer data sale opt-out; eff. Oct 2019, expanded 2021 | Hash-only ledger; no consumer data sold or stored |
 | **NRS 603A.215** | Data breach notification — 30 days | Midnight architecture satisfies; breach protocol documented |
 | **Nevada RPC 1.6** | Confidentiality | ZK selective disclosure satisfies |
-| **HIPAA (Federal)** | Medical records | Client-side; AutoDiscovery holds hashes only |
+| **HIPAA (Federal)** | Medical records | Client-side; DiscoveryManagement holds hashes only |
 
 ---
 
@@ -777,7 +777,7 @@ Wyoming has **District Courts in each of its 23 counties**, organized into 9 Jud
 | **2nd District** | Albany | Laramie | University town |
 | **7th District** | Natrona | Casper | 2nd largest market |
 
-> **AutoDiscovery v1.0 (Wyoming) targets:** 1st District (Laramie County / Cheyenne) primary.
+> **DiscoveryManagement v1.0 (Wyoming) targets:** 1st District (Laramie County / Cheyenne) primary.
 
 ---
 
@@ -867,7 +867,7 @@ Montana has **District Courts in each of its 56 counties**, organized into 22 Ju
 | **4th District** | Missoula | Missoula | University town — active civil docket |
 | **8th District** | Cascade | Great Falls | Northern Montana hub |
 
-> **AutoDiscovery v1.0 (Montana) targets:** 13th District (Yellowstone/Billings) primary, 1st District (Helena) secondary.
+> **DiscoveryManagement v1.0 (Montana) targets:** 13th District (Yellowstone/Billings) primary, 1st District (Helena) secondary.
 
 ---
 
@@ -945,13 +945,13 @@ Montana Rules of Civil Procedure (M.R.Civ.P.) track FRCP closely:
 ### 🎯 **Why California Seventh**
 - Largest legal market in the US (~150,000 licensed attorneys; ~1 in 4 US lawyers)
 - CCP (California Code of Civil Procedure) is the most complex US civil discovery system
-- Successfully launching in CA validates AutoDiscovery for every remaining major market
+- Successfully launching in CA validates DiscoveryManagement for every remaining major market
 - CCPA/CPRA compliance here proves the platform's privacy architecture to enterprise buyers
 - CA launch generates national press and enterprise pipeline for NY, TX, FL
 
 ---
 
-### 🏛️ **California Court System — Structure AutoDiscovery Must Support**
+### 🏛️ **California Court System — Structure DiscoveryManagement Must Support**
 
 California has **58 Superior Courts** (one per county) plus Courts of Appeal (6 Districts) and the California Supreme Court. Primary targets:
 
@@ -965,13 +965,13 @@ California has **58 Superior Courts** (one per county) plus Courts of Appeal (6 
 | **Alameda County Superior Court** | Alameda | Oakland | Bay Area overflow |
 | **Santa Clara Superior Court** | Santa Clara | San Jose | Silicon Valley IP + employment |
 
-> **AutoDiscovery v1.0 (California) targets:** LA Superior primary, SF and San Diego secondary. Santa Clara for tech sector enterprise.
+> **DiscoveryManagement v1.0 (California) targets:** LA Superior primary, SF and San Diego secondary. Santa Clara for tech sector enterprise.
 
 ---
 
 ### 📜 **California CCP Discovery Rules — Divergence Map**
 
-California's discovery system (CCP §§ 2016.010–2036.050) is structurally different from the IRCP/URCP/CR federal model — it uses its own statutory framework, not numbered civil rules. AutoDiscovery must map CCP sections, not rule numbers.
+California's discovery system (CCP §§ 2016.010–2036.050) is structurally different from the IRCP/URCP/CR federal model — it uses its own statutory framework, not numbered civil rules. DiscoveryManagement must map CCP sections, not rule numbers.
 
 #### Core Discovery — CCP vs IRCP Comparison
 
@@ -1013,9 +1013,9 @@ California's discovery system (CCP §§ 2016.010–2036.050) is structurally dif
 
 ### 📋 **California Judicial Council Forms — Key Differentiator**
 
-California mandates Judicial Council forms for many discovery functions. AutoDiscovery auto-populating these is a major competitive differentiator:
+California mandates Judicial Council forms for many discovery functions. DiscoveryManagement auto-populating these is a major competitive differentiator:
 
-| Form | Purpose | AutoDiscovery Implementation |
+| Form | Purpose | DiscoveryManagement Implementation |
 |------|---------|------------------------------|
 | **DISC-001** | Form Interrogatories — General | Auto-populate and serve |
 | **DISC-002** | Form Interrogatories — Limited Civil | Tier-aware auto-selection |
@@ -1030,12 +1030,12 @@ California mandates Judicial Council forms for many discovery functions. AutoDis
 
 ### 🔒 **California Privacy Laws — Most Complex in the US**
 
-| Law | Requirement | AutoDiscovery Compliance |
+| Law | Requirement | DiscoveryManagement Compliance |
 |-----|-------------|--------------------------|
 | **CCPA (Civil Code § 1798.100)** | Consumer data access and deletion rights | Hash-only ledger; no consumer personal data stored |
-| **CPRA (Prop 24, eff. Jan 1 2023)** | Expanded CCPA + sensitive personal information category | Confirmed: AutoDiscovery stores no SPI |
+| **CPRA (Prop 24, eff. Jan 1 2023)** | Expanded CCPA + sensitive personal information category | Confirmed: DiscoveryManagement stores no SPI |
 | **California Privacy Rights Act** | Right to correct, limit use of SPI | N/A — no SPI stored |
-| **Health & Safety Code § 123110** | Patient medical records access (30 days) | Client-side; AutoDiscovery holds hashes only |
+| **Health & Safety Code § 123110** | Patient medical records access (30 days) | Client-side; DiscoveryManagement holds hashes only |
 | **Civil Code § 1798.82** | Data breach notification — 72 hours (most aggressive in US) | Midnight architecture + incident response plan documented |
 | **California RPC 1.6** | Attorney confidentiality | ZK selective disclosure satisfies |
 | **HIPAA + CMIA** | Medical records + California Medical Information Act | Client-side handling; dual compliance confirmed |
@@ -1048,7 +1048,7 @@ California mandates Judicial Council forms for many discovery functions. AutoDis
 
 | Authority | Provision | Relevance |
 |-----------|-----------|-----------|
-| **Business & Professions Code § 6125** | Only licensed CA attorneys may practice law | AutoDiscovery must not constitute practice of law |
+| **Business & Professions Code § 6125** | Only licensed CA attorneys may practice law | DiscoveryManagement must not constitute practice of law |
 | **Business & Professions Code § 6126** | UPL — criminal felony (not just misdemeanor) | ⚠️ Higher stakes than Idaho/Utah/WA |
 | **California RPC 5.5** | Multi-jurisdictional practice | Out-of-state attorney access |
 | **California RPC 1.1** | Competence includes technology | Supports use |
@@ -1135,14 +1135,14 @@ California mandates Judicial Council forms for many discovery functions. AutoDis
 ### 🎯 **Why New York Eighth**
 - **38,000+ cases dismissed in NYC in 2024** — largest single-market discovery failure in the US
 - NYC conviction rate dropped from 50% to 25% linked to discovery failures — national press magnet
-- CPLR is the most cited jurisdiction in AutoDiscovery's pitch materials
+- CPLR is the most cited jurisdiction in DiscoveryManagement's pitch materials
 - Highest average sanction values in the US
 - ~180,000 licensed New York attorneys — 2nd largest legal market after California
 - NYC enterprise success enables national Big Law and corporate legal department sales
 
 ---
 
-### 🏛️ **New York Court System — Structure AutoDiscovery Must Support**
+### 🏛️ **New York Court System — Structure DiscoveryManagement Must Support**
 
 New York's court system is uniquely complex — multiple trial court types with overlapping jurisdiction:
 
@@ -1165,7 +1165,7 @@ New York's court system is uniquely complex — multiple trial court types with 
 | **3rd Dept** | Rest of upstate NY (excl. 4th Dept) | Albany, Capital Region |
 | **4th Dept** | Western NY | Buffalo, Rochester, Syracuse |
 
-> **AutoDiscovery v1.0 (New York) targets:** Supreme Court NYC (1st and 2nd Dept) primary; upstate Supreme Courts secondary.
+> **DiscoveryManagement v1.0 (New York) targets:** Supreme Court NYC (1st and 2nd Dept) primary; upstate Supreme Courts secondary.
 
 ---
 
@@ -1189,7 +1189,7 @@ New York's Civil Practice Law and Rules (CPLR) Article 31 governs discovery. It 
 | **Preliminary Conference** | Uniform Rules § 202.12 — required in Supreme Court | IRCP 16 | ⚠️ Mandatory preliminary conference — generates all downstream deadlines |
 | **Compliance Conference** | Uniform Rules § 202.19 | N/A | ⚠️ NY-specific status conference mid-discovery |
 
-> ⚠️ **Critical: New York's response deadlines are 20 days** for interrogatories, document demands, and notices to admit — the shortest of any state AutoDiscovery supports. Every deadline fork must reflect this.
+> ⚠️ **Critical: New York's response deadlines are 20 days** for interrogatories, document demands, and notices to admit — the shortest of any state DiscoveryManagement supports. Every deadline fork must reflect this.
 
 #### ⏰ New York CPLR Deadline Table
 
@@ -1211,10 +1211,10 @@ New York's Civil Practice Law and Rules (CPLR) Article 31 governs discovery. It 
 
 NYSCEF (New York State Courts Electronic Filing) is mandatory in most NYC Supreme Court matters and affects deadline calculations:
 
-| NYSCEF Rule | Impact | AutoDiscovery Implementation |
+| NYSCEF Rule | Impact | DiscoveryManagement Implementation |
 |-------------|--------|------------------------------|
 | **E-filed documents served via NYSCEF** | Service timestamp = NYSCEF filing time | Deadline calculations must use NYSCEF timestamp, not postal service |
-| **After-hours NYSCEF filing** | Filed after 11:59 PM = filed next business day | AutoDiscovery must calculate from next business day |
+| **After-hours NYSCEF filing** | Filed after 11:59 PM = filed next business day | DiscoveryManagement must calculate from next business day |
 | **System unavailability** | NYSCEF outage = extended deadline | Alert users when NYSCEF status uncertain |
 | **Mandatory e-filing counties** | NYC (NY, Kings, Queens, Bronx, Richmond), Albany, Westchester, Erie, and growing | Flag mandatory e-filing at case creation |
 | **Optional e-filing counties** | Remaining counties — parties opt in | Track e-filing consent status |
@@ -1239,7 +1239,7 @@ For high-value commercial cases (Commercial Division of Supreme Court), addition
 
 | Authority | Provision | Relevance |
 |-----------|-----------|-----------|
-| **Judiciary Law § 478** | UPL prohibition — criminal misdemeanor | AutoDiscovery must not constitute practice of law |
+| **Judiciary Law § 478** | UPL prohibition — criminal misdemeanor | DiscoveryManagement must not constitute practice of law |
 | **Judiciary Law § 476-a** | Attorney General may seek injunction against UPL | AG enforcement risk |
 | **NY RPC 5.5** | Multi-jurisdictional practice | Out-of-state attorney access |
 | **NY RPC 1.1** | Competence includes technology | Supports use |
@@ -1249,13 +1249,13 @@ For high-value commercial cases (Commercial Division of Supreme Court), addition
 
 ### 🔒 **New York Privacy & Data Security**
 
-| Law | Requirement | AutoDiscovery Compliance |
+| Law | Requirement | DiscoveryManagement Compliance |
 |-----|-------------|--------------------------|
 | **NY SHIELD Act (Gen. Bus. Law § 899-bb)** | Expanded data breach notification; reasonable security required | Midnight ZK architecture satisfies reasonable security standard |
 | **NY SHIELD Act — Notification** | Data breach notification — most expedient time (no fixed window) | Incident response plan documented |
 | **NYCPA (proposed 2024)** | NYC Consumer Privacy Act — pending | Monitor; may require updates if enacted |
 | **NY RPC 1.6** | Attorney confidentiality | ZK selective disclosure satisfies |
-| **HIPAA (Federal)** | Medical records | Client-side; AutoDiscovery holds hashes only |
+| **HIPAA (Federal)** | Medical records | Client-side; DiscoveryManagement holds hashes only |
 
 ---
 
@@ -1433,7 +1433,7 @@ Largest state by civil litigation volume outside CA/NY. Complex local rules dema
 
 ### ☀️ **Florida (Q4 2027)**
 
-High malpractice litigation volume — strong AutoDiscovery value proposition.
+High malpractice litigation volume — strong DiscoveryManagement value proposition.
 
 | Item | Detail |
 |------|--------|
@@ -1533,7 +1533,7 @@ By Phase 10 the 45-day state launch template is fully optimized. The Jurisdictio
 
 **Prioritization criteria for remaining states:**
 1. **Litigation volume** — civil cases filed per year (public NCSC court statistics)
-2. **Average case value** — higher value = more sanction risk = more AutoDiscovery value
+2. **Average case value** — higher value = more sanction risk = more DiscoveryManagement value
 3. **Bar association receptivity** — states with active legal tech committees move faster
 4. **Rule complexity** — simpler rules (close to FRCP model) are batched together
 5. **Geographic clustering** — states in same region share bar association relationships
@@ -1604,7 +1604,7 @@ By Phase 10 the 45-day state launch template is fully optimized. The Jurisdictio
 
 **Batch C Checklist:**
 - [ ] Pennsylvania Philadelphia 20-day response deadline implemented
-- [ ] Connecticut Practice Book rule numbering mapped to AutoDiscovery workflow
+- [ ] Connecticut Practice Book rule numbering mapped to DiscoveryManagement workflow
 - [ ] NJ mandatory case management conference workflow
 - [ ] MA audit — FRCP-adjacent, fast track
 - [ ] 4 state UPL memos + bar ethics inquiries
@@ -1657,7 +1657,7 @@ By Phase 10 the 45-day state launch template is fully optimized. The Jurisdictio
 
 ### ⚖️ **Federal (FRCP) — All Federal District Courts (Q4 2028)**
 
-Adding FRCP support unlocks every federal case filed by AutoDiscovery users — the largest single rule pack addition.
+Adding FRCP support unlocks every federal case filed by DiscoveryManagement users — the largest single rule pack addition.
 
 | Item | Detail |
 |------|--------|
@@ -1670,7 +1670,7 @@ Adding FRCP support unlocks every federal case filed by AutoDiscovery users — 
 
 **Key FRCP Discovery Rules (already form the basis of IRCP/URCP):**
 
-| Rule | Title | AutoDiscovery Impact |
+| Rule | Title | DiscoveryManagement Impact |
 |------|-------|---------------------|
 | **FRCP 16** | Scheduling | Foundation already built in Idaho |
 | **FRCP 26(a)(1)** | Initial Disclosures — 14 days | Same as IRCP — minimal delta |
@@ -1716,7 +1716,7 @@ Each state follows this standardized 8-week launch sprint:
 ```
 Week 1-2:  Rule Audit
            ├── Pull current state civil procedure rules
-           ├── Map all rules to AutoDiscovery 9-step protocol
+           ├── Map all rules to DiscoveryManagement 9-step protocol
            ├── Document divergence from prior states
            └── Identify local county/district rule layers
 

@@ -32,7 +32,7 @@
 
 ---
 
-## Role — AutoDiscovery.legal
+## Role — DiscoveryManagement
 
 <div align="center">
 
@@ -49,11 +49,11 @@
 ### Full-Stack Development
 
 TypeScript, React, Next.js, Vite, Express, Docker, CI/CD.
-Builds both frontend and backend — two complete frontend apps (demoLand + realDeal) for AutoDiscovery alone.
+Builds both frontend and backend — two complete frontend apps (demoLand + realDeal) for DiscoveryManagement alone.
 
 ### Smart Contract Architecture
 
-Designs and implements smart contracts in **Compact** on the Midnight Network. Authored all **6 core AutoDiscovery contracts**: `discovery-core`, `jurisdiction-registry`, `compliance-proof`, `document-registry`, `access-control`, and `expert-witness`. All compiling. **20+ exported ZK circuits.**
+Designs and implements smart contracts in **Compact** on the Midnight Network. Authored all **6 core DiscoveryManagement contracts**: `discovery-core`, `jurisdiction-registry`, `compliance-proof`, `document-registry`, `access-control`, and `expert-witness`. All compiling. **20+ exported ZK circuits.**
 
 ### Zero-Knowledge Protocol Design
 
@@ -69,7 +69,7 @@ Architect of the **"build once, comply everywhere"** jurisdiction-aware discover
 
 ### MidnightVitals
 
-Real-time diagnostic console for Midnight DApps. Monitors wallet health, proof server status, contract state, and network connectivity with interaction logging. Iterated from **v0.1.0 → v0.3.8 in a single day.** Integrated into AutoDiscovery and designed as a standalone product with open-source, Pro, and Enterprise tiers.
+Real-time diagnostic console for Midnight DApps. Monitors wallet health, proof server status, contract state, and network connectivity with interaction logging. Iterated from **v0.1.0 → v0.3.8 in a single day.** Integrated into DiscoveryManagement and designed as a standalone product with open-source, Pro, and Enterprise tiers.
 
 ### Midnight NightForce Team
 
@@ -91,7 +91,7 @@ Midnight Build Club — completed customer analysis, pitch deck, video script, a
 
 | Product | Description |
 |---------|-------------|
-| **AutoDiscovery.legal** | Legal discovery compliance |
+| **DiscoveryManagement** | Legal discovery compliance |
 | **DIDz-io** | Decentralized identity engine |
 | **KYCz** | Privacy-preserving KYC |
 | **GeoZ** | Geolocation oracle |
@@ -127,7 +127,7 @@ Built GitHub Actions workflows for automated Compact contract compilation, artif
 
 <div align="center">
 
-*AutoDiscovery.legal alone*
+*DiscoveryManagement alone*
 
 | | |
 |---|---|

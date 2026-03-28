@@ -1,4 +1,4 @@
-# AutoDiscovery.legal — Documentation Index
+# DiscoveryManagement — Documentation Index
 
 **Last Updated**: February 25, 2026
 
@@ -18,7 +18,7 @@ docs/
 │   ├── PITCH_FODDER.md           ← Raw material and talking points
 │   ├── PITCH_DECK_NOTION.md      ← Notion-formatted version
 │   ├── BUILD_CLUB_SLIDE_CONTENT.md
-│   ├── VC_PORTFOLIO_INSIGHTS_FOR_ADL.md
+│   ├── VC_PORTFOLIO_INSIGHTS_FOR_DM.md
 │   ├── WEEK_3_HOMEWORK.md
 │   └── INVESTOR_VC_ROADMAP.md        ← Investor & VC roadmap (market, financials, exit)
 │
@@ -62,7 +62,7 @@ docs/
 
 ## Quick Links
 
-- **Serve the deck locally**: `python3 -m http.server 8080` (from the ADL repo root)
+- **Serve the deck locally**: `python3 -m http.server 8080` (from the DM repo root)
 - **Regenerate PDF**: `node docs/generate-pdf.mjs` (needs server running on 8080)
 - **Deployment guide**: See `/home/js/utils_Midnight/preProd-Wallets/README_WALLET_SETUP.md`
 - **RealDeal punch list**: See `frontend-realdeal/REALDEAL_PUNCH_LIST.md`

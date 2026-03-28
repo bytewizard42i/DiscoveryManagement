@@ -28,7 +28,7 @@ MidnightVitals is a real-time diagnostic and monitoring console for decentralize
 - **SDK**: midnight-js (TypeScript)
 - **Target market**: Privacy-preserving enterprise applications
 
-### Developer Pain Points (Validated Through Building AutoDiscovery.legal)
+### Developer Pain Points (Validated Through Building DiscoveryManagement)
 
 1. **"Is my proof server running?"** — The #1 question when something fails. No easy way to check.
 2. **"Which component broke?"** — Was it the network, the contract, the wallet, or the proof server?
@@ -103,7 +103,7 @@ Full-stack observability for production Midnight deployments:
 
 ### Phase 1: Build Credibility (Now — Q2 2026)
 
-1. Build MidnightVitals as part of AutoDiscovery.legal
+1. Build MidnightVitals as part of DiscoveryManagement
 2. Battle-test it against real contract deployment and interaction
 3. Open-source the core module on GitHub
 4. Write a blog post / dev diary about building it
@@ -146,7 +146,7 @@ These are speculative and depend heavily on Midnight ecosystem growth:
 ### Bootstrap Phase (Current)
 
 - No external funding needed
-- Built as a module within AutoDiscovery.legal
+- Built as a module within DiscoveryManagement
 - Development cost = John's time + AI assistance
 
 ### Seed Round Triggers
@@ -169,7 +169,7 @@ Consider raising if:
 2. **First-mover advantage** — No competing diagnostic tools exist
 3. **Open-source flywheel** — Free tier drives adoption, Pro tier monetizes
 4. **Regulatory tailwind** — Midnight targets privacy-preserving enterprise use cases (legal, healthcare, finance) — exactly the industries that need robust monitoring
-5. **Bundled with AutoDiscovery.legal** — Proven need, validated through real product development
+5. **Bundled with DiscoveryManagement** — Proven need, validated through real product development
 
 ---
 

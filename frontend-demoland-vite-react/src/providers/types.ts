@@ -1,5 +1,5 @@
 // =============================================================================
-// AutoDiscovery Provider Interfaces
+// DiscoveryManagement Provider Interfaces
 // =============================================================================
 // These interfaces are the CONTRACT between the UI and the backend.
 // demoLand implements them with mock data.

@@ -1,6 +1,6 @@
 # Local Development & Testing Guide
 
-This guide explains how to run the AutoDiscovery application and its test suite against a fully local **midnight-local-dev** Docker stack, without requiring access to any public testnet.
+This guide explains how to run the DiscoveryManagement application and its test suite against a fully local **midnight-local-dev** Docker stack, without requiring access to any public testnet.
 
 ---
 
@@ -30,7 +30,7 @@ npm run dev:local
 ```
 
 This command:
-1. Starts the three Docker services defined in `autodiscovery-cli/standalone.yml` (proof-server, indexer, node).
+1. Starts the three Docker services defined in `discovery-cli/standalone.yml` (proof-server, indexer, node).
 2. Polls each service health endpoint until all are ready (default timeout: 120 s).
 
 ### 3. Run the full local test suite (and tear down afterwards)
@@ -41,7 +41,7 @@ npm run test:local:teardown
 
 This is the single command recommended for CI dry-runs. It:
 1. Brings the stack up (`dev:local`)
-2. Runs `autodiscovery-cli`'s undeployed test suite
+2. Runs `discovery-cli`'s undeployed test suite
 3. Tears the stack down regardless of test outcome
 
 ---
@@ -64,7 +64,7 @@ This is the single command recommended for CI dry-runs. It:
 │  └──────────────────────────────────────────────────────────────┘  │
 │                                                                     │
 │  ┌──────────────────┐   ┌────────────────────────────────────────┐ │
-│  │  autodiscovery-  │   │  frontend-demoland-vite-react /         │ │
+│  │  discovery-      │   │  frontend-demoland-vite-react /         │ │
 │  │  cli (tests)     │   │  frontend-realdeal (npm run dev)        │ │
 │  └──────────────────┘   └────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────────────────┘
@@ -133,7 +133,7 @@ If ports 6300, 8088, or 9944 are occupied by another process:
 lsof -ti:PORT | xargs kill -9
 ```
 
-Or change the host-side port mapping in `autodiscovery-cli/standalone.yml` and update the corresponding variables in your `.env.local`.
+Or change the host-side port mapping in `discovery-cli/standalone.yml` and update the corresponding variables in your `.env.local`.
 
 ### Stack takes too long to become healthy
 
@@ -149,7 +149,7 @@ The proof server is memory-intensive. Ensure Docker has at least **8 GB** of RAM
 
 ### Proof server timeout during tests
 
-Increase the proof server timeout in `autodiscovery-cli/vitest.config.ts` (it defaults to 45 minutes, which is usually sufficient).  
+Increase the proof server timeout in `discovery-cli/vitest.config.ts` (it defaults to 45 minutes, which is usually sufficient).  
 Also make sure the proof server container started successfully:
 
 ```bash

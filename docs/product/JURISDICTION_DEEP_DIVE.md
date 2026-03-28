@@ -1,7 +1,7 @@
-# AutoDiscovery — Jurisdiction Deep Dive & Automation Metrics
+# DiscoveryManagement — Jurisdiction Deep Dive & Automation Metrics
 
 > **Research Document for Build Club**  
-> **Project:** AutoDiscovery.legal  
+> **Project:** DiscoveryManagement  
 > **Purpose:** Define jurisdiction-specific rules, interstate conflicts, and 20 automatable metrics
 
 ---
@@ -222,7 +222,7 @@ This document provides a deep dive into discovery rules across our target jurisd
 **Federal Rule of Evidence 501:**
 > "In a civil case, state law governs privilege regarding a claim or defense for which state law supplies the rule of decision."
 
-**Implication:** AutoDiscovery must track which state's privilege law applies, not just discovery rules.
+**Implication:** DiscoveryManagement must track which state's privilege law applies, not just discovery rules.
 
 ---
 
@@ -283,7 +283,7 @@ These metrics can be tracked, automated, and proven via ZK proofs on Midnight:
 
 Based on forensic research (Blockchain-Based Chain of Custody for Evidence Management):
 
-| Requirement | Definition | AutoDiscovery Implementation |
+| Requirement | Definition | DiscoveryManagement Implementation |
 |-------------|------------|------------------------------|
 | **Integrity** | Evidence not altered during transfer | Hash verification at each handoff; ZK proof of unchanged state |
 | **Traceability** | Evidence traced from collection to destruction | Immutable timeline on Midnight ledger |
@@ -314,7 +314,7 @@ Each event becomes an immutable record with timestamp, actor, and ZK proof:
 
 ### 4.3 ZK Proof Assertions
 
-AutoDiscovery can generate ZK proofs asserting:
+DiscoveryManagement can generate ZK proofs asserting:
 
 - ✅ "This document was in continuous custody since [date]"
 - ✅ "This document has not been modified since [hash at time T]"
@@ -356,7 +356,7 @@ AutoDiscovery can generate ZK proofs asserting:
 ### 5.3 📜 Immutable Legal Hold Acknowledgment
 
 **Concept:** When litigation hold is issued:
-1. Custodian receives hold notice via AutoDiscovery
+1. Custodian receives hold notice via DiscoveryManagement
 2. Custodian signs acknowledgment with wallet
 3. Acknowledgment is ZK-proven and timestamped
 4. Immutable record proves custodian was notified
@@ -464,7 +464,7 @@ AutoDiscovery can generate ZK proofs asserting:
 
 ### 6.1 Disclosure Requirement Conflicts
 
-| State A | State B | Conflict | AutoDiscovery Resolution |
+| State A | State B | Conflict | DiscoveryManagement Resolution |
 |---------|---------|----------|--------------------------|
 | CA | UT | CA mandatory disclosures broader than UT tiered limits | Alert: "CA disclosure requirements exceed UT tier limits. Recommend full CA compliance." |
 | NY | ID | NY Commercial Division interrogatory limit (25) vs. ID general | Track both; apply stricter limit |
@@ -483,7 +483,7 @@ AutoDiscovery can generate ZK proofs asserting:
 
 ## Summary
 
-AutoDiscovery addresses a **fragmented, high-stakes compliance landscape** where:
+DiscoveryManagement addresses a **fragmented, high-stakes compliance landscape** where:
 
 1. **Each jurisdiction has different rules** — 6 rule sets in Phase 1 alone
 2. **Interstate cases compound complexity** — UIDDA helps but conflicts remain
@@ -491,9 +491,9 @@ AutoDiscovery addresses a **fragmented, high-stakes compliance landscape** where
 4. **Blockchain solves provenance** — Immutable proof of proper handling
 5. **Innovation opportunities abound** — Predictive risk, conflict detection, smart agreements
 
-**The opportunity:** No existing tool provides jurisdiction-aware automation with immutable compliance proofs. AutoDiscovery + Midnight fills this gap.
+**The opportunity:** No existing tool provides jurisdiction-aware automation with immutable compliance proofs. DiscoveryManagement + Midnight fills this gap.
 
 ---
 
 *Prepared for Midnight Build Club — Week 1 Deep Dive*  
-*AutoDiscovery.legal — Privacy meets compliance.*
+*DiscoveryManagement — Privacy meets compliance.*

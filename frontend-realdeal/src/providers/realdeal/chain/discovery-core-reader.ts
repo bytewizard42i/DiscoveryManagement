@@ -141,7 +141,7 @@ export async function isContractReachable(): Promise<boolean> {
  * Placeholder for parsing raw state into typed ledger objects.
  *
  * Once the contract package is linked as a dependency, this will use:
- *   import { ledger } from '@autodiscovery/contract';
+ *   import { ledger } from '@discoverymanagement/contract';
  *   const parsedLedger = ledger(rawStateBytes);
  *   parsedLedger.caseStatusByCaseIdentifier.lookup(caseId);
  *

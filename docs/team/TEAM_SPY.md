@@ -36,4 +36,4 @@ Experienced as a complex litigation paralegal and researcher; accented with nume
 
 ---
 
-*AutoDiscovery Team Member*
+*DiscoveryManagement Team Member*

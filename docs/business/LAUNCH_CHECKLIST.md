@@ -1,6 +1,6 @@
 # Launch Checklist — Build Club Program Completion (Demo Day)
 
-**Repo:** bytewizard42i/autoDiscovery_legal  
+**Repo:** bytewizard42i/DiscoveryManagement  
 **Objective:** Successful completion of the Build Club program by fulfilling participation requirements and delivering a Demo Day presentation.
 
 > Definition of “Launch” for this checklist: **Program Completion**. Completion means the participant fulfills participation requirements and presents at Demo Day.
@@ -44,7 +44,7 @@
 ---
 
 ## 3) Smart Contract Readiness (Midnight)
-- [ ] All 6 contracts are compiled (managed outputs present in `autodiscovery-contract/src/managed/`).
+- [ ] All 6 contracts are compiled (managed outputs present in `discovery-contract/src/managed/`).
 - [ ] Proof server is runnable for demo (`midnightntwrk/proof-server:7.0.0`).
 - [ ] Contracts are deployed to **Preprod** and addresses are recorded.
 - [ ] Minimal end-to-end contract calls verified for the demo scenario:
@@ -57,8 +57,8 @@
 
 ## 4) DevOps / Deployment Readiness
 - [ ] Decide hosting targets:
-  - [ ] demo site URL (e.g., `demo.autodiscovery.legal`)
-  - [ ] app URL (e.g., `app.autodiscovery.legal`) if realDeal demo is used
+  - [ ] demo site URL (e.g., `demo.DiscoveryManagement`)
+  - [ ] app URL (e.g., `app.DiscoveryManagement`) if realDeal demo is used
 - [ ] Deploy demoLand to Vercel/Netlify and verify on a clean browser.
 - [ ] If using realDeal: verify wallet extension works on the demo machine/profile.
 - [ ] Create a “Demo Day runbook” (setup steps + common failure fixes).
@@ -79,7 +79,7 @@
 - [ ] Slide deck:
   - [ ] Problem → Solution → Why now → Why Midnight/ZK → Demo → Roadmap
 - [ ] Short 30–90s backup demo video recorded.
-- [ ] One-pager link ready (can be `Why ADL?.md` rendered).
+- [ ] One-pager link ready (can be `Why DM?.md` rendered).
 
 ---
 

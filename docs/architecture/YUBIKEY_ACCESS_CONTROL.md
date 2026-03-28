@@ -27,15 +27,15 @@ Give users a **choice** in how they authenticate and sign transactions:
 │                                                               │
 │  1. YubiKey generates key pair internally                    │
 │     ├── Private key: NEVER leaves the YubiKey hardware       │
-│     ├── Public key: exported to AutoDiscovery                │
+│     ├── Public key: exported to DiscoveryManagement                │
 │     └── Key type: ECDSA P-256 (YubiKey native)              │
 │                                                               │
 │  2. Transaction signing flow:                                │
-│     ├── AutoDiscovery prepares transaction                   │
+│     ├── DiscoveryManagement prepares transaction                   │
 │     ├── Transaction hash sent to YubiKey                     │
 │     ├── User touches YubiKey (physical confirmation)         │
 │     ├── YubiKey signs the hash internally                    │
-│     ├── Signed transaction returned to AutoDiscovery         │
+│     ├── Signed transaction returned to DiscoveryManagement         │
 │     └── Submitted to Midnight network                        │
 │                                                               │
 │  SECURITY:                                                    │
@@ -62,7 +62,7 @@ Give users a **choice** in how they authenticate and sign transactions:
 │     └── PIN required to unlock key for signing               │
 │                                                               │
 │  3. Transaction signing flow:                                │
-│     ├── AutoDiscovery prepares transaction                   │
+│     ├── DiscoveryManagement prepares transaction                   │
 │     ├── PKCS#11 API sends sign request to YubiKey            │
 │     ├── User enters PIN + touches YubiKey                    │
 │     ├── YubiKey signs with the stored Ed25519 key            │
@@ -93,7 +93,7 @@ Give users a **choice** in how they authenticate and sign transactions:
 │  Sensitive operations (produce docs, sign attestations,      │
 │  share with opposing counsel, file compliance proofs):       │
 │     ├── Wallet signs the transaction                         │
-│     ├── AutoDiscovery requests FIDO2/WebAuthn challenge      │
+│     ├── DiscoveryManagement requests FIDO2/WebAuthn challenge      │
 │     ├── User touches YubiKey                                 │
 │     ├── FIDO2 signature appended to transaction metadata     │
 │     └── Both factors verified before submission              │
@@ -130,7 +130,7 @@ Give users a **choice** in how they authenticate and sign transactions:
 ```
 KEY REGISTRATION FLOW:
 
-1. User sets up AutoDiscovery account
+1. User sets up DiscoveryManagement account
    ├── Creates or connects Lace wallet (Midnight key pair)
    ├── Public key registered in access-control.compact
    └── Role assigned (DEF attorney, PRO attorney, Judge, etc.)
@@ -146,7 +146,7 @@ KEY REGISTRATION FLOW:
    ├── Step 1: Wallet signs transaction (Midnight signature)
    ├── Step 2: WebAuthn challenge sent to YubiKey
    ├── Step 3: User touches YubiKey
-   ├── Step 4: FIDO2 assertion verified by AutoDiscovery app
+   ├── Step 4: FIDO2 assertion verified by DiscoveryManagement app
    ├── Step 5: Transaction submitted with both factors
    └── On-chain: only the wallet signature matters to Midnight
        (FIDO2 is application-level, not protocol-level)
@@ -154,7 +154,7 @@ KEY REGISTRATION FLOW:
 
 ### Important: FIDO2 is Application-Level, Not Protocol-Level
 
-Midnight's consensus only cares about the wallet signature. The YubiKey/FIDO2 factor is enforced by the **AutoDiscovery application layer**, not by the smart contracts. This means:
+Midnight's consensus only cares about the wallet signature. The YubiKey/FIDO2 factor is enforced by the **DiscoveryManagement application layer**, not by the smart contracts. This means:
 
 - The smart contracts don't know about YubiKeys
 - The application refuses to submit transactions without the second factor
@@ -190,7 +190,7 @@ For most users (attorneys, paralegals), Option C is sufficient because the threa
 OPTION C (2FA) RECOVERY:
 ├── Wallet key still works (it's in Lace, not on the YubiKey)
 ├── User can add a new FIDO2 credential from a replacement YubiKey
-├── Old credential is revoked in AutoDiscovery
+├── Old credential is revoked in DiscoveryManagement
 └── No on-chain state is lost
 
 OPTION B (IMPORTED KEY) RECOVERY:

@@ -1,14 +1,14 @@
-# autoDiscovery.legal — White Paper
+# DiscoveryManagement — White Paper
 
 **Version:** 1.0 Draft  
 **Date:** February 20, 2026  
 **Authors:** Spy · John ([@bytewizard42i](https://github.com/bytewizard42i))  
-**Repository:** [bytewizard42i/autoDiscovery_legal](https://github.com/bytewizard42i/autoDiscovery_legal)  
-**License:** Proprietary — Copyright 2026 AutoDiscovery Team. All rights reserved.
+**Repository:** [bytewizard42i/DiscoveryManagement](https://github.com/bytewizard42i/DiscoveryManagement)  
+**License:** Proprietary — Copyright 2026 DiscoveryManagement Team. All rights reserved.
 
 ---
 
-> *"AutoDiscovery doesn't just help you manage discovery — it mathematically proves you did it right."*
+> *"DiscoveryManagement doesn't just help you manage discovery — it mathematically proves you did it right."*
 
 ---
 
@@ -17,7 +17,7 @@
 1. [Abstract](#1-abstract)
 2. [Introduction & Problem Statement](#2-introduction--problem-statement)
 3. [Market Analysis](#3-market-analysis)
-4. [The autoDiscovery.legal Solution](#4-the-autodiscoverylegal-solution)
+4. [The DiscoveryManagement Solution](#4-the-autodiscoverylegal-solution)
 5. [System Architecture](#5-system-architecture)
 6. [The 9-Step Discovery Protocol](#6-the-9-step-discovery-protocol)
 7. [GeoOracle Auto Compliance — The Jurisdiction Engine](#7-geooracle-auto-compliance--the-jurisdiction-engine)
@@ -39,14 +39,14 @@
 
 Legal discovery — the pre-trial process by which parties exchange evidence — is one of the most failure-prone, expensive, and jurisdiction-specific processes in the American legal system. Non-compliance results in sanctions reaching $8.5 million in a single case, 38,000+ case dismissals in New York City alone in 2024, and discovery consuming 20–50% of total litigation costs nationally — over $30 billion per year.
 
-**autoDiscovery.legal** is a Midnight-based decentralized application (dApp) that transforms legal discovery from a manual, error-prone process into a mathematically provable, geographically compliant, automated workflow. Built on the Midnight Network's dual-ledger architecture with zero-knowledge proof (ZKP) capabilities, autoDiscovery.legal delivers:
+**DiscoveryManagement** is a Midnight-based decentralized application (dApp) that transforms legal discovery from a manual, error-prone process into a mathematically provable, geographically compliant, automated workflow. Built on the Midnight Network's dual-ledger architecture with zero-knowledge proof (ZKP) capabilities, DiscoveryManagement delivers:
 
 - **Jurisdiction Rule Packs** that auto-apply the correct procedural law at case creation
 - A **9-Step Discovery Protocol** covering 24 universal document categories
 - **Immutable, court-admissible compliance attestations** without exposing underlying case data
 - A **GeoOracle Auto Compliance** engine: *build once, comply everywhere*
 
-autoDiscovery.legal is not merely a document management tool. It is a cryptographically enforced compliance protocol that abstracts away jurisdictional liability, provides mathematically provable chain-of-custody records, and positions itself to become the default infrastructure layer for legal discovery in the United States — and eventually, globally.
+DiscoveryManagement is not merely a document management tool. It is a cryptographically enforced compliance protocol that abstracts away jurisdictional liability, provides mathematically provable chain-of-custody records, and positions itself to become the default infrastructure layer for legal discovery in the United States — and eventually, globally.
 
 ---
 
@@ -91,7 +91,7 @@ Current legal technology (legaltech) products address document storage and workf
 - **Disclosure-agnostic** — no mechanism to selectively prove compliance without revealing privileged data
 - **Not court-admissible by design** — no path to using compliance records as factual evidence
 
-autoDiscovery.legal solves all four of these gaps simultaneously.
+DiscoveryManagement solves all four of these gaps simultaneously.
 
 ---
 
@@ -107,7 +107,7 @@ The U.S. legal market represents one of the largest professional services sector
 
 ### 3.2 Primary Customer Segments
 
-| Segment | Pain | autoDiscovery.legal Value |
+| Segment | Pain | DiscoveryManagement Value |
 |---|---|---|
 | **Civil Litigation Law Firms** | Manual discovery management, jurisdiction errors | Automated compliance, ZK proof records |
 | **Public Defenders & DA Offices** | Resource-constrained, high volume | Cost reduction, automation |
@@ -118,15 +118,15 @@ The U.S. legal market represents one of the largest professional services sector
 
 ### 3.3 Go-To-Market Strategy
 
-autoDiscovery.legal targets initial adoption in the Pacific Northwest and Mountain West — where domain expertise is deepest — before expanding to major markets (California, New York) and ultimately the full U.S. federal system. The modular jurisdiction rule pack architecture means new states and circuits can be added without any core code changes, enabling rapid geographic expansion.
+DiscoveryManagement targets initial adoption in the Pacific Northwest and Mountain West — where domain expertise is deepest — before expanding to major markets (California, New York) and ultimately the full U.S. federal system. The modular jurisdiction rule pack architecture means new states and circuits can be added without any core code changes, enabling rapid geographic expansion.
 
 ---
 
-## 4. The autoDiscovery.legal Solution
+## 4. The DiscoveryManagement Solution
 
 ### 4.1 Core Premise
 
-autoDiscovery.legal formalizes a **hard-coded, geographically compliant, law-based protocol** that organizes, distributes, and secures legal discovery. The system:
+DiscoveryManagement formalizes a **hard-coded, geographically compliant, law-based protocol** that organizes, distributes, and secures legal discovery. The system:
 
 1. **Abstracts away liability** — compliance is enforced by protocol, not by individual diligence
 2. **Reduces man-hours and costs** — automated workflows replace manual tracking
@@ -135,7 +135,7 @@ autoDiscovery.legal formalizes a **hard-coded, geographically compliant, law-bas
 
 ### 4.2 The GeoOracle Compliance Engine
 
-The heart of autoDiscovery.legal is the **GeoOracle Auto Compliance** engine — a privacy-preserving geolocation oracle built on the Midnight Network. When a new case is created, GeoOracle automatically:
+The heart of DiscoveryManagement is the **GeoOracle Auto Compliance** engine — a privacy-preserving geolocation oracle built on the Midnight Network. When a new case is created, GeoOracle automatically:
 
 - Identifies the filing court's jurisdiction
 - Loads the appropriate procedural rule pack (IRCP, URCP, CR, FRCP, CPLR, CCP, Civ.R., etc.)
@@ -160,7 +160,7 @@ The heart of autoDiscovery.legal is the **GeoOracle Auto Compliance** engine —
 
 ## 5. System Architecture
 
-autoDiscovery.legal is built on a three-tier ledger architecture, native to the Midnight Network, with an additional local processing layer:
+DiscoveryManagement is built on a three-tier ledger architecture, native to the Midnight Network, with an additional local processing layer:
 
 ```
 ┌──────────────────────────────────────────────────────────────────────┐
@@ -195,7 +195,7 @@ Pre-disclosure commitment schemes and document freezes are recorded here. This p
 ### 5.2 Monorepo Structure
 
 ```
-AutoDiscovery/
+DiscoveryManagement/
 ├── frontend-demoland-vite-react/           # React 19 + Vite 6 + TypeScript 5 application
 │   ├── src/
 │   │   ├── components/            # Reusable UI (email safety dialog, etc.)
@@ -205,9 +205,9 @@ AutoDiscovery/
 │   │   │   └── demoland/          # Mock providers for demo environment
 │   │   └── lib/                   # Utilities
 │   └── public/
-├── autodiscovery-contract/        # Compact smart contracts & TypeScript types
+├── discovery-contract/        # Compact smart contracts & TypeScript types
 │   └── src/types/                 # Strongly-typed data model (6 entities)
-├── autodiscovery-cli/             # CLI tools for deployment & operations
+├── discovery-cli/             # CLI tools for deployment & operations
 ├── docs/                          # 20+ comprehensive design and protocol documents
 │   ├── discovery-automation/      # 9-step discovery protocol deep dives
 │   └── reference/                 # Jurisdiction research archives
@@ -218,7 +218,7 @@ AutoDiscovery/
 ---
 
 ## 6. The 9-Step Discovery Protocol
-autoDiscovery.legal implements a universal, structured discovery workflow. Every case — regardless of jurisdiction — passes through the same 9-step framework, with jurisdiction-specific rules applied at each relevant step.
+DiscoveryManagement implements a universal, structured discovery workflow. Every case — regardless of jurisdiction — passes through the same 9-step framework, with jurisdiction-specific rules applied at each relevant step.
 
 | Step | Name | Description |
 |---|---|---|
@@ -259,7 +259,7 @@ This structure supports redaction versioning, format changes, supplements, audio
 ## 7. GeoOracle Auto Compliance — The Jurisdiction Engine
 
 ### 7.1 Overview
-GeoOracle is a privacy-preserving geolocation oracle integrated with autoDiscovery.legal as a companion infrastructure layer (see: [GeoZ Oracle](https://github.com/bytewizard42i/GeoZ_us_app_Midnight-Oracle)). It determines the applicable jurisdiction at case creation and loads the corresponding rule pack — all without revealing the case's geographic details to unauthorized parties.
+GeoOracle is a privacy-preserving geolocation oracle integrated with DiscoveryManagement as a companion infrastructure layer (see: [GeoZ Oracle](https://github.com/bytewizard42i/GeoZ_us_app_Midnight-Oracle)). It determines the applicable jurisdiction at case creation and loads the corresponding rule pack — all without revealing the case's geographic details to unauthorized parties.
 
 ### 7.2 Supported Jurisdictions (Phase 1)
 
@@ -289,7 +289,7 @@ Jurisdiction rule packs are modular TypeScript modules that encode:
 ## 8. Zero-Knowledge Proof Infrastructure
 ### 8.1 Why Zero-Knowledge Proofs for Legal Discovery?
 Legal discovery presents a unique cryptographic challenge: parties must prove they have complied with disclosure obligations without necessarily revealing the content of every document. ZK proofs are the only technology capable of satisfying this requirement. 
-autoDiscovery.legal uses Midnight's native ZK proof capabilities (built on the Compact smart contract language) to generate compliance attestations that:
+DiscoveryManagement uses Midnight's native ZK proof capabilities (built on the Compact smart contract language) to generate compliance attestations that:
 - **Prove** that a specific document was produced on a specific date
 - **Prove** that all mandatory disclosures for a given jurisdiction were completed
 - **Prove** that an expert witness meets qualification requirements
@@ -304,14 +304,14 @@ The selective disclosure model allows parties to reveal only what is legally req
 - A party can prove compliance with a deadline without revealing what was submitted
 
 ### 8.3 Court Precedent Pathway
-Courts guard precedent fiercely. Once a ZK proof is accepted as factual record by a court, that precedent binds future proceedings. autoDiscovery.legal is designed with this pathway in mind: every ZK attestation is formatted for court submission, and the system is architected to support the legal system's eventual adoption of ZK proofs as standard evidence.
+Courts guard precedent fiercely. Once a ZK proof is accepted as factual record by a court, that precedent binds future proceedings. DiscoveryManagement is designed with this pathway in mind: every ZK attestation is formatted for court submission, and the system is architected to support the legal system's eventual adoption of ZK proofs as standard evidence.
 
 > Once courts accept ZK proofs as factual record, that precedent binds all future proceedings. No industry can question what the legal system has validated.
 
 ---
 
 ## 9. Smart Contract Suite
-autoDiscovery.legal is implemented as a suite of six Compact smart contracts on the Midnight Network, each responsible for a distinct domain of the discovery process:
+DiscoveryManagement is implemented as a suite of six Compact smart contracts on the Midnight Network, each responsible for a distinct domain of the discovery process:
 
 | Contract | Ledger Layer | Purpose |
 |---|---|---|
@@ -335,7 +335,7 @@ autoDiscovery.legal is implemented as a suite of six Compact smart contracts on 
 
 ## 10. Intelligent Safeguards
 ### 10.1 Email Safety Protocol
-One of autoDiscovery.legal's most distinctive features is its **Email Safety Protocol** — a multi-layered protection system that prevents one of the most damaging and common attorney errors: accidental disclosure of privileged information to the wrong party.
+One of DiscoveryManagement's most distinctive features is its **Email Safety Protocol** — a multi-layered protection system that prevents one of the most damaging and common attorney errors: accidental disclosure of privileged information to the wrong party.
 
 | Threat Level | Trigger Condition | Enforced Action |
 |:---:|---|---|
@@ -427,7 +427,7 @@ The system maintains a strict separation between the demo environment (DemoLand)
 - [ ] Rule pack marketplace for third-party jurisdiction contributions
 - [ ] Court system API partnerships
 - [ ] International jurisdiction modules
-- [ ] AutoDiscovery Protocol as an open standard
+- [ ] DiscoveryManagement Protocol as an open standard
 
 ---
 
@@ -439,16 +439,16 @@ Medical malpractice cases have among the most complex discovery requirements, in
 - HIPAA-compliant medical records requests
 - Jurisdiction-specific disclosure deadlines (which vary significantly by state)
 
-autoDiscovery.legal handles all of these natively, with automated HIPAA compliance checks, jurisdiction-specific expert witness disclosure timelines, and ZK-attested qualification records.
+DiscoveryManagement handles all of these natively, with automated HIPAA compliance checks, jurisdiction-specific expert witness disclosure timelines, and ZK-attested qualification records.
 ### 14.2 General Civil Litigation
 - Contract disputes
 - Personal injury
 - Employment cases
 - Real estate litigation
 
-Any civil litigation matter with discovery obligations can use autoDiscovery.legal's universal 9-step protocol, with jurisdiction rules applied automatically at case creation.
+Any civil litigation matter with discovery obligations can use DiscoveryManagement's universal 9-step protocol, with jurisdiction rules applied automatically at case creation.
 ### 14.3 High-Stakes Multi-Party Litigation
-For cases with multiple parties, multiple jurisdictions, or both, autoDiscovery.legal's layered rule pack architecture and selective disclosure engine provide the only scalable compliance path.
+For cases with multiple parties, multiple jurisdictions, or both, DiscoveryManagement's layered rule pack architecture and selective disclosure engine provide the only scalable compliance path.
 ### 14.4 Future: Specialized Courts
 - Federal bankruptcy discovery (uniform federal rules)
 - Family court proceedings
@@ -464,27 +464,27 @@ For cases with multiple parties, multiple jurisdictions, or both, autoDiscovery.
 | **Practice Management (Clio, MyCase)** | Case and matter management | No discovery protocol enforcement; no cryptographic compliance |
 | **AI Legal Tools (Harvey, Luminance)** | Document review and summarization | No compliance enforcement; no immutable records; no chain-of-custody |
 
-**autoDiscovery.legal's unique position:** The only platform that combines jurisdiction-aware automation, cryptographically enforced compliance, immutable chain-of-custody, and court-admissible ZK proof attestations in a single, privacy-first system.
+**DiscoveryManagement's unique position:** The only platform that combines jurisdiction-aware automation, cryptographically enforced compliance, immutable chain-of-custody, and court-admissible ZK proof attestations in a single, privacy-first system.
 ---
 
 ## 16. Team
 ### Spy — Domain Expert & Legal Discovery Specialist
 **Domain Expert**
 
-20 years of complex litigation paralegal experience. Published statistical reports for Idaho government agencies. Deep jurisdiction expertise across Idaho, Utah, and Washington. The legal domain knowledge backbone of autoDiscovery.legal — every protocol rule, deadline, and workflow reflects real-world experience at the front lines of discovery compliance.
+20 years of complex litigation paralegal experience. Published statistical reports for Idaho government agencies. Deep jurisdiction expertise across Idaho, Utah, and Washington. The legal domain knowledge backbone of DiscoveryManagement — every protocol rule, deadline, and workflow reflects real-world experience at the front lines of discovery compliance.
 
 ### John — Developer, Midnight Builder & Architect
 **[@bytewizard42i](https://github.com/bytewizard42i)**
 
-Full-stack development, smart contract architecture on the Midnight Network, ZK protocol design, and the vision behind privacy-first legal technology. Author of the GeoZ Oracle companion project and the technical architect of the entire autoDiscovery.legal system.
+Full-stack development, smart contract architecture on the Midnight Network, ZK protocol design, and the vision behind privacy-first legal technology. Author of the GeoZ Oracle companion project and the technical architect of the entire DiscoveryManagement system.
 ---
 
 ## 17. Conclusion
 Legal discovery is broken. The consequences — dismissed cases, career-ending sanctions, billions in waste — are not edge cases. They are the everyday reality of a system that has never had a cryptographically enforced, jurisdiction-aware compliance layer.
 
-autoDiscovery.legal changes that. By combining the Midnight Network's unique privacy-preserving dual-ledger architecture with domain-expert-encoded jurisdiction rule packs and a mathematically rigorous 9-step discovery protocol, autoDiscovery.legal delivers something that has never existed before: **proof that you did discovery right**.
+DiscoveryManagement changes that. By combining the Midnight Network's unique privacy-preserving dual-ledger architecture with domain-expert-encoded jurisdiction rule packs and a mathematically rigorous 9-step discovery protocol, DiscoveryManagement delivers something that has never existed before: **proof that you did discovery right**.
 
-For law firms, the value is clear: abstracted liability, reduced costs, and immutable evidence that compliance was followed. For courts, the value is equally compelling: verifiable, tamper-proof submission records that reduce administrative burden and eliminate dismissals caused by documentation failures. For the legal system as a whole, autoDiscovery.legal offers the path to a future where discovery compliance is a solved problem — enforced by protocol, proven by mathematics, and recorded forever.
+For law firms, the value is clear: abstracted liability, reduced costs, and immutable evidence that compliance was followed. For courts, the value is equally compelling: verifiable, tamper-proof submission records that reduce administrative burden and eliminate dismissals caused by documentation failures. For the legal system as a whole, DiscoveryManagement offers the path to a future where discovery compliance is a solved problem — enforced by protocol, proven by mathematics, and recorded forever.
 
 **Build once. Comply everywhere.**
 
@@ -501,21 +501,21 @@ For law firms, the value is clear: abstracted liability, reduced costs, and immu
 | **dApp** | Decentralized Application — a software application that runs on a blockchain network |
 | **E-Discovery** | Electronic discovery — the process of identifying, collecting, and producing electronically stored information |
 | **FRCP** | Federal Rules of Civil Procedure — the rules governing civil discovery in all U.S. federal courts |
-| **GeoOracle** | The privacy-preserving geolocation oracle used by autoDiscovery.legal to identify jurisdiction at case creation |
+| **GeoOracle** | The privacy-preserving geolocation oracle used by DiscoveryManagement to identify jurisdiction at case creation |
 | **HIPAA** | Health Insurance Portability and Accountability Act — federal privacy rules for medical information |
 | **IRCP** | Idaho Rules of Civil Procedure |
 | **Lace** | The browser-extension wallet used by Midnight Network applications for key management and transaction signing |
 | **Merkle Tree** | A cryptographic data structure where every node is a hash of its child nodes, enabling efficient and secure content verification |
-| **Midnight Network** | The privacy-preserving blockchain platform on which autoDiscovery.legal is built, featuring a dual-ledger (public + private) architecture with native ZK proof support |
+| **Midnight Network** | The privacy-preserving blockchain platform on which DiscoveryManagement is built, featuring a dual-ledger (public + private) architecture with native ZK proof support |
 | **Rule Pack** | A modular, jurisdiction-specific configuration module that encodes all procedural discovery rules for a given court system |
 | **Selective Disclosure** | The ability to cryptographically prove a claim (e.g., "this document was produced on time") without revealing the underlying data |
 | **Spoliation** | The destruction, alteration, or failure to preserve evidence relevant to litigation — a serious discovery violation |
-| **Twin Protocol** | autoDiscovery.legal's mechanism for cryptographically bonding physical document originals to their digital representations |
+| **Twin Protocol** | DiscoveryManagement's mechanism for cryptographically bonding physical document originals to their digital representations |
 | **URCP** | Utah Rules of Civil Procedure |
-| **YubiKey** | A hardware security key device used by autoDiscovery.legal for multi-factor, hardware-gated authentication |
+| **YubiKey** | A hardware security key device used by DiscoveryManagement for multi-factor, hardware-gated authentication |
 | **ZK Proof / ZKP** | Zero-Knowledge Proof — a cryptographic method by which one party can prove to another that a statement is true without revealing any information beyond the truth of the statement itself |
 
 ---
 
-*© 2026 AutoDiscovery Team. All rights reserved.*  
-*autoDiscovery.legal — Privacy meets compliance. Built on [Midnight Network](https://midnight.network).*
+*© 2026 DiscoveryManagement Team. All rights reserved.*  
+*DiscoveryManagement — Privacy meets compliance. Built on [Midnight Network](https://midnight.network).*

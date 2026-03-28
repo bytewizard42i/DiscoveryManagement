@@ -1,6 +1,6 @@
 <div align="center">
 
-# AutoDiscovery.legal
+# DiscoveryManagement
 
 ### Past Milestones
 
@@ -29,11 +29,11 @@
 
 | Milestone | Who | Details |
 |-----------|:---:|---------|
-| Initial commit | `[J]` | Repository created at `bytewizard42i/autoDiscovery_legal`. First commit: *"AutoDiscovery — GeoOracle Auto Compliance for Legal Discovery."* |
+| Initial commit | `[J]` | Repository created at `bytewizard42i/DiscoveryManagement`. First commit: *"DiscoveryManagement — GeoOracle Auto Compliance for Legal Discovery."* |
 | Team formation | `[J+S]` | Spy onboarded as domain expert and co-founder. 20+ year Idaho complex litigation paralegal. Bio, dossier, and role documented. |
 | Starter template scaffold | `[J]` | Midnight MeshJS/Edda starter template. `PROJECT_OVERVIEW.md` created. |
-| AutoDiscovery logo | `[J]` | First brand asset added to `media/`. |
-| Dual-remote workflow | `[J]` | John's fork (`bytewizard42i/autoDiscovery_legal`) established as second push target. |
+| DiscoveryManagement logo | `[J]` | First brand asset added to `media/`. |
+| Dual-remote workflow | `[J]` | John's fork (`bytewizard42i/DiscoveryManagement`) established as second push target. |
 
 ---
 
@@ -47,12 +47,12 @@
 | 6-jurisdiction deep dive | `[J]` | Idaho, Utah, Washington, California, NYC, Ohio — UIDDA interstate rules, 20 automation metrics, 10 innovation ideas. |
 | Idaho "Hall of Shame" | `[J]` | Real sanction cases verified: Gem State Roofing, Raymond v ISP, Sanders v UI, Erickson v Erickson. Kohberger 68TB discovery chaos documented. |
 | Visual project overview | `[S]` | Legal/tech imagery and project overview created by Spy. |
-| Rebranded to AutoDiscovery.legal | `[J]` | Title rebrand across all docs and PDF exports. |
+| Rebranded to DiscoveryManagement | `[J]` | Title rebrand across all docs and PDF exports. |
 | Idaho-first strategy | `[J]` | Ohio research archived. Docs restructured around Idaho as anchor jurisdiction. |
 | Build plan + Grok review | `[J]` | `BUILD_PLAN.md` created. Cross-LLM architecture review with Grok for validation. |
 | Spy collaboration workflow | `[S]` | Response files, accuracy checklists, malpractice insights documented. |
 | 6-entity TypeScript data model | `[J]` | Strongly-typed interfaces: Case, DiscoveryStep, JurisdictionRulePack, Document, Party, ComplianceAttestation. |
-| Smart contract scaffold | `[J]` | All 6 `.compact` files + witness stubs created in `autodiscovery-contract/src/contracts/`. |
+| Smart contract scaffold | `[J]` | All 6 `.compact` files + witness stubs created in `discovery-contract/src/contracts/`. |
 | Idaho IRCP rule pack | `[J]` | First jurisdiction data file — Idaho Rules of Civil Procedure encoded as structured JSON. |
 | Pitch fodder v2 | `[J]` | Shock & awe stats ($8.5M sanctions, 38K NYC dismissals, $30B/yr cost), one-pager, 1000-word synopsis. |
 | Adoption strategy | `[J]` | Go-to-market strategy and decision history tracking begun. |
@@ -72,8 +72,8 @@
 | GeoZ architecture decoupled | `[J]` | Jurisdiction determined by filing court, not geolocation. GeoZ spun out as separate project. |
 | Jurisdiction ordering finalized | `[J+S]` | ID → UT → WA → CA → NYC → OH. |
 | Build Club Week 3 pitch deck | `[J]` | 13-slide HTML deck + 3-minute video script with recording checklist. |
-| Elephant brand mascot | `[J]` | Elephant-themed slides integrated into pitch (sanctions, pink, smarty, ADL). |
-| VC portfolio insights | `[J]` | Fundraising strategy derived from OpenVC article, applied to ADL positioning. |
+| Elephant brand mascot | `[J]` | Elephant-themed slides integrated into pitch (sanctions, pink, smarty, DM). |
+| VC portfolio insights | `[J]` | Fundraising strategy derived from OpenVC article, applied to DM positioning. |
 | Spy's deck tweaks | `[S]` | Vision line break, handle removal, ZK Proof card dropped, 3-column pricing, PDF regenerated. |
 | PDF generation pipeline | `[J]` | Puppeteer-based PDF script (`docs/generate-pdf.mjs`) for reproducible deck exports. |
 
@@ -85,7 +85,7 @@
 
 | Milestone | Who | Details |
 |-----------|:---:|---------|
-| White Paper draft | `[S]` | Full autoDiscovery.legal White Paper published in `docs/product/`. |
+| White Paper draft | `[S]` | Full DiscoveryManagement White Paper published in `docs/product/`. |
 | 4 core contracts compile | `[J]` | `discovery-core`, `jurisdiction-registry`, `compliance-proof`, `document-registry` — Compact 0.29.0, pragma `>= 0.20`. |
 | **All 6 contracts compile** | `[J]` | `access-control` and `expert-witness` added. **Full suite compiling.** |
 | Full demoLand UI | `[J]` | Dashboard, Case View, Login, Search, Compliance, Settings — all pages with mock providers. |
@@ -93,7 +93,7 @@
 | "What It Means to Deploy" | `[J]` | Beginner-friendly explainer for the Midnight deployment process. |
 | MidnightVitals v0.1.0 | `[J]` | Real-time diagnostic console — monitors wallet, proof server, contracts, network. |
 | MidnightVitals rapid iteration | `[J]` | v0.1.0 → v0.3.8 in one day: CLI logging, scroll hints, card layout, slim bar, float panel, interaction hooks. |
-| MidnightVitals integrated | `[J]` | Kill-switch design documented. Vitals panel embedded in AutoDiscovery frontend. |
+| MidnightVitals integrated | `[J]` | Kill-switch design documented. Vitals panel embedded in DiscoveryManagement frontend. |
 | Edge Slide pitch strategy | `[S]` | Competitive edge positioning slides created by Spy. |
 | Pitch deck v3 | `[J+S]` | 13-slide deck — Edge slide (Spy), pricing overhaul (John), visual refinements. |
 
@@ -110,7 +110,7 @@
 | Starter template cleanup | `[J]` | Removed template PNGs, purged 16 Zone.Identifier artifacts. |
 | Frontend renamed | `[J]` | `frontend-vite-react` → `frontend-demoland-vite-react` (demoLand/realDeal clarity). |
 | Document-registry ZK keys | `[J]` | Placeholder ZK keys for `verifyTwinBondIntegrity`. |
-| ADL Next Steps roadmap | `[J]` | Beginner-friendly next steps in `docs/ADL_NEXT_STEPS.md`. |
+| DM Next Steps roadmap | `[J]` | Beginner-friendly next steps in `docs/DM_NEXT_STEPS.md`. |
 | 4 contract fixes | `[J]` | Constructor fixes, `disclose()` corrections, ledger refactoring, recompile. |
 | State Rollout Strategy | `[S]` | State-by-state launch plan: Idaho → UT → WA → NV → WY → MT → CA → NY → remaining US. |
 | Pricing Analysis | `[S]` | ROI calculations per firm size, competitive comparison, value-based models. |
@@ -165,7 +165,7 @@ Spy directed and merged 20+ Copilot PRs (#21–#48) in a two-day sprint:
 | 20+ documentation files | `[J+S]` | Architecture, product specs, pitch materials, team docs, deep dives, reference research. |
 | 13-slide pitch deck | `[J+S]` | HTML + PDF pipeline (John). Edge slide + deck polish (Spy). |
 | 3-minute video script | `[J+S]` | Scripted demo walkthrough with recording checklist. |
-| Bluebook legal article | `[S]` | Legal implications framework in `Media/AutoDiscovery_Legal_Bluebook.md`. |
+| Bluebook legal article | `[S]` | Legal implications framework in `Media/DiscoveryManagement_Legal_Bluebook.md`. |
 | MidnightVitals sub-product | `[J]` | Business plan, architecture, design spec, feature roadmap, integration guide, README. |
 | Build Club participation | `[J+S]` | Week 1 matrix (John), Week 3 deck (Both), Week 5 notes (Spy), launch checklist (Spy). |
 | 22 brand assets | `[J+S]` | Logos, elephants, courtroom imagery, neon map, judge illustrations, infographics. |
@@ -200,7 +200,7 @@ Spy directed and merged 20+ Copilot PRs (#21–#48) in a two-day sprint:
 
 <div align="center">
 
-*AutoDiscovery.legal — Past Milestones*
+*DiscoveryManagement — Past Milestones*
 *John, Spy & Penny — March 2026*
 
 </div>

@@ -1,4 +1,4 @@
-// AutoDiscovery Sign-Up Page — demoLand workflow.
+// DiscoveryManagement Sign-Up Page — demoLand workflow.
 // Glass-effect dark theme matching the AD visual style.
 // All 7 auth methods with simulated device/wallet/OAuth flows.
 
@@ -201,7 +201,7 @@ export function SignupPage() {
     // Auto-fill email/password for non-email methods
     if (selectedMethod !== 'email') {
       if (!formData.email) {
-        formData.email = `${formData.firstName.toLowerCase()}.${formData.lastName.toLowerCase()}@autodiscovery.demo`;
+        formData.email = `${formData.firstName.toLowerCase()}.${formData.lastName.toLowerCase()}@discoverymanagement.demo`;
       }
       if (!formData.password) formData.password = 'demo-key-auth';
     }

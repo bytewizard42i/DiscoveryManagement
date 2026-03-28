@@ -1,6 +1,6 @@
 <div align="center">
 
-# AutoDiscovery.legal
+# DiscoveryManagement
 
 ### Future Milestones
 
@@ -81,7 +81,7 @@ Starting with Idaho and updated with every state thereafter, the guide captures 
 | Spy validation pass | Every IRCP rule, deadline, exemption, and med-mal requirement verified against 20+ years of Idaho litigation experience. **Hard gate.** |
 | UPL legal memo | Written memo from Idaho-licensed attorney confirming safe harbor. |
 | ISB Ethics Opinion inquiry | Informal inquiry to Idaho State Bar confirming no objection. |
-| Terms of Service | ToS affirming AutoDiscovery is a tool, not legal counsel. In-app disclaimer. |
+| Terms of Service | ToS affirming DiscoveryManagement is a tool, not legal counsel. In-app disclaimer. |
 | Idaho IRCP Rule Pack v1.0 | Spy-validated, production-ready, covering all IRCP rules. |
 
 ### Idaho Master Compliance Packet
@@ -103,7 +103,7 @@ Starting with Idaho and updated with every state thereafter, the guide captures 
 | Rule loader service | `services/rule-loader.ts` — loads JSON, validates schema, merges county/judge overrides. |
 | realDeal providers wired | All 12 connected to compiled Compact contracts + Lace wallet. |
 | End-to-end workflow test | Case create → steps → complete → attestation → verify proof — on Midnight preprod. |
-| Production deployment | Target: `demo.autodiscovery.legal` (demoLand), `app.autodiscovery.legal` (realDeal). |
+| Production deployment | Target: `demo.DiscoveryManagement` (demoLand), `app.DiscoveryManagement` (realDeal). |
 
 ### Idaho Market Entry
 
@@ -248,7 +248,7 @@ Starting with Idaho and updated with every state thereafter, the guide captures 
 | Milestone | Details |
 |-----------|---------|
 | Rule Pack Marketplace | Third-party jurisdiction contributions. Revenue share model. |
-| AutoDiscovery Protocol | Published open specification for legal discovery compliance. |
+| DiscoveryManagement Protocol | Published open specification for legal discovery compliance. |
 | Court system partnerships | Direct API integrations with filing systems. |
 
 ### International Expansion
@@ -346,7 +346,7 @@ Starting with Idaho and updated with every state thereafter, the guide captures 
 | Decision | Trigger | Options |
 |----------|---------|---------|
 | Demo Day strategy | Before hackathon | demoLand only vs. demoLand + realDeal |
-| Domain acquisition | Go-live readiness | `autodiscovery.legal` — confirm and register |
+| Domain acquisition | Go-live readiness | `DiscoveryManagement` — confirm and register |
 | First hire | Revenue supports it | Paralegal/researcher to accelerate packet production |
 | Funding strategy | Post-hackathon | Bootstrap vs. Midnight Foundation grant vs. seed round |
 | Open-source vs. proprietary | Before first customer | Core protocol open, packets proprietary? Or fully proprietary? |
@@ -356,7 +356,7 @@ Starting with Idaho and updated with every state thereafter, the guide captures 
 
 <div align="center">
 
-*AutoDiscovery.legal — Future Milestones*
+*DiscoveryManagement — Future Milestones*
 *John, Spy & Penny — March 2026*
 
 </div>

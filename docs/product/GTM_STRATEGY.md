@@ -1,7 +1,7 @@
-# 🚀 autoDiscovery.Legal Comprehensive GTM & Customer Acquisition Strategy
+# 🚀 DiscoveryManagement Comprehensive GTM & Customer Acquisition Strategy
 
 **Prepared by:** Spy & John | **Date:** March 2, 2026 | 
-**Product:** autoDiscovery.Legal | Privacy-preserving legal discovery compliance on Midnight Network
+**Product:** DiscoveryManagement | Privacy-preserving legal discovery compliance on Midnight Network
 
 > **Living document** — updated as market research and customer feedback evolve.
 
@@ -38,7 +38,7 @@ The beachhead is **Idaho med-mal** — strategically sound due to Spy's 20-year 
 
 #### The One-Liner
 
-> **"autoDiscovery.Legal mathematically proves your firm is discovery-compliant — across every jurisdiction, for every case, every time."**
+> **"DiscoveryManagement mathematically proves your firm is discovery-compliant — across every jurisdiction, for every case, every time."**
 
 #### Messaging Hierarchy (NEVER lead with blockchain)
 
@@ -112,7 +112,7 @@ The beachhead is **Idaho med-mal** — strategically sound due to Spy's 20-year 
 - **Platforms:** LinkedIn (legal community), legal blogs (Above the Law, Lawyerist), State Bar newsletters
 - **Cost:** ~$1K/mo (content production)
 - **Target:** SEO ranking for "discovery compliance automation," "discovery sanctions prevention"
-- **Metric:** Organic traffic to autodiscovery.legal, newsletter signups
+- **Metric:** Organic traffic to DiscoveryManagement, newsletter signups
 
 #### Channel 7: Conference Presence (Quarter milestones)
 
@@ -191,7 +191,7 @@ The beachhead is **Idaho med-mal** — strategically sound due to Spy's 20-year 
 | **Sanctions Prevented** | Impact | Documented cases where AD prevented a sanction | 2 stories | 10 stories |
 | **Court Acceptance** | Precedent | # of courts accepting ZK proofs | 1 | 3 |
 
-#### The AARRR Pirate Metrics for AutoDiscovery
+#### The AARRR Pirate Metrics for DiscoveryManagement
 
 | Stage | Metric | How We Measure | Target |
 |-------|--------|---------------|--------|
@@ -205,7 +205,7 @@ The beachhead is **Idaho med-mal** — strategically sound due to Spy's 20-year 
 
 ### 6. PRIVACY, TRUST & COMPLIANCE AS A MARKETING LEVER
 
-This is AutoDiscovery's **#1 differentiator** and should be woven into every touchpoint:
+This is DiscoveryManagement's **#1 differentiator** and should be woven into every touchpoint:
 
 | Lever | How to Use It | Where |
 |-------|--------------|-------|
@@ -404,7 +404,7 @@ This is AutoDiscovery's **#1 differentiator** and should be woven into every tou
 - [The Business Research Company – eDiscovery Market Analysis](https://www.thebusinessresearchcompany.com/report/ediscovery-global-market-report)
 - [Research and Markets – EDiscovery Market Report 2025](https://www.researchandmarkets.com/reports/5766738/ediscovery-market-report)
 
-### Internal AutoDiscovery Documents
+### Internal DiscoveryManagement Documents
 - [Adoption Strategy](./ADOPTION_STRATEGY.md) — Detailed channel-by-channel adoption plan
 - [Customer Analysis Matrix](./CUSTOMER_ANALYSIS_MATRIX.md) — Personas, pain heat map, competitive landscape
 - [Investor & VC Roadmap](../pitch/INVESTOR_VC_ROADMAP.md) — Financial projections, funding requirements
@@ -413,7 +413,7 @@ This is AutoDiscovery's **#1 differentiator** and should be woven into every tou
 
 <div align="center">
 
-**autoDiscovery.legal**
+**DiscoveryManagement**
 
 *Automated discovery compliance: build once, comply everywhere.*
 

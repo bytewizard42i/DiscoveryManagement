@@ -1,4 +1,4 @@
-# AutoDiscovery.legal — Pitch Script
+# DiscoveryManagement — Pitch Script
 
 ---
 
@@ -32,7 +32,7 @@ Everyone in legal knows it, but We have built the solution."
 
 ### SLIDE 5 — The Solution
 
-"Our protocoldoesn't just help you manage the discovery -it *mathematically proves* you did it right. Every aspect of AutoDiscovery is designed to ease the burden and abstract away liability from law firms, making it a very attractive product to the industry."
+"Our protocoldoesn't just help you manage the discovery -it *mathematically proves* you did it right. Every aspect of DiscoveryManagement is designed to ease the burden and abstract away liability from law firms, making it a very attractive product to the industry."
 
 ---
 
@@ -50,7 +50,7 @@ Everyone in legal knows it, but We have built the solution."
 
 ### SLIDE 8 — Market Opportunity
 
-"AutoDiscovery is a unique SaaS product which addresses an open niche with first to market opportunity. We are, and will continue to be, the only game in town."
+"DiscoveryManagement is a unique SaaS product which addresses an open niche with first to market opportunity. We are, and will continue to be, the only game in town."
 
 ---
 
@@ -80,4 +80,4 @@ Everyone in legal knows it, but We have built the solution."
 
 ### SLIDE 13 — The Close
 
-"So join our winning team. We are not just selling another product — we are streamlining and shaping an industry. Our adoption will pave the way for other incredible product opportunities that will stand on the shoulders of the legal precedent that will be forged here. AutoDiscovery isn't just legal tech. It's the bridge that brings blockchain into the most conservative, highest-stakes industry in the world. Thank you."
+"So join our winning team. We are not just selling another product — we are streamlining and shaping an industry. Our adoption will pave the way for other incredible product opportunities that will stand on the shoulders of the legal precedent that will be forged here. DiscoveryManagement isn't just legal tech. It's the bridge that brings blockchain into the most conservative, highest-stakes industry in the world. Thank you."

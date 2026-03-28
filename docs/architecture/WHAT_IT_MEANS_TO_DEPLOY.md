@@ -2,7 +2,7 @@
 
 **Created**: Feb 21, 2026  
 **Audience**: Anyone new to blockchain development  
-**Context**: AutoDiscovery.legal on Midnight blockchain
+**Context**: DiscoveryManagement on Midnight blockchain
 
 ---
 
@@ -16,7 +16,7 @@ Imagine you wrote a legal form (the contract). Right now it exists as a Word doc
 
 ### 1. You write the contract ✅ (done)
 
-These are the `.compact` files in `autodiscovery-contract/src/contracts/`. Written in Compact, Midnight's smart contract language.
+These are the `.compact` files in `discovery-contract/src/contracts/`. Written in Compact, Midnight's smart contract language.
 
 ### 2. You compile it ✅ (done)
 
@@ -25,7 +25,7 @@ The compiler takes your human-readable Compact code and turns it into:
 - **Proving keys** — cryptographic keys needed to generate proofs
 - **TypeScript API** — code your frontend can call (like `contract.createNewCase(...)`)
 
-All this lives in the `autodiscovery-contract/src/managed/` folders. We compiled all 6 contracts with compiler 0.29.0.
+All this lives in the `discovery-contract/src/managed/` folders. We compiled all 6 contracts with compiler 0.29.0.
 
 ### 3. You start the proof server
 

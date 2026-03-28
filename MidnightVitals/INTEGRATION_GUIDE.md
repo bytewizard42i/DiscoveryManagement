@@ -223,9 +223,9 @@ Or pass className props:
 
 ## Examples
 
-### AutoDiscovery.legal Integration
+### DiscoveryManagement Integration
 
-AutoDiscovery.legal uses MidnightVitals with 6 smart contracts:
+DiscoveryManagement uses MidnightVitals with 6 smart contracts:
 
 ```tsx
 <VitalsProvider

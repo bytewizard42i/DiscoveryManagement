@@ -1,4 +1,4 @@
-# AutoDiscovery — UI Design Notes
+# DiscoveryManagement — UI Design Notes
 
 > Design guidelines and requirements for frontend development.
 

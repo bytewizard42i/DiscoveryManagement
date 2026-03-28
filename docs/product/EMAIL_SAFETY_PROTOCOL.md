@@ -181,7 +181,7 @@ The entire dialog header changes color based on threat level:
 - Every email sent through the system logged with full threat assessment
 - Compliance report: "All opposing-counsel communications reviewed by N approvers"
 - Integration with case compliance scoring
-- ZK attestation of review process (ties into AutoDiscovery's blockchain attestation system)
+- ZK attestation of review process (ties into DiscoveryManagement's blockchain attestation system)
 
 ### Phase 5 — Real-Time Integration
 - IMAP/SMTP integration for actual email sending

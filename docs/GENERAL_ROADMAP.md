@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="../media/autodiscovery-logo.png" alt="AutoDiscovery Logo" width="200" />
+<img src="../media/discoverymanagement-logo.png" alt="DiscoveryManagement Logo" width="200" />
 
-# AutoDiscovery.legal (ADL) — General Product Roadmap
+# DiscoveryManagement (DM) — General Product Roadmap
 
 ### *Build once, comply everywhere.*
 
@@ -14,7 +14,7 @@
 
 ---
 
-> This is a **living document** — a general, high-level product roadmap for autoDiscovery.legal. Each phase builds on the last, and every phase delivers independently valuable functionality. For the detailed technical build plan, see [`BUILD_PLAN.md`](./architecture/BUILD_PLAN.md).
+> This is a **living document** — a general, high-level product roadmap for DiscoveryManagement. Each phase builds on the last, and every phase delivers independently valuable functionality. For the detailed technical build plan, see [`BUILD_PLAN.md`](./architecture/BUILD_PLAN.md).
 
 ---
 
@@ -33,7 +33,7 @@
 
 ## Phase 1 — MVP / Hackathon (Target: April 2026 — Midnight Vegas)
 
-> **Goal:** A fully functional demo that proves the core thesis: *"AutoDiscovery mathematically proves you did discovery right."*
+> **Goal:** A fully functional demo that proves the core thesis: *"DiscoveryManagement mathematically proves you did discovery right."*
 
 | Milestone | Description | Status |
 |-----------|-------------|--------|
@@ -83,7 +83,7 @@
 | **3.5 AI Metadata Pipeline** | Real AI-assisted document parsing, entity resolution, metadata extraction |
 | **3.6 End-to-End Testing** | Full workflow: create case → add steps → complete steps → generate attestation → verify on-chain |
 | **3.7 Domain Expert Validation** | Spy validates every Idaho rule, deadline, and exemption with real med-mal scenarios |
-| **3.8 Deploy to Production** | Vercel deployment, `autodiscovery.legal` domain, environment variables configured |
+| **3.8 Deploy to Production** | Vercel deployment, `DiscoveryManagement` domain, environment variables configured |
 
 ---
 
@@ -105,14 +105,14 @@
 
 ## Phase 5 — Ecosystem & Scale
 
-> **Goal:** From product to protocol — ADL becomes the industry standard for legal discovery compliance.
+> **Goal:** From product to protocol — DM becomes the industry standard for legal discovery compliance.
 
 | Milestone | Description |
 |-----------|-------------|
 | **5.1 Rule Pack Marketplace** | Third-party jurisdiction contributions — law firms publish & maintain their own rule packs |
 | **5.2 Court System Partnerships** | Direct API integrations with court filing systems |
 | **5.3 International Expansion** | International jurisdiction modules (UK, Canada, EU) |
-| **5.4 Open Protocol Standard** | AutoDiscovery Protocol published as an open specification for the legal industry |
+| **5.4 Open Protocol Standard** | DiscoveryManagement Protocol published as an open specification for the legal industry |
 | **5.5 GeoZ Oracle Maturity** | Full privacy-preserving geolocation oracle as standalone Midnight infrastructure |
 | **5.6 MidnightVitals Standalone** | Extract as npm package for any Midnight dApp developer to install |
 
@@ -165,7 +165,7 @@
 
 ## 📊 Key Metrics That Drive This Roadmap
 
-These are the real-world numbers that validate *why* autoDiscovery.legal must exist:
+These are the real-world numbers that validate *why* DiscoveryManagement must exist:
 
 | Metric | Value | Significance |
 |--------|-------|--------------|
@@ -223,6 +223,6 @@ These are the real-world numbers that validate *why* autoDiscovery.legal must ex
 
 ---
 
-<sub>Copyright 2026 AutoDiscovery Team. All rights reserved.</sub>
+<sub>Copyright 2026 DiscoveryManagement Team. All rights reserved.</sub>
 
 </div>

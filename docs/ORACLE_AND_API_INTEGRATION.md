@@ -1,6 +1,6 @@
-# Oracle Pattern & API Integration Guide — AutoDiscovery.legal
+# Oracle Pattern & API Integration Guide — DiscoveryManagement
 
-> How external data gets into Midnight smart contracts, and which free APIs are relevant to AutoDiscovery.legal (eDiscovery platform).
+> How external data gets into Midnight smart contracts, and which free APIs are relevant to DiscoveryManagement (eDiscovery platform).
 
 ---
 
@@ -41,7 +41,7 @@ An **oracle** is a trusted off-chain service that feeds external data into the b
 
 ---
 
-## Recommended Free APIs for AutoDiscovery.legal
+## Recommended Free APIs for DiscoveryManagement
 
 ### Legal & Government Data
 
@@ -87,7 +87,7 @@ An **oracle** is a trusted off-chain service that feeds external data into the b
 
 ---
 
-## ADL-Specific Oracle Use Cases
+## DM-Specific Oracle Use Cases
 
 ### 1. Document Integrity Proofs
 ```
@@ -135,4 +135,4 @@ An **oracle** is a trusted off-chain service that feeds external data into the b
 
 - Public APIs catalog: https://github.com/public-apis/public-apis
 - Midnight docs: https://docs.midnight.network
-- ADL architecture: See project docs in this repo
+- DM architecture: See project docs in this repo

@@ -1,6 +1,6 @@
 <div align="center">
 
-# AutoDiscovery.legal
+# DiscoveryManagement
 
 ### Present Milestones
 
@@ -144,7 +144,7 @@
 
 <div align="center">
 
-*AutoDiscovery.legal — Present Milestones*
+*DiscoveryManagement — Present Milestones*
 *John, Spy & Penny — March 2026*
 
 </div>

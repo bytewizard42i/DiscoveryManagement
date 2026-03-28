@@ -4,7 +4,7 @@ Copy everything below the line into Grok.
 
 ---
 
-I'm building a privacy-preserving legal discovery management platform called AutoDiscovery. I need your help designing the data model and automation structure, starting with Ohio civil procedure as the first jurisdiction implementation.
+I'm building a privacy-preserving legal discovery management platform called DiscoveryManagement. I need your help designing the data model and automation structure, starting with Ohio civil procedure as the first jurisdiction implementation.
 
 ## Context
 

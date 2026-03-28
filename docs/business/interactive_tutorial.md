@@ -1,8 +1,8 @@
 # Quickstart: Your First Network Discovery
 
-Welcome to AutoDiscovery! Let’s walk through your first primary workflow:
+Welcome to DiscoveryManagement! Let’s walk through your first primary workflow:
 
-1. **Login to AutoDiscovery.**
+1. **Login to DiscoveryManagement.**
 2. **Navigate to the Discover tab.**
 3. **Select Your Network or Range.**
     - Enter subnet or select from the dropdown.

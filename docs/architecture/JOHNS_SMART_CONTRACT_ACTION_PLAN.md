@@ -1,6 +1,6 @@
 # John's Smart Contract Action Plan
 
-> **AutoDiscovery.legal — The Architecture Bible**  
+> **DiscoveryManagement — The Architecture Bible**  
 > **Author:** Penny 🎀 (with John)  
 > **Date:** February 21, 2026  
 > **Status:** Living document — updated as we build
@@ -85,7 +85,7 @@ DAPP LAYER (TypeScript + React + Off-chain Storage)
 
 ### Contract 1: `jurisdiction-registry.compact`
 
-**Deployment:** ONE instance for the entire AutoDiscovery platform (admin-controlled)
+**Deployment:** ONE instance for the entire DiscoveryManagement platform (admin-controlled)
 
 **Purpose:** Anchors the hash of each jurisdiction's rule pack JSON on-chain, creating an immutable audit trail of which rules were in effect at any point in time.
 
@@ -195,7 +195,7 @@ DAPP LAYER (TypeScript + React + Off-chain Storage)
 **Purpose:** THE KILLER FEATURE. Generates and verifies ZK compliance attestations — mathematical proofs that discovery obligations were met, without revealing any case details.
 
 **Why it needs a smart contract:**
-- This is the ENTIRE VALUE PROPOSITION of AutoDiscovery
+- This is the ENTIRE VALUE PROPOSITION of DiscoveryManagement
 - A ZK proof that "47 discovery obligations were met before their deadlines" is something NO existing legal tech product can provide
 - Courts verify by checking a hash on-chain — zero trust required
 - The proof is mathematically irrefutable — you literally cannot fake compliance
@@ -338,7 +338,7 @@ The DApp is a React + TypeScript application that handles everything that does N
 
 ## Part 5: The Story — A Case from Start to Finish
 
-*Let me walk you through how AutoDiscovery handles a real case, from the moment an attorney opens the app to the moment a court verifies their compliance proof. This is the story of how all four contracts and the DApp work together.*
+*Let me walk you through how DiscoveryManagement handles a real case, from the moment an attorney opens the app to the moment a court verifies their compliance proof. This is the story of how all four contracts and the DApp work together.*
 
 ---
 
@@ -348,7 +348,7 @@ The DApp is a React + TypeScript application that handles everything that does N
 
 Attorney Sarah Chen represents the defendant in *Martinez v. Riverside Medical Center*, a medical malpractice case filed in Ada County, Idaho. The plaintiff alleges that Dr. Williams failed to diagnose a heart condition, leading to a cardiac event.
 
-Sarah opens AutoDiscovery on her laptop. She's already connected her Lace wallet.
+Sarah opens DiscoveryManagement on her laptop. She's already connected her Lace wallet.
 
 **She clicks "New Case."**
 
@@ -486,7 +486,7 @@ She clicks "Finalize Production" in the DApp. Here's what happens:
 
 3. **The DApp calls `document-registry.anchorCaseRootSnapshot()`** — A snapshot of the entire case's discovery state (all productions so far) is anchored with a timestamp.
 
-4. **The DApp handles the actual sharing** — Sarah's DApp encrypts the 156 documents and transmits them to opposing counsel James Park's AutoDiscovery instance (off-chain, direct transfer). The DApp calls `document-registry.recordCustodyTransfer()` for each document to create the on-chain proof that the transfer occurred.
+4. **The DApp handles the actual sharing** — Sarah's DApp encrypts the 156 documents and transmits them to opposing counsel James Park's DiscoveryManagement instance (off-chain, direct transfer). The DApp calls `document-registry.recordCustodyTransfer()` for each document to create the on-chain proof that the transfer occurred.
 
 **What the public chain now shows:**
 - Production #1 exists with Merkle root `[hash]`
@@ -622,7 +622,7 @@ The DApp produces a court-ready PDF (no blockchain terminology):
    • Scope: Full case compliance
    
    To verify this attestation independently:
-   Visit verify.autodiscovery.legal
+   Visit verify.DiscoveryManagement
    Enter hash: [hash]
    
    Or scan: [QR CODE]
@@ -658,7 +658,7 @@ If anyone — a court, an insurer, a bar association, a malpractice auditor — 
 
 The actual case documents? They live on Sarah's machine and in her firm's document management system. The blockchain never saw them. It only saw their hashes. Privacy preserved. Compliance proven.
 
-**That is AutoDiscovery.**
+**That is DiscoveryManagement.**
 
 ---
 

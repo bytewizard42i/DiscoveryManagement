@@ -1,12 +1,12 @@
 # Hello Jay! 👋
 
-Welcome to the **AutoDiscovery.legal (ADL)** repo. John asked me to write you a briefing so you can hit the ground running with your review for Build Club.
+Welcome to the **DiscoveryManagement (DM)** repo. John asked me to write you a briefing so you can hit the ground running with your review for Build Club.
 
 **I'm Penny** 🎀 — one of John's AI coding assistants. I run on his ASUS ProArt laptop via Windsurf (Cascade). I've been deeply involved in the architecture, documentation, and cross-pollination analysis across John's entire DIDz ecosystem (26 repos). If you leave me notes or instructions in this repo, John and I will pick them up in our next session. More on that below.
 
 ---
 
-## Where ADL Stands Right Now
+## Where DM Stands Right Now
 
 ### What's Done ✅
 
@@ -84,14 +84,14 @@ The first jurisdiction data file (`idaho-ircp.json`) needs to be encoded from Sp
 ## Repo Layout Quick Reference
 
 ```
-AutoDiscovery/
+DiscoveryManagement/
 ├── frontend-demoland-vite-react/    # Demo frontend (mock data, UI complete)
 ├── frontend-realdeal/               # Production frontend (needs contract wiring)
-├── autodiscovery-contract/          # Smart contracts + TypeScript types
+├── discovery-contract/          # Smart contracts + TypeScript types
 │   ├── src/contracts/*.compact      # The 6 Compact contract source files
 │   ├── src/managed/*/               # Compiled output (JS, keys, zkir)
 │   └── src/types/                   # Strongly-typed data model
-├── autodiscovery-cli/               # CLI tools for deployment
+├── discovery-cli/               # CLI tools for deployment
 ├── docs/                            # 46 documentation files
 │   ├── architecture/                # BUILD_PLAN.md, contract partitioning, etc.
 │   ├── discovery-automation/        # 9-step protocol deep dives
@@ -110,7 +110,7 @@ AutoDiscovery/
 | Doc | Why |
 |-----|-----|
 | **[README.md](./README.md)** | Full project overview, problem statement, architecture |
-| **[ADL_NEXT_STEPS.md](./docs/ADL_NEXT_STEPS.md)** | Detailed breakdown of the 4 contract issues + what comes next (written for beginner-friendly clarity) |
+| **[DM_NEXT_STEPS.md](./docs/DM_NEXT_STEPS.md)** | Detailed breakdown of the 4 contract issues + what comes next (written for beginner-friendly clarity) |
 | **[BUILD_PLAN.md](./docs/architecture/BUILD_PLAN.md)** | Living technical build plan with phase tracking |
 | **[GENERAL_ROADMAP.md](./docs/GENERAL_ROADMAP.md)** | High-level product roadmap through Phase 5 |
 | **[SMART_CONTRACT_PARTITIONING.md](./docs/architecture/SMART_CONTRACT_PARTITIONING.md)** | Why 6 contracts, what goes where, private vs public vs sealed state |
@@ -122,7 +122,7 @@ AutoDiscovery/
 - **John** ([@bytewizard42i](https://github.com/bytewizard42i)) — Developer, architect, Midnight ambassador. Building the full DIDz ecosystem (26 repos). Learning developer who's leveled up fast.
 - **Spy** (Domain Expert) — Domain expert. 20 years complex litigation paralegal experience. Published stats reports for Idaho government. The reason the legal domain knowledge in this repo is real and accurate.
 - **Penny** 🎀 (that's me) — AI coding assistant on John's ASUS ProArt. I handle code, docs, cross-repo analysis, and architecture. I work in Windsurf/Cascade.
-- **Cassie** 💜 — Another of John's AI assistants, on his desktop (Chuck). She's also worked on ADL.
+- **Cassie** 💜 — Another of John's AI assistants, on his desktop (Chuck). She's also worked on DM.
 
 ---
 
@@ -141,9 +141,9 @@ We genuinely want your honest assessment — what's solid, what's shaky, what's 
 
 ## The Bigger Picture
 
-ADL is one of 26 repos in John's **DIDzMonolith** ecosystem — all building on Midnight Network for privacy-preserving applications. ADL's unique angle: it's not just another legal tool, it **mathematically proves** discovery compliance using zero-knowledge proofs. Courts can verify compliance without seeing the underlying case data.
+DM is one of 26 repos in John's **DIDzMonolith** ecosystem — all building on Midnight Network for privacy-preserving applications. DM's unique angle: it's not just another legal tool, it **mathematically proves** discovery compliance using zero-knowledge proofs. Courts can verify compliance without seeing the underlying case data.
 
-The hackathon target is **Midnight Vegas, April 2026**. The core thesis: *"AutoDiscovery doesn't just help you manage discovery — it mathematically proves you did it right."*
+The hackathon target is **Midnight Vegas, April 2026**. The core thesis: *"DiscoveryManagement doesn't just help you manage discovery — it mathematically proves you did it right."*
 
 The $8.5M single-case sanction for discovery failures is real. The 38,000+ NYC cases dismissed in 2024 for compliance failures is real. This product has a massive, validated market.
 
@@ -151,7 +151,7 @@ The $8.5M single-case sanction for discovery failures is real. The 38,000+ NYC c
 
 Thanks for taking the time to review, Jay. We're excited to have a Midnight dev's eyes on this.
 
-— Penny 🎀 *(on behalf of John and the ADL team)*
+— Penny 🎀 *(on behalf of John and the DM team)*
 
 ---
 

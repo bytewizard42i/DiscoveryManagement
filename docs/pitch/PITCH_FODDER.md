@@ -1,4 +1,4 @@
-# AutoDiscovery.legal — Pitch Fodder
+# DiscoveryManagement — Pitch Fodder
 
 > **Shock & awe stats, landmark cases, one-pager, and shareable synopsis**
 > Last updated: February 11, 2026
@@ -8,7 +8,7 @@
 
 ## TL;DR — "Sell the Pain"
 
-Discovery failures are common (~10–20% of cases hit judicial intervention), expensive (mean sanction ~$704K, top awards >$8.5M), and career-ending (attorney bar referrals, disbarments). They're getting worse — data volumes are exploding, courts are losing patience, and criminal cases now take 60% longer just from eDiscovery overload. AutoDiscovery.legal eliminates the risk with jurisdiction-aware automation and cryptographic compliance proofs on the Midnight blockchain.
+Discovery failures are common (~10–20% of cases hit judicial intervention), expensive (mean sanction ~$704K, top awards >$8.5M), and career-ending (attorney bar referrals, disbarments). They're getting worse — data volumes are exploding, courts are losing patience, and criminal cases now take 60% longer just from eDiscovery overload. DiscoveryManagement eliminates the risk with jurisdiction-aware automation and cryptographic compliance proofs on the Midnight blockchain.
 
 ---
 
@@ -159,7 +159,7 @@ From the Willoughby 401-case dataset:
 > Document review accounts for **73%** of eDiscovery production costs. Median per-case eDiscovery cost: **$1.8 million** (large corporate cases). *(Note: this reflects large-volume cases from 8 major corporations, not typical small/mid cases.)*
 
 - **Source**: RAND Institute for Civil Justice, *Where the Money Goes: Understanding Litigant Expenditures for Producing Electronic Discovery* (2012). [rand.org](https://www.rand.org/pubs/monographs/MG1208.html)
-- **Caveat**: The $1.8M figure comes from a study of only 45 cases at 8 large corporations. It is NOT representative of all litigation, but it IS representative of the kind of complex litigation where AutoDiscovery adds the most value.
+- **Caveat**: The $1.8M figure comes from a study of only 45 cases at 8 large corporations. It is NOT representative of all litigation, but it IS representative of the kind of complex litigation where DiscoveryManagement adds the most value.
 
 ---
 
@@ -175,7 +175,7 @@ From the Willoughby 401-case dataset:
 4. **Alert on upcoming deadlines** — no jurisdiction-aware warning system
 5. **Protect privacy** — documents and case data sit on vendor servers
 
-## What AutoDiscovery Does
+## What DiscoveryManagement Does
 
 | Feature | How It Works | Why It Matters |
 |---------|-------------|----------------|
@@ -186,7 +186,7 @@ From the Willoughby 401-case dataset:
 | **Privacy-Preserving** | Documents never touch the blockchain — only proofs | HIPAA/privilege safe by design |
 
 **Our pitch in one sentence**:
-> *"AutoDiscovery doesn't just help you manage discovery — it mathematically proves you did it right."*
+> *"DiscoveryManagement doesn't just help you manage discovery — it mathematically proves you did it right."*
 
 ---
 
@@ -218,7 +218,7 @@ From the Willoughby 401-case dataset:
 > - **Your annual caseload**: [___] cases
 > - **Expected annual exposure**: [___] × 10% × $704K = **$[___]**
 >
-> *AutoDiscovery costs a fraction of a single sanction. [Schedule a demo →](https://autodiscovery.legal/demo)*
+> *DiscoveryManagement costs a fraction of a single sanction. [Schedule a demo →](https://DiscoveryManagement/demo)*
 
 ---
 
@@ -244,7 +244,7 @@ Per Spy (retired Idaho paralegal, 20+ years med-mal experience):
 - The warning → deadline → escalation flow is managed with **spreadsheets and Outlook reminders**
 - Discovery tracking **falls apart when the responsible person is out** — no automated handoff
 
-**Marketing line**: *"If your discovery tracking system is a spreadsheet, AutoDiscovery is the upgrade you can't afford to skip."*
+**Marketing line**: *"If your discovery tracking system is a spreadsheet, DiscoveryManagement is the upgrade you can't afford to skip."*
 
 ---
 
@@ -252,7 +252,7 @@ Per Spy (retired Idaho paralegal, 20+ years med-mal experience):
 
 ---
 
-## AutoDiscovery.legal — eDiscovery Risk & Protection One-Pager
+## DiscoveryManagement — eDiscovery Risk & Protection One-Pager
 
 ### The Problem: Discovery Is Litigation's Biggest Liability
 
@@ -278,11 +278,11 @@ Per Spy (retired Idaho paralegal, 20+ years med-mal experience):
 - **165+** — Court orders issued in one case trying to get compliance (*Wachtel v. Health Net*)
 - **60%** — Increase in federal criminal case duration from eDiscovery overload (2018→2023)
 
-### The Solution: AutoDiscovery.legal
+### The Solution: DiscoveryManagement
 
-With autoDiscovery.legal, we aim to organize and formalize a **hard-coded, geographically compliant, law-based protocol** that will help organize, distribute, and give proper, accurate, and secure access control to user-aggregated legal discovery. This protocol will **abstract away liability**, reduce man hours and overall costs, increase profits, and form an **immutable (existing forever) proof of compliance, custody, provenance, and access.**
+With DiscoveryManagement, we aim to organize and formalize a **hard-coded, geographically compliant, law-based protocol** that will help organize, distribute, and give proper, accurate, and secure access control to user-aggregated legal discovery. This protocol will **abstract away liability**, reduce man hours and overall costs, increase profits, and form an **immutable (existing forever) proof of compliance, custody, provenance, and access.**
 
-It is our hope that autoDiscovery.legal will be the **default protocol for accurate and dependable discovery/evidence management** — backed with error insurance that will protect law firms from errors and omissions.
+It is our hope that DiscoveryManagement will be the **default protocol for accurate and dependable discovery/evidence management** — backed with error insurance that will protect law firms from errors and omissions.
 
 **What makes us different**: Zero-knowledge compliance proofs on the **Midnight blockchain** let you **mathematically prove** discovery compliance without revealing privileged content. Courts and insurers can verify independently.
 
@@ -290,11 +290,11 @@ It is our hope that autoDiscovery.legal will be the **default protocol for accur
 
 > **Average sanction**: $704,094 | **Risk per case**: ~10%
 > **50 cases/year** × 10% × $704K = **$3.5M annual exposure**
-> AutoDiscovery: a fraction of one sanction.
+> DiscoveryManagement: a fraction of one sanction.
 
 ### Contact
 
-**autodiscovery.legal** | john@autodiscovery.legal | @realjohnny5i on X
+**DiscoveryManagement** | john@DiscoveryManagement | @realjohnny5i on X
 
 *Sources: FJC, Duke Law Journal, RAND, Gibson Dunn, Logikcull, U.S. Courts (2009–2024)*
 
@@ -304,7 +304,7 @@ It is our hope that autoDiscovery.legal will be the **default protocol for accur
 
 ---
 
-## The Hidden Perils of eDiscovery — And Why AutoDiscovery.legal Changes Everything
+## The Hidden Perils of eDiscovery — And Why DiscoveryManagement Changes Everything
 
 ### Discovery Is Litigation's Most Dangerous Phase
 
@@ -334,23 +334,23 @@ The ripple effects extend far beyond individual cases. Federal criminal cases no
 
 The RAND Institute for Civil Justice found that document review alone consumes 73 percent of eDiscovery production costs in large corporate cases, with median per-case expenditures of $1.8 million. For the firms and corporations bearing these costs, the calculus is punishing: spend massively on compliance and hope nothing slips through, or cut corners and risk the sanctions roulette wheel.
 
-### AutoDiscovery.legal: Automating Compliance, Abstracting Liability
+### DiscoveryManagement: Automating Compliance, Abstracting Liability
 
-AutoDiscovery.legal exists to break this cycle. Built on the Midnight blockchain's zero-knowledge proof technology, AutoDiscovery is the first platform to automate discovery compliance at the jurisdictional level — hard-coding the specific rules of each state's civil procedure into the workflow itself.
+DiscoveryManagement exists to break this cycle. Built on the Midnight blockchain's zero-knowledge proof technology, DiscoveryManagement is the first platform to automate discovery compliance at the jurisdictional level — hard-coding the specific rules of each state's civil procedure into the workflow itself.
 
 The platform provides jurisdiction-aware rule packs that encode the actual requirements of each state — Idaho's 40-interrogatory limit, the 30-day response windows, the deemed-admitted trap for unanswered requests for admission, the expert disclosure requirements, the supplementation duties. It computes deadlines according to each jurisdiction's time computation rules, accounting for weekends, holidays, and service method extensions. It tracks every discovery step, every response, every production, and every objection.
 
-But the true differentiator is what happens on-chain. When a party completes a discovery obligation, AutoDiscovery generates a zero-knowledge compliance proof — a cryptographic attestation that the obligation was met, timestamped and verifiable, without revealing any privileged or confidential content. Courts, insurers, and opposing counsel can independently verify compliance without accessing the underlying documents. It's not just a record. It's mathematical proof.
+But the true differentiator is what happens on-chain. When a party completes a discovery obligation, DiscoveryManagement generates a zero-knowledge compliance proof — a cryptographic attestation that the obligation was met, timestamped and verifiable, without revealing any privileged or confidential content. Courts, insurers, and opposing counsel can independently verify compliance without accessing the underlying documents. It's not just a record. It's mathematical proof.
 
 For law firms, this means something revolutionary: the ability to demonstrate, with cryptographic certainty, that discovery was conducted properly. No more "he said, she said" in sanctions hearings. No more scrambling to reconstruct a timeline of who did what and when. The blockchain doesn't forget, and zero-knowledge proofs don't lie.
 
 ### The Bottom Line
 
-Discovery is litigation's largest operational liability. One missed preservation notice, one auto-deleted text thread, one overlooked supplementation duty — and a firm faces sanctions that can exceed the case value itself. AutoDiscovery.legal doesn't just reduce this risk. It eliminates it through automation and proves it through cryptography.
+Discovery is litigation's largest operational liability. One missed preservation notice, one auto-deleted text thread, one overlooked supplementation duty — and a firm faces sanctions that can exceed the case value itself. DiscoveryManagement doesn't just reduce this risk. It eliminates it through automation and proves it through cryptography.
 
-The question isn't whether your firm can afford AutoDiscovery. It's whether it can afford not to have it.
+The question isn't whether your firm can afford DiscoveryManagement. It's whether it can afford not to have it.
 
-**Visit [autodiscovery.legal](https://autodiscovery.legal) | Contact: john@autodiscovery.legal | @realjohnny5i on X**
+**Visit [DiscoveryManagement](https://DiscoveryManagement) | Contact: john@DiscoveryManagement | @realjohnny5i on X**
 
 ---
 
@@ -389,9 +389,9 @@ The question isn't whether your firm can afford AutoDiscovery. It's whether it c
 | Captive Alternatives: "2024" | **2023** | Court opinion dated Aug. 29, 2023 (M.D. Fla.). |
 | "85% of LA Superior Court cases" | **Unverified** | Columbia Law Review citation not found. Omitted. |
 | RAND $1.8M "median per case" | **Confirmed but narrow** | Only 45 cases from 8 large corporations — not representative of all litigation. |
-| "Early adopters report 30% faster..." | **Fabricated by Grok** | AutoDiscovery doesn't exist yet. No user data. Removed. |
+| "Early adopters report 30% faster..." | **Fabricated by Grok** | DiscoveryManagement doesn't exist yet. No user data. Removed. |
 
 ---
 
 *Compiled by Alice 🌟 + Grok + Penny 🎀 for John & Spy — February 2026*
-*"Discovery is a battlefield. AutoDiscovery is your armor."*
+*"Discovery is a battlefield. DiscoveryManagement is your armor."*

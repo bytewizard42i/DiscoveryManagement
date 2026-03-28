@@ -18,7 +18,7 @@ These files are not part of the codebase and are intended for internal reference
 | `onboarding_checklist.md` | User onboarding checklist |
 | `wed_feb_25_2026_adding_investor_roadmap_md_to_repository.md` | Commit note for investor roadmap addition |
 | `FAQ.md` | Frequently asked questions |
-| `Why ADL?.md` | Overview of why AutoDiscovery Legal exists |
+| `Why DM?.md` | Overview of why DiscoveryManagement exists |
 | `LAUNCH_CHECKLIST.md` | Pre-launch checklist |
 | `BuildClub_Terms_of_Participation.docx` | Build Club terms of participation agreement |
 

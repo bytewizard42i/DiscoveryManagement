@@ -1,4 +1,4 @@
-# AutoDiscovery - Project Overview
+# DiscoveryManagement - Project Overview
 
 > **Automated discovery compliance: build once, comply everywhere.**
 
@@ -6,9 +6,9 @@
 
 ## Executive Summary
 
-AutoDiscovery is a **Midnight-based dApp** that automates legal discovery workflows with **jurisdiction-aware compliance**. The platform uses modular jurisdiction rule packs to apply the correct regional legislation and procedural rules based on the court where the case is filed—eliminating the risk of discovery non-compliance that leads to sanctions, dismissed cases, or suppressed evidence.
+DiscoveryManagement is a **Midnight-based dApp** that automates legal discovery workflows with **jurisdiction-aware compliance**. The platform uses modular jurisdiction rule packs to apply the correct regional legislation and procedural rules based on the court where the case is filed—eliminating the risk of discovery non-compliance that leads to sanctions, dismissed cases, or suppressed evidence.
 
-With **autoDiscovery.legal**, we aim to organize and formalize a hard-coded, geographically compliant, law-based protocol that will help organize, distribute, and give proper, accurate, and secure access control to user-aggregated legal discovery. This protocol will **abstract away liability**, reduce man hours and overall costs, increase profits, and form an **immutable (existing forever) proof of compliance, custody, provenance, and access.**
+With **DiscoveryManagement**, we aim to organize and formalize a hard-coded, geographically compliant, law-based protocol that will help organize, distribute, and give proper, accurate, and secure access control to user-aggregated legal discovery. This protocol will **abstract away liability**, reduce man hours and overall costs, increase profits, and form an **immutable (existing forever) proof of compliance, custody, provenance, and access.**
 
 ---
 
@@ -51,15 +51,15 @@ Legal discovery is governed by different rules in every jurisdiction:
 
 ---
 
-## Solution: AutoDiscovery
+## Solution: DiscoveryManagement
 
 ### Core Concept
 
-With **autoDiscovery.legal**, we aim to organize and formalize a **hard-coded, geographically compliant, law-based protocol** that will help organize, distribute, and give proper, accurate, and secure access control to user-aggregated legal discovery.
+With **DiscoveryManagement**, we aim to organize and formalize a **hard-coded, geographically compliant, law-based protocol** that will help organize, distribute, and give proper, accurate, and secure access control to user-aggregated legal discovery.
 
-This protocol will **abstract away liability**, reduce man hours and overall costs, increase profits, and form an **immutable (existing forever) proof of compliance, custody, provenance, and access.** It is our hope that autoDiscovery.legal will be the **default protocol for accurate and dependable discovery/evidence management** — backed with error insurance that will protect law firms from errors and omissions.
+This protocol will **abstract away liability**, reduce man hours and overall costs, increase profits, and form an **immutable (existing forever) proof of compliance, custody, provenance, and access.** It is our hope that DiscoveryManagement will be the **default protocol for accurate and dependable discovery/evidence management** — backed with error insurance that will protect law firms from errors and omissions.
 
-AutoDiscovery provides:
+DiscoveryManagement provides:
 
 1. **Automated Workflow Engine** — Step-by-step discovery process execution
 2. **Jurisdiction Rule Packs** — Modular, per-state rules loaded at case creation based on filing court
@@ -71,7 +71,7 @@ AutoDiscovery provides:
 - *"Automated legal discovery — jurisdiction-aware by design."*
 - *"Remove the risks of failing to disclose or handle discovery properly — regional compliance is baked in."*
 - *"Prove compliance in an immutable fashion that can be entered as factual record."*
-- *"AutoDiscovery doesn't just help you manage discovery — it mathematically proves you did it right."*
+- *"DiscoveryManagement doesn't just help you manage discovery — it mathematically proves you did it right."*
 
 ---
 
@@ -90,13 +90,13 @@ AutoDiscovery provides:
 ### Project Structure
 
 ```
-AutoDiscovery/
-├── autodiscovery-contract/     # Compact smart contracts
+DiscoveryManagement/
+├── discovery-contract/     # Compact smart contracts
 │   └── src/
 │       ├── discovery.compact   # Main discovery workflow contract
 │       ├── jurisdiction.compact # Jurisdiction rule loader
 │       └── compliance.compact  # Compliance proof generation
-├── autodiscovery-cli/          # CLI tools for deployment/testing
+├── discovery-cli/          # CLI tools for deployment/testing
 ├── frontend-demoland-vite-react/        # React frontend
 │   └── src/
 │       ├── components/         # UI components
@@ -114,7 +114,7 @@ AutoDiscovery/
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    AutoDiscovery Protocol                    │
+│                    DiscoveryManagement Protocol                    │
 ├─────────────────────────────────────────────────────────────┤
 │                                                              │
 │  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐  │
@@ -169,7 +169,7 @@ Medical malpractice cases require:
 - **Medical records** request compliance
 - **HIPAA** privacy requirements
 
-AutoDiscovery handles jurisdiction-specific:
+DiscoveryManagement handles jurisdiction-specific:
 - Disclosure deadlines
 - Expert witness designation rules
 - Privilege log requirements
@@ -249,7 +249,7 @@ Courts guard precedent fiercely. In one case, a judge refused to let a plaintiff
 
 ### Discovery Non-Compliance Case Studies
 
-Find examples where attorneys had cases thrown out or evidence suppressed due to discovery non-compliance. These become **counter-examples** that AutoDiscovery solves:
+Find examples where attorneys had cases thrown out or evidence suppressed due to discovery non-compliance. These become **counter-examples** that DiscoveryManagement solves:
 
 - [ ] Failure to disclose expert witnesses on time
 - [ ] Improper privilege log formatting
@@ -270,8 +270,8 @@ Find examples where attorneys had cases thrown out or evidence suppressed due to
 
 ```bash
 # Clone the repo
-git clone git@github.com:bytewizard42i/AutoDiscovery.git
-cd AutoDiscovery
+git clone git@github.com:bytewizard42i/DiscoveryManagement.git
+cd DiscoveryManagement
 
 # Install dependencies
 npm install

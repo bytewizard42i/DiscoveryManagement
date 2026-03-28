@@ -184,7 +184,7 @@ export function SettingsPage() {
 
       {/* Footer */}
       <div className="text-center space-y-1 pb-8">
-        <p className="text-[10px] text-muted-foreground">AutoDiscovery Legal Intelligence v0.2.0-demo</p>
+        <p className="text-[10px] text-muted-foreground">DiscoveryManagement Legal Intelligence v0.2.0-demo</p>
         <div className="flex items-center justify-center gap-3 text-[10px] text-muted-foreground/50">
           <span>Midnight Blockchain</span>
           <span className="w-1 h-1 rounded-full bg-muted-foreground/20" />

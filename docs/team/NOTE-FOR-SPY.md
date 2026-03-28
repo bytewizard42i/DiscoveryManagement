@@ -7,7 +7,7 @@
 
 ## What's Happened This Week
 
-We've been doing a deep dive into the architecture for AutoDiscovery. Here's a quick summary of what we've done:
+We've been doing a deep dive into the architecture for DiscoveryManagement. Here's a quick summary of what we've done:
 
 1. **Grok Review** — John fed a detailed prompt into Grok asking for a data schema for automating discovery management. We used Ohio as a test case for the schema design exercise. That research is archived in `docs/reference/` for later use — **Idaho is our primary focus now.**
 

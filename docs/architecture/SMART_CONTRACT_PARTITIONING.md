@@ -273,7 +273,7 @@ SCENARIO: DEF produces 500 documents to PRO in response to RFP #3
 
 3. DEF "shares" with PRO:
    ├── Off-chain: Encrypted document files sent to PRO
-   │   (via AutoDiscovery protocol — NOT on the blockchain)
+   │   (via DiscoveryManagement protocol — NOT on the blockchain)
    ├── On-chain: access-control.compact grants PRO access
    │   to verify these specific documents against the
    │   Production Root
@@ -288,7 +288,7 @@ SCENARIO: DEF produces 500 documents to PRO in response to RFP #3
    └── Either: "The documents were different" (sealed hash commitments)
 ```
 
-**The actual document files travel off-chain** — encrypted, direct transfer between parties via the AutoDiscovery application layer. The blockchain only carries the proof that the transfer happened and the integrity hashes.
+**The actual document files travel off-chain** — encrypted, direct transfer between parties via the DiscoveryManagement application layer. The blockchain only carries the proof that the transfer happened and the integrity hashes.
 
 ---
 
@@ -375,7 +375,7 @@ The search is **fast and local**. Blockchain only gets involved when you need to
 
 2. **Sealed ledger for hash commitments** — Sealed means write-once. Can we still *read* sealed values for verification, or only prove membership? Need to confirm Compact semantics.
 
-3. **Off-chain document transfer** — What's the best encrypted transport layer? IPFS + encryption? Direct P2P? AutoDiscovery server relay?
+3. **Off-chain document transfer** — What's the best encrypted transport layer? IPFS + encryption? Direct P2P? DiscoveryManagement server relay?
 
 4. **Cross-contract calls** — Can `compliance-proof.compact` read from `document-registry.compact`'s public state? Or do we need to pass values through witnesses?
 

@@ -1,4 +1,4 @@
-# AutoDiscovery × SelectConnect — Privacy-Preserving Legal Contact
+# DiscoveryManagement × SelectConnect — Privacy-Preserving Legal Contact
 
 *How SelectConnect's progressive reveal and abuse bonds transform legal discovery from adversarial fishing expeditions into economically accountable, privacy-preserving information exchange.*
 
@@ -45,7 +45,7 @@ Expert → Can set different policies for:
   - Conflict checks via ZK proof ("Not engaged by opposing party ✓")
 ```
 
-### Document Discovery (AutoDiscovery Core Flow)
+### Document Discovery (DiscoveryManagement Core Flow)
 
 SelectConnect's progressive reveal maps directly to tiered document production:
 - **Level 1**: Document category + privilege log excerpt
@@ -65,7 +65,7 @@ Opposing parties in litigation can use SelectConnect for settlement discussions:
 
 ## Related Documents
 
-- AutoDiscovery Architecture: `AutoDiscovery/docs/` (if exists)
+- DiscoveryManagement Architecture: `DiscoveryManagement/docs/` (if exists)
 - SelectConnect Contract: `selectConnect/contracts/SelectConnectProtocol.compact`
 - DIDz Identity Integration: `DIDz-io/docs/SELECTCONNECT_IDENTITY_INTEGRATION.md`
 

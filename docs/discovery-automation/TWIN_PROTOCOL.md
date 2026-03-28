@@ -45,7 +45,7 @@ Physical documents in discovery get digitized constantly — handwritten notes, 
 2. **Keep only the OCR** — lose the visual fidelity (signatures, handwriting, stamps, stains, physical damage)
 3. **Keep both but don't link them** — eventually one version gets separated, lost, or produced without its counterpart
 
-AutoDiscovery's Twin Protocol ensures both versions exist, are linked, and are verifiable.
+DiscoveryManagement's Twin Protocol ensures both versions exist, are linked, and are verifiable.
 
 ---
 
@@ -150,7 +150,7 @@ PHYSICAL DOCUMENT ENTERS DISCOVERY
 │     ├─ Bond Hash = SHA-256(image_hash + digital_hash)
 │     ├─ Fidelity score calculated (image vs. digital comparison)
 │     ├─ Visual features flagged (signatures, stamps, handwriting)
-│     └─ Bond record created in AutoDiscovery
+│     └─ Bond record created in DiscoveryManagement
 │
 ├─ 6. QUALITY CHECK
 │     ├─ OCR confidence < 0.85? → FLAG for human review
@@ -341,4 +341,4 @@ This slots cleanly into the existing 5-level hierarchy without adding a new leve
 
 ---
 
-*This protocol applies to all digitized documents entering AutoDiscovery. Born-digital documents (emails, database exports, native electronic files) don't need twins — they ARE the original.*
+*This protocol applies to all digitized documents entering DiscoveryManagement. Born-digital documents (emails, database exports, native electronic files) don't need twins — they ARE the original.*

@@ -241,7 +241,7 @@ When extracted to its own npm package, the architecture becomes:
 @midnight-vitals/core          — Types, context, hooks, base components
 @midnight-vitals/react         — React component library
 @midnight-vitals/providers     — Mock + live provider implementations
-@midnight-vitals/adl-adapter   — AutoDiscovery.legal specific adapters
+@midnight-vitals/adl-adapter   — DiscoveryManagement specific adapters
 ```
 
 Other Midnight DApp developers would install `@midnight-vitals/core` and `@midnight-vitals/react`, then implement their own adapters for their specific contracts.

@@ -1,4 +1,4 @@
-# AutoDiscovery Pitch Deck
+# DiscoveryManagement Pitch Deck
 
 ## Slide 1: Title Slide 🌟
 Branding content goes here...
@@ -19,7 +19,7 @@ Branding content goes here...
 </details>
 
 ## Slide 4: Solution Comparison Table 🆚
-| Feature         | AutoDiscovery | Competitor A | Competitor B |
+| Feature         | DiscoveryManagement | Competitor A | Competitor B |
 |-----------------|---------------|---------------|---------------|
 | Speed           | Fast          | Moderate      | Slow          |
 | Usability       | High          | Medium        | Low           |
@@ -55,7 +55,7 @@ Branding content goes here...
 - **Jane Smith** - CTO, experience in startups.
 
 ## Slide 10: Vision and Legitimization 🌍
-- Vision statement outlining the future impact of AutoDiscovery.
+- Vision statement outlining the future impact of DiscoveryManagement.
 
 ## Slide 11: Call to Action 📞
 - Contact us for more information and collaboration.
@@ -64,4 +64,4 @@ Branding content goes here...
 - Citations and references to support claims throughout the deck.
 
 ---
-### Thank you for considering AutoDiscovery!
+### Thank you for considering DiscoveryManagement!

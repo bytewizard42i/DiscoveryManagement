@@ -10,7 +10,7 @@
 ### 1. Pitch Deck (10–12 slides maximum)
 
 - [x] **Problem** — Discovery sanctions, malpractice, career-ending consequences
-- [x] **Solution** — AutoDiscovery.legal: jurisdiction-aware automation + ZK compliance proofs
+- [x] **Solution** — DiscoveryManagement: jurisdiction-aware automation + ZK compliance proofs
 - [x] **Opportunity** — $27.6B eDiscovery market, 50-state expansion path
 - [x] **Team** — Spy (20-year paralegal) + John (4× Midnight hackathon winner)
 - [x] **Privacy/Data Protection slide** — Why this can only be built on Midnight (ZK proofs, selective disclosure, documents never touch the chain)
@@ -85,14 +85,14 @@
 | 0:10–0:30 | **Problem** | Stats barrage — $8.5M, 38K cases dismissed, 28% malpractice |
 | 0:30–0:50 | **Human Cost** | Spy's real-world pain — spreadsheets, coverage gaps, wrong filings |
 | 0:50–1:05 | **Market** | $27.6B market, 6 states mapped, 50-state goal |
-| 1:05–1:30 | **Solution** | AutoDiscovery — automate, comply, prove, protect |
+| 1:05–1:30 | **Solution** | DiscoveryManagement — automate, comply, prove, protect |
 | 1:30–1:50 | **Privacy Advantage** | Why Midnight — ZK proofs, selective disclosure, documents never on-chain |
 | 1:50–2:10 | **How It Works** | 6 contracts, workflow diagram, rule packs |
-| 2:10–2:25 | **Horror Stories** | Qualcomm, Coleman, Wachtel — "AutoDiscovery makes these impossible" |
+| 2:10–2:25 | **Horror Stories** | Qualcomm, Coleman, Wachtel — "DiscoveryManagement makes these impossible" |
 | 2:25–2:40 | **ROI** | $3.5M annual exposure vs. fraction-of-a-sanction cost |
 | 2:40–2:50 | **Team** | Spy + John — domain + dev |
 | 2:50–3:00 | **Bigger Picture** | "We're building the bridge between courts and blockchain" |
 
 ---
 
-*"Discovery is a battlefield. AutoDiscovery is your armor."*
+*"Discovery is a battlefield. DiscoveryManagement is your armor."*

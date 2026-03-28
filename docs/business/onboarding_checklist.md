@@ -1,6 +1,6 @@
-# AutoDiscovery Onboarding Checklist
+# DiscoveryManagement Onboarding Checklist
 
-Welcome! Follow these steps to get started with AutoDiscovery:
+Welcome! Follow these steps to get started with DiscoveryManagement:
 
 1. **Access the Application**
    - Obtain login credentials from your admin.

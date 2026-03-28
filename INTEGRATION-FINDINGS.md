@@ -1,14 +1,14 @@
-# Integration Findings & Adjustments: AutoDiscovery realDeal
+# Integration Findings & Adjustments: DiscoveryManagement realDeal
 
 > **Date:** 2026-03-25
-> **Scope:** Code audit of AutoDiscovery realDeal layer against [midnight-doc-manager](https://github.com/Mackenzie-OO7/midnight-doc-manager) (PreProd reference) and [midnight-local-dev](https://github.com/midnightntwrk/midnight-local-dev) (local Docker stack).
-> **Related Issue:** [#37 — Reference Implementation for AutoDiscovery Integration](https://github.com/bytewizard42i/autoDiscovery_legal/issues/37)
+> **Scope:** Code audit of DiscoveryManagement realDeal layer against [midnight-doc-manager](https://github.com/Mackenzie-OO7/midnight-doc-manager) (PreProd reference) and [midnight-local-dev](https://github.com/midnightntwrk/midnight-local-dev) (local Docker stack).
+> **Related Issue:** [#37 — Reference Implementation for DiscoveryManagement Integration](https://github.com/bytewizard42i/DiscoveryManagement/issues/37)
 
 ---
 
 ## 1. Provider Architecture — Current State vs. Reference
 
-AutoDiscovery's current realDeal provider structure (`frontend-realdeal/src/providers/realdeal/`):
+DiscoveryManagement's current realDeal provider structure (`frontend-realdeal/src/providers/realdeal/`):
 
 | Provider file | Maps to contract | Status |
 |---|---|---|
@@ -23,7 +23,7 @@ AutoDiscovery's current realDeal provider structure (`frontend-realdeal/src/prov
 
 **Key finding:** The `real-case.ts` provider currently has the `BlockchainConnection` interface defined but hardcoded to `{ connected: false }`. The actual `deployContract` / `findDeployedContract` / `callTx.*` pipeline is commented out (lines 123–129). This is the **primary integration gap**.
 
-**What midnight-doc-manager does that AutoDiscovery doesn't yet:**
+**What midnight-doc-manager does that DiscoveryManagement doesn't yet:**
 
 ```typescript
 // midnight-doc-manager's deployment pipeline (src/deploy.ts):
@@ -39,16 +39,16 @@ const deployed = await deployContract(providers, {
 // Then: deployed.callTx.registerDocument(...)
 ```
 
-**Adjustment needed:** AutoDiscovery must replicate this pipeline for each of its 6 contracts, replacing the single `document-manager` contract with the multi-contract suite exported from `autodiscovery-contract/src/index.ts`.
+**Adjustment needed:** DiscoveryManagement must replicate this pipeline for each of its 6 contracts, replacing the single `document-manager` contract with the multi-contract suite exported from `discovery-contract/src/index.ts`.
 
 ---
 
 ## 2. Witness Implementations — ✅ Well-Structured, One Critical Gap
 
-The witness implementations in `autodiscovery-contract/src/witnesses/` are correctly structured and match the `Witnesses<PS>` type signatures:
+The witness implementations in `discovery-contract/src/witnesses/` are correctly structured and match the `Witnesses<PS>` type signatures:
 
 ```typescript
-// autodiscovery-contract/src/witnesses/discovery-witnesses.ts (lines 180–184)
+// discovery-contract/src/witnesses/discovery-witnesses.ts (lines 180–184)
 export const discoveryCoreWitnesses = {
   computeUniqueCaseIdentifier,
   computeUniqueStepHash,
@@ -58,22 +58,22 @@ export const discoveryCoreWitnesses = {
 
 **Comparison with midnight-doc-manager's witness pattern:**
 
-| Aspect | midnight-doc-manager | AutoDiscovery |
+| Aspect | midnight-doc-manager | DiscoveryManagement |
 |---|---|---|
 | Witness return type | `[PS, Uint8Array]` | `[PS, bigint]` ✅ (correct for `Field` type) |
 | Private state mutation | Returns `context.privateState` unchanged | Returns updated state with case/step tracking ✅ |
 | Hash function | `persistentHash` from `@midnight-ntwrk/compact-runtime` | Custom `deterministicHashToField` (FNV-1a) |
 
-**⚠️ Critical finding:** AutoDiscovery uses a custom FNV-1a hash (`deterministicHashToField`) while midnight-doc-manager uses Midnight's native `persistentHash`. The comment in the code acknowledges this: *"In the future, this can be upgraded to use Midnight's native hash primitive."* Since the circuit trusts the witness output directly (no circuit-side hash re-computation), this works for now but should be migrated to `persistentHash` for production to ensure consistency with on-chain verification.
+**⚠️ Critical finding:** DiscoveryManagement uses a custom FNV-1a hash (`deterministicHashToField`) while midnight-doc-manager uses Midnight's native `persistentHash`. The comment in the code acknowledges this: *"In the future, this can be upgraded to use Midnight's native hash primitive."* Since the circuit trusts the witness output directly (no circuit-side hash re-computation), this works for now but should be migrated to `persistentHash` for production to ensure consistency with on-chain verification.
 
-**The root `witnesses.ts`** (at `autodiscovery-contract/src/witnesses.ts`) is a legacy counter-only stub:
+**The root `witnesses.ts`** (at `discovery-contract/src/witnesses.ts`) is a legacy counter-only stub:
 
 ```typescript
-// autodiscovery-contract/src/witnesses.ts
+// discovery-contract/src/witnesses.ts
 export const witnesses = {};
 ```
 
-This is only used for the `Counter` contract and is separate from the full witness suite in `autodiscovery-contract/src/witnesses/`.
+This is only used for the `Counter` contract and is separate from the full witness suite in `discovery-contract/src/witnesses/`.
 
 ---
 
@@ -100,7 +100,7 @@ export async function getOnChainCaseStatus(
 const { Contract, ledger, pureCircuits } = await import(contractModulePath);
 ```
 
-**Adjustment:** Add `@autodiscovery/contract` as a dependency to `frontend-realdeal` and import `DiscoveryCore.ledger` to parse raw indexer state.
+**Adjustment:** Add `@discoverymanagement/contract` as a dependency to `frontend-realdeal` and import `DiscoveryCore.ledger` to parse raw indexer state.
 
 ---
 
@@ -108,7 +108,7 @@ const { Contract, ledger, pureCircuits } = await import(contractModulePath);
 
 **midnight-doc-manager's `configureProviders`** returns 6 components:
 
-| Component | Package | AutoDiscovery has? |
+| Component | Package | DiscoveryManagement has? |
 |---|---|---|
 | `privateStateProvider` | `@midnight-ntwrk/midnight-js-level-private-state-provider` | ❌ Not yet |
 | `publicDataProvider` | `@midnight-ntwrk/midnight-js-indexer-public-data-provider` | ✅ (via GraphQL in reader) |
@@ -143,7 +143,7 @@ VITE_NODE_URL=http://localhost:9944
 
 ## 6. Key File Inventory
 
-### AutoDiscovery — realDeal Provider Layer
+### DiscoveryManagement — realDeal Provider Layer
 
 | File | Purpose |
 |---|---|
@@ -156,18 +156,18 @@ VITE_NODE_URL=http://localhost:9944
 | `frontend-realdeal/src/providers/realdeal/storage/case-storage.ts` | localStorage persistence for case metadata |
 | `frontend-realdeal/src/providers/realdeal/storage/adl-storage.ts` | Generic localStorage adapter |
 
-### AutoDiscovery — Contract Layer
+### DiscoveryManagement — Contract Layer
 
 | File | Purpose |
 |---|---|
-| `autodiscovery-contract/src/index.ts` | Barrel exports for 7 compiled contracts + all witnesses |
-| `autodiscovery-contract/src/witnesses/index.ts` | Barrel exports for 6 witness implementations |
-| `autodiscovery-contract/src/witnesses/discovery-witnesses.ts` | `computeUniqueCaseIdentifier`, `computeUniqueStepHash`, `getCurrentTimestamp` |
-| `autodiscovery-contract/src/witnesses/compliance-witnesses.ts` | `computeUniqueAttestationHash`, `getCurrentTimestamp` |
-| `autodiscovery-contract/src/witnesses/document-registry-witnesses.ts` | `computeTwinBondHash`, `buildMerkleRootFromDocumentHashes` |
-| `autodiscovery-contract/src/witnesses/access-control-witnesses.ts` | `computeSharingEventProofHash`, `getCurrentTimestamp` |
-| `autodiscovery-contract/src/witnesses/expert-witness-witnesses.ts` | `computeExpertIdentifierHash` |
-| `autodiscovery-contract/src/witnesses/registry-witnesses.ts` | Jurisdiction registry witnesses |
+| `discovery-contract/src/index.ts` | Barrel exports for 7 compiled contracts + all witnesses |
+| `discovery-contract/src/witnesses/index.ts` | Barrel exports for 6 witness implementations |
+| `discovery-contract/src/witnesses/discovery-witnesses.ts` | `computeUniqueCaseIdentifier`, `computeUniqueStepHash`, `getCurrentTimestamp` |
+| `discovery-contract/src/witnesses/compliance-witnesses.ts` | `computeUniqueAttestationHash`, `getCurrentTimestamp` |
+| `discovery-contract/src/witnesses/document-registry-witnesses.ts` | `computeTwinBondHash`, `buildMerkleRootFromDocumentHashes` |
+| `discovery-contract/src/witnesses/access-control-witnesses.ts` | `computeSharingEventProofHash`, `getCurrentTimestamp` |
+| `discovery-contract/src/witnesses/expert-witness-witnesses.ts` | `computeExpertIdentifierHash` |
+| `discovery-contract/src/witnesses/registry-witnesses.ts` | Jurisdiction registry witnesses |
 
 ### Reference — midnight-doc-manager (key files studied)
 
@@ -199,6 +199,6 @@ VITE_NODE_URL=http://localhost:9944
 
 - **midnight-doc-manager** (PreProd reference dApp): https://github.com/Mackenzie-OO7/midnight-doc-manager
 - **midnight-local-dev** (local Docker stack): https://github.com/midnightntwrk/midnight-local-dev
-- **AutoDiscovery witnesses**: `autodiscovery-contract/src/witnesses/`
-- **AutoDiscovery Compact contracts**: `autodiscovery-contract/src/contracts/`
-- **Related issue**: [bytewizard42i/autoDiscovery_legal#37](https://github.com/bytewizard42i/autoDiscovery_legal/issues/37)
+- **DiscoveryManagement witnesses**: `discovery-contract/src/witnesses/`
+- **DiscoveryManagement Compact contracts**: `discovery-contract/src/contracts/`
+- **Related issue**: [bytewizard42i/DiscoveryManagement#37](https://github.com/bytewizard42i/DiscoveryManagement/issues/37)

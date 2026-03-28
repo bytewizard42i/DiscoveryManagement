@@ -1,10 +1,10 @@
 import type { IAuthProvider, AuthMethod, Credentials, AuthSession } from '../types';
 
 const DEMO_USERS: Record<string, AuthSession> = {
-  'demo@autodiscovery.legal': {
+  'demo@discoverymanagement.app': {
     userId: 'user-001',
     displayName: 'Sarah Mitchell',
-    email: 'demo@autodiscovery.legal',
+    email: 'demo@discoverymanagement.app',
     role: 'prosecution',
     publicKey: '0xDEMO_PK_a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8',
     authMethod: 'email',
@@ -34,10 +34,10 @@ export class MockAuthProvider implements IAuthProvider {
     }
 
     const session: AuthSession = {
-      ...DEMO_USERS['demo@autodiscovery.legal'],
+      ...DEMO_USERS['demo@discoverymanagement.app'],
       authMethod: method,
       authenticatedAt: new Date().toISOString(),
-      email: credentials?.email || 'demo@autodiscovery.legal',
+      email: credentials?.email || 'demo@discoverymanagement.app',
     };
 
     this.session = session;

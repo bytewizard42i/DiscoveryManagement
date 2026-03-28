@@ -1,4 +1,4 @@
-# RealDeal Punch List — AutoDiscovery.legal
+# RealDeal Punch List — DiscoveryManagement
 
 **Created**: Feb 21, 2026  
 **Updated**: Mar 8, 2026  

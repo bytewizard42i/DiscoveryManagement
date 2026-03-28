@@ -33,7 +33,7 @@ Before we can hash anything, we need to define what we're hashing. In legal disc
 | A database export (50,000 rows) | N/A | No pages — structured data |
 | A contract + its 3 amendments | 45 | 4 documents that together form 1 "agreement" |
 
-**The answer**: A document is whatever a party *says* it is when they produce it. But AutoDiscovery needs to handle ALL of these cases with a single, consistent hashing architecture.
+**The answer**: A document is whatever a party *says* it is when they produce it. But DiscoveryManagement needs to handle ALL of these cases with a single, consistent hashing architecture.
 
 ---
 
@@ -87,7 +87,7 @@ LEVEL 5: CASE ROOT
 
 If you've used Git, this is the same architecture:
 
-| Git Concept | AutoDiscovery Equivalent |
+| Git Concept | DiscoveryManagement Equivalent |
 |-------------|-------------------------|
 | **Blob** (raw file content) | Level 0/1: Raw bytes / page hash |
 | **Tree** (directory of blobs) | Level 2/3: Document / package hash |
@@ -386,7 +386,7 @@ Link Record:
 └── Native Available: YES (per ESI agreement / court order)
 ```
 
-This matters because metadata in native format (Excel formulas, Word track changes, email headers) can be legally significant. The produced PDF doesn't contain it. AutoDiscovery tracks both versions and their relationship.
+This matters because metadata in native format (Excel formulas, Word track changes, email headers) can be legally significant. The produced PDF doesn't contain it. DiscoveryManagement tracks both versions and their relationship.
 
 ### 3. Supplemental Productions (Document Versioning)
 
@@ -481,9 +481,9 @@ WHAT GOES ON-CHAIN:
 └── Key individual document hashes — when specifically disputed
 
 WHAT STAYS OFF-CHAIN (but verifiable):
-├── Package hashes (Level 3) — stored in AutoDiscovery's DB
-├── Document hashes (Level 2) — stored in AutoDiscovery's DB
-└── Page/segment hashes (Level 1) — stored in AutoDiscovery's DB
+├── Package hashes (Level 3) — stored in DiscoveryManagement's DB
+├── Document hashes (Level 2) — stored in DiscoveryManagement's DB
+└── Page/segment hashes (Level 1) — stored in DiscoveryManagement's DB
 ```
 
 ### Verification Flow

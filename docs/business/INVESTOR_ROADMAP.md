@@ -1,4 +1,4 @@
-# 🚀 AutoDiscovery - Investor & Venture Capital Roadmap
+# 🚀 DiscoveryManagement - Investor & Venture Capital Roadmap
 
 > **"Automated discovery compliance: build once, comply everywhere."**
 
@@ -6,7 +6,7 @@
 
 ## 📊 **Executive Summary**
 
-**AutoDiscovery** is a **Midnight-based dApp** that revolutionizes legal discovery workflows with **jurisdiction-aware compliance** and **zero-knowledge proofs**. We're addressing a **$30+ billion annual problem** in the US legal market where discovery failures cost firms millions in sanctions and result in case dismissals.
+**DiscoveryManagement** is a **Midnight-based dApp** that revolutionizes legal discovery workflows with **jurisdiction-aware compliance** and **zero-knowledge proofs**. We're addressing a **$30+ billion annual problem** in the US legal market where discovery failures cost firms millions in sanctions and result in case dismissals.
 
 <div align="center">
 
@@ -175,7 +175,7 @@
 
 ### 🏆 **Our Competitive Advantages**
 
-| Feature | AutoDiscovery | Competitors |
+| Feature | DiscoveryManagement | Competitors |
 |---------|---------------|-------------|
 | **Privacy-Preserving** | ✅ ZK proofs | ❌ |
 | **Jurisdiction-Aware** | ✅ GeoOracle | ❌ |
@@ -290,10 +290,10 @@
 5. **💰 Term sheet** - Investment negotiation
 
 ### 📧 **Contact Information**
-- **🕵️ Spy (CEO)** - spy@autodiscovery.legal
-- **💻 John (CTO)** - john@autodiscovery.legal
-- **🌐 Website** - https://autodiscovery.legal
-- **📱 Demo** - https://demo.autodiscovery.legal
+- **🕵️ Spy (CEO)** - spy@DiscoveryManagement
+- **💻 John (CTO)** - john@DiscoveryManagement
+- **🌐 Website** - https://DiscoveryManagement
+- **📱 Demo** - https://demo.DiscoveryManagement
 
 ---
 
@@ -301,7 +301,7 @@
 
 # 🚀 **Join Us in Revolutionizing Legal Discovery**
 
-> *"AutoDiscovery doesn't just help you manage discovery — it mathematically proves you did it right."*
+> *"DiscoveryManagement doesn't just help you manage discovery — it mathematically proves you did it right."*
 
 **Built with Midnight Network — Privacy meets compliance.** 🌙
 

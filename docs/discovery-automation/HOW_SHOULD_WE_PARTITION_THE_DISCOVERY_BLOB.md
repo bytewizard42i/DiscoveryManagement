@@ -13,7 +13,7 @@ Legal discovery is a **giant blob**. One big undifferentiated mass of data, file
 
 Right now, this blob is managed with spreadsheets, email threads, and prayer. The result: $8.5M sanctions, 38,000+ dismissed cases, careers ended.
 
-**AutoDiscovery's job**: Turn the blob into a structured, tracked, auditable, jurisdiction-compliant protocol.
+**DiscoveryManagement's job**: Turn the blob into a structured, tracked, auditable, jurisdiction-compliant protocol.
 
 ---
 
@@ -331,7 +331,7 @@ The DApp is **most powerful** when all parties use it. Here's why:
 | **Sender on DApp, receiver not** | Partial proof — we prove it was sent, but receipt is unconfirmed (like certified mail without a signature) |
 | **Neither on DApp** | No proof — the status quo. Chaos. |
 
-This is the **adoption flywheel**: once one side uses AutoDiscovery, the other side is incentivized to join because the first side now has proof and they don't.
+This is the **adoption flywheel**: once one side uses DiscoveryManagement, the other side is incentivized to join because the first side now has proof and they don't.
 
 ---
 
@@ -583,7 +583,7 @@ End of each court day:
 │
 ├─ Court reporter files transcript (rough or final)
 │
-├─ AutoDiscovery ingests transcript
+├─ DiscoveryManagement ingests transcript
 │   ├─ Hash generated and anchored to Midnight
 │   ├─ Paralegal/attorney tags discovery-relevant excerpts
 │   └─ System auto-extracts: deadlines, rulings, warnings
@@ -603,7 +603,7 @@ This creates a **running judicial audit trail**. Six months later at a sanctions
 
 ## Step 8: Judge Instructions & Court Orders — The Authority Layer
 
-Judges don't just rule on motions — they actively manage discovery through orders, scheduling conferences, and bench commentary. These are **authoritative commands** that create obligations. AutoDiscovery needs to treat them as first-class objects.
+Judges don't just rule on motions — they actively manage discovery through orders, scheduling conferences, and bench commentary. These are **authoritative commands** that create obligations. DiscoveryManagement needs to treat them as first-class objects.
 
 ### Types of Judicial Directives
 
@@ -627,7 +627,7 @@ This is a **critical gap** in current practice. A judge says from the bench: "De
 - By then, the deadline may have passed
 - Parties dispute what the judge actually said
 
-**AutoDiscovery's solution**: When a transcript excerpt is tagged `DISCOVERY_RULING` or `DEADLINE_SET`, the system:
+**DiscoveryManagement's solution**: When a transcript excerpt is tagged `DISCOVERY_RULING` or `DEADLINE_SET`, the system:
 1. Immediately creates a new obligation record
 2. Starts the deadline countdown
 3. Sends alerts to all parties
@@ -638,7 +638,7 @@ Now there's no "I didn't know" or "I thought the judge said the 28th, not the 20
 
 ### Judge Commentary Tracker
 
-Judges often drop hints before they drop hammers. AutoDiscovery should track the **escalation pattern**:
+Judges often drop hints before they drop hammers. DiscoveryManagement should track the **escalation pattern**:
 
 ```
 ╔══════════════════════════════════════════════════════════╗
@@ -663,13 +663,13 @@ Judges often drop hints before they drop hammers. AutoDiscovery should track the
 ║          Severity: ●●●● CRITICAL                           ║
 ║                                                            ║
 ║  PATTERN: 4-event escalation over 17 days.                 ║
-║  AutoDiscovery alerts were sent at each stage.             ║
+║  DiscoveryManagement alerts were sent at each stage.             ║
 ║  Receiving party acknowledged 2 of 4 alerts.               ║
 ║                                                            ║
 ╚══════════════════════════════════════════════════════════╝
 ```
 
-This tracker becomes **exhibit A** at the sanctions hearing. It shows the court gave ample warning, AutoDiscovery flagged each escalation, and the non-compliant party had every opportunity to fix the problem.
+This tracker becomes **exhibit A** at the sanctions hearing. It shows the court gave ample warning, DiscoveryManagement flagged each escalation, and the non-compliant party had every opportunity to fix the problem.
 
 ---
 
@@ -716,9 +716,9 @@ Judge tells the jury:
  would have been unfavorable to Defendant's position."
 ```
 
-That instruction can **win or lose the case**. AutoDiscovery tracks the full chain:
+That instruction can **win or lose the case**. DiscoveryManagement tracks the full chain:
 
-| Step | What AutoDiscovery Captures |
+| Step | What DiscoveryManagement Captures |
 |------|---------------------------|
 | 1. Document was due | Obligation record with deadline |
 | 2. Not produced on time | Overdue flag in memorandum |
@@ -902,11 +902,11 @@ The final output:
 
 2. ~~**What happens when a party supplements discovery?**~~ — **RESOLVED**: Supplements create new Production entries (Level 4) that fold into the Case Root. Corrected documents preserve original hash in history. Never delete, only append. See deep dive: "Supplemental Productions" section.
 
-3. **Format standardization** — Should AutoDiscovery enforce format requirements (e.g., all text must be OCR'd PDF)? Or just flag non-compliance?
+3. **Format standardization** — Should DiscoveryManagement enforce format requirements (e.g., all text must be OCR'd PDF)? Or just flag non-compliance?
 
-4. **Integration with existing e-discovery tools** — Firms already use Relativity, Logikcull, etc. AutoDiscovery should layer on top, not replace their document management.
+4. **Integration with existing e-discovery tools** — Firms already use Relativity, Logikcull, etc. DiscoveryManagement should layer on top, not replace their document management.
 
-5. **Privilege disputes** — When a party claims privilege, the other side can challenge. How does AutoDiscovery handle in camera review (judge sees it, nobody else does)?
+5. **Privilege disputes** — When a party claims privilege, the other side can challenge. How does DiscoveryManagement handle in camera review (judge sees it, nobody else does)?
 
 6. **Transcript turnaround time** — Official transcripts can take days/weeks. Do we ingest rough drafts same-day and update when finals arrive? How do we handle hash changes between rough and final?
 

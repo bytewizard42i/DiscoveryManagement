@@ -1,4 +1,4 @@
-# AutoDiscovery — Interaction Log
+# DiscoveryManagement — Interaction Log
 
 > **Project journal** — records key prompts, decisions, and milestones from John + Penny dev sessions.
 > Updated before each push to maintain a running record of how the project evolved.
@@ -24,7 +24,7 @@ First real build session after planning/research phase. Spy's feedback already r
 - **Decision**: Jurisdiction rollout order locked: **Idaho → Ohio → Washington → Utah → California → New York**
 
 **John**: Let's lock that order in. What should we work on first? Do you want to start making the folders for the compact smart contracts and begin making a skeleton?
-- **Action**: Scaffolded `autodiscovery-contract/src/contracts/` with 4 skeleton Compact files:
+- **Action**: Scaffolded `discovery-contract/src/contracts/` with 4 skeleton Compact files:
   - `discovery-core.compact` — case lifecycle, step tracking
   - `jurisdiction-registry.compact` — on-chain rule pack registry
   - `compliance-proof.compact` — ZK attestation generation
@@ -57,9 +57,9 @@ Continuing from scaffold. Spy's feedback incorporated. TypeScript data model is 
 **John**: Can you check out the ft bifrost bridge repo I just forked in GitHub?
 - **Note**: GitHub MCP auth failing ("Bad credentials"). Worked around by fetching README directly via URL.
 - **Action**: Reviewed `bytewizard42i/ft-bifrost-bridge_johns-copy`. It's a Bitcoin↔Cardano bridge by FluidTokens/ZkFold/Lantr using SPO consensus. Catalyst Fund 14 funded (739K ADA). AGPL licensed. In final dev phase.
-- **Decision**: Not relevant to AutoDiscovery. Nice ecosystem reference fork. Parked.
+- **Decision**: Not relevant to DiscoveryManagement. Nice ecosystem reference fork. Parked.
 
-**John**: I'm a little tired, can we pick up again tomorrow? In the meantime feel free to work on whatever part of ADL that you feel is appropriate.
+**John**: I'm a little tired, can we pick up again tomorrow? In the meantime feel free to work on whatever part of DM that you feel is appropriate.
 - **Action**: Built the entire 6-entity TypeScript data model (Phase 0.3):
   - `enums.ts` — 11 enums covering all status types, categories, roles
   - `case.ts` — Case entity with disposition + appeal tracking (Spy's request)
@@ -143,14 +143,14 @@ Continuing from scaffold. Spy's feedback incorporated. TypeScript data model is 
 - **Note**: Corrected Alice's $8.83M Grange Mutual figure — actual sanctions were $5.4M default judgment (6th Circuit). Pioneer Hi-Bred v. Monsanto $8.2M figure could not be independently verified as a sanctions amount — omitted from final file.
 
 ### Commits (continued)
-- `docs: pitch fodder — cited shock & awe stats for selling autodiscovery.legal`
+- `docs: pitch fodder — cited shock & awe stats for selling DiscoveryManagement`
 
 **John**: Shared Grok's expanded deep dive with more case law, systemic stats, and a draft one-pager/synopsis. Requested full merge, deeper research, one-pager and 1000-word synopsis.
 - **Action**: Verified all new Grok data points against primary sources. Merged Alice + Grok + Penny research into comprehensive 8-part PITCH_FODDER.md:
   - Part I: Core stats (cited & verified)
   - Part II: 10 landmark cases with full citations (added Coleman v Morgan Stanley $1.58B, Zubulake $29.3M, DR Distributors $2.5M, Captive Alternatives dismissed, Paisley Park, Skanska)
   - Part III: Systemic impact (vanishing trial, criminal cases 60% longer, budget data)
-  - Part IV: AutoDiscovery differentiator
+  - Part IV: DiscoveryManagement differentiator
   - Part V: 15 copy-ready pain bullets
   - Part VI: Idaho-specific & Spy angles
   - Part VII: Shareable one-pager
@@ -164,7 +164,7 @@ Continuing from scaffold. Spy's feedback incorporated. TypeScript data model is 
 
 ### Alice Ad Prompt (sent Feb 11, 2026)
 
-> Here is a list of the top 10 bangers. What Id like you to do is make a picture with an angry judge at the top smashing her gavel down. Under that the list of bangers and somewhere on the page: Title: autoDiscovery.legal (keep my capitalization please for the title), then a triangle with 1. abstact away liability and prevent sanctions, 2. reduce workload and manhours reducing costs, 3. increase profits with the tagline: Hard-coded, multi-jurisdictional discovery law for modern discovery management.
+> Here is a list of the top 10 bangers. What Id like you to do is make a picture with an angry judge at the top smashing her gavel down. Under that the list of bangers and somewhere on the page: Title: DiscoveryManagement (keep my capitalization please for the title), then a triangle with 1. abstact away liability and prevent sanctions, 2. reduce workload and manhours reducing costs, 3. increase profits with the tagline: Hard-coded, multi-jurisdictional discovery law for modern discovery management.
 
 **Top 10 bangers provided:**
 1. 1 in 10 federal civil cases requires a judge to resolve discovery disputes. (FJC 2009)
@@ -197,7 +197,7 @@ Major ideation session. Synced repos, reviewed Penny's new research, created fea
 ### Key Interactions
 
 **John**: Sync both repos with remotes, merge upstream changes, commit new slide content, share updates with Penny.
-- **Action**: Fetched and merged upstream changes in both ADL and PixyPi repos. Committed `BUILD_CLUB_SLIDE_CONTENT.md`. Created `CASSIE_UPDATE_2026-02-15.md` in PixyPi for Penny with ADL progress summary and Agent-MCP feedback.
+- **Action**: Fetched and merged upstream changes in both DM and PixyPi repos. Committed `BUILD_CLUB_SLIDE_CONTENT.md`. Created `CASSIE_UPDATE_2026-02-15.md` in PixyPi for Penny with DM progress summary and Agent-MCP feedback.
 - **Outcome**: Both repos clean and synced.
 
 **John**: Pull Penny's new updates and review them.
@@ -353,7 +353,7 @@ Feature implementation session on branch `sunday-night-penny-upgrades`. Focus: e
 
 ### Key Interactions
 
-**John**: Implement the suggested ADL features for the demoLand mock UI.
+**John**: Implement the suggested DM features for the demoLand mock UI.
 - **Action**: Implemented 8 features across 3 files (case-view, dashboard, layout):
 
 #### Case View Page (`pages/case-view/index.tsx`)

@@ -1,4 +1,4 @@
-# AutoDiscovery — Build Plan
+# DiscoveryManagement — Build Plan
 
 > **Living document** — updated as work progresses.
 > Last updated: February 15, 2026
@@ -44,12 +44,12 @@ Comprehensive protocol architecture for automating legal discovery. All document
 - Decision: Start with `>= 0.16 && <= 0.18` (per global rules + MCP validation); bump only if compilation fails
 - Update `package.json` compact script if compiler version changes
 
-### 0.3 ✅ TypeScript Data Model (`autodiscovery-contract/src/types/`)
+### 0.3 ✅ TypeScript Data Model (`discovery-contract/src/types/`)
 Create strongly-typed interfaces (no `Record<string, any>` — everything explicit).
 
 **Files to create:**
 ```
-autodiscovery-contract/src/types/
+discovery-contract/src/types/
 ├── case.ts                    # Case entity
 ├── discovery-step.ts          # Discovery step/obligation
 ├── jurisdiction-rule-pack.ts  # Rule pack with params
@@ -73,7 +73,7 @@ Rename/reorganize from starter template to AD-specific structure.
 
 **Contract package — rename and extend:**
 ```
-autodiscovery-contract/src/
+discovery-contract/src/
 ├── contracts/
 │   ├── discovery-core.compact           # Case lifecycle
 │   ├── jurisdiction-registry.compact    # Rule storage & lookup
@@ -420,7 +420,7 @@ Multi-step wizard:
 - Idaho IRCP vs. FRCP comparison as initial content
 
 ### 3.7 ⬜ Navigation & Layout Updates
-- Replace "Midnight Starter Template" branding with AutoDiscovery
+- Replace "Midnight Starter Template" branding with DiscoveryManagement
 - Add sidebar navigation (Dashboard, Cases, New Case, Jurisdiction, Settings)
 - Update `index.html` title/favicon
 - Keep wallet widget in header (connected indicator, not full page)
@@ -448,7 +448,7 @@ Multi-step wizard:
 ### 4.4 ⬜ Deploy to Vercel
 - Configure Vercel deployment (Spy's subscription)
 - Set up environment variables
-- Custom domain: autodiscovery.legal (if available)
+- Custom domain: DiscoveryManagement (if available)
 
 ---
 
@@ -534,4 +534,4 @@ Phase 0.2 (pragma resolution)
 
 ---
 
-*AutoDiscovery Build Plan — John + Penny (Feb 2026)*
+*DiscoveryManagement Build Plan — John + Penny (Feb 2026)*

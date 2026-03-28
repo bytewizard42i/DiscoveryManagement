@@ -1,6 +1,6 @@
 # DemoLand Video Walkthrough Script
 
-**For**: Screen recording of AutoDiscovery.legal DemoLand demo
+**For**: Screen recording of DiscoveryManagement DemoLand demo
 **Duration**: ~4-5 minutes
 **Setup**: `cd frontend-demoland-vite-react && npm run dev` → opens at `localhost:5173`
 **Recording Tool**: OBS Studio, Windows Game Bar (Win+G), or any screen recorder
@@ -22,10 +22,10 @@
 
 ### Scene 1: Login Screen (0:00 - 0:30)
 
-**What you see**: Gold scales logo, "AutoDiscovery" title, yellow DEMO MODE banner at top, three auth method cards.
+**What you see**: Gold scales logo, "DiscoveryManagement" title, yellow DEMO MODE banner at top, three auth method cards.
 
 **What to say**:
-> "This is AutoDiscovery Legal — a privacy-preserving legal discovery platform built on the Midnight blockchain. We support three authentication methods."
+> "This is DiscoveryManagement — a privacy-preserving legal discovery platform built on the Midnight blockchain. We support three authentication methods."
 
 **Actions**:
 1. **Hover** over each auth card briefly:
@@ -61,7 +61,7 @@
 
 3. **Point out the "Due This Week" section** (if visible — scroll slightly):
    - "The system flags upcoming deadlines. These are steps due within 7 days."
-   - Note any "Deemed Admitted" warnings — "Under IRCP 36, unanswered requests for admission are automatically deemed admitted. AutoDiscovery tracks this countdown."
+   - Note any "Deemed Admitted" warnings — "Under IRCP 36, unanswered requests for admission are automatically deemed admitted. DiscoveryManagement tracks this countdown."
 
 4. **Point out Smith v. Acme case card**:
    - "Smith v. Acme Medical Center — a med-mal case"
@@ -168,7 +168,7 @@
 **Actions**: Navigate back to dashboard.
 
 **What to say**:
-> "That's AutoDiscovery Legal — privacy-preserving legal discovery automation powered by Midnight's zero-knowledge proofs. Six smart contracts, 27 ZK circuits, all live on the Midnight Preprod network. Every document hash, every compliance attestation, every access permission is cryptographically verified on-chain — while the sensitive data never leaves the law firm's control."
+> "That's DiscoveryManagement — privacy-preserving legal discovery automation powered by Midnight's zero-knowledge proofs. Six smart contracts, 27 ZK circuits, all live on the Midnight Preprod network. Every document hash, every compliance attestation, every access permission is cryptographically verified on-chain — while the sensitive data never leaves the law firm's control."
 
 ---
 

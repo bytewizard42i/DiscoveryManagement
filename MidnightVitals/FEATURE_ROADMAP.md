@@ -108,7 +108,7 @@ Connect to real infrastructure. Same UI, real data.
 
 ## Phase 3: Standalone Package
 
-Extract from AutoDiscovery.legal into a reusable npm package.
+Extract from DiscoveryManagement into a reusable npm package.
 
 ### v1.0.0 — Public Release
 
@@ -123,7 +123,7 @@ Extract from AutoDiscovery.legal into a reusable npm package.
 
 - [ ] Plugin interface for custom health checks
 - [ ] Plugin interface for custom log entry types
-- [ ] ADL adapter as reference plugin implementation
+- [ ] DM adapter as reference plugin implementation
 - [ ] Documentation for plugin developers
 
 ---

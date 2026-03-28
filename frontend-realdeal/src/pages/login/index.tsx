@@ -10,7 +10,7 @@ export function LoginPage() {
   const navigate = useNavigate();
 
   const [method, setMethod] = useState<AuthMethod>('email');
-  const [email, setEmail] = useState('demo@autodiscovery.legal');
+  const [email, setEmail] = useState('demo@discoverymanagement.app');
   const [password, setPassword] = useState('demo1234');
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState('');
@@ -257,7 +257,7 @@ export function LoginPage() {
               <span>Privacy-First</span>
             </div>
             <p className="text-[10px] text-blue-300/20">
-              v0.1.0-demo • AutoDiscovery Legal Intelligence
+              v0.1.0-demo • DiscoveryManagement Legal Intelligence
             </p>
           </div>
         </div>

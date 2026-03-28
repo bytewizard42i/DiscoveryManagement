@@ -38,7 +38,7 @@ Do not use 🔵 figures in investor materials without disclosure. Use 🟢 and �
 
 > 🟢 Source: ComplexDiscovery 2024–2029 eDiscovery Market Size Mashup
 
-**AutoDiscovery GTM Insight:** The decline of manual document review as a revenue center — and the rise of processing/production spend — validates AutoDiscovery's automation-first approach. Firms want to move *past* manual review. We automate it.
+**DiscoveryManagement GTM Insight:** The decline of manual document review as a revenue center — and the rise of processing/production spend — validates DiscoveryManagement's automation-first approach. Firms want to move *past* manual review. We automate it.
 
 ---
 
@@ -80,7 +80,7 @@ Do not use 🔵 figures in investor materials without disclosure. Use 🟢 and �
 
 | Metric | Value | Source |
 |--------|-------|--------|
-| **Largest single-case discovery sanction** | $8,500,000 | 🟢 Public court record (cited in AutoDiscovery README) |
+| **Largest single-case discovery sanction** | $8,500,000 | 🟢 Public court record (cited in DiscoveryManagement README) |
 | **Average discovery sanction (US)** | $704,094 | 🟢 Public court records analysis |
 | **NYC cases dismissed due to discovery failure (2024)** | 38,000+ | 🟢 NYC Court System data (2024) |
 | **NYC conviction rate drop linked to discovery failures** | 50% → 25% | 🟢 NYC court data (2024) |
@@ -100,7 +100,7 @@ Do not use 🔵 figures in investor materials without disclosure. Use 🟢 and �
 | **Expert witness coordination** | 8–12% | $28–$42/hr equivalent | 🔵 Industry estimate |
 | **Compliance verification** | 5–10% | $17–$35/hr equivalent | 🔵 Industry estimate |
 
-> **AutoDiscovery directly addresses 4 of the 6 categories above through automation.**
+> **DiscoveryManagement directly addresses 4 of the 6 categories above through automation.**
 
 ---
 
@@ -108,7 +108,7 @@ Do not use 🔵 figures in investor materials without disclosure. Use 🟢 and �
 
 ### 📋 Top Malpractice Claim Categories (ABA / ALPS 2024)
 
-| Rank | Category | % of Claims | AutoDiscovery Mitigation |
+| Rank | Category | % of Claims | DiscoveryManagement Mitigation |
 |------|----------|------------|--------------------------|
 | **1** | Missed deadlines / calendar errors | 28% | ✅ Automated deadline tracking |
 | **2** | Failure to know / apply law | 18% | ✅ Jurisdiction rule packs |
@@ -120,7 +120,7 @@ Do not use 🔵 figures in investor materials without disclosure. Use 🟢 and �
 
 > 🟢 Sources: ABA Profile of Legal Malpractice Claims; ALPS Insurance 2024 Claims Report
 
-**AutoDiscovery directly mitigates 46%+ of all malpractice claim categories by category weight.**
+**DiscoveryManagement directly mitigates 46%+ of all malpractice claim categories by category weight.**
 
 ### 💸 Malpractice Insurance Costs (Annual Premium Benchmarks)
 
@@ -131,7 +131,7 @@ Do not use 🔵 figures in investor materials without disclosure. Use 🟢 and �
 | **Mid (25 attorneys)** | $40,000–$120,000 | $1,600–$4,800 | 🟢 ALPS Insurance data |
 | **Large (100 attorneys)** | $200,000–$600,000 | $2,000–$6,000 | 🔵 Industry estimate |
 
-> **Positioning angle:** AutoDiscovery is cheaper than the malpractice premium increase caused by one discovery violation.
+> **Positioning angle:** DiscoveryManagement is cheaper than the malpractice premium increase caused by one discovery violation.
 
 ---
 
@@ -153,7 +153,7 @@ Do not use 🔵 figures in investor materials without disclosure. Use 🟢 and �
 
 ### 🌐 Cloud & SaaS Adoption Trajectory
 
-| Metric | Status | Implication for AutoDiscovery |
+| Metric | Status | Implication for DiscoveryManagement |
 |--------|--------|-------------------------------|
 | **Cloud adoption in legal** | Accelerating | SaaS delivery model is now the default expectation |
 | **Preferred deployment model** | Cloud-first (70%+) | No on-premise requirement needed for launch |
@@ -180,9 +180,9 @@ Do not use 🔵 figures in investor materials without disclosure. Use 🟢 and �
 
 > 🟢 Sources: Public pricing pages, G2, Capterra, and legal tech procurement reports (2024)
 
-### 🎯 AutoDiscovery Pricing vs. Market
+### 🎯 DiscoveryManagement Pricing vs. Market
 
-| Tier | AutoDiscovery | Comparable Stack | Savings | Value Multiplier |
+| Tier | DiscoveryManagement | Comparable Stack | Savings | Value Multiplier |
 |------|--------------|-----------------|---------|-----------------|
 | **Solo** | $99/mo ($1,188/yr) | $5K–$15K/yr | $4K–$14K | 4–12x cheaper |
 | **Small Firm** | $299/mo ($3,588/yr) | $25K–$60K/yr | $21K–$56K | 7–17x cheaper |
@@ -200,7 +200,7 @@ Do not use 🔵 figures in investor materials without disclosure. Use 🟢 and �
 - **Current spend:** $5K–$15K/yr on legal tech, mostly Clio + Westlaw
 - **Discovery pain:** Does everything manually; one missed deadline = malpractice exposure
 - **Budget authority:** Full control, very price sensitive
-- **AutoDiscovery pitch:** *"One sanction costs more than 10 years of AutoDiscovery."*
+- **DiscoveryManagement pitch:** *"One sanction costs more than 10 years of DiscoveryManagement."*
 - **Price sensitivity:** High — needs ROI within 30 days
 - **Best channel:** Legal blog ads, bar association newsletters, CLE sessions
 
@@ -209,7 +209,7 @@ Do not use 🔵 figures in investor materials without disclosure. Use 🟢 and �
 - **Current spend:** $25K–$80K/yr, fragmented tools, no unified discovery workflow
 - **Discovery pain:** Can't standardize across attorneys; relies on paralegal checklists
 - **Budget authority:** Shared with office manager / COO
-- **AutoDiscovery pitch:** *"Replace 5 tools with one. Standardize compliance across your whole team."*
+- **DiscoveryManagement pitch:** *"Replace 5 tools with one. Standardize compliance across your whole team."*
 - **Price sensitivity:** Moderate — focused on team productivity and risk reduction
 - **Best channel:** State bar tech committees, legal ops webinars, referrals
 
@@ -218,7 +218,7 @@ Do not use 🔵 figures in investor materials without disclosure. Use 🟢 and �
 - **Current spend:** $100K–$400K/yr, Relativity or Logikcull, practice management suite
 - **Discovery pain:** Multi-jurisdiction complexity; e-discovery costs ballooning; no compliance audit trail
 - **Budget authority:** Recommends to managing committee
-- **AutoDiscovery pitch:** *"ZK compliance proofs that can be entered as court record. No other platform does this."*
+- **DiscoveryManagement pitch:** *"ZK compliance proofs that can be entered as court record. No other platform does this."*
 - **Price sensitivity:** Low for value — focused on compliance guarantee and cost reduction
 - **Best channel:** ILTA conferences, legal ops LinkedIn, Relativity Fest
 
@@ -227,7 +227,7 @@ Do not use 🔵 figures in investor materials without disclosure. Use 🟢 and �
 - **Current spend:** $200K–$1M/yr on outside counsel discovery costs alone
 - **Discovery pain:** Outside counsel bills are opaque; no audit trail on compliance
 - **Budget authority:** Full authority up to $500K
-- **AutoDiscovery pitch:** *"Demand your outside counsel uses AutoDiscovery — or prove they don't need to."*
+- **DiscoveryManagement pitch:** *"Demand your outside counsel uses DiscoveryManagement — or prove they don't need to."*
 - **Price sensitivity:** Very low — risk reduction is the metric
 - **Best channel:** ACC (Association of Corporate Counsel), CLM events, LinkedIn
 
@@ -251,7 +251,7 @@ Do not use 🔵 figures in investor materials without disclosure. Use 🟢 and �
 
 | Audience | Primary Message | Proof Point |
 |----------|----------------|-------------|
-| **Solo attorneys** | "One mistake costs more than years of AutoDiscovery" | Avg sanction: $704K |
+| **Solo attorneys** | "One mistake costs more than years of DiscoveryManagement" | Avg sanction: $704K |
 | **Small firms** | "Standardize compliance. Eliminate manual checklists." | 28% malpractice from deadlines |
 | **Mid-size firms** | "Replace your $100K+ discovery stack for $12K/yr" | 7–17x cheaper than Relativity |
 | **Enterprise** | "The only platform that produces court-admissible ZK compliance proofs" | Midnight ZK unique differentiator |
@@ -262,10 +262,10 @@ Do not use 🔵 figures in investor materials without disclosure. Use 🟢 and �
 | Objection | Response | Data Point |
 |-----------|----------|-----------|
 | *"We already use Relativity"* | "Relativity doesn't do jurisdiction-aware compliance. We do." | No competitor does this |
-| *"We can't afford more tools"* | "AutoDiscovery replaces 3–5 tools you're already paying for." | 7–17x cost reduction |
+| *"We can't afford more tools"* | "DiscoveryManagement replaces 3–5 tools you're already paying for." | 7–17x cost reduction |
 | *"We handle compliance manually"* | "28% of all malpractice claims come from manual deadline failures." | ABA Malpractice Study |
 | *"We don't understand ZK proofs"* | "Neither do judges — but courts accept the result. That's the point." | Midnight ZK design |
-| *"We're a small firm"* | "AutoDiscovery was built specifically for practitioners who can't afford a $500K discovery team." | ILTA spend data |
+| *"We're a small firm"* | "DiscoveryManagement was built specifically for practitioners who can't afford a $500K discovery team." | ILTA spend data |
 
 ---
 
@@ -284,7 +284,7 @@ All sources cited in this document. Verify and link in any investor or marketing
 | 7 | Axiom Law — 2025 Legal Department Budgets & Technology | Survey | 2025 | https://www.axiomlaw.com/blog/2025-legal-department-budgets-technology-emerging-risks |
 | 8 | ABA Journal — Legal Malpractice Trends 2024 | Legal News | 2024 | https://www.abajournal.com/web/article/9-legal-malpractice-trends-in-2024 |
 | 9 | Fortune Business Insights — eDiscovery Market Report | Market Research | 2024 | https://www.fortunebusinessinsights.com/industry-reports/ediscovery-market-101503 |
-| 10 | NYC Court System — Case Dismissal Data | Public Record | 2024 | Cited in AutoDiscovery README |
+| 10 | NYC Court System — Case Dismissal Data | Public Record | 2024 | Cited in DiscoveryManagement README |
 
 ---
 
@@ -304,7 +304,7 @@ All sources cited in this document. Verify and link in any investor or marketing
 5. **Write content targeting "Relativity alternative"** and "Logikcull alternative" search terms
 
 ### 🚀 For Go-To-Market
-1. **Partner with ALPS or another malpractice insurer** — offer premium discounts to AutoDiscovery users
+1. **Partner with ALPS or another malpractice insurer** — offer premium discounts to DiscoveryManagement users
 2. **Target ILTA members** — these are the technology decision-makers at law firms
 3. **Submit to ABA TECHSHOW** — largest legal tech conference in the US (Chicago, spring)
 4. **Apply to LawNext50** — annual list of most promising legal tech companies

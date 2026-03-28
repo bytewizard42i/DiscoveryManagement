@@ -41,26 +41,26 @@ jobs:
         run: npm install -g @midnight-ntwrk/compact@1
 
       - name: Run test:compile
-        working-directory: autodiscovery-contract
+        working-directory: discovery-contract
         run: npm run test:compile
 
       - name: Upload compiled contracts
         uses: actions/upload-artifact@v4
         with:
           name: compiled-contracts
-          path: autodiscovery-contract/src/managed/
+          path: discovery-contract/src/managed/
           retention-days: 30
           if-no-files-found: error
 
       - name: Build contract package
-        working-directory: autodiscovery-contract
+        working-directory: discovery-contract
         run: npm run build
 
       - name: Upload build output
         uses: actions/upload-artifact@v4
         with:
           name: contract-dist
-          path: autodiscovery-contract/dist/
+          path: discovery-contract/dist/
           retention-days: 30
           if-no-files-found: error
 
@@ -77,17 +77,17 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: compiled-contracts
-          path: autodiscovery-contract/src/managed/
+          path: discovery-contract/src/managed/
 
       - name: Download build output
         uses: actions/download-artifact@v4
         with:
           name: contract-dist
-          path: autodiscovery-contract/dist/
+          path: discovery-contract/dist/
 
       - name: Verify artifacts
         run: |
-          ls -la autodiscovery-contract/src/managed/
-          test -n "$(ls -A autodiscovery-contract/src/managed/)" || exit 1
-          ls -la autodiscovery-contract/dist/
-          test -n "$(ls -A autodiscovery-contract/dist/)" || exit 1
+          ls -la discovery-contract/src/managed/
+          test -n "$(ls -A discovery-contract/src/managed/)" || exit 1
+          ls -la discovery-contract/dist/
+          test -n "$(ls -A discovery-contract/dist/)" || exit 1

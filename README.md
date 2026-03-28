@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src="./media/autodiscovery-logo.png" alt="AutoDiscovery Logo" width="280" />
+<img src="./media/discoverymanagement-logo.png" alt="DiscoveryManagement Logo" width="280" />
 
-# AutoDiscovery
+# DiscoveryManagement
 
-<img src="./media/autodiscovery-banner.png" alt="The Cost of Discovery Failure — autoDiscovery.legal" width="600" />
+<img src="./media/discoverymanagement-banner.png" alt="The Cost of Discovery Failure — DiscoveryManagement" width="600" />
 
 ### *Automated discovery compliance: build once, comply everywhere.*
 
@@ -44,17 +44,17 @@ The legal discovery process is messy, time consuming, and varies by jurisdiction
 
 ## 💡 The Solution
 
-With **autoDiscovery.legal**, we aim to organize and formalize a **hard-coded, geographically compliant, law-based protocol** that will help organize, distribute, and give proper, accurate, and secure access control to user-aggregated legal discovery.
+With **DiscoveryManagement**, we aim to organize and formalize a **hard-coded, geographically compliant, law-based protocol** that will help organize, distribute, and give proper, accurate, and secure access control to user-aggregated legal discovery.
 
 This protocol will **abstract away liability**, reduce man hours and overall costs, increase profits, and form an **immutable (existing forever) proof of compliance, custody, provenance, and access.**
 
-It is our hope that autoDiscovery.legal will be the **default protocol for accurate and dependable discovery/evidence management** — backed with error insurance that will protect law firms from errors and omissions.
+It is our hope that DiscoveryManagement will be the **default protocol for accurate and dependable discovery/evidence management** — backed with error insurance that will protect law firms from errors and omissions.
 
-> *"AutoDiscovery doesn't just help you manage discovery — it mathematically proves you did it right."*
+> *"DiscoveryManagement doesn't just help you manage discovery — it mathematically proves you did it right."*
 
 ---
 
-## ⚙️ What AutoDiscovery Does
+## ⚙️ What DiscoveryManagement Does
 
 <table>
 <tr>
@@ -131,7 +131,7 @@ It is our hope that autoDiscovery.legal will be the **default protocol for accur
 ## 📁 Project Structure
 
 ```
-AutoDiscovery/
+DiscoveryManagement/
 ├── frontend-demoland-vite-react/           # React application
 │   ├── src/
 │   │   ├── components/            # Reusable UI (email safety dialog, etc.)
@@ -141,9 +141,9 @@ AutoDiscovery/
 │   │   │   └── demoland/          # Mock providers for demo environment
 │   │   └── lib/                   # Utilities
 │   └── public/
-├── autodiscovery-contract/        # Compact smart contracts & TypeScript types
+├── discovery-contract/        # Compact smart contracts & TypeScript types
 │   └── src/types/                 # Strongly-typed data model (6 entities)
-├── autodiscovery-cli/             # CLI tools for deployment & operations
+├── discovery-cli/             # CLI tools for deployment & operations
 ├── docs/                          # Comprehensive documentation (20+ docs)
 │   ├── discovery-automation/      # 9-step discovery protocol deep dives
 │   └── reference/                 # Jurisdiction research archives
@@ -170,8 +170,8 @@ AutoDiscovery/
 
 ```bash
 # Clone the repository
-git clone git@github.com:bytewizard42i/autoDiscovery_legal.git
-cd AutoDiscovery
+git clone git@github.com:bytewizard42i/DiscoveryManagement.git
+cd DiscoveryManagement
 
 # Install all dependencies (monorepo)
 npm install
@@ -187,7 +187,7 @@ npm run dev:frontend
 
 ```bash
 # Copy environment templates
-cp autodiscovery-cli/.env_template autodiscovery-cli/.env
+cp discovery-cli/.env_template discovery-cli/.env
 cp frontend-demoland-vite-react/.env_template frontend-demoland-vite-react/.env
 ```
 
@@ -197,11 +197,11 @@ cp frontend-demoland-vite-react/.env_template frontend-demoland-vite-react/.env
 
 ### 1. Running the Proof Server (Local / Undeployed)
 
-The repo ships Docker Compose files in `autodiscovery-cli/` for running the proof server locally without a live network:
+The repo ships Docker Compose files in `discovery-cli/` for running the proof server locally without a live network:
 
 ```bash
 # Start proof server only (for contract compilation & testing)
-cd autodiscovery-cli
+cd discovery-cli
 docker compose -f ps-undeployed.yml up
 
 # Or start the full local dev stack (proof server + indexer + node)
@@ -237,7 +237,7 @@ To interact with Midnight PreProd you need a wallet funded with tDUST tokens:
 
 ### 3. Environment Variable Reference
 
-#### `autodiscovery-cli/.env`
+#### `discovery-cli/.env`
 
 | Variable | Description | How to obtain |
 |----------|-------------|---------------|
@@ -267,7 +267,7 @@ Follow these steps to connect the frontend to a live PreProd deployment:
 
 1. Deploy the contracts from the CLI:
    ```bash
-   cd autodiscovery-cli
+   cd discovery-cli
    npm run tui-preview
    ```
 2. Copy the contract address printed in the deployment output.
@@ -328,7 +328,7 @@ Follow these steps to connect the frontend to a live PreProd deployment:
 
 ## 📧 Email Safety Protocol
 
-One of AutoDiscovery's standout features — a multi-layered protection system that prevents accidental disclosure to the wrong party.
+One of DiscoveryManagement's standout features — a multi-layered protection system that prevents accidental disclosure to the wrong party.
 
 | Threat Level | Trigger | Action |
 |:---:|---|---|
@@ -339,7 +339,7 @@ One of AutoDiscovery's standout features — a multi-layered protection system t
 
 Features include **recipient auto-detection** against the case contacts database, **attachment metadata scanning** (EXIF, tracked changes, hidden PDF layers), **image preview before send**, and a **tandem approval workflow** where N approvers must sign off on sensitive communications.
 
-> 📧 **[Full Protocol Documentation →](https://github.com/bytewizard42i/AutoDiscovery/blob/main/docs/product/EMAIL_SAFETY_PROTOCOL.md)**
+> 📧 **[Full Protocol Documentation →](https://github.com/bytewizard42i/DiscoveryManagement/blob/main/docs/product/EMAIL_SAFETY_PROTOCOL.md)**
 
 ---
 
@@ -384,6 +384,6 @@ Full-stack development, smart contract architecture, ZK protocol design, and the
 
 ---
 
-<sub>Copyright 2026 AutoDiscovery Team. All rights reserved.</sub>
+<sub>Copyright 2026 DiscoveryManagement Team. All rights reserved.</sub>
 
 </div>

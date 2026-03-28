@@ -1,23 +1,23 @@
-# 🩺 MidnightVitals — AutoDiscovery.legal Integration
+# 🩺 MidnightVitals — DiscoveryManagement Integration
 
-**The working, integrated version of MidnightVitals inside the AutoDiscovery.legal DApp.**
+**The working, integrated version of MidnightVitals inside the DiscoveryManagement DApp.**
 
 ---
 
 ## What Is This Folder?
 
-This is the **documentation and roadmap** for the MidnightVitals module as it lives inside AutoDiscovery.legal. The actual source code is at `frontend-demoland-vite-react/src/vitals/`.
+This is the **documentation and roadmap** for the MidnightVitals module as it lives inside DiscoveryManagement. The actual source code is at `frontend-demoland-vite-react/src/vitals/`.
 
 There are **two MidnightVitals repos** — here's how they relate:
 
 | Repo | Purpose | Contains |
 |------|---------|----------|
-| **This folder** (`AutoDiscovery/MidnightVitals/`) | Integrated version — embedded in ADL for demoLand and realDeal | Docs, roadmap, integration notes |
+| **This folder** (`DiscoveryManagement/MidnightVitals/`) | Integrated version — embedded in DM for demoLand and realDeal | Docs, roadmap, integration notes |
 | **[bytewizard42i/MidnightVitals](https://github.com/bytewizard42i/MidnightVitals)** | Future standalone package — for any Midnight DApp admin to install | Docs, architecture, will eventually hold extracted source |
 
 ### Key Principle: Non-Interference
 
-MidnightVitals is integrated into AutoDiscovery.legal but **must never interfere** with demoLand or realDeal operation. It's designed to be completely shut off:
+MidnightVitals is integrated into DiscoveryManagement but **must never interfere** with demoLand or realDeal operation. It's designed to be completely shut off:
 
 - **Remove `<VitalsProvider>`** from the app wrapper → the entire module disappears (no hooks fire, no health checks run, no UI renders)
 - **Remove `<VitalsPanel />`** → no panel, but hooks still work silently (useful for headless logging)
@@ -25,7 +25,7 @@ MidnightVitals is integrated into AutoDiscovery.legal but **must never interfere
 - **Remove all `useVitalsInteraction()` calls** → no hover/click tracking, but everything else keeps working
 - **Comment out the `<VitalsNavigationLogger />`** → no route-change logging
 
-Each piece is independently removable. If MidnightVitals ever causes any issue — performance, layout, console noise — any layer can be disabled without touching the rest of the ADL codebase.
+Each piece is independently removable. If MidnightVitals ever causes any issue — performance, layout, console noise — any layer can be disabled without touching the rest of the DM codebase.
 
 ---
 
@@ -101,4 +101,4 @@ The standalone repo at [bytewizard42i/MidnightVitals](https://github.com/bytewiz
 
 ---
 
-Built by John (bytewizard42i) with Penny 🎀 as part of the AutoDiscovery.legal ecosystem.
+Built by John (bytewizard42i) with Penny 🎀 as part of the DiscoveryManagement ecosystem.

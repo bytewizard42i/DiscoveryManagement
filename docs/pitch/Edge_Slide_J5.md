@@ -25,10 +25,10 @@ Your existing relationships already span **8+ states**:
 - Product name, tagline, your unique credibility in legal/health tech
 
 ### Slide 2 — **Problem Statement**
-- What pain point does AutoDiscovery solve? Frame it for legal, court, and health law audiences.
+- What pain point does DiscoveryManagement solve? Frame it for legal, court, and health law audiences.
 
 ### Slide 3 — **Solution**
-- How AutoDiscovery addresses the problem — keep it visual and concise.
+- How DiscoveryManagement addresses the problem — keep it visual and concise.
 
 ### Slide 4 — **Market Opportunity**
 - **Key insight**: Every state has a Bar Association → built-in distribution channel

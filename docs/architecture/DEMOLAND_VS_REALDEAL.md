@@ -243,7 +243,7 @@ VITE_AD_MODE=demoland
 # .env.realdeal
 VITE_AD_MODE=realdeal
 VITE_MIDNIGHT_NETWORK=testnet
-VITE_AI_SERVICE_URL=https://ai.autodiscovery.legal/api
+VITE_AI_SERVICE_URL=https://ai.DiscoveryManagement/api
 ```
 
 ### NPM Scripts
@@ -321,7 +321,7 @@ demoLand should be **obvious** to prevent anyone from thinking mock data is real
 demoLand:
 ┌─────────────────────────────────────────────────────────┐
 │ 🎭 DEMO MODE — Artificial Data — Not Connected to Chain │
-│ AutoDiscovery.legal                         [No Wallet] │
+│ DiscoveryManagement                         [No Wallet] │
 ├─────────────────────────────────────────────────────────┤
 │                                                          │
 │  (normal UI below — everything works, data is fake)     │
@@ -330,7 +330,7 @@ demoLand:
 
 realDeal:
 ┌─────────────────────────────────────────────────────────┐
-│ AutoDiscovery.legal          [🔐 Connected: addr1q...] │
+│ DiscoveryManagement          [🔐 Connected: addr1q...] │
 │ 📍 Idaho — IRCP Active                   [Testnet 🟡]  │
 ├─────────────────────────────────────────────────────────┤
 │                                                          │
@@ -376,7 +376,7 @@ HACKATHON / DEMO:
 ├── Static site — no backend needed
 ├── Anyone can visit the URL and try it
 ├── No wallet, no signup, no blockchain
-└── URL: demo.autodiscovery.legal
+└── URL: demo.DiscoveryManagement
 
 PRODUCTION:
 ├── Deploy realDeal build to Vercel/Netlify
@@ -384,13 +384,13 @@ PRODUCTION:
 ├── Connected to Midnight testnet (→ mainnet later)
 ├── AI services running (separate backend)
 ├── Document storage (IPFS or encrypted cloud)
-└── URL: app.autodiscovery.legal
+└── URL: app.DiscoveryManagement
 
 WEBSITE (marketing):
-├── Landing page explaining AutoDiscovery
+├── Landing page explaining DiscoveryManagement
 ├── Links to both demo and app
 ├── Blog, docs, pricing
-└── URL: autodiscovery.legal
+└── URL: DiscoveryManagement
 ```
 
 ---
@@ -428,7 +428,7 @@ All three produce the same `AuthSession` object. The UI doesn't care how you aut
 
 > These rules prevent us from confusing the two worlds during development.
 
-1. **Smart contract `.compact` files live ONLY in `autodiscovery-contract/src/`** — never in the frontend folder
+1. **Smart contract `.compact` files live ONLY in `discovery-contract/src/`** — never in the frontend folder
 2. **demoLand UI lives in `frontend-demoland-vite-react/src/`** with mock providers in `providers/demoland/`
 3. **realDeal providers** will go in `providers/realdeal/` — same interfaces, real backends
 4. **Complete demoLand UI first** → then create realDeal providers → then wire them up

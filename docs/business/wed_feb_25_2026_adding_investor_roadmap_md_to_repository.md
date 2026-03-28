@@ -5,10 +5,10 @@
 
 ## Spy
 
-please add C:\Users\Kurti\AutoDiscovery\INVESTOR_ROADMAP.md 
+please add C:\Users\Kurti\DiscoveryManagement\INVESTOR_ROADMAP.md 
 
 ## Copilot
 
-I see that `INVESTOR_ROADMAP.md` doesn't currently exist in the repository. You mentioned the file path `C:\Users\Kurti\AutoDiscovery\INVESTOR_ROADMAP.md` — that's a local file on your machine, and I don't have access to read local files from your computer.
+I see that `INVESTOR_ROADMAP.md` doesn't currently exist in the repository. You mentioned the file path `C:\Users\Kurti\DiscoveryManagement\INVESTOR_ROADMAP.md` — that's a local file on your machine, and I don't have access to read local files from your computer.
 
-Could you **paste the contents** of `INVESTOR_ROADMAP.md` here in the chat? Once you provide the content, I'll push it to the root of your `autoDiscovery_legal` repository on the `main` branch for you.
+Could you **paste the contents** of `INVESTOR_ROADMAP.md` here in the chat? Once you provide the content, I'll push it to the root of your `DiscoveryManagement` repository on the `main` branch for you.

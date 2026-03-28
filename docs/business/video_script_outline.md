@@ -1,7 +1,7 @@
-# Video Script Outline: AutoDiscovery Primary Workflow
+# Video Script Outline: DiscoveryManagement Primary Workflow
 
 **[Opening Scene]**  
-“Welcome to AutoDiscovery! In this two-minute video, we’ll walk you through discovering your network in just a few steps.”
+“Welcome to DiscoveryManagement! In this two-minute video, we’ll walk you through discovering your network in just a few steps.”
 
 **[Step-by-Step: Screen Recording/Voiceover]**
 

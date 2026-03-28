@@ -1,6 +1,6 @@
 # Diligence Pack (Templates)
 
-**Purpose:** This folder contains fill-in-the-blank templates used to make AutoDiscovery investor/diligence materials consistent, auditable, and easy to review.
+**Purpose:** This folder contains fill-in-the-blank templates used to make DiscoveryManagement investor/diligence materials consistent, auditable, and easy to review.
 
 ## How to use
 

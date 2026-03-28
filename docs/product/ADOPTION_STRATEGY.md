@@ -1,4 +1,4 @@
-# AutoDiscovery — Adoption Strategy
+# DiscoveryManagement — Adoption Strategy
 
 > **Living document** — updated as market research and Spy feedback evolve.
 > Last updated: February 11, 2026
@@ -7,9 +7,9 @@
 
 ## Executive Summary
 
-AutoDiscovery's go-to-market focuses on **Idaho med-mal** as the beachhead market, leveraging Spy's professional network, insurance carrier incentives, and court-system partnerships to drive adoption before expanding to additional jurisdictions.
+DiscoveryManagement's go-to-market focuses on **Idaho med-mal** as the beachhead market, leveraging Spy's professional network, insurance carrier incentives, and court-system partnerships to drive adoption before expanding to additional jurisdictions.
 
-**Domain**: [autodiscovery.legal](https://autodiscovery.legal) (target)
+**Domain**: [DiscoveryManagement](https://DiscoveryManagement) (target)
 
 ---
 
@@ -133,7 +133,7 @@ Start with one friendly judge in Ada County (Idaho's largest, most complex docke
 
 ### The "Arms Race" Dynamic
 
-When one side in a case uses AutoDiscovery:
+When one side in a case uses DiscoveryManagement:
 - They produce **ZK-verified compliance proofs** to the judge
 - Opposing counsel looks disorganized by comparison
 - The judge starts expecting the same standard from both sides
@@ -236,4 +236,4 @@ When one side in a case uses AutoDiscovery:
 
 ---
 
-*AutoDiscovery Adoption Strategy — John, Spy & Penny (Feb 2026)*
+*DiscoveryManagement Adoption Strategy — John, Spy & Penny (Feb 2026)*

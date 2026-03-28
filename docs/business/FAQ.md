@@ -1,9 +1,9 @@
-# FAQ: AutoDiscovery
+# FAQ: DiscoveryManagement
 
-**Q: What does AutoDiscovery do?**  
+**Q: What does DiscoveryManagement do?**  
 A: It automatically scans and maps network assets, helping you understand and document your infrastructure.
 
-**Q: Who should use AutoDiscovery?**  
+**Q: Who should use DiscoveryManagement?**  
 A: New users for learning about the network, and admins for setting up or managing automated discovery tasks.
 
 **Q: How do I start a discovery?**  

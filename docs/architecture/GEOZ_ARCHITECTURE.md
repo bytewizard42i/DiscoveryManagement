@@ -16,25 +16,25 @@ For full architecture, ISP attestation research, circuit design, and CAMARA inte
 
 ---
 
-## Relationship to AutoDiscovery
+## Relationship to DiscoveryManagement
 
-**GeoZ is not a dependency of AutoDiscovery.** AutoDiscovery determines jurisdiction based on the court where the case is filed — which is known at case creation and doesn't require a geolocation oracle.
+**GeoZ is not a dependency of DiscoveryManagement.** DiscoveryManagement determines jurisdiction based on the court where the case is filed — which is known at case creation and doesn't require a geolocation oracle.
 
-GeoZ and AutoDiscovery are **companion projects** by the same team, both built on Midnight:
+GeoZ and DiscoveryManagement are **companion projects** by the same team, both built on Midnight:
 
 | Project | What It Does |
 |---------|-------------|
-| **AutoDiscovery** | Automates legal discovery with jurisdiction-aware compliance, ZK proofs, and privacy-first architecture |
+| **DiscoveryManagement** | Automates legal discovery with jurisdiction-aware compliance, ZK proofs, and privacy-first architecture |
 | **GeoZ** | Proves geographic region membership in ZK — general-purpose oracle for any application |
 
 ### Potential Future Synergies
 
-While not required, GeoZ could optionally enhance AutoDiscovery in the future:
+While not required, GeoZ could optionally enhance DiscoveryManagement in the future:
 
 - **Optional location verification** — If a firm wants to cryptographically prove they operated from a specific jurisdiction (beyond just selecting it), GeoZ could provide that attestation
 - **Multi-party cases** — In cases where party location matters (e.g., service of process across state lines), GeoZ could verify party locations without exposing addresses
 
-These are **optional enhancements**, not core requirements. AutoDiscovery works fully without GeoZ.
+These are **optional enhancements**, not core requirements. DiscoveryManagement works fully without GeoZ.
 
 ---
 

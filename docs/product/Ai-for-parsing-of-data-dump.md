@@ -8,7 +8,7 @@
 
 ## The Idea
 
-Allow users to **data dump** all case-related documents into AutoDiscovery and let AI agent(s) automatically:
+Allow users to **data dump** all case-related documents into DiscoveryManagement and let AI agent(s) automatically:
 
 1. **Categorize** — classify each document by type (medical record, email, billing, deposition, etc.)
 2. **Label** — tag with metadata (dates, parties, relevance, privilege status, PHI)
@@ -19,14 +19,14 @@ Allow users to **data dump** all case-related documents into AutoDiscovery and l
    - Example: "What's missing from our initial disclosures?"
 5. **Jurisdiction-aware** — apply IRCP/FRCP rules to determine what must be produced, what's privileged, what's exempt
 
-The **key value proposition**: users don't need to manually sort thousands of documents. They dump everything in, and AI + rule packs handle the organization. The attorney reviews and approves, then AutoDiscovery generates a ZK compliance proof.
+The **key value proposition**: users don't need to manually sort thousands of documents. They dump everything in, and AI + rule packs handle the organization. The attorney reviews and approves, then DiscoveryManagement generates a ZK compliance proof.
 
 ---
 
 ## Proposed Workflow
 
 ```
-Attorney dumps documents into AutoDiscovery
+Attorney dumps documents into DiscoveryManagement
          │
          ▼
     AI Ingestion Layer
@@ -94,7 +94,7 @@ Existing tools (Relativity, Logikcull, Everlaw) already do AI-assisted document 
 
 John's insight: "Give advantage with legal knowledge to the parties using the protocol."
 
-If AutoDiscovery's AI knows the IRCP better than opposing counsel's paralegal:
+If DiscoveryManagement's AI knows the IRCP better than opposing counsel's paralegal:
 - It won't miss a required disclosure
 - It won't over-produce (protecting privileged material)
 - It will catch set numbering errors (per Spy's identified pain point)
