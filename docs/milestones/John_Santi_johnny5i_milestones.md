@@ -102,7 +102,7 @@ Midnight Build Club — completed customer analysis, pitch deck, video script, a
 | **SouLink** | Soul-bound persistent AI memory protocol |
 | **PopCork** | Event coordination & access protocol |
 | **HuddleBridge** | Semi-decentralized video communications protocol with anti-rug tech |
-| **DownMan** | Privacy-preserving emergency notifications and roll call protocol |
+| **LegacyKey** | Privacy-preserving emergency notifications and roll call protocol |
 | **SafeHealthData** | Privacy-preserving healthcare records with HIPAA-compliant scientific data sharing |
 | **PetProData** | Companion animal health records and RWA tokenization for property and provenance |
 | **EquineProData** | Equine identity, provenance, and health records |
